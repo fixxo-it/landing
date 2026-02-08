@@ -287,14 +287,17 @@ function App() {
         </div>
       </section>
 
-      {/* Phone Mockup Section */}
-      <section className="py-24 bg-slate-900 text-white text-center relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#4F46E5 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
-        <div className="relative z-10 max-w-4xl mx-auto px-6">
-          <h2 className="text-5xl md:text-7xl font-bold mb-6">You're too important.</h2>
-          <p className="text-2xl text-indigo-200 mb-12">WhatsApp us. Do more.</p>
+      {/* Phone Mockup Section - PINNED */}
+      <div id="phone-pin-container" className="relative h-[250vh] bg-slate-900">
+        <section className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden">
+          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#4F46E5 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
 
-          <div className="relative mx-auto border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[650px] w-[320px] shadow-2xl overflow-hidden">
+          <div className="relative z-10 max-w-4xl mx-auto px-6 mb-12">
+            <h2 className="text-5xl md:text-7xl font-bold mb-6 text-white">You're too important.</h2>
+            <p className="text-2xl text-indigo-200">WhatsApp us. Do more.</p>
+          </div>
+
+          <div className="relative z-10 mx-auto border-gray-800 bg-gray-800 border-[14px] rounded-[2.5rem] h-[600px] w-[300px] shadow-2xl overflow-hidden mb-12 transition-transform duration-500 scale-90 md:scale-100">
             <div className="h-[32px] w-[3px] bg-gray-800 absolute -left-[17px] top-[72px] rounded-l-lg"></div>
             <div className="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[124px] rounded-l-lg"></div>
             <div className="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[178px] rounded-l-lg"></div>
@@ -302,8 +305,8 @@ function App() {
 
             <WhatsAppChat />
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       {/* Pricing Section */}
       <PricingSection />
@@ -408,8 +411,8 @@ function ServiceCard({ service, index }) {
 }
 
 function WhatsAppChat() {
-  const [visibleMessages, setVisibleMessages] = useState(0);
-  const sectionRef = useRef(null);
+  const [visibleMessages, setVisibleMessages] = useState(1);
+  const chatContainerRef = useRef(null);
 
   const messages = [
     { type: 'left', text: 'Welcome back Aryan 👋\nWhat can I help you with?', time: '2:03 PM' },
@@ -424,17 +427,15 @@ function WhatsAppChat() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (!sectionRef.current) return;
+      const container = document.getElementById('phone-pin-container');
+      if (!container) return;
 
-      const rect = sectionRef.current.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
+      const rect = container.getBoundingClientRect();
+      const scrollProgress = Math.max(0, Math.min(1, -rect.top / (rect.height - window.innerHeight)));
 
-      // Calculate how much of the section is visible
-      // 0 when section starts entering, 1 when it's fully in view
-      const visibility = Math.max(0, Math.min(1, (windowHeight - rect.top) / rect.height));
-
-      const count = Math.floor(visibility * (messages.length + 2));
-      setVisibleMessages(Math.max(0, Math.min(messages.length, count)));
+      // Start with 1 message, then pop rest
+      const count = Math.max(1, Math.floor(scrollProgress * (messages.length + 1)));
+      setVisibleMessages(Math.min(messages.length, count));
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -442,8 +443,28 @@ function WhatsAppChat() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      // Find the last visible message element
+      const container = chatContainerRef.current;
+      const visibleElements = container.querySelectorAll('.msg-bubble');
+      const lastVisible = visibleElements[visibleMessages - 1];
+
+      if (lastVisible) {
+        // Calculate scroll to keep the last message at the bottom of the visible area
+        const targetScroll = lastVisible.offsetTop + lastVisible.offsetHeight - container.offsetHeight + 16; // 16 for padding/breathing room
+        container.scrollTo({
+          top: Math.max(0, targetScroll),
+          behavior: 'smooth'
+        });
+      } else {
+        container.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  }, [visibleMessages]);
+
   return (
-    <div ref={sectionRef} className="rounded-[2rem] overflow-hidden w-full h-full bg-[#e5ddd5] flex flex-col text-slate-900 text-left font-sans">
+    <div className="rounded-[2rem] overflow-hidden w-full h-full bg-[#e5ddd5] flex flex-col text-slate-900 text-left font-sans shadow-inner">
       {/* WhatsApp Header */}
       <div className="bg-[#075e54] p-3 pt-6 flex items-center justify-between text-white shrink-0">
         <div className="flex items-center gap-2">
@@ -467,12 +488,15 @@ function WhatsAppChat() {
         </div>
       </div>
 
-      {/* Chat Area */}
-      <div className="flex-1 overflow-y-auto p-3 space-y-2 bg-[url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')] bg-repeat">
+      {/* Chat Area - Scroll disabled manually, automated via JS */}
+      <div
+        ref={chatContainerRef}
+        className="flex-1 overflow-hidden p-3 space-y-3 bg-[url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')] bg-repeat transition-all duration-500"
+      >
         {messages.map((m, i) => (
           <div
             key={i}
-            className={`flex ${m.type === 'right' ? 'justify-end' : 'justify-start'} transition-all duration-300 ${i < visibleMessages ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-95'}`}
+            className={`msg-bubble flex ${m.type === 'right' ? 'justify-end' : 'justify-start'} transition-all duration-300 ${i < visibleMessages ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-95'}`}
           >
             <div className={`max-w-[85%] p-2 rounded-lg shadow-sm relative text-xs leading-relaxed ${m.type === 'right' ? 'bg-[#dcf8c6]' : 'bg-white'}`}>
               <div className="whitespace-pre-wrap">{m.text}</div>
@@ -612,7 +636,7 @@ function FAQItem({ question, answer }) {
       <summary className="flex justify-between items-center font-bold text-lg cursor-pointer list-none text-slate-800">
         {question}
         <span className="transition group-open:rotate-180">
-          <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24">
+          <svg fill="none" height="24" shapeRendering="geometricPrecision" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" width="24">
             <path d="M6 9l6 6 6-6"></path>
           </svg>
         </span>
