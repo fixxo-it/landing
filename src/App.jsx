@@ -210,6 +210,9 @@ function App() {
               <h1 className="text-6xl md:text-8xl font-bold text-slate-900 leading-[0.9] tracking-tight mb-6">
                 <img src="/logo.png" alt="Fixxo" className="h-[1.1em] inline-block align-bottom -mb-2 md:-mb-4" /><br />WhatsApp, smarter.
               </h1>
+              <p className="text-slate-600 text-lg md:text-xl mb-2 font-bold text-indigo-600">
+                Hyperlocal AI Task Master
+              </p>
               <p className="text-slate-600 text-lg md:text-xl mb-8 max-w-xl mx-auto">
                 We build intelligent WhatsApp chatbots to automate your business in Bangalore and beyond.
               </p>
@@ -265,7 +268,7 @@ function App() {
       <section id="services" className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
         <div className="text-center mb-20">
           <h2 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6">
-            How can <span className="inline-block px-6 py-2 bg-indigo-50 rounded-full rotate-2 border border-indigo-100"><img src="/logo.png" alt="Fixxo" className="h-[2em] inline-block align-middle" /></span> help you?
+            How can <img src="/logo.png" alt="Fixxo" className="h-[1.2em] inline-block align-middle mx-2" /> help you?
           </h2>
           <p className="text-xl text-slate-600">Our monthly subscription costs as much as a good night out...<br />because it feels like one.</p>
         </div>
@@ -294,6 +297,9 @@ function App() {
           </div>
         </div>
       </section>
+
+      {/* Pricing Section */}
+      <PricingSection />
 
       {/* FAQ Section */}
       <section className="py-24 px-6 md:px-12 max-w-3xl mx-auto">
@@ -489,6 +495,108 @@ function WhatsAppChat() {
         </div>
       </div>
     </div>
+  );
+}
+
+function PricingSection() {
+  const plans = [
+    {
+      name: "BASIC PLAN",
+      price: "499",
+      features: ["5% discount on Hyperlocal task"],
+      color: "bg-blue-500",
+      lightColor: "bg-blue-50",
+      textColor: "text-blue-600",
+      icon: "📍"
+    },
+    {
+      name: "PREMIUM PLAN",
+      price: "999",
+      features: ["10% on all Hyperlocal tasks", "2 Hyperlocal tasks Free/Month"],
+      color: "bg-emerald-500",
+      lightColor: "bg-emerald-50",
+      textColor: "text-emerald-600",
+      icon: "🛡️"
+    },
+    {
+      name: "PLUS PLAN",
+      price: "1499",
+      features: ["15% on all Hyperlocal tasks", "4 Hyperlocal tasks Free/Month"],
+      color: "bg-violet-500",
+      lightColor: "bg-violet-50",
+      textColor: "text-violet-600",
+      icon: "💎"
+    }
+  ];
+
+  const services = [
+    { name: "NANNY", price: "399", color: "bg-blue-500", icon: "👩‍👧" },
+    { name: "DOG WALKER", price: "299", color: "bg-emerald-500", icon: "🐕" },
+    { name: "IRON AT HOME", price: "199", color: "bg-violet-500", icon: "👕" }
+  ];
+
+  return (
+    <section id="pricing" className="py-24 px-6 md:px-12 bg-white">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#0f172a] mb-4">PLAN & HYPERLOCAL CATEGORY PRICING</h2>
+        </div>
+
+        {/* Subscription Plans */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          {plans.map((plan) => (
+            <div key={plan.name} className="border-2 rounded-3xl overflow-hidden shadow-lg border-gray-100 flex flex-col h-full hover:scale-[1.02] transition-transform duration-300">
+              <div className={`${plan.color} py-4 text-center`}>
+                <span className="text-white font-bold text-xl tracking-wider">{plan.name}</span>
+              </div>
+              <div className="p-8 flex flex-col flex-1 items-center text-center">
+                <div className="relative mb-6">
+                  <div className="text-4xl font-bold text-slate-900">Rs. {plan.price}</div>
+                  <div className="absolute -right-12 -top-4 opacity-10 text-6xl">{plan.icon}</div>
+                </div>
+                <ul className="space-y-4 text-left w-full mt-4">
+                  {plan.features.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <div className={`mt-1 h-5 w-5 rounded-full ${plan.color} flex items-center justify-center shrink-0`}>
+                        <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <span className="text-slate-700 font-medium">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Hourly Services */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {services.map((service) => (
+            <div key={service.name} className="border-2 rounded-3xl overflow-hidden shadow-md border-gray-100 flex flex-col hover:scale-[1.02] transition-transform duration-300">
+              <div className={`${service.color} py-3 text-center`}>
+                <span className="text-white font-bold text-lg tracking-wider">{service.name}</span>
+              </div>
+              <div className="p-6 flex items-center justify-between bg-white relative">
+                <div className="flex items-center gap-3">
+                  <div className={`h-6 w-6 rounded-full ${service.color} flex items-center justify-center`}>
+                    <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-slate-900">Rs. {service.price}/hr</div>
+                    <div className="text-sm text-slate-400 font-medium tracking-wide">Hourly</div>
+                  </div>
+                </div>
+                <div className="opacity-20 text-4xl">{service.icon}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
