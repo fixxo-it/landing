@@ -210,9 +210,9 @@ function App() {
               <h1 className="text-6xl md:text-8xl font-bold text-slate-900 leading-[0.9] tracking-tight mb-6">
                 <img src="/logo.png" alt="Fixxo" className="h-[1.1em] inline-block align-bottom -mb-2 md:-mb-4" /><br />WhatsApp, smarter.
               </h1>
-              <p className="text-slate-600 text-lg md:text-xl mb-2 font-bold text-indigo-600">
+              <div className="inline-block px-4 py-1.5 mb-6 text-sm font-bold tracking-wider text-indigo-600 uppercase bg-indigo-50 border border-indigo-100 rounded-full">
                 Hyperlocal AI Task Master
-              </p>
+              </div>
               <p className="text-slate-600 text-lg md:text-xl mb-8 max-w-xl mx-auto">
                 We build intelligent WhatsApp chatbots to automate your business in Bangalore and beyond.
               </p>
@@ -268,7 +268,7 @@ function App() {
       <section id="services" className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
         <div className="text-center mb-20">
           <h2 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6">
-            How can <img src="/logo.png" alt="Fixxo" className="h-[1.2em] inline-block align-middle mx-2" /> help you?
+            How can <img src="/logo.png" alt="Fixxo" className="h-[1.6em] inline-block align-middle mx-4 rotate-2" /> help you?
           </h2>
           <p className="text-xl text-slate-600">Our monthly subscription costs as much as a good night out...<br />because it feels like one.</p>
         </div>
