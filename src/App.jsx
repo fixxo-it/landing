@@ -200,8 +200,15 @@ function App() {
     return () => cancelAnimationFrame(animationFrame);
   }, [placedNotes]);
 
+  const [currentView, setCurrentView] = useState('home');
+
+  if (currentView === 'terms') {
+    return <TermsPage onBack={() => setCurrentView('home')} />;
+  }
+
   return (
-    <div className="bg-slate-50 selection:bg-indigo-100 selection:text-indigo-900">
+    <div className="bg-slate-50 selection:bg-indigo-100 selection:text-indigo-900 relative">
+      <SupportChat />
       {/* Hero Section */}
       <div id="hero-pin-container" className="relative h-[200vh]">
         <section id="hero" className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
@@ -338,18 +345,17 @@ function App() {
           <div className="flex space-x-12 text-sm text-slate-600">
             <div className="flex flex-col space-y-3">
               <span className="font-bold text-slate-900">Company</span>
-              <a href="#" className="hover:text-indigo-600">Home</a>
-              <a href="#" className="hover:text-indigo-600">About</a>
+              <button onClick={() => setCurrentView('home')} className="hover:text-indigo-600 text-left">Home</button>
+              <button onClick={() => setCurrentView('home')} className="hover:text-indigo-600 text-left">About</button>
             </div>
             <div className="flex flex-col space-y-3">
               <span className="font-bold text-slate-900">Help</span>
-              <a href="#" className="hover:text-indigo-600">Customer Support</a>
-              <a href="#" className="hover:text-indigo-600">Terms & Conditions</a>
+              <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="hover:text-indigo-600 text-left">Customer Support</button>
+              <button onClick={() => setCurrentView('terms')} className="hover:text-indigo-600 text-left">Terms & Conditions</button>
             </div>
             <div className="flex flex-col space-y-3">
               <span className="font-bold text-slate-900">Social</span>
               <a href="https://api.whatsapp.com/send?phone=15817019840&text=YBMPL6" className="hover:text-indigo-600">WhatsApp</a>
-              <a href="#" className="hover:text-indigo-600">Twitter</a>
             </div>
           </div>
         </div>
@@ -618,4 +624,137 @@ function FAQItem({ question, answer }) {
   );
 }
 
+function SupportChat() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [messages, setMessages] = useState([
+    { role: 'bot', text: 'Hello! How can I help you today? I can answer questions about Fixxo services and pricing.' }
+  ]);
+  const [input, setInput] = useState('');
+
+  const handleSend = (e) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+
+    const newMessages = [...messages, { role: 'user', text: input }];
+    setMessages(newMessages);
+    setInput('');
+
+    // Basic bot logic
+    setTimeout(() => {
+      let response = "I'm a basic assistant. For complex tasks, please chat with us on WhatsApp for a human response!";
+      const lowerInput = input.toLowerCase();
+      if (lowerInput.includes('price') || lowerInput.includes('cost')) {
+        response = "Our Basic plan starts at Rs. 499/month. We also have Premium (999) and Plus (1499) plans for more hyperlocal tasks!";
+      } else if (lowerInput.includes('nanny') || lowerInput.includes('dog')) {
+        response = "Yes! We provide Nannies (Rs. 399/hr), Dog Walkers (Rs. 299/hr), and even laundry services at home.";
+      }
+      setMessages(prev => [...prev, { role: 'bot', text: response }]);
+    }, 1000);
+  };
+
+  return (
+    <div className="fixed bottom-6 right-6 z-[100]">
+      {isOpen ? (
+        <div className="bg-white rounded-2xl shadow-2xl w-80 md:w-96 h-[500px] flex flex-col border border-slate-100 overflow-hidden animate-fadeIn">
+          <div className="bg-[#4F46E5] p-4 text-white flex justify-between items-center">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">🤖</div>
+              <span className="font-bold">Fixxo Support</span>
+            </div>
+            <button onClick={() => setIsOpen(false)} className="hover:bg-white/10 p-1 rounded">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+          </div>
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50">
+            {messages.map((m, i) => (
+              <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                <div className={`max-w-[80%] p-3 rounded-2xl text-sm ${m.role === 'user' ? 'bg-[#4F46E5] text-white rounded-tr-none' : 'bg-white text-slate-700 shadow-sm border border-slate-100 rounded-tl-none'}`}>
+                  {m.text}
+                </div>
+              </div>
+            ))}
+          </div>
+          <form onSubmit={handleSend} className="p-4 border-t border-slate-100 bg-white flex gap-2">
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Type your message..."
+              className="flex-1 bg-slate-100 border-none rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-[#4F46E5] transition-all"
+            />
+            <button type="submit" className="bg-[#4F46E5] text-white p-2 rounded-full hover:scale-110 transition-transform">
+              <svg className="w-5 h-5 rotate-90" fill="currentColor" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" /></svg>
+            </button>
+          </form>
+        </div>
+      ) : (
+        <button
+          onClick={() => setIsOpen(true)}
+          className="bg-[#4F46E5] text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all duration-300 group"
+        >
+          <div className="absolute -top-12 right-0 bg-white text-slate-800 px-4 py-2 rounded-xl text-xs font-bold shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap border border-slate-100">
+            Need help? Chat with us!
+          </div>
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
+        </button>
+      )}
+    </div>
+  );
+}
+
+function TermsPage({ onBack }) {
+  return (
+    <div className="min-h-screen bg-white">
+      <nav className="border-b border-slate-100 p-6 flex justify-between items-center sticky top-0 bg-white/80 backdrop-blur-md z-50">
+        <div className="flex items-center gap-2">
+          <img src="/logo.png" alt="Fixxo Logo" className="h-[1.5em] object-contain" />
+        </div>
+        <button onClick={onBack} className="text-slate-600 hover:text-[#4F46E5] font-bold flex items-center gap-2 transition-colors">
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+          Back to Home
+        </button>
+      </nav>
+
+      <main className="max-w-4xl mx-auto py-20 px-6">
+        <h1 className="text-5xl font-bold text-slate-900 mb-12">Terms of Service</h1>
+
+        <div className="prose prose-slate max-w-none space-y-8 text-slate-600 leading-relaxed">
+          <section>
+            <h2 className="text-2xl font-bold text-slate-900 mb-4">1. Acceptance of Terms</h2>
+            <p>By accessing or using Fixxo, you agree to be bound by these terms and all applicable laws and regulations. If you do not agree, you are prohibited from using the service.</p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold text-slate-900 mb-4">2. Use of Service</h2>
+            <p>Our service allows you to request hyperlocal tasks and automation via WhatsApp. You are responsible for maintaining the security of your communication and for all activities that occur under your request.</p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold text-slate-900 mb-4">3. Privacy and Data</h2>
+            <p>We take your privacy seriously. Your data is encrypted and handled according to our Privacy Policy. We do not share your personal information without explicit consent in accordance with Bangalore jurisdictional laws.</p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold text-slate-900 mb-4">4. Limitation of Liability</h2>
+            <p>Fixxo shall not be held liable for any indirect, incidental, special, or consequential damages resulting from the use or inability to use the service.</p>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold text-slate-900 mb-4">5. Governing Law</h2>
+            <p>These terms are governed by and construed in accordance with the laws of Karnataka, India. Any disputes shall be subject to the exclusive jurisdiction of the courts in Bangalore.</p>
+          </section>
+        </div>
+
+        <div className="mt-20 pt-12 border-t border-slate-100 flex flex-col items-center">
+          <p className="text-slate-400 text-sm mb-6 text-center">Last updated: February 2025</p>
+          <button onClick={onBack} className="bg-[#4F46E5] text-white px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform shadow-xl shadow-indigo-500/20">
+            Accept and Go Home
+          </button>
+        </div>
+      </main>
+    </div>
+  );
+}
+
 export default App;
+
