@@ -14,13 +14,55 @@ body {
   overflow-x: hidden;
 }
 
-.sticky-note {
+.chat-bubble {
   position: absolute;
   transition: transform 0.1s ease-out;
   will-change: transform;
   cursor: default;
   user-select: none;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.05));
+}
+
+.chat-bubble::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #1a1a1a;
+  background: inherit;
+  bottom: -8px;
+  z-index: -1;
+}
+
+.chat-bubble.tail-left::after {
+  left: 20px;
+  transform: rotate(45deg);
+  border-top: none;
+  border-left: none;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8);
+}
+
+.chat-bubble.tail-right::after {
+  right: 20px;
+  transform: rotate(45deg);
+  border-top: none;
+  border-left: none;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8);
+}
+
+.bubble-icon {
+  position: absolute;
+  font-size: 1.5rem;
+  z-index: 20;
+  pointer-events: none;
+  filter: drop-shadow(2px 2px 0px rgba(0, 0, 0, 0.2));
 }
 
 /* Custom scrollbar hide */

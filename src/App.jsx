@@ -1,48 +1,45 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-const stickyData = [
-  { text: "Automate\nSupport", color: "#DBEAFE", rotate: -12 },
-  { text: "Track\nOrders", color: "#FEF3C7", rotate: 13 },
-  { text: "Book\nAppointments", color: "#F3E8FF", rotate: 5 },
-  { text: "Collect\nFeedback", color: "#DCFCE7", rotate: -16 },
-  { text: "Recover\nCarts", color: "#FFEDD5", rotate: 26 },
-  { text: "Bangalore\nTraffic 🚦", color: "#FEE2E2", rotate: 12 },
-  { text: "Frush\nIntegration", color: "#E0E7FF", rotate: -21 },
-  { text: "Send\nInvoices", color: "#F3F4F6", rotate: 13 },
-  { text: "Verify\nUsers", color: "#FEF3C7", rotate: -15 },
-  { text: "Instant\nReplies", color: "#DBEAFE", rotate: 8 },
-  { text: "Code\nReview", color: "#F3E8FF", rotate: -30 },
-  { text: "Deploy\nBots", color: "#DCFCE7", rotate: -21 },
-  { text: "Scale\nUp", color: "#FFEDD5", rotate: 13 },
-  { text: "Debug\nLife", color: "#FEE2E2", rotate: 3 },
-  { text: "Silk Board\nSurvival", color: "#F3F4F6", rotate: -9 },
-  { text: "API\nIntegration", color: "#E0E7FF", rotate: 17 },
-  { text: "Push\nNotifications", color: "#DBEAFE", rotate: -9 },
-  { text: "Generate\nLeads", color: "#DCFCE7", rotate: 8 }
+const chatData = [
+  { text: "My mother is here for 3 days i want a physiotherapist for her every morning 👵💪", color: "#FFF9C4", rotate: -5, side: 'left', icon: '❓', avatar: 'Felix' },
+  { text: "My MIL is here for 3 days and need a physiotherapist every morning. Can you assist. 👵🤝", color: "#FFF9C4", rotate: 3, side: 'left', avatar: 'Aneka' },
+  { text: "Looking for a top rated Italian chef to host a party for friends. 👨‍🍳🍝", color: "#FFF9C4", rotate: -2, side: 'right', icon: '👨‍🍳', avatar: 'Dr' },
+  { text: "Need to book a last-minute flight to Mumbai. Any deals? ✈️🎟️", color: "#DCFCE7", rotate: 4, side: 'left', icon: '💼', avatar: 'Bandit' },
+  { text: "Can you organize a maid for deep cleaning on Saturday morning? 🧹🧽", color: "#DCFCE7", rotate: -3, side: 'right', icon: '🧹', avatar: 'Lilith' },
+  { text: "4-6 meeting pushed to 6-8. Urgently need someone to babysit for 2 hrs ? 🗓️🧸🆘", color: "#FFF9C4", rotate: 2, side: 'left', icon: '⏰', avatar: 'George' },
+  { text: "Bangalore weather - suddenly raining and my umbrella ditched me. Can someone fix it ? 🌧️☂️🔧", color: "#FFF9C4", rotate: -4, side: 'left', icon: '🌧️', avatar: 'Jasper' },
+  { text: "Send a parcel to my friend in Koramangala. 📦🚚", color: "#DCFCE7", rotate: 5, side: 'right', icon: '📦', avatar: 'Oliver' },
+  { text: "Woke up with a headache, but my dog needs a run. Can you send a dogwalker ? 🤒🐕🏃", color: "#FFF9C4", rotate: -3, side: 'left', icon: '🐕', avatar: 'Sasha' },
+  { text: "Categories: Home Services, Errand Running, Personal Assistance, Pet Care 🏠🏃🧘🐾", color: "#DCFCE7", rotate: 2, side: 'left', icon: '🏠' },
+  { text: "Sudden train trip trip my bag chain is broken ? 🚆🎒⛓️", color: "#DCFCE7", rotate: -5, side: 'right', icon: '🎒', avatar: 'Leo' },
+  { text: "Need a tutor for 10th grade math. 📚✏️", color: "#DCFCE7", rotate: 4, side: 'left', icon: '📚' },
+  { text: "I have a last-minute event and need an instant makeup artist! Can you send one? 💄✨", color: "#FFF9C4", rotate: -2, side: 'right', icon: '💄', avatar: 'Maya' }
 ];
 
 const services = [
-  { id: "01", title: "Home", desc: "Grocery Ordering, Utilities, Home services", icon: "🏠" },
-  { id: "02", title: "Coordination", desc: "Appointments, Courier, Porter, Deliveries", icon: "🤝" },
-  { id: "03", title: "Commerce", desc: "Recommendations, Returns, Refunds", icon: "🛍️" },
-  { id: "04", title: "Travel", desc: "Flights, Hotels, Webcheckin, Airport cab", icon: "✈️" },
-  { id: "05", title: "Social Life", desc: "Gifting, Tracking birthdays, Hosting events", icon: "🎉" },
-  { id: "06", title: "Personal Admin", desc: "Bills, Reminders, Wake up calls, Document management", icon: "📂" },
-  { id: "07", title: "Health", desc: "Get medicines, Doctor Appointment, Checkups", icon: "❤️" },
-  { id: "08", title: "Lifestyle", desc: "Restaurants, Concerts, Things to do", icon: "🍷" }
+  { id: "01", title: "Ironing at home", desc: "Professional ironing services right at your doorstep.", icon: "👕" },
+  { id: "02", title: "Dog walker", desc: "Reliable walkers to keep your furry friends active and happy.", icon: "🐕" },
+  { id: "03", title: "Nanny", desc: "Trusted childcare for your little ones whenever you need it.", icon: "👵" },
+  { id: "04", title: "Gardener", desc: "Expert care to keep your home garden lush and beautiful.", icon: "🌱" },
+  { id: "05", title: "Home Services", desc: "Deep cleaning, plumbing, and electrical assistance.", icon: "🏠" },
+  { id: "06", title: "Errand Running", desc: "Deliveries, porter services, and personal tasks handled.", icon: "🏃" },
+  { id: "07", title: "Travel & Admin", desc: "Bookings, reminders, and document management.", icon: "📂" },
+  { id: "08", title: "Social & Lifestyle", desc: "Gifting, event hosting, and restaurant reservations.", icon: "🎉" }
 ];
 
 function App() {
   const containerRef = useRef(null);
   const [placedNotes, setPlacedNotes] = useState([]);
   const notesStateRef = useRef([]);
+  const bubblesRef = useRef([]);
   const mouseRef = useRef({ x: 0, y: 0, inWindow: false });
 
   // Physics constants
-  const centerThreshold = 900;
-  const noteSize = 220;
-  const maxOverlapRatio = 0.20;
-  const noteArea = noteSize * noteSize;
+  const centerThreshold = 800;
+  const bubbleW = 280;
+  const bubbleH = 100;
+  const maxOverlapRatio = 0.12;
+  const bubbleArea = bubbleW * bubbleH;
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -59,14 +56,14 @@ function App() {
     const screenH = window.innerHeight;
     const centerX = screenW / 2;
     const centerY = screenH / 2;
-    const margin = -50;
+    const margin = 20;
     const minX = margin;
-    const maxX = screenW - noteSize - margin;
+    const maxX = screenW - bubbleW - margin;
     const minY = margin;
-    const maxY = screenH - noteSize - margin;
+    const maxY = screenH - bubbleH - margin;
 
-    const capacity = (screenW * screenH) / (noteArea * 0.6);
-    const targetCount = Math.min(Math.floor(capacity), 60);
+    const capacity = (screenW * screenH) / (bubbleArea * 1.2);
+    const targetCount = Math.min(Math.floor(capacity), chatData.length * 2);
     const placedRects = [];
     const newPlacedNotes = [];
 
@@ -80,23 +77,23 @@ function App() {
       let bestX, bestY;
       let placed = false;
 
-      for (let attempt = 0; attempt < 200; attempt++) {
+      for (let attempt = 0; attempt < 150; attempt++) {
         let testX, testY;
         if (i < 4) {
           const angle = Math.random() * Math.PI * 2;
-          const r = Math.random() * 150;
-          testX = centerX + Math.cos(angle) * r - noteSize / 2;
-          testY = centerY + Math.sin(angle) * r - noteSize / 2;
+          const r = Math.random() * 200;
+          testX = centerX + Math.cos(angle) * r - bubbleW / 2;
+          testY = centerY + Math.sin(angle) * r - bubbleH / 2;
         } else {
           testX = minX + Math.random() * (maxX - minX);
           testY = minY + Math.random() * (maxY - minY);
         }
 
-        const candidate = { x: testX, y: testY, w: noteSize, h: noteSize };
+        const candidate = { x: testX, y: testY, w: bubbleW, h: bubbleH };
         let maxOverlapFound = 0;
         for (const existing of placedRects) {
           const overlap = getIntersectionArea(candidate, existing);
-          const ratio = overlap / noteArea;
+          const ratio = overlap / bubbleArea;
           if (ratio > maxOverlapFound) maxOverlapFound = ratio;
         }
 
@@ -110,9 +107,9 @@ function App() {
       }
 
       if (placed) {
-        const data = stickyData[i % stickyData.length];
-        const noteCX = bestX + noteSize / 2;
-        const noteCY = bestY + noteSize / 2;
+        const data = chatData[i % chatData.length];
+        const noteCX = bestX + bubbleW / 2;
+        const noteCY = bestY + bubbleH / 2;
         const vecX = noteCX - centerX;
         const vecY = noteCY - centerY;
         const dist = Math.sqrt(vecX * vecX + vecY * vecY) || 1;
@@ -123,7 +120,7 @@ function App() {
           data,
           baseX: bestX,
           baseY: bestY,
-          rotation: data.rotate + (Math.random() * 20 - 10),
+          rotation: data.rotate + (Math.random() * 6 - 3),
           flyAngle: angle,
           distFromCenterAtStart: dist,
           currentX: bestX,
@@ -138,14 +135,19 @@ function App() {
   }, []);
 
   useEffect(() => {
-    let animationFrame;
-    const animate = () => {
-      const heroScrollDistance = window.innerHeight;
-      const heroScrollProgress = Math.min(1, window.scrollY / heroScrollDistance);
-      const scrollPush = heroScrollProgress * 1200;
+    if (placedNotes.length === 0) return;
 
-      const centerX = window.innerWidth / 2;
-      const centerY = window.innerHeight / 2;
+    let animationFrame;
+    const notes = notesStateRef.current;
+    const elements = bubblesRef.current;
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+
+    const animate = () => {
+      const scrollY = window.scrollY;
+      const heroScrollDistance = window.innerHeight;
+      const heroScrollProgress = Math.min(1, scrollY / heroScrollDistance);
+      const scrollPush = heroScrollProgress * 1200;
 
       const dx = mouseRef.current.x - centerX;
       const dy = mouseRef.current.y - centerY;
@@ -153,15 +155,18 @@ function App() {
 
       let mouseScatterProgress = 0;
       if (distFromCenter < centerThreshold) {
-        mouseScatterProgress = 1 - (distFromCenter / centerThreshold);
+        mouseScatterProgress = Math.pow(1 - (distFromCenter / centerThreshold), 2);
       }
-      const easedMouseScatter = Math.pow(Math.max(0, Math.min(1, mouseScatterProgress)), 2);
 
-      const holeRadius = (750 * easedMouseScatter) + scrollPush;
+      const holeRadius = (750 * mouseScatterProgress) + scrollPush;
 
-      notesStateRef.current.forEach((note, index) => {
-        const cx = note.baseX + noteSize / 2;
-        const cy = note.baseY + noteSize / 2;
+      for (let i = 0; i < notes.length; i++) {
+        const note = notes[i];
+        const el = elements[i];
+        if (!el) continue;
+
+        const cx = note.baseX + bubbleW / 2;
+        const cy = note.baseY + bubbleH / 2;
         const vx = cx - centerX;
         const vy = cy - centerY;
         const dist = Math.sqrt(vx * vx + vy * vy) || 1;
@@ -171,27 +176,27 @@ function App() {
 
         if (dist < holeRadius) {
           const pushFactor = (holeRadius - dist);
-          const pushX = (vx / dist) * pushFactor;
-          const pushY = (vy / dist) * pushFactor;
+          const invDist = 1 / dist;
+          const nx = vx * invDist;
+          const ny = vy * invDist;
 
-          targetX = note.baseX + pushX;
-          targetY = note.baseY + pushY;
+          targetX = note.baseX + nx * pushFactor;
+          targetY = note.baseY + ny * pushFactor;
 
-          targetX += (vx / dist) * 50 * easedMouseScatter;
-          targetY += (vy / dist) * 50 * easedMouseScatter;
+          if (mouseScatterProgress > 0) {
+            targetX += nx * 50 * mouseScatterProgress;
+            targetY += ny * 50 * mouseScatterProgress;
+          }
         }
 
-        const targetRotation = note.rotation + (easedMouseScatter * 45 * (index % 2 === 0 ? 1 : -1));
+        const targetRotation = note.rotation + (mouseScatterProgress * 45 * (i % 2 === 0 ? 1 : -1));
 
-        note.currentX += (targetX - note.currentX) * 0.1;
-        note.currentY += (targetY - note.currentY) * 0.1;
-        note.currentRotation += (targetRotation - note.currentRotation) * 0.1;
+        note.currentX += (targetX - note.currentX) * 0.12;
+        note.currentY += (targetY - note.currentY) * 0.12;
+        note.currentRotation += (targetRotation - note.currentRotation) * 0.12;
 
-        const el = document.getElementById(`note-${note.id}`);
-        if (el) {
-          el.style.transform = `translate(${note.currentX}px, ${note.currentY}px) rotate(${note.currentRotation}deg)`;
-        }
-      });
+        el.style.transform = `translate3d(${note.currentX}px, ${note.currentY}px, 0) rotate(${note.currentRotation}deg)`;
+      }
 
       animationFrame = requestAnimationFrame(animate);
     };
@@ -214,53 +219,63 @@ function App() {
         <section id="hero" className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
           <div id="main-content" className="center-content absolute inset-0 flex flex-col items-center justify-center z-0 pointer-events-auto">
             <div className="text-center max-w-2xl px-4">
-              <h1 className="text-6xl md:text-8xl font-bold text-slate-900 leading-[0.9] tracking-tight mb-6">
-                <img src="/logo.png" alt="Fixxo" className="h-[1.1em] inline-block align-bottom -mb-2 md:-mb-4" /><br />WhatsApp, smarter.
+              <h1 className="text-6xl md:text-8xl font-bold text-slate-900 leading-[0.9] tracking-tight mb-12">
+                What Are We Solving For?
               </h1>
               <div className="inline-block px-4 py-1.5 mb-6 text-sm font-bold tracking-wider text-indigo-600 uppercase bg-indigo-50 border border-indigo-100 rounded-full">
                 Hyperlocal AI Task Master
               </div>
               <p className="text-slate-600 text-lg md:text-xl mb-8 max-w-xl mx-auto">
-                We build intelligent WhatsApp chatbots to automate your business in Bangalore and beyond.
+                Providing quick and seamless services to your doorstep via WhatsApp. From nannies to errand runners, consider it done.
               </p>
-              <a href="https://api.whatsapp.com/send?phone=15817019840&text=YBMPL6" className="inline-flex items-center justify-center px-8 py-4 bg-[#4F46E5] text-white rounded-full text-xl font-semibold hover:scale-105 transition-transform duration-300 shadow-xl shadow-indigo-500/20">
+              <a href="https://api.whatsapp.com/send?phone=919972678833&text=hi" className="inline-flex items-center justify-center px-8 py-4 bg-[#4F46E5] text-white rounded-full text-xl font-semibold hover:scale-105 transition-transform duration-300 shadow-xl shadow-indigo-500/20">
                 Start Automating
               </a>
               <div className="mt-12 flex items-center justify-center -space-x-4 opacity-80 grayscale hover:grayscale-0 transition-all duration-500">
                 {[1, 2, 3, 4].map(i => (
                   <div key={i} className="w-12 h-12 rounded-full border-2 border-white bg-gray-200 overflow-hidden">
                     <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i === 1 ? 'Felix' : i === 2 ? 'Aneka' : i === 3 ? 'Dr' : 'Bandit'}`} className="w-full h-full object-cover" alt="avatar" />
-                  </div>
+                  </div >
                 ))}
-              </div>
+              </div >
               <p className="mt-4 text-sm text-slate-400 font-medium">Brewed with ☕ in Bangalore</p>
-            </div>
-          </div>
-
-          <div id="sticky-container" className="absolute inset-0 overflow-hidden z-10 pointer-events-none">
-            {placedNotes.map((note) => (
+            </div >
+          </div >
+          <div id="bubble-container" className="absolute inset-0 overflow-hidden z-10 pointer-events-none">
+            {placedNotes.map((note, idx) => (
               <div
                 key={note.id}
-                id={`note-${note.id}`}
-                className="sticky-note absolute flex items-center justify-center text-center p-6 w-48 h-48 md:w-56 md:h-56"
+                ref={el => bubblesRef.current[idx] = el}
+                id={`bubble-${note.id}`}
+                className={`chat-bubble absolute text-center p-4 w-[280px] h-auto min-h-[80px] ${note.data.side === 'right' ? 'tail-right' : 'tail-left'}`}
                 style={{
                   backgroundColor: note.data.color,
                   left: 0,
                   top: 0,
-                  transform: `translate(${note.baseX}px, ${note.baseY}px) rotate(${note.rotation}deg)`
+                  transform: `translate3d(${note.baseX}px, ${note.baseY}px, 0) rotate(${note.rotation}deg)`
                 }}
               >
-                <p className="relative z-10 font-bold text-[#333] text-xl md:text-2xl leading-none" style={{ fontFamily: 'General Sans, sans-serif' }}>
-                  {note.data.text.split('\n').map((line, i) => <React.Fragment key={i}>{line}<br /></React.Fragment>)}
+                {note.data.avatar && (
+                  <div className="absolute -left-10 md:-left-12 top-0 w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white bg-gray-200 overflow-hidden shadow-sm">
+                    <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${note.data.avatar}`} className="w-full h-full object-cover" alt="avatar" />
+                  </div>
+                )}
+                {note.data.icon && (
+                  <div className={`bubble-icon ${note.data.side === 'right' ? '-right-8 -top-4' : '-right-8 -bottom-4'}`}>
+                    {note.data.icon}
+                  </div>
+                )}
+                <p className="relative z-10 font-bold text-[#1a1a1a] text-sm md:text-base leading-tight" style={{ fontFamily: 'General Sans, sans-serif' }}>
+                  {note.data.text}
                 </p>
               </div>
             ))}
           </div>
-        </section>
-      </div>
+        </section >
+      </div >
 
       {/* Marquee */}
-      <div className="py-12 bg-indigo-50 overflow-hidden whitespace-nowrap border-y border-indigo-100">
+      < div className="py-12 bg-indigo-50 overflow-hidden whitespace-nowrap border-y border-indigo-100" >
         <div className="inline-block animate-marquee">
           {[1, 2, 3, 4].map(idx => (
             <React.Fragment key={idx}>
@@ -269,10 +284,10 @@ function App() {
             </React.Fragment>
           ))}
         </div>
-      </div>
+      </div >
 
       {/* Services Section */}
-      <section id="services" className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+      < section id="services" className="py-24 px-6 md:px-12 max-w-7xl mx-auto" >
         <div className="text-center mb-20">
           <h2 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6">
             How can <img src="/logo.png" alt="Fixxo" className="h-[1.6em] inline-block align-middle mx-4 rotate-2" /> help you?
@@ -285,10 +300,10 @@ function App() {
             <ServiceCard key={s.id} service={s} index={i} />
           ))}
         </div>
-      </section>
+      </section >
 
       {/* Phone Mockup Section - PINNED */}
-      <div id="phone-pin-container" className="relative h-[250vh] bg-slate-900">
+      < div id="phone-pin-container" className="relative h-[250vh] bg-slate-900" >
         <section className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden">
           <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#4F46E5 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
 
@@ -308,8 +323,6 @@ function App() {
         </section>
       </div>
 
-      {/* Pricing Section */}
-      <PricingSection />
 
       {/* FAQ Section */}
       <section className="py-24 px-6 md:px-12 max-w-3xl mx-auto">
@@ -332,7 +345,7 @@ function App() {
         <div className="mt-16 text-center bg-indigo-50 p-8 rounded-3xl">
           <h3 className="text-xl font-bold text-slate-900 mb-2">Still have questions?</h3>
           <p className="text-slate-600 mb-6">Can’t find the answer you are looking for? Please chat to our friendly team.</p>
-          <a href="https://api.whatsapp.com/send?phone=15817019840&text=YBMPL6" className="text-[#4F46E5] font-semibold hover:underline">Get in touch &rarr;</a>
+          <a href="https://api.whatsapp.com/send?phone=919972678833&text=hi" className="text-[#4F46E5] font-semibold hover:underline">Get in touch &rarr;</a>
         </div>
       </section>
 
@@ -358,15 +371,15 @@ function App() {
             </div>
             <div className="flex flex-col space-y-3">
               <span className="font-bold text-slate-900">Social</span>
-              <a href="https://api.whatsapp.com/send?phone=15817019840&text=YBMPL6" className="hover:text-indigo-600">WhatsApp</a>
+              <a href="https://api.whatsapp.com/send?phone=919972678833&text=hi" className="hover:text-indigo-600">WhatsApp</a>
             </div>
           </div>
         </div>
         <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-slate-200 text-center text-slate-400 text-sm">
           © Copyright 2025, All Rights Reserved by Swad Hotels & Restaurants Private Limited.
         </div>
-      </footer>
-    </div>
+      </footer >
+    </div >
   );
 }
 
@@ -388,7 +401,7 @@ function ServiceCard({ service, index }) {
   const tilt = (Math.random() * 12) - 6;
   const offX = (Math.random() * 40) - 20;
   const offY = (Math.random() * 40) - 20;
-  const bgColor = stickyData[index % stickyData.length].color;
+  const bgColor = chatData[index % chatData.length].color;
 
   return (
     <div
@@ -528,107 +541,6 @@ function WhatsAppChat() {
   );
 }
 
-function PricingSection() {
-  const plans = [
-    {
-      name: "BASIC PLAN",
-      price: "499",
-      features: ["5% discount on Hyperlocal task"],
-      color: "bg-blue-500",
-      lightColor: "bg-blue-50",
-      textColor: "text-blue-600",
-      icon: "📍"
-    },
-    {
-      name: "PREMIUM PLAN",
-      price: "999",
-      features: ["10% on all Hyperlocal tasks", "2 Hyperlocal tasks Free/Month"],
-      color: "bg-emerald-500",
-      lightColor: "bg-emerald-50",
-      textColor: "text-emerald-600",
-      icon: "🛡️"
-    },
-    {
-      name: "PLUS PLAN",
-      price: "1499",
-      features: ["15% on all Hyperlocal tasks", "4 Hyperlocal tasks Free/Month"],
-      color: "bg-violet-500",
-      lightColor: "bg-violet-50",
-      textColor: "text-violet-600",
-      icon: "💎"
-    }
-  ];
-
-  const services = [
-    { name: "NANNY", price: "399", color: "bg-blue-500", icon: "👩‍👧" },
-    { name: "DOG WALKER", price: "299", color: "bg-emerald-500", icon: "🐕" },
-    { name: "IRON AT HOME", price: "199", color: "bg-violet-500", icon: "👕" }
-  ];
-
-  return (
-    <section id="pricing" className="py-24 px-6 md:px-12 bg-white">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#0f172a] mb-4">PLAN & HYPERLOCAL CATEGORY PRICING</h2>
-        </div>
-
-        {/* Subscription Plans */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-          {plans.map((plan) => (
-            <div key={plan.name} className="border-2 rounded-3xl overflow-hidden shadow-lg border-gray-100 flex flex-col h-full hover:scale-[1.02] transition-transform duration-300">
-              <div className={`${plan.color} py-4 text-center`}>
-                <span className="text-white font-bold text-xl tracking-wider">{plan.name}</span>
-              </div>
-              <div className="p-8 flex flex-col flex-1 items-center text-center">
-                <div className="relative mb-6">
-                  <div className="text-4xl font-bold text-slate-900">Rs. {plan.price}</div>
-                  <div className="absolute -right-12 -top-4 opacity-10 text-6xl">{plan.icon}</div>
-                </div>
-                <ul className="space-y-4 text-left w-full mt-4">
-                  {plan.features.map((feature, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <div className={`mt-1 h-5 w-5 rounded-full ${plan.color} flex items-center justify-center shrink-0`}>
-                        <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                      <span className="text-slate-700 font-medium">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Hourly Services */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {services.map((service) => (
-            <div key={service.name} className="border-2 rounded-3xl overflow-hidden shadow-md border-gray-100 flex flex-col hover:scale-[1.02] transition-transform duration-300">
-              <div className={`${service.color} py-3 text-center`}>
-                <span className="text-white font-bold text-lg tracking-wider">{service.name}</span>
-              </div>
-              <div className="p-6 flex items-center justify-between bg-white relative">
-                <div className="flex items-center gap-3">
-                  <div className={`h-6 w-6 rounded-full ${service.color} flex items-center justify-center`}>
-                    <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold text-slate-900">Rs. {service.price}/hr</div>
-                    <div className="text-sm text-slate-400 font-medium tracking-wide">Hourly</div>
-                  </div>
-                </div>
-                <div className="opacity-20 text-4xl">{service.icon}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function FAQItem({ question, answer }) {
   return (
