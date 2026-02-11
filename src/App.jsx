@@ -16,6 +16,12 @@ const chatData = [
   { text: "I have a last-minute event and need an instant makeup artist! Can you send one? 💄✨", color: "#FFF9C4", rotate: -2, side: 'right', icon: '💄', avatar: 'Maya' }
 ];
 
+// Ruleset for mobile vs desktop placement to control overlap and sizing
+const PLACEMENT_RULES = {
+  mobile: { overlap: 0.03, width: 200, height: 80 },
+  desktop: { overlap: 0.12, width: 280, height: 100 }
+};
+
 const services = [
   { id: "01", title: "Ironing at home", desc: "Professional ironing services right at your doorstep.", icon: "👕" },
   { id: "02", title: "Dog walker", desc: "Reliable walkers to keep your furry friends active and happy.", icon: "🐕" },
@@ -34,11 +40,14 @@ function App() {
   const bubblesRef = useRef([]);
   const mouseRef = useRef({ x: 0, y: 0, inWindow: false });
 
-  // Physics constants
+  // Physics constants & Mobile detection
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const rules = isMobile ? PLACEMENT_RULES.mobile : PLACEMENT_RULES.desktop;
+
   const centerThreshold = 800;
-  const bubbleW = 280;
-  const bubbleH = 100;
-  const maxOverlapRatio = 0.12;
+  const bubbleW = rules.width;
+  const bubbleH = rules.height;
+  const maxOverlapRatio = rules.overlap;
   const bubbleArea = bubbleW * bubbleH;
 
   useEffect(() => {
@@ -247,9 +256,11 @@ function App() {
                 key={note.id}
                 ref={el => bubblesRef.current[idx] = el}
                 id={`bubble-${note.id}`}
-                className={`chat-bubble absolute text-center p-4 w-[280px] h-auto min-h-[80px] ${note.data.side === 'right' ? 'tail-right' : 'tail-left'}`}
+                className={`chat-bubble absolute text-center p-4 h-auto ${note.data.side === 'right' ? 'tail-right' : 'tail-left'}`}
                 style={{
                   backgroundColor: note.data.color,
+                  width: `${bubbleW}px`,
+                  minHeight: `${bubbleH}px`,
                   left: 0,
                   top: 0,
                   transform: `translate3d(${note.baseX}px, ${note.baseY}px, 0) rotate(${note.rotation}deg)`
