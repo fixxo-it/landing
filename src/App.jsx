@@ -586,15 +586,33 @@ function SupportChat() {
     setMessages(newMessages);
     setInput('');
 
-    // Basic bot logic
+    // Smarter bot logic based on product scope
     setTimeout(() => {
-      let response = "I'm a basic assistant. For complex tasks, please chat with us on WhatsApp for a human response!";
       const lowerInput = input.toLowerCase();
-      if (lowerInput.includes('price') || lowerInput.includes('cost')) {
-        response = "Our Basic plan starts at Rs. 499/month. We also have Premium (999) and Plus (1499) plans for more hyperlocal tasks!";
-      } else if (lowerInput.includes('nanny') || lowerInput.includes('dog')) {
-        response = "Yes! We provide Nannies (Rs. 399/hr), Dog Walkers (Rs. 299/hr), and even laundry services at home.";
+      let response = "I'm the Fixxo AI assistant. I can tell you about our services, pricing, and how the WhatsApp process works. For specific tasks, it's best to chat with us directly on WhatsApp!";
+
+      if (lowerInput.includes('who') || lowerInput.includes('what is fixxo')) {
+        response = "Fixxo is your hyperlocal AI task master! We help you manage home tasks like ironing, dog walking, nannies, and gardening with trusted local help, all coordinated through WhatsApp.";
+      } else if (lowerInput.includes('service') || lowerInput.includes('what do you do')) {
+        response = "Currently, we specialize in 4 core services for personal use: \n1. Ironing at home 👕\n2. Dog walking 🐕\n3. Nannies 👵\n4. Gardening 🌱\nWhich one can I tell you more about?";
+      } else if (lowerInput.includes('price') || lowerInput.includes('cost') || lowerInput.includes('subscription')) {
+        response = "Our monthly subscription is designed to be affordable—costing about as much as a single good night out! It covers all coordination and administrative support. Specific service rates (like hourly nanny or dog walking) are extra.";
+      } else if (lowerInput.includes('iron')) {
+        response = "Our 'Ironing at Home' service brings the help to you. On WhatsApp, we'll just ask for your volume (up to 20, 50, or more clothes) and your preferred time (today, tomorrow, or this week) to get you sorted!";
+      } else if (lowerInput.includes('dog') || lowerInput.includes('pet')) {
+        response = "Need a dog walker? We'll match you with verified walkers nearby. We just need to know the duration and your preferred time slots to set it up.";
+      } else if (lowerInput.includes('nanny') || lowerInput.includes('baby') || lowerInput.includes('child')) {
+        response = "We provide trusted childcare for your little ones. Our onboarding flow ensures we understand your specific needs before finding the right verified helper for you.";
+      } else if (lowerInput.includes('garden')) {
+        response = "Our gardening service handles expert care for your home garden. Whether it's a one-time cleanup or regular maintenance, we've got you covered.";
+      } else if (lowerInput.includes('how it works') || lowerInput.includes('process') || lowerInput.includes('onboarding')) {
+        response = "It's simple! \n1) You tell us what you need on WhatsApp. \n2) We suggest verified helpers near you. \n3) You pick one, and we handle the coordination. \nReady to get started? Just click 'Start Automating' on the hero section!";
+      } else if (lowerInput.includes('area') || lowerInput.includes('city') || lowerInput.includes('where')) {
+        response = "Fixxo is currently active in Bengaluru! We're focusing on being the best hyperlocal assistant for Bengaluru residents before expanding to other cities.";
+      } else if (lowerInput.includes('hi') || lowerInput.includes('hello')) {
+        response = "Hey there! 👋 I'm Fixxo. I can help you with questions about our home services (Ironing, Gardening, Nannies, and Dog walking) or explain how our WhatsApp bot works. What's on your mind?";
       }
+
       setMessages(prev => [...prev, { role: 'bot', text: response }]);
     }, 1000);
   };
