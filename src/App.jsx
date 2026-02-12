@@ -1,25 +1,25 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 const chatData = [
-  { text: "My mother is here for 3 days i want a physiotherapist for her every morning 👵💪", color: "#FFF9C4", rotate: -5, side: 'left', icon: '❓', avatar: 'Felix' },
+  { text: "My mother is here for 3 days i want a physiotherapist for her every morning 👵💪", color: "#FFF9C4", rotate: -5, side: 'left', avatar: 'Felix' },
+  { text: "Looking for a top rated Italian chef to host a party for friends. �‍🍳🍝", color: "#FFF9C4", rotate: -2, side: 'left', avatar: 'Dr' },
+  { text: "Need to book a last-minute flight to Mumbai. Any deals? ✈️�️", color: "#DCFCE7", rotate: 4, side: 'right', avatar: 'Bandit' },
   { text: "My MIL is here for 3 days and need a physiotherapist every morning. Can you assist. 👵🤝", color: "#FFF9C4", rotate: 3, side: 'left', avatar: 'Aneka' },
-  { text: "Looking for a top rated Italian chef to host a party for friends. 👨‍🍳🍝", color: "#FFF9C4", rotate: -2, side: 'right', icon: '👨‍🍳', avatar: 'Dr' },
-  { text: "Need to book a last-minute flight to Mumbai. Any deals? ✈️🎟️", color: "#DCFCE7", rotate: 4, side: 'left', icon: '💼', avatar: 'Bandit' },
-  { text: "Can you organize a maid for deep cleaning on Saturday morning? 🧹🧽", color: "#DCFCE7", rotate: -3, side: 'right', icon: '🧹', avatar: 'Lilith' },
-  { text: "4-6 meeting pushed to 6-8. Urgently need someone to babysit for 2 hrs ? 🗓️🧸🆘", color: "#FFF9C4", rotate: 2, side: 'left', icon: '⏰', avatar: 'George' },
-  { text: "Bangalore weather - suddenly raining and my umbrella ditched me. Can someone fix it ? 🌧️☂️🔧", color: "#FFF9C4", rotate: -4, side: 'left', icon: '🌧️', avatar: 'Jasper' },
-  { text: "Send a parcel to my friend in Koramangala. 📦🚚", color: "#DCFCE7", rotate: 5, side: 'right', icon: '📦', avatar: 'Oliver' },
-  { text: "Woke up with a headache, but my dog needs a run. Can you send a dogwalker ? 🤒🐕🏃", color: "#FFF9C4", rotate: -3, side: 'left', icon: '🐕', avatar: 'Sasha' },
-  { text: "Categories: Home Services, Errand Running, Personal Assistance, Pet Care 🏠🏃🧘🐾", color: "#DCFCE7", rotate: 2, side: 'left', icon: '🏠' },
-  { text: "Sudden train trip trip my bag chain is broken ? 🚆🎒⛓️", color: "#DCFCE7", rotate: -5, side: 'right', icon: '🎒', avatar: 'Leo' },
-  { text: "Need a tutor for 10th grade math. 📚✏️", color: "#DCFCE7", rotate: 4, side: 'left', icon: '📚' },
-  { text: "I have a last-minute event and need an instant makeup artist! Can you send one? 💄✨", color: "#FFF9C4", rotate: -2, side: 'right', icon: '💄', avatar: 'Maya' }
+  { text: "Can you organize a maid for deep cleaning on Saturday morning? 🧹🧽", color: "#DCFCE7", rotate: -3, side: 'right', avatar: 'Lilith' },
+  { text: "4-6 meeting pushed to 6-8. Urgently need someone to babysit for 2 hrs ? 🗓️🧸🆘", color: "#FFF9C4", rotate: 2, side: 'left', avatar: 'George' },
+  { text: "Bangalore weather - suddenly raining and my umbrella ditched me. Can someone fix it ? 🌧️☂️🔧", color: "#FFF9C4", rotate: -4, side: 'left', avatar: 'Jasper' },
+  { text: "Send a parcel to my friend in Koramangala. 📦🚚", color: "#DCFCE7", rotate: 5, side: 'right', avatar: 'Oliver' },
+  { text: "Woke up with a headache, but my dog needs a run. Can you send a dogwalker ? 🤒🐕🏃", color: "#FFF9C4", rotate: -3, side: 'left', avatar: 'Sasha' },
+  { text: "Categories: Home Services, Errand Running, Personal Assistance, Pet Care 🏠🏃🧘🐾", color: "#DCFCE7", rotate: 2, side: 'right' },
+  { text: "Sudden train trip trip my bag chain is broken ? 🚆🎒⛓️", color: "#DCFCE7", rotate: -5, side: 'right', avatar: 'Leo' },
+  { text: "Need a tutor for 10th grade math. 📚✏️", color: "#DCFCE7", rotate: 4, side: 'right' },
+  { text: "I have a last-minute event and need an instant makeup artist! Can you send one? 💄✨", color: "#FFF9C4", rotate: -2, side: 'right', avatar: 'Maya' }
 ];
 
 // Ruleset for mobile vs desktop placement to control overlap and sizing
 const PLACEMENT_RULES = {
-  mobile: { overlap: 0.03, width: 200, height: 80 },
-  desktop: { overlap: 0.12, width: 280, height: 100 }
+  mobile: { width: 160, height: 70, gap: 10 },
+  desktop: { width: 280, height: 100, gap: 20 }
 };
 
 const services = [
@@ -38,24 +38,22 @@ function App() {
   const [placedNotes, setPlacedNotes] = useState([]);
   const notesStateRef = useRef([]);
   const bubblesRef = useRef([]);
-  const mouseRef = useRef({ x: 0, y: 0, inWindow: false });
+  const [scrollProgress, setScrollProgress] = useState(0);
 
-  // Physics constants & Mobile detection
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
   const rules = isMobile ? PLACEMENT_RULES.mobile : PLACEMENT_RULES.desktop;
-
-  const centerThreshold = 800;
   const bubbleW = rules.width;
   const bubbleH = rules.height;
-  const maxOverlapRatio = rules.overlap;
-  const bubbleArea = bubbleW * bubbleH;
 
   useEffect(() => {
-    const handleMouseMove = (e) => {
-      mouseRef.current = { x: e.clientX, y: e.clientY, inWindow: true };
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const viewportH = window.innerHeight;
+      const progress = Math.min(1, scrollY / viewportH);
+      setScrollProgress(progress);
     };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
@@ -64,84 +62,82 @@ function App() {
     const screenW = window.innerWidth;
     const screenH = window.innerHeight;
     const centerX = screenW / 2;
-    const centerY = screenH / 2;
-    const margin = 20;
-    const minX = margin;
-    const maxX = screenW - bubbleW - margin;
-    const minY = margin;
-    const maxY = screenH - bubbleH - margin;
 
-    const capacity = (screenW * screenH) / (bubbleArea * 1.2);
-    const targetCount = Math.min(Math.floor(capacity), chatData.length * 2);
-    const placedRects = [];
-    const newPlacedNotes = [];
+    const mobileCount = 7;
+    const notesToPlace = isMobile ? chatData.slice(0, mobileCount) : chatData;
 
-    const getIntersectionArea = (r1, r2) => {
-      const xOverlap = Math.max(0, Math.min(r1.x + r1.w, r2.x + r2.w) - Math.max(r1.x, r2.x));
-      const yOverlap = Math.max(0, Math.min(r1.y + r1.h, r2.y + r2.h) - Math.max(r1.y, r2.y));
-      return xOverlap * yOverlap;
-    };
-
-    for (let i = 0; i < targetCount; i++) {
-      let bestX, bestY;
-      let placed = false;
-
-      for (let attempt = 0; attempt < 150; attempt++) {
-        let testX, testY;
-        if (i < 4) {
-          const angle = Math.random() * Math.PI * 2;
-          const r = Math.random() * 200;
-          testX = centerX + Math.cos(angle) * r - bubbleW / 2;
-          testY = centerY + Math.sin(angle) * r - bubbleH / 2;
+    const newPlacedNotes = notesToPlace.map((data, i) => {
+      // Start positions: Edges for desktop, hidden for mobile
+      let startX, startY;
+      if (isMobile) {
+        startX = centerX - bubbleW / 2;
+        startY = screenH + 100; // Below screen
+      } else {
+        const side = data.side || (i % 2 === 0 ? 'left' : 'right');
+        if (side === 'left') {
+          // Peek in more (around 75-80% visible)
+          startX = -bubbleW * 0.2 + Math.random() * 40;
+          startY = (screenH / (notesToPlace.length / 2)) * (i / 2) + 60;
         } else {
-          testX = minX + Math.random() * (maxX - minX);
-          testY = minY + Math.random() * (maxY - minY);
-        }
-
-        const candidate = { x: testX, y: testY, w: bubbleW, h: bubbleH };
-        let maxOverlapFound = 0;
-        for (const existing of placedRects) {
-          const overlap = getIntersectionArea(candidate, existing);
-          const ratio = overlap / bubbleArea;
-          if (ratio > maxOverlapFound) maxOverlapFound = ratio;
-        }
-
-        if (maxOverlapFound <= maxOverlapRatio) {
-          bestX = testX;
-          bestY = testY;
-          placed = true;
-          placedRects.push(candidate);
-          break;
+          // Peek in more (around 75-80% visible)
+          startX = screenW - bubbleW * 0.8 - Math.random() * 40;
+          startY = (screenH / (notesToPlace.length / 2)) * (i / 2) + 60;
         }
       }
 
-      if (placed) {
-        const data = chatData[i % chatData.length];
-        const noteCX = bestX + bubbleW / 2;
-        const noteCY = bestY + bubbleH / 2;
-        const vecX = noteCX - centerX;
-        const vecY = noteCY - centerY;
-        const dist = Math.sqrt(vecX * vecX + vecY * vecY) || 1;
-        const angle = Math.atan2(vecY, vecX);
+      // Target positions: Spread layout
+      const cols = isMobile ? 1 : 3;
+      const colIndex = i % cols;
+      const rowIndex = Math.floor(i / cols);
 
-        newPlacedNotes.push({
-          id: i,
-          data,
-          baseX: bestX,
-          baseY: bestY,
-          rotation: data.rotate + (Math.random() * 6 - 3),
-          flyAngle: angle,
-          distFromCenterAtStart: dist,
-          currentX: bestX,
-          currentY: bestY,
-          currentRotation: data.rotate
-        });
+      const gridW = screenW * (isMobile ? 0.9 : 0.95);
+      const startGridX = (screenW - gridW) / 2;
+
+      // Calculate available vertical space to stay above chat bar
+      const topMargin = isMobile ? 110 : 140;
+      const bottomBound = screenH - 180;
+      const availableH = bottomBound - topMargin;
+      const numRows = Math.ceil(notesToPlace.length / cols);
+
+      // Ensure vertical spacing is AT LEAST bubble height + gap to prevent overlap
+      const minRowGap = isMobile ? 20 : 30;
+      const rowSpacing = Math.max(bubbleH + minRowGap, availableH / (numRows || 1));
+
+      let targetX;
+      if (isMobile) {
+        // More dramatic side-to-side stagger for mobile
+        const side = i % 2 === 0 ? 'left' : 'right';
+        const margin = 15;
+        if (side === 'left') {
+          targetX = margin + Math.random() * 20;
+        } else {
+          targetX = screenW - bubbleW - margin - Math.random() * 20;
+        }
+      } else {
+        // Spread more on desktop with jitter
+        targetX = startGridX + (colIndex * (gridW / cols)) + (Math.random() * 120 - 60);
       }
-    }
+
+      let targetY = topMargin + (rowIndex * rowSpacing) + (Math.random() * 10 - 5);
+
+      return {
+        id: i,
+        data,
+        startX,
+        startY,
+        targetX,
+        targetY,
+        startRotation: data.rotate || (Math.random() * 20 - 10),
+        currentX: startX,
+        currentY: startY,
+        currentRotation: data.rotate || 0,
+        opacity: isMobile ? 0 : 1
+      };
+    });
 
     setPlacedNotes(newPlacedNotes);
-    notesStateRef.current = newPlacedNotes.map(n => ({ ...n }));
-  }, []);
+    notesStateRef.current = newPlacedNotes;
+  }, [isMobile]); // Added isMobile to dependencies to re-run on resize if it changes
 
   useEffect(() => {
     if (placedNotes.length === 0) return;
@@ -149,62 +145,26 @@ function App() {
     let animationFrame;
     const notes = notesStateRef.current;
     const elements = bubblesRef.current;
-    const centerX = window.innerWidth / 2;
-    const centerY = window.innerHeight / 2;
 
     const animate = () => {
-      const scrollY = window.scrollY;
-      const heroScrollDistance = window.innerHeight;
-      const heroScrollProgress = Math.min(1, scrollY / heroScrollDistance);
-      const scrollPush = heroScrollProgress * 1200;
+      const p = scrollProgress; // 0 to 1
 
-      const dx = mouseRef.current.x - centerX;
-      const dy = mouseRef.current.y - centerY;
-      const distFromCenter = Math.sqrt(dx * dx + dy * dy);
-
-      let mouseScatterProgress = 0;
-      if (distFromCenter < centerThreshold) {
-        mouseScatterProgress = Math.pow(1 - (distFromCenter / centerThreshold), 2);
-      }
-
-      const holeRadius = (750 * mouseScatterProgress) + scrollPush;
+      // Use a custom ease for smoother transition
+      const easeP = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
 
       for (let i = 0; i < notes.length; i++) {
         const note = notes[i];
         const el = elements[i];
         if (!el) continue;
 
-        const cx = note.baseX + bubbleW / 2;
-        const cy = note.baseY + bubbleH / 2;
-        const vx = cx - centerX;
-        const vy = cy - centerY;
-        const dist = Math.sqrt(vx * vx + vy * vy) || 1;
+        const curX = note.startX + (note.targetX - note.startX) * easeP;
+        const curY = note.startY + (note.targetY - note.startY) * easeP;
+        const curRot = note.startRotation + (0 - note.startRotation) * easeP;
+        const curOpacity = isMobile ? easeP : 1;
+        const curScale = isMobile ? 0.8 + 0.2 * easeP : 1;
 
-        let targetX = note.baseX;
-        let targetY = note.baseY;
-
-        if (dist < holeRadius) {
-          const pushFactor = (holeRadius - dist);
-          const invDist = 1 / dist;
-          const nx = vx * invDist;
-          const ny = vy * invDist;
-
-          targetX = note.baseX + nx * pushFactor;
-          targetY = note.baseY + ny * pushFactor;
-
-          if (mouseScatterProgress > 0) {
-            targetX += nx * 50 * mouseScatterProgress;
-            targetY += ny * 50 * mouseScatterProgress;
-          }
-        }
-
-        const targetRotation = note.rotation + (mouseScatterProgress * 45 * (i % 2 === 0 ? 1 : -1));
-
-        note.currentX += (targetX - note.currentX) * 0.12;
-        note.currentY += (targetY - note.currentY) * 0.12;
-        note.currentRotation += (targetRotation - note.currentRotation) * 0.12;
-
-        el.style.transform = `translate3d(${note.currentX}px, ${note.currentY}px, 0) rotate(${note.currentRotation}deg)`;
+        el.style.transform = `translate3d(${curX}px, ${curY}px, 0) rotate(${curRot}deg) scale(${curScale})`;
+        el.style.opacity = curOpacity;
       }
 
       animationFrame = requestAnimationFrame(animate);
@@ -212,7 +172,7 @@ function App() {
 
     animationFrame = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(animationFrame);
-  }, [placedNotes]);
+  }, [placedNotes, scrollProgress, isMobile]); // Added isMobile to dependencies
 
   const [currentView, setCurrentView] = useState('home');
 
@@ -224,32 +184,52 @@ function App() {
     <div className="bg-slate-50 selection:bg-indigo-100 selection:text-indigo-900 relative">
       <SupportChat />
       {/* Hero Section */}
-      <div id="hero-pin-container" className="relative h-[200vh]">
-        <section id="hero" className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
-          <div id="main-content" className="center-content absolute inset-0 flex flex-col items-center justify-center z-0 pointer-events-auto">
-            <div className="text-center max-w-2xl px-4">
-              <h1 className="text-6xl md:text-8xl font-bold text-slate-900 leading-[0.9] tracking-tight mb-12">
-                What Are We Solving For?
+      <div id="hero-pin-container" className="relative h-[250vh]">
+        <section id="hero" className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden bg-[#E2D8CF]/30">
+          {/* Background WhatsApp Doodle Pattern */}
+          <div
+            className="absolute inset-0 opacity-5 pointer-events-none"
+            style={{
+              backgroundImage: `url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png')`,
+              backgroundSize: '400px'
+            }}
+          ></div>
+
+          <div
+            id="main-content"
+            className={`center-content absolute inset-0 flex flex-col items-center z-0 pointer-events-auto`}
+            style={{
+              transform: `translate3d(0, ${-scrollProgress * 250}px, 0)`,
+              opacity: 1 - scrollProgress * 3
+            }}
+          >
+            <div className={`text-center max-w-4xl px-4 ${isMobile ? 'mt-auto mb-32' : 'pt-24'}`}>
+              <h1
+                className={`text-6xl md:text-8xl font-black leading-[0.9] tracking-tighter mb-8 text-slate-900 transition-colors duration-500`}
+              >
+                What Are We <span className="text-indigo-600">Solving</span> For?
               </h1>
-              <div className="inline-block px-4 py-1.5 mb-6 text-sm font-bold tracking-wider text-indigo-600 uppercase bg-indigo-50 border border-indigo-100 rounded-full">
+              <div
+                className="inline-block px-4 py-1.5 mb-6 text-sm font-bold tracking-wider text-indigo-600 uppercase bg-indigo-50 border border-indigo-100 rounded-full"
+              >
                 Hyperlocal AI Task Master
               </div>
-              <p className="text-slate-600 text-lg md:text-xl mb-8 max-w-xl mx-auto">
+              <p
+                className="text-slate-600 text-lg md:text-xl mb-10 max-w-2xl mx-auto font-medium"
+              >
                 Providing quick and seamless services to your doorstep via WhatsApp. From nannies to errand runners, consider it done.
               </p>
-              <a href="https://api.whatsapp.com/send?phone=919972678833&text=hi" className="inline-flex items-center justify-center px-8 py-4 bg-[#4F46E5] text-white rounded-full text-xl font-semibold hover:scale-105 transition-transform duration-300 shadow-xl shadow-indigo-500/20">
-                Start Automating
-              </a>
-              <div className="mt-12 flex items-center justify-center -space-x-4 opacity-80 grayscale hover:grayscale-0 transition-all duration-500">
-                {[1, 2, 3, 4].map(i => (
-                  <div key={i} className="w-12 h-12 rounded-full border-2 border-white bg-gray-200 overflow-hidden">
-                    <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${i === 1 ? 'Felix' : i === 2 ? 'Aneka' : i === 3 ? 'Dr' : 'Bandit'}`} className="w-full h-full object-cover" alt="avatar" />
-                  </div >
-                ))}
-              </div >
-              <p className="mt-4 text-sm text-slate-400 font-medium">Brewed with ☕ in Bangalore</p>
+              <div>
+                <a href="https://api.whatsapp.com/send?phone=919972678833&text=hi" className="inline-flex items-center justify-center px-10 py-5 bg-indigo-600 text-white rounded-full text-xl font-bold hover:scale-105 transition-all duration-300 shadow-2xl shadow-indigo-500/40">
+                  Start Automating
+                </a>
+              </div>
+              <p className="mt-12 text-sm text-slate-400 font-bold">
+                Brewed with ☕ in Bangalore
+              </p>
             </div >
           </div >
+
           <div id="bubble-container" className="absolute inset-0 overflow-hidden z-10 pointer-events-none">
             {placedNotes.map((note, idx) => (
               <div
@@ -263,7 +243,8 @@ function App() {
                   minHeight: `${bubbleH}px`,
                   left: 0,
                   top: 0,
-                  transform: `translate3d(${note.baseX}px, ${note.baseY}px, 0) rotate(${note.rotation}deg)`
+                  transform: `translate3d(${note.startX}px, ${note.startY}px, 0) rotate(${note.startRotation}deg)`,
+                  opacity: note.opacity
                 }}
               >
                 {note.data.avatar && (
@@ -271,16 +252,32 @@ function App() {
                     <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${note.data.avatar}`} className="w-full h-full object-cover" alt="avatar" />
                   </div>
                 )}
-                {note.data.icon && (
-                  <div className={`bubble-icon ${note.data.side === 'right' ? '-right-8 -top-4' : '-right-8 -bottom-4'}`}>
-                    {note.data.icon}
-                  </div>
-                )}
-                <p className="relative z-10 font-bold text-[#1a1a1a] text-sm md:text-base leading-tight" style={{ fontFamily: 'General Sans, sans-serif' }}>
+                <p className="relative z-10 font-bold text-[#1a1a1a] text-sm md:text-base leading-tight">
                   {note.data.text}
                 </p>
               </div>
             ))}
+          </div>
+
+          {/* WhatsApp Send Message Bar */}
+          <div
+            className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[90%] max-w-2xl bg-white rounded-full shadow-2xl p-2 flex items-center gap-3 z-20 transition-all duration-500 border border-slate-200"
+            style={{
+              transform: `translate3d(-50%, ${100 - scrollProgress * 100}px, 0)`,
+              opacity: scrollProgress
+            }}
+          >
+            <div className="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-indigo-600 cursor-pointer">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" /></svg>
+            </div>
+            <div className="flex-1 px-4 py-2 bg-slate-50 rounded-full text-slate-400 text-sm font-medium border border-slate-100">
+              Type a message...
+            </div>
+            <div className="flex gap-2 pr-2">
+              <div className="w-8 h-8 flex items-center justify-center text-slate-400"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg></div>
+              <div className="w-8 h-8 flex items-center justify-center text-slate-400"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg></div>
+              <div className="w-8 h-8 flex items-center justify-center text-slate-400"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg></div>
+            </div>
           </div>
         </section >
       </div >
