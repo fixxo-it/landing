@@ -94,13 +94,16 @@ function App() {
       const startGridX = (screenW - gridW) / 2;
 
       // Calculate available vertical space to stay above chat bar
-      const topMargin = isMobile ? 110 : 140;
-      const bottomBound = screenH - 180;
+      // Reduced top margin to fill the "above strip" better
+      const topMargin = isMobile ? 80 : 50;
+      // Reduced bottom reservation to prevent cutoff at the bottom
+      const bottomBound = screenH - 120;
       const availableH = bottomBound - topMargin;
       const numRows = Math.ceil(notesToPlace.length / cols);
 
       // Ensure vertical spacing is AT LEAST bubble height + gap to prevent overlap
-      const minRowGap = isMobile ? 20 : 30;
+      // Slightly reduced minRowGap to help fit on smaller screens
+      const minRowGap = isMobile ? 15 : 20;
       const rowSpacing = Math.max(bubbleH + minRowGap, availableH / (numRows || 1));
 
       let targetX;
