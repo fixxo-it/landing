@@ -35,8 +35,8 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.7 }}
           >
-            Caregiving with <br />
-            <span className="text-gradient">Uncompromising Quality</span>
+            Nannies & Babycare in <br />
+            <span className="text-gradient">10 Minutes</span>
           </motion.h1>
           
           <motion.p 
@@ -45,8 +45,8 @@ export default function Hero() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.8 }}
           >
-            Experience the most modern caregiver app designed for your family's safety. 
-            We blend human expertise with tech to bring you directly hired & matched professionals.
+            Experience the most modern caregiver app designed for your family's safety and speed. 
+            We bring you directly hired & matched professionals to your doorstep in just 10 minutes.
           </motion.p>
           
           <motion.div 
