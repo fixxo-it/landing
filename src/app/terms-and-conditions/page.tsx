@@ -5,7 +5,7 @@ export default function TermsAndConditions() {
     <LegalLayout title="Terms and Conditions" lastUpdated="March 2024">
       <section>
         <p>Welcome to fam.care. By using our website and services, you agree to comply with and be bound by the following terms and conditions. Please read them carefully.</p>
-        
+
         <h2>1. Acceptance of Terms</h2>
         <p>By accessing or using any part of our service, you agree to be bound by these Terms and Conditions. If you do not agree to all the terms and conditions of this agreement, then you may not access the website or use any services.</p>
 
@@ -31,7 +31,10 @@ export default function TermsAndConditions() {
         <p>These terms and conditions are governed by and construed in accordance with the laws of the jurisdiction where fam.care is registered. Any disputes shall be subject to the exclusive jurisdiction of the courts in that region.</p>
 
         <h2>9. Contact Us</h2>
-        <p>If you have any questions regarding these Terms and Conditions, please reach out to us at legal@fam.care.</p>
+        <p>If you have any questions regarding these Terms and Conditions, please reach out to us at founders@famcare.co.in.</p>
+        <p>These Terms and Conditions applies to https://www.famcare.co.in/ ("platform"). We recognize the importance of maintaining your privacy and value your trust in us. This Policy describes how we treat user information we collect on https://www.famcare.co.in/ and other online sources.</p>
+        <p>These Terms and Conditions applies to current and former visitors to our website and to our online customers. By visiting and/or using our website, you agree to this Privacy Policy.</p>
+        <p>https://www.famcare.co.in is a property of Swad Hotels & Restaurants Private Limited, an Indian company registered under the Companies Act, 2013 having its registered office at 101, 1st Floor, 1st Main Road, 1st Block, HRBR Layout, Kalyan Nagar, Bangalore, Karnataka, India, 560043</p>
       </section>
     </LegalLayout>
   );
