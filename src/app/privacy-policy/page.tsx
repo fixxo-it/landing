@@ -5,7 +5,7 @@ export default function PrivacyPolicy() {
     <LegalLayout title="Privacy Policy" lastUpdated="March 2024">
       <section>
         <p>At fam.care, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal information when you use our services.</p>
-        
+
         <h2>1. Information We Collect</h2>
         <p>We collect information you provide directly to us when you use our services, including:</p>
         <ul>
@@ -43,7 +43,12 @@ export default function PrivacyPolicy() {
         <p>Our website uses cookies to enhance your browsing experience and analyze site traffic. You can manage cookie preferences through your browser settings.</p>
 
         <h2>7. Contact Us</h2>
-        <p>If you have any questions about this Privacy Policy, please contact us at support@fam.care.</p>
+        <p>If you have any questions about this Privacy Policy, please contact us at founders@famcare.co.in</p>
+        <h2>8. Entity Information</h2>
+        <p>Address: 101, 1st Floor, 1st Main Road, 1st Block, HRBR Layout, Kalyan Nagar, Bangalore, Karnataka, India, 560043</p>
+        <p>This Privacy Policy applies to https://www.famcare.co.in/ ("platform"). We recognize the importance of maintaining your privacy and value your trust in us. This Policy describes how we treat user information we collect on https://www.famcare.co.in/ and other online sources.</p>
+        <p>This Privacy Policy applies to current and former visitors to our website and to our online customers. By visiting and/or using our website, you agree to this Privacy Policy.</p>
+        <p>https://www.famcare.co.in is a property of Swad Hotels & Restaurants Private Limited, an Indian company registered under the Companies Act, 2013 having its registered office at 101, 1st Floor, 1st Main Road, 1st Block, HRBR Layout, Kalyan Nagar, Bangalore, Karnataka, India, 560043</p>
       </section>
     </LegalLayout>
   );
