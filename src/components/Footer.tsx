@@ -20,6 +20,7 @@ export default function Footer() {
           <Link href="/privacy-policy">Privacy Policy</Link>
           <Link href="/terms-and-conditions">Terms & Conditions</Link>
           <Link href="/refund-policy">Refund Policy</Link>
+          <Link href="/deletion-of-data">Deletion of Data</Link>
         </div>
 
         <div style={{ borderTop: '1px solid rgba(20, 184, 166, 0.1)', width: '100%', paddingTop: '32px', marginTop: '8px' }}>

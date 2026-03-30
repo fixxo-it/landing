@@ -1,4 +1,5 @@
 import LegalLayout from '@/components/LegalLayout';
+import Link from 'next/link';
 
 export default function PrivacyPolicy() {
   return (
@@ -37,7 +38,7 @@ export default function PrivacyPolicy() {
         <p>We implement robust technical and organizational measures to protect your data against unauthorized access, alteration, or disclosure. However, no method of transmission over the internet is 100% secure.</p>
 
         <h2>5. Your Rights</h2>
-        <p>Depending on your location, you may have rights regarding your personal data, including the right to access, correct, or delete your information. Contact our support team for any data-related requests.</p>
+        <p>Depending on your location, you may have rights regarding your personal data, including the right to access, correct, or delete your information. To request account deletion, please follow the instructions on our <Link href="/deletion-of-data" style={{ color: 'var(--primary)', textDecoration: 'none' }}>Deletion of Data</Link> page.</p>
 
         <h2>6. Cookies</h2>
         <p>Our website uses cookies to enhance your browsing experience and analyze site traffic. You can manage cookie preferences through your browser settings.</p>
