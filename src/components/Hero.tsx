@@ -1,7 +1,8 @@
 'use client';
 
+import NextImage from 'next/image';
 import { motion } from 'framer-motion';
-import { ShieldCheck, Users, HeartPulse, CheckSquare } from 'lucide-react';
+import { ShieldCheck, Users, HeartPulse, CheckSquare, Baby, Smile, UserRound, Dog } from 'lucide-react';
 import styles from './Hero.module.css';
 
 export default function Hero() {
@@ -35,8 +36,8 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.7 }}
           >
-            Nannies & Babycare in <br />
-            <span className="text-gradient">10 Minutes</span>
+            Baby, Child, Elder and <br />
+            Pet Care in <span className="text-gradient">Minutes</span>
           </motion.h1>
           
           <motion.p 
@@ -46,7 +47,7 @@ export default function Hero() {
             transition={{ delay: 0.6, duration: 0.8 }}
           >
             Experience the most modern caregiver app designed for your family's safety and speed. 
-            We bring you directly hired & matched professionals to your doorstep in just 10 minutes.
+            We bring you directly hired & matched professionals to your doorstep in just minutes.
           </motion.p>
           
           <motion.div 
@@ -58,10 +59,20 @@ export default function Hero() {
             <button className="btn btn-primary">
               Book a Caregiver
             </button>
-            <button className="btn btn-outline" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-              <HeartPulse size={20} />
-              Our Standard
-            </button>
+            <a 
+              href="https://play.google.com/store/apps/details?id=com.famcare.praja&pcampaignid=web_share" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className={styles.playStoreLink}
+            >
+              <NextImage 
+                src="/googleplay.webp" 
+                alt="Get it on Google Play" 
+                width={400} 
+                height={122} 
+                className={styles.playStoreImg}
+              />
+            </a>
           </motion.div>
           
           <motion.div 
@@ -88,58 +99,55 @@ export default function Hero() {
         </motion.div>
         
         <div className={styles.visual}>
-          <div className={styles.illustrationFrame}>
-            <motion.div 
-              className={styles.blob}
-              animate={{ 
-                borderRadius: ["40% 60% 70% 30% / 40% 50% 60% 50%", "60% 40% 30% 70% / 60% 30% 70% 40%", "40% 60% 70% 30% / 40% 50% 60% 50%"],
-                rotate: [0, 5, -5, 0]
-              }}
-              transition={{ repeat: Infinity, duration: 12, ease: "easeInOut" }}
-            />
-            
-            <motion.div 
-              className={styles.floatingCard1}
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0, y: [-10, 10, -10] }}
-              transition={{ 
-                opacity: { delay: 0.8, duration: 0.5 },
-                x: { delay: 0.8, duration: 0.5, type: 'spring' },
-                y: { repeat: Infinity, duration: 6, ease: "easeInOut", delay: 1 } 
-              }}
-            >
-              <HeartPulse size={24} color="var(--primary)" />
-              <span>Standardized Trust</span>
-            </motion.div>
-            
-            <motion.div 
-              className={styles.floatingCard2}
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0, y: [10, -10, 10] }}
-              transition={{ 
-                opacity: { delay: 1, duration: 0.5 },
-                x: { delay: 1, duration: 0.5, type: 'spring' },
-                y: { repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1.5 } 
-              }}
-            >
-              <ShieldCheck size={24} color="var(--primary)" />
-              <span>Field Auditing</span>
-            </motion.div>
+          <motion.div 
+            className={styles.offeringsContainer}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.6, duration: 0.8 }}
+          >
+            <h3 className={styles.offeringsTitle}>Our Care Offerings</h3>
+            <div className={styles.offeringsGrid}>
+              <div className={styles.offeringCard}>
+                <div className={styles.offeringIcon}>
+                  <Baby size={32} />
+                </div>
+                <div className={styles.offeringText}>
+                  <h4>Baby Care</h4>
+                  <p>Expert care for your littlest ones, from newborns to infants.</p>
+                </div>
+              </div>
+              
+              <div className={styles.offeringCard}>
+                <div className={styles.offeringIcon}>
+                  <Smile size={32} />
+                </div>
+                <div className={styles.offeringText}>
+                  <h4>Child Care</h4>
+                  <p>Engaging and safe care for toddlers and growing children.</p>
+                </div>
+              </div>
+              
+              <div className={styles.offeringCard}>
+                <div className={styles.offeringIcon}>
+                  <UserRound size={32} />
+                </div>
+                <div className={styles.offeringText}>
+                  <h4>Elderly Care</h4>
+                  <p>Compassionate support and assistance for your senior family members.</p>
+                </div>
+              </div>
 
-            <motion.div 
-              className={styles.floatingCard3}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0, y: [-5, 15, -5] }}
-              transition={{ 
-                opacity: { delay: 1.2, duration: 0.5 },
-                x: { delay: 1.2, duration: 0.5, type: 'spring' },
-                y: { repeat: Infinity, duration: 7, ease: "easeInOut", delay: 0.5 } 
-              }}
-            >
-              <Users size={24} color="var(--primary)" />
-              <span>Full-Stack Model</span>
-            </motion.div>
-          </div>
+              <div className={styles.offeringCard}>
+                <div className={styles.offeringIcon}>
+                  <Dog size={32} />
+                </div>
+                <div className={styles.offeringText}>
+                  <h4>Pet Care</h4>
+                  <p>Professional care, walking, and attention for your furry friends.</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

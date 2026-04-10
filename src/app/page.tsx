@@ -4,6 +4,7 @@ import Features from '@/components/Features';
 import Pillars from '@/components/Pillars';
 import Services from '@/components/Services';
 import Expertise from '@/components/Expertise';
+import Testimonials from '@/components/Testimonials';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <Pillars />
       <Expertise />
       <Services />
+      <Testimonials />
       <Footer />
     </main>
   );

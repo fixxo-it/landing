@@ -34,7 +34,7 @@ const storySteps = [
   {
     icon: <Smartphone size={28} />,
     title: '6. Empowered by Technology',
-    description: "Finally, we tied it all up in a unified app experience. With built-in safety tools and instant communication, you retain absolute oversight and control right in your pocket. The complete fam.care story."
+    description: "Finally, we tied it all up in a unified app experience. With built-in safety tools and instant communication, you retain absolute oversight and control right in your pocket. The complete FamCare story."
   }
 ];
 
@@ -62,7 +62,7 @@ export default function Features() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            The <span className="text-gradient">fam.care</span> Journey
+            The <span className="text-gradient">FamCare</span> Journey
           </motion.h2>
           <motion.p 
             className={styles.introText}

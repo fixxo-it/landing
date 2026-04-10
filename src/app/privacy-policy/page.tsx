@@ -5,7 +5,7 @@ export default function PrivacyPolicy() {
   return (
     <LegalLayout title="Privacy Policy" lastUpdated="March 2024">
       <section>
-        <p>At fam.care, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal information when you use our services.</p>
+        <p>At FamCare, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal information when you use our services.</p>
 
         <h2>1. Information We Collect</h2>
         <p>We collect information you provide directly to us when you use our services, including:</p>

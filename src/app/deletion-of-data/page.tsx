@@ -4,7 +4,7 @@ export default function DeletionOfData() {
   return (
     <LegalLayout title="Deletion of Data" lastUpdated="March 2024">
       <section>
-        <p>At fam.care, we respect your privacy and provide you with the option to delete your personal data and account information from our systems.</p>
+        <p>At FamCare, we respect your privacy and provide you with the option to delete your personal data and account information from our systems.</p>
 
         <h2>How to Request Data Deletion</h2>
         <p>If you wish to delete your account and all associated personal information, please send an email to our founding team from your registered email address.</p>

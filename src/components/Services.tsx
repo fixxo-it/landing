@@ -10,6 +10,7 @@ const services = [
   { image: '/images/night-nanny.png', title: 'Night Nanny', desc: 'Expert overnight care so you can get the rest you need.' },
   { image: '/images/oil-massage.png', title: 'Oil Massage', desc: 'Traditional and soothing massages by trained experts.' },
   { image: '/images/zappa.png', title: 'Zappa / Postpartum', desc: 'Specialized Japa care for mother and newborn wellness.' },
+  { image: '/images/petcare.png', title: 'Pet Sitting', desc: 'Loving care and attention for your pets while you are away.' },
 ];
 
 const containerVariants = {
