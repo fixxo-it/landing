@@ -17,15 +17,15 @@ export default function Navbar() {
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className={`container ${styles.navContainer}`}>
+      <div className={styles.navContainer}>
         <Link href="/" className={styles.logo} onClick={() => setIsOpen(false)}>
           <NextImage 
             src="/logo.png" 
             alt="FamCare" 
-            width={120} 
-            height={40} 
+            width={160} 
+            height={64} 
             priority
-            style={{ objectFit: 'contain' }}
+            style={{ objectFit: 'contain', objectPosition: 'left' }}
           />
         </Link>
 

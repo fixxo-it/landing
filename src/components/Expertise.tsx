@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Settings, Check } from 'lucide-react';
+import NextImage from 'next/image';
 import styles from './Expertise.module.css';
 
 const items = [
@@ -58,10 +59,13 @@ export default function Expertise() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <img 
+          <NextImage 
             src="/images/team.png" 
             alt="FAMCARE TEAM" 
+            width={600}
+            height={450}
             className={styles.teamImage} 
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
         </motion.div>
       </div>

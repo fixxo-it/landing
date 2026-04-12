@@ -18,7 +18,7 @@ const faqs = [
   },
   {
     question: "What geographical areas do you serve?",
-    answer: "We are currently operational in major metropolitan cities including Bangalore, Mumbai, Delhi-NCR, and Hyderabad. We are rapidly expanding to more cities across India."
+    answer: "We are currently operational in only Bangalore. We are rapidly expanding to more cities across India."
   },
   {
     question: "How do I cancel or reschedule a booking?",
