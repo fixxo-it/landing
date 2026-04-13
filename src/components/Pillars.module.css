@@ -1,84 +1,220 @@
 .pillarsSection {
   background-color: var(--bg-color);
   position: relative;
+  padding: 100px 0;
+  overflow: hidden;
 }
 
 .header {
   text-align: center;
-  margin-bottom: 64px;
+  margin-bottom: 80px;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 32px;
-}
-
-.pillarCard {
-  background: white;
-  border-radius: var(--radius-lg);
-  padding: 40px;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(20, 184, 166, 0.1);
+.timelineWrapper {
   position: relative;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 0;
 }
 
-.pillarCard:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-md);
+.timelineLine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  background: linear-gradient(to bottom, rgba(20, 184, 166, 0.1), rgba(20, 184, 166, 0.4), rgba(20, 184, 166, 0.1));
+  transform: translateX(-50%);
+  border-radius: 4px;
+  z-index: 1;
 }
 
-.pillarTitle {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: white;
-  padding: 10px 24px;
-  border-radius: 999px;
-  display: inline-flex;
-  margin-bottom: 32px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-.pillarList {
-  list-style: none;
+.timelineNodes {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 64px;
+  position: relative;
+  z-index: 2;
 }
 
-.pillarItem {
+.milestoneRow {
   display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.layoutColumn {
+  flex: 1;
+  width: 50%;
+}
+
+.centerNodeWrapper {
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.nodeCircle {
+  width: 50px;
+  height: 50px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 0 8px var(--bg-color), 0 4px 15px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.milestoneCard {
+  background: white;
+  padding: 32px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(0,0,0,0.03);
+  position: relative;
+}
+
+.alignRight {
+  margin-right: 40px;
+  text-align: right;
+}
+
+.alignRight .cardItem {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.alignLeft {
+  margin-left: 40px;
+  text-align: left;
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 24px;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cardItem {
+  display: flex;
+  gap: 12px;
   align-items: flex-start;
-  gap: 8px;
 }
 
 .bullet {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-top: 8px;
   flex-shrink: 0;
-  margin-top: 2px;
 }
 
-.pillarItemText {
-  display: flex;
-  flex-direction: column;
-}
-
-.pillarItemTitle {
-  font-weight: 700;
+.cardItem strong {
+  display: block;
+  font-size: 1.05rem;
   color: var(--text-main);
-  line-height: 1.3;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
-.pillarItemDesc {
-  color: var(--text-muted);
+.cardItem p {
+  margin: 0;
   font-size: 0.95rem;
-  line-height: 1.5;
+  color: var(--text-muted);
+  line-height: 1.4;
 }
 
-@media (max-width: 768px) {
-  .grid {
-    grid-template-columns: 1fr;
+/* Connective Triangles */
+.alignRight::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -10px;
+  transform: translateY(-50%);
+  border-width: 10px 0 10px 10px;
+  border-style: solid;
+  border-color: transparent transparent transparent white;
+}
+
+.alignLeft::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -10px;
+  transform: translateY(-50%);
+  border-width: 10px 10px 10px 0;
+  border-style: solid;
+  border-color: transparent white transparent transparent;
+}
+
+
+/* Responsive Mobile Fallback */
+@media (max-width: 860px) {
+  .timelineLine {
+    left: 40px;
+    transform: none;
+  }
+  
+  .milestoneRow {
+    flex-direction: row !important;
+  }
+  
+  .layoutColumn {
+    width: auto;
+    flex: 1;
+  }
+  
+  /* Hide the empty opposing columns on mobile */
+  .milestoneEven .layoutColumn:first-child,
+  .milestoneOdd .layoutColumn:first-child {
+    display: none;
+  }
+  
+  .centerNodeWrapper {
+    width: 60px;
+    margin-left: 10px;
+    margin-right: 20px;
+  }
+  
+  .milestoneCard {
+    width: calc(100vw - 120px);
+  }
+  
+  .alignRight,
+  .alignLeft {
+    margin: 0;
+    text-align: left;
+  }
+  
+  .alignRight .cardItem {
+    flex-direction: row;
+    text-align: left;
+  }
+  
+  /* Point triangles back to the left line always on mobile */
+  .alignRight::after,
+  .alignLeft::after {
+    left: -10px;
+    right: auto;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent white transparent transparent;
+  }
+}
+
+@media (max-width: 500px) {
+  .milestoneCard {
+    padding: 24px;
+    width: calc(100vw - 90px);
+  }
+  .cardTitle {
+    font-size: 1.25rem;
   }
 }

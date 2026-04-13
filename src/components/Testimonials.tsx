@@ -12,19 +12,19 @@ const testimonials = [
   },
   {
     name: "Rajesh Iyer",
-    location: "Mumbai",
+    location: "Bangalore",
     text: "Finding a reliable caregiver used to be a nightmare of calls and vetting. With FamCare, we were matched with a professional in minutes.",
     initials: "RI"
   },
   {
     name: "Dr. Sunita Verma",
-    location: "Delhi",
+    location: "Bangalore",
     text: "Transparent, safe, and professional. The exhaustive background checks and field auditing give us the extra layer of trust we need.",
     initials: "SV"
   },
   {
     name: "Vikram & Neha",
-    location: "Hyderabad",
+    location: "Bangalore",
     text: "Best decision for our newborn. The matched professional was highly trained and made our transition to parenthood so much easier.",
     initials: "VN"
   }
