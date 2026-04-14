@@ -1,12 +1,13 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, ShieldCheck, Video, ShieldAlert } from 'lucide-react';
 import styles from './Pillars.module.css';
 
 const milestones = [
   {
-    title: 'Dedicated Field Safety Auditing',
+    title: 'Field Safety Auditing',
     icon: ShieldAlert,
     color: '#14B8A6',
     items: [
@@ -16,7 +17,7 @@ const milestones = [
     ]
   },
   {
-    title: 'Accountability & Verification',
+    title: 'Accountability & Verify',
     icon: ShieldCheck,
     color: '#E11D48',
     items: [
@@ -25,7 +26,7 @@ const milestones = [
     ]
   },
   {
-    title: 'Personalization & Check-ins',
+    title: 'Personalization',
     icon: Video,
     color: '#D97706',
     items: [
@@ -34,7 +35,7 @@ const milestones = [
     ]
   },
   {
-    title: 'Expert Training & Compliance',
+    title: 'Expert Training',
     icon: Sparkles,
     color: '#059669',
     items: [
@@ -46,6 +47,8 @@ const milestones = [
 ];
 
 export default function Pillars() {
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+
   return (
     <section id="pillars" className={`section ${styles.pillarsSection}`}>
       <div className="container">
@@ -56,93 +59,72 @@ export default function Pillars() {
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="h2">The Safety <span className="text-gradient">Journey</span></h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '1.125rem', maxWidth: '600px', margin: '0 auto' }}>
-            Follow the meticulous, step-by-step framework we navigate to ensure unparalleled caregiving quality and child safety.
-          </p>
+          <h2 className="h2" style={{ marginBottom: '0' }}>Safety And <span className="text-gradient">Journey with Trust</span></h2>
         </motion.div>
 
-        <div className={styles.timelineWrapper}>
-          <div className={styles.timelineLine}></div>
-          
-          <div className={styles.timelineNodes}>
-            {milestones.map((milestone, idx) => {
-              const isEven = idx % 2 === 0;
-
-              return (
-                <motion.div 
-                  key={idx}
-                  className={`${styles.milestoneRow} ${isEven ? styles.milestoneEven : styles.milestoneOdd}`}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.7, delay: 0.1 }}
+        <div className={styles.interactiveWrapper} onMouseLeave={() => setExpandedIndex(null)}>
+          <div className={styles.pillarsGrid}>
+            {milestones.map((milestone, idx) => (
+              <motion.div 
+                key={idx}
+                className={`${styles.pillarIconCard} ${expandedIndex === idx ? styles.activeCard : ''}`}
+                onMouseEnter={() => setExpandedIndex(idx)}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+              >
+                <div 
+                  className={styles.iconCircle}
+                  style={{ 
+                    color: milestone.color, 
+                    borderColor: expandedIndex === idx ? milestone.color : 'rgba(0,0,0,0.05)',
+                    backgroundColor: expandedIndex === idx ? `${milestone.color}15` : 'white'
+                  }}
                 >
-                  
-                  {/* Left Column (Empty for Odds, Content for Evens) */}
-                  <div className={styles.layoutColumn}>
-                    {isEven && (
-                      <div className={`${styles.milestoneCard} ${styles.alignRight}`}>
-                        <h3 className={styles.cardTitle} style={{ color: milestone.color }}>
-                          {milestone.title}
-                        </h3>
-                        <div className={styles.cardContent}>
-                          {milestone.items.map((item, i) => (
-                            <div key={i} className={styles.cardItem}>
-                              <div className={styles.bullet} style={{ backgroundColor: milestone.color }} />
-                              <div>
-                                <strong>{item.subtitle}</strong>
-                                <p>{item.desc}</p>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Center Node */}
-                  <div className={styles.centerNodeWrapper}>
-                    <motion.div 
-                      className={styles.nodeCircle}
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ type: "spring", stiffness: 200, delay: 0.3 }}
-                      style={{ border: `3px solid ${milestone.color}` }}
-                    >
-                      <milestone.icon size={20} color={milestone.color} />
-                    </motion.div>
-                  </div>
-
-                  {/* Right Column (Content for Odds, Empty for Evens) */}
-                  <div className={styles.layoutColumn}>
-                    {!isEven && (
-                      <div className={`${styles.milestoneCard} ${styles.alignLeft}`}>
-                        <h3 className={styles.cardTitle} style={{ color: milestone.color }}>
-                          {milestone.title}
-                        </h3>
-                        <div className={styles.cardContent}>
-                          {milestone.items.map((item, i) => (
-                            <div key={i} className={styles.cardItem}>
-                              <div className={styles.bullet} style={{ backgroundColor: milestone.color }} />
-                              <div>
-                                <strong>{item.subtitle}</strong>
-                                <p>{item.desc}</p>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
-                </motion.div>
-              );
-            })}
+                  <milestone.icon size={32} />
+                </div>
+                <h4>{milestone.title}</h4>
+              </motion.div>
+            ))}
           </div>
-        </div>
 
+          <AnimatePresence>
+            {expandedIndex !== null && (
+              <motion.div 
+                className={styles.expandedPanel}
+                initial={{ opacity: 0, height: 0, translateY: -20 }}
+                animate={{ opacity: 1, height: 'auto', translateY: 0 }}
+                exit={{ opacity: 0, height: 0, translateY: -20 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                style={{ borderColor: milestones[expandedIndex].color }}
+              >
+
+                
+                <div className={styles.panelHeader}>
+                  <div className={styles.panelIcon} style={{ background: milestones[expandedIndex].color }}>
+                    {(() => {
+                      const Icon = milestones[expandedIndex].icon;
+                      return <Icon size={24} color="white" />;
+                    })()}
+                  </div>
+                  <h3 style={{ color: milestones[expandedIndex].color }}>
+                    {milestones[expandedIndex].title} Details
+                  </h3>
+                </div>
+
+                <div className={styles.panelGrid}>
+                  {milestones[expandedIndex].items.map((item, i) => (
+                    <div key={i} className={styles.panelItem} style={{ borderLeftColor: milestones[expandedIndex].color }}>
+                      <strong>{item.subtitle}</strong>
+                      <p>{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </section>
   );

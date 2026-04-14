@@ -91,19 +91,7 @@ export default function SupportPage() {
               </a>
             </motion.div>
 
-            <motion.div 
-              className={styles.contactCard}
-              whileHover={{ y: -5 }}
-            >
-              <div className={styles.iconCircle}>
-                <MessageCircle size={32} />
-              </div>
-              <h3>Chat with Us</h3>
-              <p>Our team is available to assist you in real-time.</p>
-              <button className="btn btn-primary" onClick={() => alert('Support chat coming soon!')}>
-                Start Chat
-              </button>
-            </motion.div>
+
           </div>
         </div>
       </section>

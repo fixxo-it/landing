@@ -1,7 +1,6 @@
 .pillarsSection {
-  background-color: var(--bg-color);
   position: relative;
-  padding: 100px 0;
+  padding: 40px 0;
   overflow: hidden;
 }
 
@@ -10,211 +9,175 @@
   margin-bottom: 80px;
 }
 
-.timelineWrapper {
-  position: relative;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 40px 0;
-}
-
-.timelineLine {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 4px;
-  background: linear-gradient(to bottom, rgba(20, 184, 166, 0.1), rgba(20, 184, 166, 0.4), rgba(20, 184, 166, 0.1));
-  transform: translateX(-50%);
-  border-radius: 4px;
-  z-index: 1;
-}
-
-.timelineNodes {
+.interactiveWrapper {
   display: flex;
   flex-direction: column;
-  gap: 64px;
-  position: relative;
-  z-index: 2;
-}
-
-.milestoneRow {
-  display: flex;
   align-items: center;
-  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.layoutColumn {
-  flex: 1;
-  width: 50%;
+.pillarsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 40px;
 }
 
-.centerNodeWrapper {
+.pillarIconCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 180px;
+  text-align: center;
+}
+
+.pillarIconCard:hover {
+  transform: translateY(-4px);
+}
+
+.iconCircle {
   width: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-}
-
-.nodeCircle {
-  width: 50px;
-  height: 50px;
-  background: white;
+  height: 80px;
   border-radius: 50%;
-  box-shadow: 0 0 0 8px var(--bg-color), 0 4px 15px rgba(0,0,0,0.1);
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 10;
-}
-
-.milestoneCard {
+  justify-content: center;
   background: white;
-  padding: 32px;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-  border: 1px solid rgba(0,0,0,0.03);
+  border: 2px solid rgba(0,0,0,0.05);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pillarIconCard h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  line-height: 1.3;
+}
+
+.activeCard .iconCircle {
+  transform: scale(1.1);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.expandedPanel {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  width: 100%;
   position: relative;
-}
-
-.alignRight {
-  margin-right: 40px;
-  text-align: right;
-}
-
-.alignRight .cardItem {
-  flex-direction: row-reverse;
-  text-align: right;
-}
-
-.alignLeft {
-  margin-left: 40px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+  border-top: 4px solid transparent; /* controlled by inline style */
+  overflow: hidden;
   text-align: left;
 }
 
-.cardTitle {
-  font-size: 1.5rem;
-  font-weight: 800;
-  margin-bottom: 24px;
-}
-
-.cardContent {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.cardItem {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-}
-
-.bullet {
-  width: 8px;
-  height: 8px;
+.closeBtn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: white;
+  border: 1px solid rgba(0,0,0,0.06);
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  margin-top: 8px;
-  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-muted);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: all 0.2s;
+  z-index: 10;
 }
 
-.cardItem strong {
-  display: block;
-  font-size: 1.05rem;
+.closeBtn:hover {
+  transform: rotate(90deg) scale(1.1);
   color: var(--text-main);
-  margin-bottom: 2px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
 }
 
-.cardItem p {
+.panelHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  padding-right: 48px;
+}
+
+.panelIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.panelHeader h3 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.panelGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.panelItem {
+  background: white;
+  padding: 20px 24px;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  border-left: 4px solid transparent; /* controlled by inline style */
+  border-top: 1px solid rgba(0,0,0,0.02);
+  border-right: 1px solid rgba(0,0,0,0.02);
+  border-bottom: 1px solid rgba(0,0,0,0.02);
+}
+
+.panelItem strong {
+  display: block;
+  font-size: 1.1rem;
+  color: var(--primary-dark);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.panelItem p {
   margin: 0;
   font-size: 0.95rem;
   color: var(--text-muted);
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
-/* Connective Triangles */
-.alignRight::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  right: -10px;
-  transform: translateY(-50%);
-  border-width: 10px 0 10px 10px;
-  border-style: solid;
-  border-color: transparent transparent transparent white;
-}
-
-.alignLeft::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: -10px;
-  transform: translateY(-50%);
-  border-width: 10px 10px 10px 0;
-  border-style: solid;
-  border-color: transparent white transparent transparent;
-}
-
-
-/* Responsive Mobile Fallback */
-@media (max-width: 860px) {
-  .timelineLine {
-    left: 40px;
-    transform: none;
+@media (max-width: 768px) {
+  .pillarsGrid {
+    gap: 16px;
   }
-  
-  .milestoneRow {
-    flex-direction: row !important;
+  .pillarIconCard {
+    width: 140px;
   }
-  
-  .layoutColumn {
-    width: auto;
-    flex: 1;
+  .expandedPanel {
+    padding: 24px;
   }
-  
-  /* Hide the empty opposing columns on mobile */
-  .milestoneEven .layoutColumn:first-child,
-  .milestoneOdd .layoutColumn:first-child {
-    display: none;
-  }
-  
-  .centerNodeWrapper {
-    width: 60px;
-    margin-left: 10px;
-    margin-right: 20px;
-  }
-  
-  .milestoneCard {
-    width: calc(100vw - 120px);
-  }
-  
-  .alignRight,
-  .alignLeft {
-    margin: 0;
-    text-align: left;
-  }
-  
-  .alignRight .cardItem {
-    flex-direction: row;
-    text-align: left;
-  }
-  
-  /* Point triangles back to the left line always on mobile */
-  .alignRight::after,
-  .alignLeft::after {
-    left: -10px;
-    right: auto;
-    border-width: 10px 10px 10px 0;
-    border-color: transparent white transparent transparent;
+  .panelHeader h3 {
+    font-size: 1.3rem;
   }
 }
 
 @media (max-width: 500px) {
-  .milestoneCard {
-    padding: 24px;
-    width: calc(100vw - 90px);
-  }
-  .cardTitle {
-    font-size: 1.25rem;
+  .pillarIconCard {
+    width: 40%;
   }
 }

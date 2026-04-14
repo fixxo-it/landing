@@ -22,8 +22,8 @@ export default function Navbar() {
           <NextImage 
             src="/logo.png" 
             alt="FamCare" 
-            width={160} 
-            height={64} 
+            width={240} 
+            height={96} 
             priority
             style={{ objectFit: 'contain', objectPosition: 'left' }}
           />
@@ -33,7 +33,6 @@ export default function Navbar() {
         <div className={styles.navLinks}>
           <Link href="/#features">Features</Link>
           <Link href="/#pillars">Quality</Link>
-          <Link href="/#services">Services</Link>
           <Link href="/support">Support</Link>
           <button className="btn btn-primary" style={{ padding: '10px 24px', fontSize: '1rem' }}>
             Book Care
@@ -56,7 +55,6 @@ export default function Navbar() {
             >
               <Link href="/#features" onClick={() => setIsOpen(false)}>Features</Link>
               <Link href="/#pillars" onClick={() => setIsOpen(false)}>Quality</Link>
-              <Link href="/#services" onClick={() => setIsOpen(false)}>Services</Link>
               <Link href="/support" onClick={() => setIsOpen(false)}>Support</Link>
               <button className="btn btn-primary" style={{ width: '100%' }}>
                 Book Care

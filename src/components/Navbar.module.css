@@ -14,7 +14,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 80px;
+  height: 100px;
   padding-left: 0;
   padding-right: 40px;
   width: 100%;
@@ -22,12 +22,11 @@
 
 .logo {
   display: flex;
-  align-items: flex-start;
-  align-self: flex-start;
+  align-items: center;
   text-decoration: none;
   cursor: pointer;
   margin: 0;
-  padding: 8px 12px;
+  padding: 0 12px;
 }
 
 .logoText {
@@ -80,7 +79,7 @@
 
 .mobileMenu {
   position: absolute;
-  top: 80px;
+  top: 100px;
   left: 0;
   width: 100%;
   background: white;

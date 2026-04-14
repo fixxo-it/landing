@@ -27,7 +27,7 @@ export default function Expertise() {
             <Settings size={16} />
             Synergy of Human & Tech
           </div>
-          <h2 className={styles.h2}>Full-Stack Human Expertise</h2>
+          <h2 className={styles.h2}>In House Human Expertise</h2>
           
           <ul className={styles.list}>
             {items.map((item, idx) => (
