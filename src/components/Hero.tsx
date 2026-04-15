@@ -39,25 +39,25 @@ export default function Hero() {
         <div className={styles.circle1} />
         <div className={styles.circle2} />
       </div>
-      
+
       <div className={`container ${styles.heroContainer}`}>
-        <motion.div 
+        <motion.div
           className={styles.content}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <motion.h1 
+          <motion.h1
             className="h1"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.7 }}
             style={{ marginBottom: '40px' }}
           >
-            <span className="text-gradient">Trusted Care</span> in Minutes
+            <span className="text-gradient">In House Trusted Care</span> in Minutes
           </motion.h1>
 
-          <motion.div 
+          <motion.div
             className={styles.servicesWrapper}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -65,42 +65,50 @@ export default function Hero() {
             onMouseLeave={() => setExpandedService(null)}
           >
             <div className={styles.servicesGrid}>
-              
 
-              <div 
+
+              <div
                 className={`${styles.serviceItem} ${expandedService === 'child' ? styles.activeService : ''}`}
                 onMouseEnter={() => setExpandedService('child')}
               >
                 <div className={styles.serviceImageWrapper}>
-                  <NextImage src="/images/childcare.png" alt="Child Care" layout="fill" objectFit="cover" />
+                  <NextImage src="/images/childcare.png" alt="Child Care" fill style={{ objectFit: 'cover' }} />
                 </div>
                 <h4>Child Care</h4>
               </div>
-              
-              <div 
+
+              <div
                 className={`${styles.serviceItem} ${expandedService === 'elderly' ? styles.activeService : ''}`}
                 onMouseEnter={() => setExpandedService('elderly')}
               >
                 <div className={styles.serviceImageWrapper}>
-                  <NextImage src="/images/elderly.png" alt="Elderly Care" layout="fill" objectFit="cover" />
+                  <NextImage src="/images/elderly.png" alt="Elderly Care" fill style={{ objectFit: 'cover' }} />
                 </div>
                 <h4>Elderly Care</h4>
               </div>
 
-              <div 
+              <div
                 className={`${styles.serviceItem} ${expandedService === 'pet' ? styles.activeService : ''}`}
                 onMouseEnter={() => setExpandedService('pet')}
               >
                 <div className={styles.serviceImageWrapper}>
-                  <NextImage src="/images/petcare.png" alt="Pet Care" layout="fill" objectFit="cover" />
+                  <NextImage src="/images/petcare.png" alt="Pet Care" fill style={{ objectFit: 'cover' }} />
                 </div>
                 <h4>Pet Care</h4>
+              </div>
+
+              <div className={`${styles.serviceItem} ${styles.comingSoonWrapper}`}>
+                <div className={styles.serviceImageWrapper} style={{ filter: 'grayscale(0.4)' }}>
+                  <NextImage src="/images/adult.webp" alt="Adult Care" fill style={{ objectFit: 'cover' }} />
+                </div>
+                <h4>Adult Care</h4>
+                <span className={styles.comingSoonBadge}>Coming Soon</span>
               </div>
             </div>
 
             <AnimatePresence>
               {expandedService && (
-                <motion.div 
+                <motion.div
                   className={styles.expandedDetails}
                   initial={{ opacity: 0, height: 0, marginTop: 0 }}
                   animate={{ opacity: 1, height: 'auto', marginTop: 16 }}
@@ -123,19 +131,19 @@ export default function Hero() {
               )}
             </AnimatePresence>
           </motion.div>
-          
-          <motion.p 
+
+          <motion.p
             className={styles.subtitle}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.8 }}
             style={{ marginTop: '32px' }}
           >
-            Experience the most modern caregiver app designed for your family's safety and speed. 
+            Experience the most modern caregiver app designed for your family's safety and speed.
             We bring you directly hired & matched professionals to your doorstep in just minutes.
           </motion.p>
-          
-          <motion.div 
+
+          <motion.div
             className={styles.stats}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -165,16 +173,16 @@ export default function Hero() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1.0, duration: 0.7, ease: "easeOut" }}
           >
-            <NextImage 
-              src="/images/mobile.jpeg" 
-              alt="FamCare Mobile App" 
-              width={800} 
+            <NextImage
+              src="/images/mobile.jpeg"
+              alt="FamCare Mobile App"
+              width={800}
               height={1400}
               className={styles.appScreenshot}
             />
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className={styles.actions}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -194,17 +202,17 @@ export default function Hero() {
                 className={styles.playStoreImg}
               />
             </a>
-            <a 
-              href="https://play.google.com/store/apps/details?id=com.famcare.praja&pcampaignid=web_share" 
-              target="_blank" 
+            <a
+              href="https://play.google.com/store/apps/details?id=com.famcare.praja&pcampaignid=web_share"
+              target="_blank"
               rel="noopener noreferrer"
               className={styles.playStoreLink}
             >
-              <NextImage 
-                src="/googleplay.webp" 
-                alt="Get it on Google Play" 
-                width={400} 
-                height={122} 
+              <NextImage
+                src="/googleplay.webp"
+                alt="Get it on Google Play"
+                width={400}
+                height={122}
                 className={styles.playStoreImg}
               />
             </a>
