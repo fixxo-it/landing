@@ -99,17 +99,11 @@
 }
 
 .playStoreImg {
-  height: 122px;
+  height: 64px;
   max-width: 100%;
   width: auto;
   object-fit: contain;
   background: transparent;
-}
-
-@media (max-width: 500px) {
-  .playStoreImg {
-    height: 80px;
-  }
 }
 
 .stats {
@@ -150,8 +144,6 @@
   color: var(--text-muted);
   font-weight: 500;
 }
-
-
 
 .servicesWrapper {
   width: 100%;
@@ -248,8 +240,8 @@
 .expandedDetails::before {
   content: '';
   position: absolute;
-  top: 0; 
-  left: 0; 
+  top: 0;
+  left: 0;
   right: 0;
   height: 4px;
   background: linear-gradient(90deg, var(--primary), #3b82f6);
@@ -322,50 +314,6 @@
   flex-shrink: 0;
 }
 
-@media (max-width: 992px) {
-  .hero {
-    padding-top: 40px;
-  }
-  .heroContainer {
-    padding-top: 40px;
-    padding-bottom: 40px;
-    gap: 32px;
-  }
-  .content {
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 16px;
-  }
-  .servicesGrid {
-    gap: 10px;
-    overflow-x: auto;
-    justify-content: flex-start;
-    padding-bottom: 8px;
-  }
-  .serviceImageWrapper {
-    width: 120px;
-    height: 120px;
-  }
-  .serviceItem h4 {
-    font-size: 0.85rem;
-  }
-  .actions {
-    justify-content: center;
-  }
-  .stats {
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-    justify-content: center;
-  }
-
-  .blob, .floatingCard1, .floatingCard2, .floatingCard3 {
-    display: none;
-  }
-}
-
 .appScreenshotWrapper {
   margin-top: 48px;
   width: 100%;
@@ -381,4 +329,119 @@
   height: auto;
   object-fit: contain;
   display: block;
+}
+
+/* ── Tablet (≤768px) ── */
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 128px;
+    min-height: auto;
+  }
+  .heroContainer {
+    padding-top: 24px;
+    padding-bottom: 40px;
+  }
+  .content {
+    padding: 0 16px;
+    width: 100%;
+  }
+  .subtitle {
+    font-size: 1rem;
+    max-width: 100%;
+    margin-bottom: 24px;
+  }
+  .servicesGrid {
+    gap: 12px;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding: 0 16px 12px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    margin-bottom: 16px;
+    width: calc(100% + 32px);
+    margin-left: -16px;
+  }
+  .servicesGrid::-webkit-scrollbar {
+    display: none;
+  }
+  .serviceItem {
+    flex-shrink: 0;
+  }
+  .serviceImageWrapper {
+    width: 130px;
+    height: 130px;
+    border-width: 3px;
+  }
+  .serviceItem h4 {
+    font-size: 0.85rem;
+  }
+  .expandedDetails {
+    padding: 20px;
+    border-radius: 16px;
+    max-width: 100%;
+  }
+  .expandedTitle {
+    font-size: 1.1rem;
+    margin-bottom: 14px;
+  }
+  .expandedTagItem {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    gap: 8px;
+  }
+  .stats {
+    gap: 24px;
+    padding-top: 20px;
+  }
+  .actions {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  .playStoreImg {
+    height: 52px;
+  }
+  .appScreenshotWrapper {
+    max-width: 260px;
+    margin-top: 28px;
+    border-width: 3px;
+  }
+}
+
+/* ── Mobile (≤480px) ── */
+@media (max-width: 480px) {
+  .hero {
+    padding-top: 100px;
+  }
+  .heroContainer {
+    padding-top: 12px;
+    padding-bottom: 32px;
+  }
+  .serviceImageWrapper {
+    width: 100px;
+    height: 100px;
+  }
+  .serviceItem h4 {
+    font-size: 0.75rem;
+  }
+  .stats {
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .statItem strong {
+    font-size: 1.2rem;
+  }
+  .statItem span {
+    font-size: 0.75rem;
+  }
+  .playStoreImg {
+    height: 44px;
+  }
+  .appScreenshotWrapper {
+    max-width: 200px;
+    margin-top: 20px;
+  }
 }

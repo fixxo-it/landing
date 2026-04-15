@@ -100,3 +100,13 @@
   padding-bottom: 12px;
   border-bottom: 1px solid #f1f5f9;
 }
+
+@media (max-width: 768px) {
+  .navContainer {
+    height: 80px;
+    padding-right: 16px;
+  }
+  .mobileMenu {
+    top: 80px;
+  }
+}
