@@ -22,8 +22,8 @@ export default function Navbar() {
           <NextImage 
             src="/logo.png" 
             alt="FamCare" 
-            width={240} 
-            height={96} 
+            width={320} 
+            height={128} 
             priority
             style={{ objectFit: 'contain', objectPosition: 'left' }}
           />

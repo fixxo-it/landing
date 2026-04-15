@@ -181,9 +181,19 @@ export default function Hero() {
             transition={{ delay: 1.2, duration: 0.5 }}
             style={{ marginTop: '40px', marginBottom: '-40px' }}
           >
-            <button className="btn btn-primary">
-              Book a Caregiver
-            </button>
+            <a
+              href="#"
+              className={styles.playStoreLink}
+              onClick={(e) => e.preventDefault()}
+            >
+              <NextImage
+                src="/appstore.png"
+                alt="Download on the App Store"
+                width={400}
+                height={122}
+                className={styles.playStoreImg}
+              />
+            </a>
             <a 
               href="https://play.google.com/store/apps/details?id=com.famcare.praja&pcampaignid=web_share" 
               target="_blank" 
