@@ -16,9 +16,17 @@ export default function Footer() {
             style={{ objectFit: 'contain' }}
           />
         </div>
-        <p style={{ color: 'var(--text-muted)', marginBottom: '32px', maxWidth: '400px' }}>
+        <p style={{ color: 'var(--text-muted)', marginBottom: '16px', maxWidth: '400px' }}>
           Pioneering Quality, Safety, and Trust in Caregiving. The modern solution for your family.
         </p>
+        <div style={{ marginBottom: '32px', color: 'var(--text-muted)', fontSize: '0.925rem' }}>
+          <p style={{ marginBottom: '8px' }}>
+            Support: <a href="tel:+919986905105" style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>+91 99869 05105</a>
+          </p>
+          <p>
+            Email: <a href="mailto:founders@famcare.co.in" style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>founders@famcare.co.in</a>
+          </p>
+        </div>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '24px 40px', marginBottom: '24px', color: 'var(--text-main)', fontWeight: 500 }}>
           <Link href="/#features">Features</Link>
