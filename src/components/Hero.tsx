@@ -10,15 +10,15 @@ import Pillars from './Pillars';
 const serviceDetails: Record<string, { title: string; items: string[] }> = {
   child: {
     title: 'Child Care',
-    items: ['After School Babysitting', 'Tutoring & Homework', 'Creative Activities', 'Outdoor Play']
+    items: ['After School Babysitting']
   },
   elderly: {
     title: 'Elderly Care',
-    items: ['Elderly companion', 'Medication Reminders', 'Mobility Assistance']
+    items: ['Elderly companion']
   },
   pet: {
     title: 'Pet Care',
-    items: ['Dog Walker', 'Pet Sitting']
+    items: ['Dog Walker']
   }
 };
 
