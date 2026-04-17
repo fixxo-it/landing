@@ -98,12 +98,17 @@
   filter: brightness(1.05);
 }
 
-.playStoreImg {
+.playStoreImg,
+.appStoreImg {
   height: 64px;
   max-width: 100%;
   width: auto;
   object-fit: contain;
   background: transparent;
+}
+
+.appStoreImg {
+  height: 56px; /* Reduced from 64px to match Google Play visual weight */
 }
 
 .stats {
@@ -403,6 +408,9 @@
   .playStoreImg {
     height: 52px;
   }
+  .appStoreImg {
+    height: 45px;
+  }
   .appScreenshotWrapper {
     max-width: 260px;
     margin-top: 28px;
@@ -439,6 +447,9 @@
   }
   .playStoreImg {
     height: 44px;
+  }
+  .appStoreImg {
+    height: 38px;
   }
   .appScreenshotWrapper {
     max-width: 200px;

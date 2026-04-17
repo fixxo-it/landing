@@ -199,7 +199,7 @@ export default function Hero() {
                 alt="Download on the App Store"
                 width={400}
                 height={122}
-                className={styles.playStoreImg}
+                className={styles.appStoreImg}
               />
             </a>
             <a
