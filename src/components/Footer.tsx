@@ -35,7 +35,30 @@ export default function Footer() {
           <Link href="/support">Support</Link>
         </div>
 
-        <div style={{ marginBottom: '60px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '16px', marginBottom: '60px' }}>
+          <a
+            href="https://apps.apple.com/in/app/famcare/id6761720384"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              transition: 'transform 0.2s ease',
+              background: 'transparent',
+              border: 'none',
+              padding: '0'
+            }}
+            onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-4px)'}
+            onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+          >
+            <NextImage
+              src="/appstore.png"
+              alt="Download on the App Store"
+              width={400}
+              height={122}
+              style={{ objectFit: 'contain' }}
+            />
+          </a>
           <a 
             href="https://play.google.com/store/apps/details?id=com.famcare.praja&pcampaignid=web_share" 
             target="_blank" 
@@ -44,7 +67,6 @@ export default function Footer() {
               display: 'inline-flex', 
               alignItems: 'center', 
               transition: 'transform 0.2s ease',
-              margin: '0 auto',
               background: 'transparent',
               border: 'none',
               padding: '0'

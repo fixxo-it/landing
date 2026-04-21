@@ -190,9 +190,10 @@ export default function Hero() {
             style={{ marginTop: '40px', marginBottom: '-40px' }}
           >
             <a
-              href="#"
+              href="https://apps.apple.com/in/app/famcare/id6761720384"
+              target="_blank"
+              rel="noopener noreferrer"
               className={styles.playStoreLink}
-              onClick={(e) => e.preventDefault()}
             >
               <NextImage
                 src="/appstore.png"
