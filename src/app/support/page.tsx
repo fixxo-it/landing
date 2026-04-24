@@ -10,7 +10,7 @@ import styles from './Support.module.css';
 const faqs = [
   {
     question: "How do I book a caregiver?",
-    answer: "You can book a caregiver directly through our platform by clicking the 'Book a Caregiver' button. Our automated system will match you with the best professional based on your specific requirements within minutes."
+    answer: "Please download the FamCare app using the link provided on our website — available on both the Apple App Store and Google Play Store. Once installed, log in using your mobile number via OTP, enter your care requirements and preferred time, and confirm your booking. It's that simple!"
   },
   {
     question: "How do you ensure the safety of caregivers?",
@@ -22,10 +22,10 @@ const faqs = [
   },
   {
     question: "How do I cancel or reschedule a booking?",
-    answer: "You can cancel or reschedule through your dashboard. Please refer to our Refund Policy for details on cancellation windows and eligible refunds."
+    answer: "You can cancel or reschedule a booking directly within the FamCare app. To cancel, navigate to your upcoming bookings and select the cancellation option. Cancellations must be made at least 45 minutes prior to the scheduled booking time. For rescheduling, simply choose a new date and time from the app."
   },
   {
-    question: "What are your service rates?",
+    question: "What is your pricing?",
     answer: "Our pricing is transparent and standardized based on the type of care (Baby, Child, Elder, or Pet) and the duration of the service. You will see the exact quote before confirming your booking."
   }
 ];
