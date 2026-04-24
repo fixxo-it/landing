@@ -108,7 +108,7 @@
 }
 
 .appStoreImg {
-  height: 56px; /* Reduced from 64px to match Google Play visual weight */
+  height: 50px; /* Slightly smaller than Google Play to match visual weight */
 }
 
 .stats {
@@ -403,7 +403,7 @@
     align-items: center;
     gap: 10px;
     margin-top: 16px;
-    margin-bottom: 16px;
+    margin-bottom: 32px !important;
   }
   .playStoreImg {
     height: 52px;
@@ -450,6 +450,9 @@
   }
   .appStoreImg {
     height: 38px;
+  }
+  .actions {
+    margin-bottom: 24px !important;
   }
   .appScreenshotWrapper {
     max-width: 200px;
