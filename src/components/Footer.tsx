@@ -54,8 +54,8 @@ export default function Footer() {
             <NextImage
               src="/appstore.png"
               alt="Download on the App Store"
-              width={400}
-              height={122}
+              width={135}
+              height={40}
               style={{ objectFit: 'contain' }}
             />
           </a>
@@ -77,8 +77,8 @@ export default function Footer() {
             <NextImage 
               src="/googleplay.webp" 
               alt="Get it on Google Play" 
-              width={400} 
-              height={122} 
+              width={135} 
+              height={40} 
               style={{ objectFit: 'contain' }}
             />
           </a>

@@ -34,9 +34,6 @@ export default function Navbar() {
           <Link href="/#features">Features</Link>
           <Link href="/#pillars">Quality</Link>
           <Link href="/support">Support</Link>
-          <button className="btn btn-primary" style={{ padding: '10px 24px', fontSize: '1rem' }}>
-            Book Care
-          </button>
         </div>
 
         {/* Mobile Toggle */}
@@ -56,9 +53,6 @@ export default function Navbar() {
               <Link href="/#features" onClick={() => setIsOpen(false)}>Features</Link>
               <Link href="/#pillars" onClick={() => setIsOpen(false)}>Quality</Link>
               <Link href="/support" onClick={() => setIsOpen(false)}>Support</Link>
-              <button className="btn btn-primary" style={{ width: '100%' }}>
-                Book Care
-              </button>
             </motion.div>
           )}
         </AnimatePresence>
