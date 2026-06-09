@@ -54,6 +54,12 @@ const cardVariants: Variants = {
 export default function Services() {
   const [openCard, setOpenCard] = useState<number | null>(null);
 
+  const handleCardClick = (e: React.MouseEvent, idx: number) => {
+    if ((e.nativeEvent as PointerEvent).pointerType === 'touch') {
+      setOpenCard(prev => prev === idx ? null : idx);
+    }
+  };
+
   return (
     <section id="features" className={`section ${styles.servicesSection}`}>
       <div className="container">
@@ -78,7 +84,7 @@ export default function Services() {
               variants={cardVariants}
               animate={openCard === idx ? 'hover' : undefined}
               whileHover="hover"
-              onClick={() => setOpenCard(prev => prev === idx ? null : idx)}
+              onClick={(e) => handleCardClick(e, idx)}
             >
               <div className={styles.urgencyBadge}>⚡ 10 min</div>
               {/* Background Image Layer */}
