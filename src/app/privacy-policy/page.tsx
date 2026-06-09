@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function PrivacyPolicy() {
   return (
-    <LegalLayout title="Privacy Policy" lastUpdated="March 2024">
+    <LegalLayout title="Privacy Policy" lastUpdated="May 2026">
       <section>
         <p>At FamCare, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your personal information when you use our services.</p>
 

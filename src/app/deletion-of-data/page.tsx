@@ -2,7 +2,7 @@ import LegalLayout from '@/components/LegalLayout';
 
 export default function DeletionOfData() {
   return (
-    <LegalLayout title="Deletion of Data" lastUpdated="March 2024">
+    <LegalLayout title="Deletion of Data" lastUpdated="May 2026">
       <section>
         <p>At FamCare, we respect your privacy and provide you with the option to delete your personal data and account information from our systems.</p>
 

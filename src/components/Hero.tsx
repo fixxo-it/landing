@@ -168,18 +168,47 @@ export default function Hero() {
           <Pillars />
 
           <motion.div
-            className={styles.appScreenshotWrapper}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
+            className={styles.phonesRow}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.0, duration: 0.7, ease: "easeOut" }}
           >
-            <NextImage
-              src="/images/mobile.jpeg"
-              alt="FamCare Mobile App"
-              width={800}
-              height={1400}
-              className={styles.appScreenshot}
-            />
+            <div className={`${styles.phoneFrame} ${styles.phoneFrameSide}`}>
+              <div className={styles.phoneDynamicIsland} />
+              <div className={styles.phoneScreen}>
+                <NextImage
+                  src="/wdkndkd.png"
+                  alt="FamCare App Home"
+                  width={270}
+                  height={585}
+                  className={styles.phoneScreenImg}
+                />
+              </div>
+            </div>
+            <div className={`${styles.phoneFrame} ${styles.phoneFrameCenter}`}>
+              <div className={styles.phoneDynamicIsland} />
+              <div className={styles.phoneScreen}>
+                <NextImage
+                  src="/Screenshot_20260512-155001_FamCare.png"
+                  alt="FamCare App Services"
+                  width={270}
+                  height={585}
+                  className={styles.phoneScreenImg}
+                />
+              </div>
+            </div>
+            <div className={`${styles.phoneFrame} ${styles.phoneFrameSide}`}>
+              <div className={styles.phoneDynamicIsland} />
+              <div className={styles.phoneScreen}>
+                <NextImage
+                  src="/Screenshot_20260512-155009_FamCare.png"
+                  alt="FamCare App Booking"
+                  width={270}
+                  height={585}
+                  className={styles.phoneScreenImg}
+                />
+              </div>
+            </div>
           </motion.div>
 
           <motion.div

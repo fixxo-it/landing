@@ -2,7 +2,7 @@ import LegalLayout from '@/components/LegalLayout';
 
 export default function TermsAndConditions() {
   return (
-    <LegalLayout title="Terms and Conditions" lastUpdated="March 2024">
+    <LegalLayout title="Terms and Conditions" lastUpdated="May 2026">
       <section>
         <p>Welcome to FamCare. By using our website and services, you agree to comply with and be bound by the following terms and conditions. Please read them carefully.</p>
         

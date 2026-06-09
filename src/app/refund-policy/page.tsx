@@ -2,7 +2,7 @@ import LegalLayout from '@/components/LegalLayout';
 
 export default function RefundPolicy() {
   return (
-    <LegalLayout title="Refund Policy" lastUpdated="March 2024">
+    <LegalLayout title="Refund Policy" lastUpdated="May 2026">
       <section>
         <p>At FamCare, we aim to provide exceptional caregiving services for your loved ones. We understand that plans can change, and we strive to provide a fair and transparent refund policy.</p>
         
@@ -32,10 +32,10 @@ export default function RefundPolicy() {
         <p>Discounted or promotional services are non-refundable unless otherwise specified in the promotion&apos;s terms and conditions.</p>
 
         <h2>6. Dispute Resolution</h2>
-        <p>In the event of a payment dispute, we encourage you to contact us directly at billing@famcare.co.in to resolve the issue before initiating a chargeback.</p>
+        <p>In the event of a payment dispute, we encourage you to contact us directly at founders@famcare.co.in to resolve the issue before initiating a chargeback.</p>
 
         <h2>7. Contact Us</h2>
-        <p>If you have any questions about our Refund Policy or need assistance with a refund request, please contact us at support@famcare.co.in.</p>
+        <p>If you have any questions about our Refund Policy or need assistance with a refund request, please contact us at founders@famcare.co.in.</p>
       </section>
     </LegalLayout>
   );

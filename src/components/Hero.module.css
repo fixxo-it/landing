@@ -319,20 +319,75 @@
   flex-shrink: 0;
 }
 
-.appScreenshotWrapper {
+.phonesRow {
   margin-top: 48px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 16px;
   width: 100%;
-  max-width: 400px;
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  box-shadow: var(--shadow-xl);
-  border: 4px solid white;
 }
 
-.appScreenshot {
+.phoneFrame {
+  position: relative;
+  background: #0f172a;
+  border-radius: 38px;
+  padding: 14px 8px 22px;
+  flex-shrink: 0;
+  box-shadow:
+    0 32px 64px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+}
+
+/* power button */
+.phoneFrame::after {
+  content: '';
+  position: absolute;
+  right: -3px;
+  top: 88px;
+  width: 3px;
+  height: 48px;
+  background: #1e293b;
+  border-radius: 0 2px 2px 0;
+}
+
+.phoneFrameSide {
+  width: 168px;
+  opacity: 0.82;
+  transform: scale(0.93) translateY(14px);
+}
+
+.phoneFrameCenter {
+  width: 190px;
+  z-index: 2;
+  box-shadow:
+    0 40px 80px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+    0 0 40px rgba(20, 184, 166, 0.2);
+}
+
+.phoneDynamicIsland {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 78px;
+  height: 20px;
+  background: #0f172a;
+  border-radius: 100px;
+  z-index: 3;
+}
+
+.phoneScreen {
+  border-radius: 26px;
+  overflow: hidden;
+  background: #000;
+  position: relative;
+}
+
+.phoneScreenImg {
   width: 100%;
   height: auto;
-  object-fit: contain;
   display: block;
 }
 
@@ -411,10 +466,15 @@
   .appStoreImg {
     height: 45px;
   }
-  .appScreenshotWrapper {
-    max-width: 260px;
+  .phonesRow {
     margin-top: 28px;
-    border-width: 3px;
+    gap: 10px;
+  }
+  .phoneFrameSide {
+    display: none;
+  }
+  .phoneFrameCenter {
+    width: 210px;
   }
 }
 
@@ -454,8 +514,7 @@
   .actions {
     margin-bottom: 24px !important;
   }
-  .appScreenshotWrapper {
-    max-width: 200px;
-    margin-top: 20px;
+  .phoneFrameCenter {
+    width: 180px;
   }
 }
