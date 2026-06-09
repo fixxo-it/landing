@@ -59,13 +59,13 @@ export default function Expertise() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <NextImage 
-            src="/images/team.png" 
-            alt="FAMCARE TEAM" 
-            width={600}
-            height={450}
-            className={styles.teamImage} 
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          <NextImage
+            src="/images/team.webp"
+            alt="FamCare Team"
+            width={900}
+            height={1343}
+            className={styles.teamImage}
+            sizes="(max-width: 992px) 90vw, 45vw"
           />
         </motion.div>
       </div>

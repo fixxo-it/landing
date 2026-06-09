@@ -82,9 +82,9 @@ export default function Hero() {
           >
             <div className={styles.servicesGrid}>
               {[
-                { key: 'child', src: '/images/childcare.png', label: 'Child Care' },
-                { key: 'elderly', src: '/images/elderly.png', label: 'Elderly Care' },
-                { key: 'pet', src: '/images/petcare.png', label: 'Pet Care' },
+                { key: 'child', src: '/images/childcare.webp', label: 'Child Care' },
+                { key: 'elderly', src: '/images/elderly.webp', label: 'Elderly Care' },
+                { key: 'pet', src: '/images/petcare.webp', label: 'Pet Care' },
               ].map(({ key, src, label }) => (
                 <div
                   key={key}
@@ -92,7 +92,7 @@ export default function Hero() {
                   onMouseEnter={() => setExpandedService(key)}
                 >
                   <div className={styles.serviceImageWrapper}>
-                    <NextImage src={src} alt={label} fill style={{ objectFit: 'cover' }} />
+                    <NextImage src={src} alt={label} fill style={{ objectFit: 'cover' }} priority sizes="140px" />
                   </div>
                   <h4>{label}</h4>
                 </div>
@@ -207,13 +207,13 @@ export default function Hero() {
             <div className={`${styles.phoneFrame} ${styles.phoneFrameSide}`}>
               <div className={styles.phoneDynamicIsland} />
               <div className={styles.phoneScreen}>
-                <NextImage src="/wdkndkd.png" alt="FamCare App Home" width={270} height={585} className={styles.phoneScreenImg} />
+                <NextImage src="/wdkndkd.png" alt="FamCare App Home" width={270} height={585} className={styles.phoneScreenImg} priority sizes="190px" />
               </div>
             </div>
             <div className={`${styles.phoneFrame} ${styles.phoneFrameCenter}`}>
               <div className={styles.phoneDynamicIsland} />
               <div className={styles.phoneScreen}>
-                <NextImage src="/Screenshot_20260512-155001_FamCare.png" alt="FamCare App Services" width={270} height={585} className={styles.phoneScreenImg} />
+                <NextImage src="/Screenshot_20260512-155001_FamCare.png" alt="FamCare App Services" width={270} height={585} className={styles.phoneScreenImg} priority sizes="190px" />
               </div>
             </div>
             <div className={`${styles.phoneFrame} ${styles.phoneFrameSide}`}>

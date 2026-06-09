@@ -8,28 +8,28 @@ const services = [
   {
     title: 'Baby Care',
     desc: 'Expert care for your littlest ones, from newborns to infants.',
-    img: '/images/babysitting.png',
+    img: '/images/babysitting.webp',
     subServices: ['Newborn Specialists', 'Sleep Training', 'Feeding Assistance', 'Play & Development'],
     detailedInfo: 'Our experts provide gentle and knowledgeable care tailored to the delicate needs of babies.'
   },
   {
     title: 'Child Care',
     desc: 'Engaging and safe care for toddlers and growing children.',
-    img: '/images/childcare.png',
+    img: '/images/childcare.webp',
     subServices: ['Tutoring & Homework', 'Creative Activities', 'Outdoor Play', 'School Pick-ups'],
     detailedInfo: 'Trusted companions and tutors for your child, ensuring a safe and engaging environment.'
   },
   {
     title: 'Elderly Care',
     desc: 'Compassionate support and assistance for your senior family members.',
-    img: '/images/elderly.png',
+    img: '/images/elderly.webp',
     subServices: ['Medication Reminders', 'Mobility Assistance', 'Companionship', 'Meal Prep'],
     detailedInfo: 'Dignified, respectful, and compassionate care to empower seniors to live comfortably.'
   },
   {
     title: 'Pet Care',
     desc: 'Professional care, walking, and attention for your furry friends.',
-    img: '/images/petcare.png',
+    img: '/images/petcare.webp',
     subServices: ['Dog Walking', 'Pet Sitting', 'Feeding & Grooming', 'Vet Visits'],
     detailedInfo: 'Dedicated animal lovers providing top-tier care and companionship for your pets.'
   },
