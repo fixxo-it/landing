@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { motion, Variants } from 'framer-motion';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import styles from './Services.module.css';
@@ -51,6 +52,8 @@ const cardVariants: Variants = {
 };
 
 export default function Services() {
+  const [openCard, setOpenCard] = useState<number | null>(null);
+
   return (
     <section id="features" className={`section ${styles.servicesSection}`}>
       <div className="container">
@@ -69,13 +72,13 @@ export default function Services() {
           viewport={{ once: true, margin: "-50px" }}
         >
           {services.map((service, idx) => (
-            <motion.div 
-              key={idx} 
-              className={styles.card} 
+            <motion.div
+              key={idx}
+              className={styles.card}
               variants={cardVariants}
-              initial="initial"
+              animate={openCard === idx ? 'hover' : undefined}
               whileHover="hover"
-              whileTap="hover"
+              onClick={() => setOpenCard(prev => prev === idx ? null : idx)}
             >
               <div className={styles.urgencyBadge}>⚡ 10 min</div>
               {/* Background Image Layer */}
@@ -128,7 +131,10 @@ export default function Services() {
                   ))}
                 </div>
                 
-                <button className={`btn btn-primary ${styles.bookBtn}`}>
+                <button
+                  className={`btn btn-primary ${styles.bookBtn}`}
+                  onClick={e => e.stopPropagation()}
+                >
                   Plan Care <ArrowRight size={18}/>
                 </button>
               </motion.div>
