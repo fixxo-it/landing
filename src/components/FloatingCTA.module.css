@@ -2,11 +2,16 @@
   position: fixed;
   bottom: 24px;
   left: 50%;
-  transform: translateX(-50%);
   z-index: 200;
   width: calc(100% - 48px);
   max-width: 660px;
   pointer-events: all;
+}
+
+@supports (bottom: env(safe-area-inset-bottom)) {
+  .bar {
+    bottom: calc(24px + env(safe-area-inset-bottom));
+  }
 }
 
 .inner {
@@ -86,6 +91,12 @@
   .bar {
     bottom: 16px;
     width: calc(100% - 32px);
+  }
+
+  @supports (bottom: env(safe-area-inset-bottom)) {
+    .bar {
+      bottom: calc(16px + env(safe-area-inset-bottom));
+    }
   }
 
   .inner {

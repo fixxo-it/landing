@@ -130,6 +130,35 @@
   border-top-left-radius: var(--radius-lg);
   border-top-right-radius: var(--radius-lg);
   box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.15);
+  overflow-y: auto;
+}
+
+@media (max-width: 860px) {
+  .hoverDetails {
+    height: 100%;
+    border-radius: 0;
+    padding: 28px 24px;
+  }
+
+  .hoverTitle {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .detailedInfo {
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+  }
+
+  .subServicesGrid {
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .bookBtn {
+    padding: 14px;
+    font-size: 1rem;
+  }
 }
 
 .hoverTitle {

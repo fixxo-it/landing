@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, Variants } from 'framer-motion';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import styles from './Services.module.css';
@@ -40,9 +40,7 @@ const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.15
-    }
+    transition: { staggerChildren: 0.15 }
   }
 };
 
@@ -53,8 +51,17 @@ const cardVariants: Variants = {
 
 export default function Services() {
   const [openCard, setOpenCard] = useState<number | null>(null);
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [isTouch, setIsTouch] = useState(false);
 
-  const handleCardClick = (e: React.MouseEvent, idx: number) => {
+  useEffect(() => {
+    setIsTouch(window.matchMedia('(pointer: coarse)').matches);
+  }, []);
+
+  const isExpanded = (idx: number) =>
+    isTouch ? openCard === idx : hoveredCard === idx;
+
+  const handleClick = (e: React.MouseEvent, idx: number) => {
     if ((e.nativeEvent as PointerEvent).pointerType === 'touch') {
       setOpenCard(prev => prev === idx ? null : idx);
     }
@@ -70,7 +77,7 @@ export default function Services() {
           </p>
         </div>
 
-        <motion.div 
+        <motion.div
           className={styles.grid}
           variants={containerVariants}
           initial="hidden"
@@ -82,31 +89,26 @@ export default function Services() {
               key={idx}
               className={styles.card}
               variants={cardVariants}
-              animate={openCard === idx ? 'hover' : undefined}
-              whileHover="hover"
-              onClick={(e) => handleCardClick(e, idx)}
+              onMouseEnter={() => !isTouch && setHoveredCard(idx)}
+              onMouseLeave={() => !isTouch && setHoveredCard(null)}
+              onClick={(e) => handleClick(e, idx)}
             >
               <div className={styles.urgencyBadge}>⚡ 10 min</div>
+
               {/* Background Image Layer */}
               <motion.div
-                className={styles.imageLayer} 
+                className={styles.imageLayer}
                 style={{ backgroundImage: `url(${service.img})` }}
-                variants={{
-                  initial: { scale: 1 },
-                  hover: { scale: 1.05 }
-                }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
+                animate={isExpanded(idx) ? { scale: 1.05 } : { scale: 1 }}
+                transition={{ duration: 0.6, ease: 'easeOut' }}
               >
                 <div className={styles.overlayGradient}></div>
               </motion.div>
 
-              {/* Default Content (Visible initially) */}
-              <motion.div 
+              {/* Default Content */}
+              <motion.div
                 className={styles.contentLayer}
-                variants={{
-                  initial: { y: 0, opacity: 1 },
-                  hover: { y: -20, opacity: 0 }
-                }}
+                animate={isExpanded(idx) ? { y: -20, opacity: 0 } : { y: 0, opacity: 1 }}
                 transition={{ duration: 0.4 }}
               >
                 <div className={styles.titleWrapper}>
@@ -116,18 +118,16 @@ export default function Services() {
                 <p className={styles.desc}>{service.desc}</p>
               </motion.div>
 
-              {/* Reveal Hover Details */}
-              <motion.div 
+              {/* Reveal Details */}
+              <motion.div
                 className={styles.hoverDetails}
-                variants={{
-                  initial: { y: '100%', opacity: 0 },
-                  hover: { y: 0, opacity: 1 }
-                }}
+                initial={{ y: '100%', opacity: 0 }}
+                animate={isExpanded(idx) ? { y: 0, opacity: 1 } : { y: '100%', opacity: 0 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               >
                 <h3 className={styles.hoverTitle}>{service.title}</h3>
                 <p className={styles.detailedInfo}>{service.detailedInfo}</p>
-                
+
                 <div className={styles.subServicesGrid}>
                   {service.subServices.map((sub, i) => (
                     <div key={i} className={styles.subItem}>
@@ -136,12 +136,12 @@ export default function Services() {
                     </div>
                   ))}
                 </div>
-                
+
                 <button
                   className={`btn btn-primary ${styles.bookBtn}`}
                   onClick={e => e.stopPropagation()}
                 >
-                  Plan Care <ArrowRight size={18}/>
+                  Plan Care <ArrowRight size={18} />
                 </button>
               </motion.div>
             </motion.div>

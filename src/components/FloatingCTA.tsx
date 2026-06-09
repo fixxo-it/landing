@@ -24,9 +24,9 @@ export default function FloatingCTA() {
       {visible && !dismissed && (
         <motion.div
           className={styles.bar}
-          initial={{ y: 120, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 120, opacity: 0 }}
+          initial={{ y: 120, opacity: 0, x: '-50%' }}
+          animate={{ y: 0, opacity: 1, x: '-50%' }}
+          exit={{ y: 120, opacity: 0, x: '-50%' }}
           transition={{ type: 'spring', stiffness: 320, damping: 30 }}
         >
           <div className={styles.inner}>
