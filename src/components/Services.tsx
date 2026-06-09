@@ -52,7 +52,7 @@ const cardVariants: Variants = {
 
 export default function Services() {
   return (
-    <section id="services" className={`section ${styles.servicesSection}`}>
+    <section id="features" className={`section ${styles.servicesSection}`}>
       <div className="container">
         <div className={styles.header}>
           <h2 className="h2">Our <span className="text-gradient">Care Offerings</span></h2>
@@ -77,8 +77,9 @@ export default function Services() {
               whileHover="hover"
               whileTap="hover"
             >
+              <div className={styles.urgencyBadge}>⚡ 10 min</div>
               {/* Background Image Layer */}
-              <motion.div 
+              <motion.div
                 className={styles.imageLayer} 
                 style={{ backgroundImage: `url(${service.img})` }}
                 variants={{

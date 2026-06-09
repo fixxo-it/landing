@@ -3,99 +3,100 @@
 import { useState } from 'react';
 import NextImage from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Users, CheckSquare, X, CheckCircle2 } from 'lucide-react';
+import { Users, CheckSquare, Zap, X, CheckCircle2 } from 'lucide-react';
 import styles from './Hero.module.css';
-import Pillars from './Pillars';
 
 const serviceDetails: Record<string, { title: string; items: string[] }> = {
   child: {
     title: 'Child Care',
-    items: ['After School Babysitting', 'WFH Babysitting', 'Quick Babysitting']
+    items: ['After School Babysitting', 'WFH Babysitting', 'Quick Babysitting'],
   },
   elderly: {
     title: 'Elderly Care',
-    items: ['Elderly companion']
+    items: ['Elderly Companion'],
   },
   pet: {
     title: 'Pet Care',
-    items: ['Dog Walker']
-  }
+    items: ['Dog Walker'],
+  },
 };
 
 export default function Hero() {
   const [expandedService, setExpandedService] = useState<string | null>(null);
 
-  const toggleService = (key: string) => {
-    if (expandedService === key) {
-      setExpandedService(null);
-    } else {
-      setExpandedService(key);
-    }
-  };
-
   return (
     <section className={styles.hero}>
-      <div className={styles.bgElements}>
-        <div className={styles.circle1} />
-        <div className={styles.circle2} />
-      </div>
+      {/* Animated background blobs */}
+      <div className={styles.blob1} />
+      <div className={styles.blob2} />
+      <div className={styles.blob3} />
 
       <div className={`container ${styles.heroContainer}`}>
+
+        {/* ── LEFT COLUMN ── */}
         <motion.div
-          className={styles.content}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          className={styles.heroLeft}
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
         >
+          {/* Availability pill */}
+          <motion.div
+            className={styles.topBadge}
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.5 }}
+          >
+            <Zap size={13} fill="currentColor" />
+            Available Now in Bengaluru
+          </motion.div>
+
           <motion.h1
-            className="h1"
+            className={`h1 ${styles.headline}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.7 }}
-            style={{ marginBottom: '40px' }}
+            transition={{ delay: 0.25, duration: 0.7 }}
           >
-            <span className="text-gradient">In House Trusted Care</span> in Minutes
+            <span className="text-gradient">In House Trusted Care</span>{' '}
+            in Minutes
           </motion.h1>
 
+          <motion.p
+            className={styles.subtitle}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.45, duration: 0.7 }}
+          >
+            Experience the most modern caregiver app designed for your family's
+            safety and speed. Directly hired &amp; matched professionals at your
+            doorstep in minutes.
+          </motion.p>
+
+          {/* Service tiles */}
           <motion.div
             className={styles.servicesWrapper}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
+            transition={{ delay: 0.4, duration: 0.7 }}
             onMouseLeave={() => setExpandedService(null)}
           >
             <div className={styles.servicesGrid}>
-
-
-              <div
-                className={`${styles.serviceItem} ${expandedService === 'child' ? styles.activeService : ''}`}
-                onMouseEnter={() => setExpandedService('child')}
-              >
-                <div className={styles.serviceImageWrapper}>
-                  <NextImage src="/images/childcare.png" alt="Child Care" fill style={{ objectFit: 'cover' }} />
+              {[
+                { key: 'child', src: '/images/childcare.png', label: 'Child Care' },
+                { key: 'elderly', src: '/images/elderly.png', label: 'Elderly Care' },
+                { key: 'pet', src: '/images/petcare.png', label: 'Pet Care' },
+              ].map(({ key, src, label }) => (
+                <div
+                  key={key}
+                  className={`${styles.serviceItem} ${expandedService === key ? styles.activeService : ''}`}
+                  onMouseEnter={() => setExpandedService(key)}
+                >
+                  <div className={styles.serviceImageWrapper}>
+                    <NextImage src={src} alt={label} fill style={{ objectFit: 'cover' }} />
+                  </div>
+                  <h4>{label}</h4>
                 </div>
-                <h4>Child Care</h4>
-              </div>
-
-              <div
-                className={`${styles.serviceItem} ${expandedService === 'elderly' ? styles.activeService : ''}`}
-                onMouseEnter={() => setExpandedService('elderly')}
-              >
-                <div className={styles.serviceImageWrapper}>
-                  <NextImage src="/images/elderly.png" alt="Elderly Care" fill style={{ objectFit: 'cover' }} />
-                </div>
-                <h4>Elderly Care</h4>
-              </div>
-
-              <div
-                className={`${styles.serviceItem} ${expandedService === 'pet' ? styles.activeService : ''}`}
-                onMouseEnter={() => setExpandedService('pet')}
-              >
-                <div className={styles.serviceImageWrapper}>
-                  <NextImage src="/images/petcare.png" alt="Pet Care" fill style={{ objectFit: 'cover' }} />
-                </div>
-                <h4>Pet Care</h4>
-              </div>
+              ))}
 
               <div className={`${styles.serviceItem} ${styles.comingSoonWrapper}`}>
                 <div className={styles.serviceImageWrapper} style={{ filter: 'grayscale(0.4)' }}>
@@ -118,7 +119,9 @@ export default function Hero() {
                   <button className={styles.closeExpanded} onClick={() => setExpandedService(null)}>
                     <X size={20} />
                   </button>
-                  <h3 className={styles.expandedTitle}>{serviceDetails[expandedService].title} Includes:</h3>
+                  <h3 className={styles.expandedTitle}>
+                    {serviceDetails[expandedService].title} Includes:
+                  </h3>
                   <div className={styles.expandedTags}>
                     {serviceDetails[expandedService].items.map((item, idx) => (
                       <div key={idx} className={styles.expandedTagItem}>
@@ -132,22 +135,12 @@ export default function Hero() {
             </AnimatePresence>
           </motion.div>
 
-          <motion.p
-            className={styles.subtitle}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            style={{ marginTop: '32px' }}
-          >
-            Experience the most modern caregiver app designed for your family's safety and speed.
-            We bring you directly hired & matched professionals to your doorstep in just minutes.
-          </motion.p>
-
+          {/* Stats row */}
           <motion.div
             className={styles.stats}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
+            transition={{ delay: 0.65, duration: 0.7 }}
           >
             <div className={styles.statItem}>
               <Users className={styles.statIcon} />
@@ -165,58 +158,12 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          <Pillars />
-
-          <motion.div
-            className={styles.phonesRow}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.0, duration: 0.7, ease: "easeOut" }}
-          >
-            <div className={`${styles.phoneFrame} ${styles.phoneFrameSide}`}>
-              <div className={styles.phoneDynamicIsland} />
-              <div className={styles.phoneScreen}>
-                <NextImage
-                  src="/wdkndkd.png"
-                  alt="FamCare App Home"
-                  width={270}
-                  height={585}
-                  className={styles.phoneScreenImg}
-                />
-              </div>
-            </div>
-            <div className={`${styles.phoneFrame} ${styles.phoneFrameCenter}`}>
-              <div className={styles.phoneDynamicIsland} />
-              <div className={styles.phoneScreen}>
-                <NextImage
-                  src="/Screenshot_20260512-155001_FamCare.png"
-                  alt="FamCare App Services"
-                  width={270}
-                  height={585}
-                  className={styles.phoneScreenImg}
-                />
-              </div>
-            </div>
-            <div className={`${styles.phoneFrame} ${styles.phoneFrameSide}`}>
-              <div className={styles.phoneDynamicIsland} />
-              <div className={styles.phoneScreen}>
-                <NextImage
-                  src="/Screenshot_20260512-155009_FamCare.png"
-                  alt="FamCare App Booking"
-                  width={270}
-                  height={585}
-                  className={styles.phoneScreenImg}
-                />
-              </div>
-            </div>
-          </motion.div>
-
+          {/* App store buttons */}
           <motion.div
             className={styles.actions}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2, duration: 0.5 }}
-            style={{ marginTop: '40px', marginBottom: '-40px' }}
+            transition={{ delay: 0.8, duration: 0.5 }}
           >
             <a
               href="https://apps.apple.com/in/app/famcare/id6761720384"
@@ -247,6 +194,35 @@ export default function Hero() {
               />
             </a>
           </motion.div>
+        </motion.div>
+
+        {/* ── RIGHT COLUMN — Phones ── */}
+        <motion.div
+          className={styles.heroRight}
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.35, duration: 0.9, ease: 'easeOut' }}
+        >
+          <div className={styles.phonesRow}>
+            <div className={`${styles.phoneFrame} ${styles.phoneFrameSide}`}>
+              <div className={styles.phoneDynamicIsland} />
+              <div className={styles.phoneScreen}>
+                <NextImage src="/wdkndkd.png" alt="FamCare App Home" width={270} height={585} className={styles.phoneScreenImg} />
+              </div>
+            </div>
+            <div className={`${styles.phoneFrame} ${styles.phoneFrameCenter}`}>
+              <div className={styles.phoneDynamicIsland} />
+              <div className={styles.phoneScreen}>
+                <NextImage src="/Screenshot_20260512-155001_FamCare.png" alt="FamCare App Services" width={270} height={585} className={styles.phoneScreenImg} />
+              </div>
+            </div>
+            <div className={`${styles.phoneFrame} ${styles.phoneFrameSide}`}>
+              <div className={styles.phoneDynamicIsland} />
+              <div className={styles.phoneScreen}>
+                <NextImage src="/Screenshot_20260512-155009_FamCare.png" alt="FamCare App Booking" width={270} height={585} className={styles.phoneScreenImg} />
+              </div>
+            </div>
+          </div>
         </motion.div>
 
       </div>

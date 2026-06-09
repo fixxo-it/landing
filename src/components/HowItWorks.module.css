@@ -1,0 +1,146 @@
+.section {
+  padding: 100px 0;
+  background: #ffffff;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 72px;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--primary);
+  background: rgba(20, 184, 166, 0.1);
+  padding: 6px 16px;
+  border-radius: 999px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(20, 184, 166, 0.2);
+}
+
+.subhead {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  max-width: 460px;
+  margin: 14px auto 0;
+  line-height: 1.6;
+}
+
+/* ── Steps row ── */
+.stepsRow {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.stepWrapper {
+  display: contents;
+}
+
+.card {
+  flex: 1;
+  background: #fafafa;
+  border: 1px solid rgba(20, 184, 166, 0.1);
+  border-radius: 28px;
+  padding: 44px 36px 40px;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+}
+
+.card:hover {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.07);
+  border-color: rgba(20, 184, 166, 0.22);
+}
+
+.bigNumber {
+  position: absolute;
+  top: -14px;
+  right: 18px;
+  font-size: 7.5rem;
+  font-weight: 900;
+  color: rgba(20, 184, 166, 0.055);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  pointer-events: none;
+  user-select: none;
+}
+
+.iconCircle {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 22px;
+}
+
+.title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+  line-height: 1.2;
+}
+
+.desc {
+  color: var(--text-muted);
+  font-size: 0.975rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ── Arrow connector ── */
+.connector {
+  flex-shrink: 0;
+  width: 48px;
+  transform-origin: left center;
+}
+
+.connector svg {
+  width: 100%;
+  height: 12px;
+}
+
+@media (max-width: 860px) {
+  .stepsRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .stepWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .connector {
+    width: 12px;
+    height: 40px;
+    transform: rotate(90deg);
+    margin: 4px 0;
+  }
+
+  .card {
+    width: 100%;
+    padding: 32px 28px;
+  }
+
+  .bigNumber {
+    font-size: 5.5rem;
+  }
+
+  .section {
+    padding: 80px 0;
+  }
+
+  .header {
+    margin-bottom: 56px;
+  }
+}

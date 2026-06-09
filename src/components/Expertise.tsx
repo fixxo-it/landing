@@ -6,7 +6,7 @@ import NextImage from 'next/image';
 import styles from './Expertise.module.css';
 
 const items = [
-  'In-House Trained Professionals',
+  'In-House Trained Caregivers',
   'Directly Hired & Vetted Team',
   'Verified Background Checks',
   'Ensures Quality & Trust',

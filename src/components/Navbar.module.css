@@ -51,6 +51,24 @@
   color: var(--primary);
 }
 
+.getAppBtn {
+  background: var(--primary) !important;
+  color: white !important;
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  letter-spacing: 0.01em;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s !important;
+}
+
+.getAppBtn:hover {
+  background: var(--primary-dark) !important;
+  color: white !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 20px rgba(20, 184, 166, 0.35) !important;
+}
+
 @media (max-width: 860px) {
   .navLinks {
     display: none;

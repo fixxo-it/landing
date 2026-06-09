@@ -7,6 +7,41 @@ export default function Footer() {
   return (
     <footer style={{ backgroundColor: 'var(--bg-color)', padding: '80px 0 40px 0', borderTop: '1px solid rgba(20, 184, 166, 0.1)' }}>
       <div className="container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
+
+        {/* CTA block */}
+        <div style={{
+          width: '100%',
+          maxWidth: '640px',
+          background: 'linear-gradient(135deg, rgba(20,184,166,0.1) 0%, rgba(3,105,161,0.08) 100%)',
+          border: '1px solid rgba(20,184,166,0.18)',
+          borderRadius: '28px',
+          padding: '48px 40px',
+          marginBottom: '64px',
+        }}>
+          <h3 style={{ fontSize: '1.9rem', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: '10px', color: 'var(--primary-dark)' }}>
+            Ready for trusted care?
+          </h3>
+          <p style={{ color: 'var(--text-muted)', marginBottom: '28px', fontSize: '1.05rem' }}>
+            Join thousands of families across Bengaluru.
+          </p>
+          <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <a href="https://apps.apple.com/in/app/famcare/id6761720384" target="_blank" rel="noopener noreferrer"
+              style={{ display: 'flex', transition: 'transform 0.2s' }}
+              onMouseOver={e => (e.currentTarget.style.transform = 'translateY(-3px)')}
+              onMouseOut={e => (e.currentTarget.style.transform = 'translateY(0)')}
+            >
+              <NextImage src="/appstore.png" alt="App Store" width={140} height={42} style={{ height: '44px', width: 'auto', objectFit: 'contain' }} />
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.famcare.praja&pcampaignid=web_share" target="_blank" rel="noopener noreferrer"
+              style={{ display: 'flex', transition: 'transform 0.2s' }}
+              onMouseOver={e => (e.currentTarget.style.transform = 'translateY(-3px)')}
+              onMouseOut={e => (e.currentTarget.style.transform = 'translateY(0)')}
+            >
+              <NextImage src="/googleplay.webp" alt="Google Play" width={140} height={42} style={{ height: '52px', width: 'auto', objectFit: 'contain' }} />
+            </a>
+          </div>
+        </div>
+
         <div style={{ marginBottom: '24px' }}>
           <NextImage 
             src="/logo.png" 

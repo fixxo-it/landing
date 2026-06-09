@@ -34,6 +34,14 @@ export default function Navbar() {
           <Link href="/#features">Features</Link>
           <Link href="/#pillars">Quality</Link>
           <Link href="/support">Support</Link>
+          <a
+            href="https://apps.apple.com/in/app/famcare/id6761720384"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.getAppBtn}
+          >
+            Get App ↗
+          </a>
         </div>
 
         {/* Mobile Toggle */}
