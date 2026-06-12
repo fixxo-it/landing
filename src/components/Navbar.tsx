@@ -5,10 +5,12 @@ import NextImage from 'next/image';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useStoreUrl } from '@/lib/useStoreUrl';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const storeUrl = useStoreUrl();
 
   return (
     <motion.nav
@@ -35,12 +37,12 @@ export default function Navbar() {
           <Link href="#how">How it works</Link>
           <Link href="#verified">Verified Caregivers</Link>
           <a
-            href="https://apps.apple.com/in/app/famcare/id6761720384"
+            href={storeUrl}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.bookNowBtn}
           >
-            Book Now
+            Download Now
           </a>
         </div>
 
@@ -62,13 +64,13 @@ export default function Navbar() {
               <Link href="#how" onClick={() => setIsOpen(false)}>How it works</Link>
               <Link href="#verified" onClick={() => setIsOpen(false)}>Verified Caregivers</Link>
               <a
-                href="https://apps.apple.com/in/app/famcare/id6761720384"
+                href={storeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.mobileBookBtn}
                 onClick={() => setIsOpen(false)}
               >
-                Book Now
+                Download Now
               </a>
             </motion.div>
           )}

@@ -71,21 +71,22 @@
 }
 
 .bookNowBtn {
-  background: var(--primary) !important;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%) !important;
   color: white !important;
   padding: 10px 22px;
   border-radius: 999px;
   font-weight: 700;
   font-size: 0.88rem;
   letter-spacing: 0.01em;
-  transition: background 0.2s, transform 0.2s, box-shadow 0.2s !important;
+  box-shadow: 0 2px 12px rgba(20, 184, 166, 0.38) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .bookNowBtn:hover {
-  background: var(--primary-dark) !important;
+  background: linear-gradient(135deg, #12A396 0%, #0A5F58 100%) !important;
   color: white !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 8px 20px rgba(20, 184, 166, 0.35) !important;
+  box-shadow: 0 6px 20px rgba(20, 184, 166, 0.5) !important;
 }
 
 .mobileToggle {

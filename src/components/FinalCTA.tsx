@@ -2,9 +2,11 @@
 
 import { motion } from 'framer-motion';
 import { fadeUp, revealContainer } from '@/lib/motion';
+import { useStoreUrl } from '@/lib/useStoreUrl';
 import styles from './FinalCTA.module.css';
 
 export default function FinalCTA() {
+  const storeUrl = useStoreUrl();
   return (
     <section className={styles.section}>
       <motion.div {...revealContainer(0.12)}>
@@ -16,12 +18,12 @@ export default function FinalCTA() {
         </motion.p>
         <motion.div className={styles.actions} variants={fadeUp}>
           <a
-            href="https://apps.apple.com/in/app/famcare/id6761720384"
+            href={storeUrl}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.btnWhite}
           >
-            Book on-demand now <span className={styles.arrow}>→</span>
+            Download Now <span className={styles.arrow}>→</span>
           </a>
         </motion.div>
       </motion.div>

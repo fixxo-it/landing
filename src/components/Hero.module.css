@@ -140,7 +140,8 @@
 .btnDark {
   display: inline-flex;
   align-items: center;
-  background: var(--primary);
+  gap: 8px;
+  background: linear-gradient(135deg, var(--primary) 0%, #0EA5A0 55%, var(--primary-dark) 100%);
   color: white;
   border: none;
   padding: 15px 30px;
@@ -149,15 +150,22 @@
   font-weight: 700;
   cursor: pointer;
   font-family: 'Outfit', sans-serif;
-  transition: all 0.2s;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   letter-spacing: 0.01em;
-  box-shadow: var(--shadow-colored);
+  box-shadow: 0 4px 20px rgba(20, 184, 166, 0.45), 0 1px 0 rgba(255, 255, 255, 0.14) inset;
 }
 
 .btnDark:hover {
-  background: var(--primary-dark);
+  background: linear-gradient(135deg, #12A396 0%, var(--primary-dark) 100%);
   transform: translateY(-2px);
-  box-shadow: 0 14px 28px rgba(20, 184, 166, 0.4);
+  box-shadow: 0 10px 28px rgba(20, 184, 166, 0.55);
+}
+
+.appleIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  opacity: 0.92;
 }
 
 .arrow {
@@ -167,6 +175,34 @@
 }
 
 .btnDark:hover .arrow {
+  transform: translateX(4px);
+}
+
+.btnSafety {
+  display: inline-flex;
+  align-items: center;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1.5px solid rgba(20, 184, 166, 0.3);
+  padding: 14px 26px;
+  border-radius: 28px;
+  font-size: 0.94rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Outfit', sans-serif;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  letter-spacing: 0.005em;
+  white-space: nowrap;
+}
+
+.btnSafety:hover {
+  background: rgba(20, 184, 166, 0.08);
+  border-color: var(--primary);
+  color: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+.btnSafety:hover .arrow {
   transform: translateX(4px);
 }
 

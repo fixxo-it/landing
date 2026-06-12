@@ -4,6 +4,7 @@ import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import NextImage from 'next/image';
 import { useState, useEffect } from 'react';
 import { EASE_OUT, fadeUp, staggerContainer } from '@/lib/motion';
+import { useStoreUrl } from '@/lib/useStoreUrl';
 import styles from './Hero.module.css';
 
 const CARE_IMAGES = [
@@ -43,6 +44,7 @@ const HEADLINE_LINES = [
 
 export default function Hero() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const storeUrl = useStoreUrl();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -86,12 +88,20 @@ export default function Hero() {
 
         <motion.div className={styles.actions} variants={fadeUp}>
           <a
-            href="https://apps.apple.com/in/app/famcare/id6761720384"
+            href={storeUrl}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.btnDark}
           >
-            Book Now <span className={styles.arrow}>→</span>
+            <svg className={styles.appleIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Download Now
+          </a>
+          <a href="#tech" className={styles.btnSafety}>
+            Check Safety Features <span className={styles.arrow}>→</span>
           </a>
         </motion.div>
       </motion.div>

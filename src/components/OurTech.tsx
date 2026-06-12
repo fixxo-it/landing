@@ -93,7 +93,7 @@ const features = [
 
 export default function OurTech() {
   return (
-    <section className={styles.section}>
+    <section className={styles.section} id="tech">
       <div className="container">
         <motion.div
           className={styles.header}

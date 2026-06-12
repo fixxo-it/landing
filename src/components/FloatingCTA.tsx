@@ -4,11 +4,13 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Baby } from 'lucide-react';
 import { springSoft } from '@/lib/motion';
+import { useStoreUrl } from '@/lib/useStoreUrl';
 import styles from './FloatingCTA.module.css';
 
 export default function FloatingCTA() {
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
+  const storeUrl = useStoreUrl();
 
   useEffect(() => {
     const onScroll = () => {
@@ -39,12 +41,12 @@ export default function FloatingCTA() {
             </div>
 
             <a
-              href="https://apps.apple.com/in/app/famcare/id6761720384"
+              href={storeUrl}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.bookBtn}
             >
-              Book Now →
+              Download Now →
             </a>
 
             <button
