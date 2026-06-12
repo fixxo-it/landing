@@ -18,7 +18,7 @@ export default function Footer() {
             style={{ objectFit: 'contain' }}
           />
           <p className={styles.tagline}>
-            Trusted baby care in Bangalore. Newborn, toddler, after-school — we&apos;ve got you covered.
+            Trusted baby care in Whitefield, Bangalore. Newborn, toddler, after-school - we&apos;ve got you covered.
           </p>
           <div className={styles.contact}>
             <a href="tel:+919986905105">+91 99869 05105</a>
@@ -40,7 +40,6 @@ export default function Footer() {
             <div className={styles.linkHeading}>Company</div>
             <Link href="#how">How it works</Link>
             <Link href="#verified">Verified caregivers</Link>
-            <Link href="#pricing">Pricing</Link>
             <Link href="/support">Support</Link>
           </div>
           <div className={styles.linkGroup}>
@@ -55,8 +54,8 @@ export default function Footer() {
 
       <div className={styles.bottom}>
         <div className="container">
-          <span>© {new Date().getFullYear()} Swad Hotels And Restaurants Private Limited. All rights reserved.</span>
-          <span className={styles.madeWith}>Made with ❤️ for Bangalore families</span>
+          <span>© {new Date().getFullYear()} FAMCARE TECHNOLOGIES PRIVATE LIMITED. All rights reserved.</span>
+          <span className={styles.madeWith}>Made with ❤️ for Whitefield, Bangalore families</span>
         </div>
       </div>
     </footer>

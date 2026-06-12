@@ -24,16 +24,42 @@
 .card {
   background: white;
   border-radius: var(--radius-md);
-  padding: 28px 22px;
+  padding: 0;
   border: 1px solid rgba(20, 184, 166, 0.1);
   transition: transform 0.25s, box-shadow 0.25s;
   cursor: default;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
   border-color: var(--primary-light);
+}
+
+.imageWrapper {
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  background: rgba(20, 184, 166, 0.08);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  padding: 12px;
+}
+
+.card:hover .imageWrapper img {
+  transform: scale(1.05);
 }
 
 .featuredCard {
@@ -45,6 +71,7 @@
   font-size: 2rem;
   margin-bottom: 14px;
   line-height: 1;
+  padding: 22px 22px 0;
 }
 
 .cardTitle {
@@ -52,17 +79,22 @@
   font-weight: 700;
   color: var(--text-main);
   margin-bottom: 8px;
+  padding: 0 22px;
 }
 
 .cardDesc {
   font-size: 0.83rem;
   color: var(--text-muted);
   line-height: 1.6;
+  padding: 0 22px;
+  flex: 1;
 }
 
 .tag {
   display: inline-block;
   margin-top: 14px;
+  margin-left: 22px;
+  margin-bottom: 22px;
   font-size: 0.7rem;
   font-weight: 700;
   padding: 3px 10px;

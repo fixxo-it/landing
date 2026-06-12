@@ -34,7 +34,6 @@ export default function Navbar() {
           <Link href="#services">Services</Link>
           <Link href="#how">How it works</Link>
           <Link href="#verified">Verified Caregivers</Link>
-          <Link href="#pricing">Pricing</Link>
           <a
             href="https://apps.apple.com/in/app/famcare/id6761720384"
             target="_blank"
@@ -62,7 +61,6 @@ export default function Navbar() {
               <Link href="#services" onClick={() => setIsOpen(false)}>Services</Link>
               <Link href="#how" onClick={() => setIsOpen(false)}>How it works</Link>
               <Link href="#verified" onClick={() => setIsOpen(false)}>Verified Caregivers</Link>
-              <Link href="#pricing" onClick={() => setIsOpen(false)}>Pricing</Link>
               <a
                 href="https://apps.apple.com/in/app/famcare/id6761720384"
                 target="_blank"

@@ -20,21 +20,6 @@ const plans = [
     btnText: 'Book a session',
   },
   {
-    tag: 'Most popular',
-    name: 'Monthly pass',
-    price: '₹3,999',
-    per: '40 hours / month',
-    features: [
-      'Save up to 35%',
-      'Priority matching',
-      'Preferred caregiver lock-in',
-      'Mix session types freely',
-      'Rollover unused hours',
-    ],
-    featured: true,
-    btnText: 'Get monthly pass',
-  },
-  {
     tag: 'For families',
     name: 'Family plan',
     price: '₹6,999',
@@ -62,11 +47,6 @@ export default function Pricing() {
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.6 }}
         >
-          <div className="eyebrow">Flexible &amp; affordable</div>
-          <h2 className="h2">
-            Pay for what you need.<br />
-            Nothing more.
-          </h2>
           <p className={styles.subhead}>
             Start with one session. Subscribe when you&apos;re ready. No long
             contracts, no agency fees.

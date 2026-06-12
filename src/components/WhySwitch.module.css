@@ -95,6 +95,26 @@
   text-align: center;
 }
 
+.cellInner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.cross {
+  color: rgba(255, 255, 255, 0.22);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.checkMark {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
 .row:hover .cellFeat {
   color: white;
 }

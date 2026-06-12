@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { fadeUp, viewportOnce } from '@/lib/motion';
 import styles from './Testimonials.module.css';
 
 const testimonials = [
@@ -29,7 +30,7 @@ const testimonials = [
   {
     name: 'Meera T.',
     location: 'Architect · Koramangala',
-    text: '"My 2-year-old is impossible with strangers. The FamCare toddler companion they sent had him laughing in 10 minutes. I cried — happy tears. Finally some time to breathe."',
+    text: '"My 2-year-old is impossible with strangers. The FamCare toddler companion they sent had him laughing in 10 minutes. I cried - happy tears. Finally some time to breathe."',
     initials: 'MT',
     color: '#B45309',
     stars: 5,
@@ -40,7 +41,7 @@ const testimonials = [
   {
     name: 'Rohit & Deepa N.',
     location: 'Engineers · Whitefield',
-    text: '"After-school care sorted! The caregiver picks up our 6-year-old, handles snacks and homework — by the time we\'re home everything is done. Absolute lifesaver."',
+    text: '"After-school care sorted! The caregiver picks up our 6-year-old, handles snacks and homework - by the time we\'re home everything is done. Absolute lifesaver."',
     initials: 'RN',
     color: '#0369A1',
     stars: 5,
@@ -51,7 +52,7 @@ const testimonials = [
   {
     name: 'Kavitha M.',
     location: 'Doctor · Jayanagar',
-    text: '"I had a night shift and needed overnight care for my 4-month-old. FamCare\'s night care caregiver was incredible — professional, gentle, and I could actually sleep knowing he was safe."',
+    text: '"I had a night shift and needed overnight care for my 4-month-old. FamCare\'s night care caregiver was incredible - professional, gentle, and I could actually sleep knowing he was safe."',
     initials: 'KM',
     color: '#6D28D9',
     stars: 5,
@@ -80,12 +81,12 @@ export default function Testimonials() {
       <div className="container">
         <motion.div
           className={styles.header}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
         >
-          <div className="eyebrow">Real Bangalore families</div>
+          <div className="eyebrow">Real Whitefield, Bangalore families</div>
           <h2 className="h2">
             They trusted FamCare.<br />
             Now they won&apos;t go back.

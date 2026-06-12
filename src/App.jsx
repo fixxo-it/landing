@@ -387,7 +387,7 @@ function App() {
           </div>
         </div>
         <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-slate-200 text-center text-slate-400 text-sm">
-          © Copyright 2025, All Rights Reserved by Swad Hotels & Restaurants Private Limited.
+          © Copyright 2025, All Rights Reserved by FAMCARE TECHNOLOGIES PRIVATE LIMITED.
         </div>
       </footer >
     </div >
@@ -596,7 +596,7 @@ function SupportChat() {
       } else if (lowerInput.includes('service') || lowerInput.includes('what do you do')) {
         response = "Currently, we specialize in 4 core services for personal use: \n1. Ironing at home 👕\n2. Dog walking 🐕\n3. Nannies 👵\n4. Gardening 🌱\nWhich one can I tell you more about?";
       } else if (lowerInput.includes('price') || lowerInput.includes('cost') || lowerInput.includes('subscription')) {
-        response = "Our monthly subscription is designed to be affordable—costing about as much as a single good night out! It covers all coordination and administrative support. Specific service rates (like hourly nanny or dog walking) are extra.";
+        response = "Our monthly subscription is designed to be affordable-costing about as much as a single good night out! It covers all coordination and administrative support. Specific service rates (like hourly nanny or dog walking) are extra.";
       } else if (lowerInput.includes('iron')) {
         response = "Our 'Ironing at Home' service brings the help to you. On WhatsApp, we'll just ask for your volume (up to 20, 50, or more clothes) and your preferred time (today, tomorrow, or this week) to get you sorted!";
       } else if (lowerInput.includes('dog') || lowerInput.includes('pet')) {

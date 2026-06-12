@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Baby } from 'lucide-react';
+import { springSoft } from '@/lib/motion';
 import styles from './FloatingCTA.module.css';
 
 export default function FloatingCTA() {
@@ -26,7 +27,7 @@ export default function FloatingCTA() {
           initial={{ y: 120, opacity: 0, x: '-50%' }}
           animate={{ y: 0, opacity: 1, x: '-50%' }}
           exit={{ y: 120, opacity: 0, x: '-50%' }}
-          transition={{ type: 'spring', stiffness: 320, damping: 30 }}
+          transition={springSoft}
         >
           <div className={styles.inner}>
             <div className={styles.iconWrap}>

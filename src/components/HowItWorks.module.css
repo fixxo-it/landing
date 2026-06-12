@@ -53,6 +53,7 @@
   text-align: center;
   padding: 0 16px;
   position: relative;
+  cursor: pointer;
 }
 
 .stepCircle {
@@ -68,11 +69,12 @@
   font-size: 1.4rem;
   position: relative;
   z-index: 1;
-  transition: background 0.2s;
+  transition: background 0.3s, border-color 0.3s;
 }
 
 .step:hover .stepCircle {
-  background: rgba(20, 184, 166, 0.22);
+  background: rgba(20, 184, 166, 0.25);
+  border-color: rgba(20, 184, 166, 0.5);
 }
 
 .stepTime {

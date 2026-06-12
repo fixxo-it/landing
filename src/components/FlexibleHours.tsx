@@ -1,36 +1,29 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { EASE_OUT, fadeUp, scaleIn, revealContainer, staggerItem, viewportOnce } from '@/lib/motion';
 import styles from './FlexibleHours.module.css';
 
 const durations = [
   {
+    hours: '1',
+    unit: 'hour',
+    name: 'Quick help',
+  },
+  {
     hours: '3',
     unit: 'hours',
     name: 'Quick support',
-    desc: 'Errands, doctor visits, or a well-deserved breather',
-    price: 'From ₹299/hr',
   },
   {
     hours: '6',
     unit: 'hours',
     name: 'Half-day',
-    desc: 'Full morning or afternoon of uninterrupted focus',
-    price: 'From ₹275/hr',
   },
   {
     hours: '9',
     unit: 'hours',
     name: 'Full day',
-    desc: 'Complete working day — focus completely on what matters',
-    price: 'From ₹249/hr',
-  },
-  {
-    hours: 'Night',
-    unit: '8pm – 7am',
-    name: 'Night care',
-    desc: 'Overnight support and sleep training assistance',
-    price: 'From ₹1,499/night',
   },
 ];
 
@@ -40,37 +33,35 @@ export default function FlexibleHours() {
       <div className="container">
         <motion.div
           className={styles.header}
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.6 }}
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
         >
           <div className="eyebrow">Flexible hours</div>
           <h2 className="h2">Pay for only the hours you need.</h2>
           <p className={styles.subhead}>
-            No minimum commitment. Book for 3 hours or a full working day — at
-            transparent, fixed prices.
+            Book for as little as 1 hour or as much as a full day - whatever works for you.
           </p>
         </motion.div>
 
-        <div className={styles.grid}>
+        <motion.div className={styles.grid} {...revealContainer(0.1)}>
           {durations.map((d, i) => (
             <motion.div
               key={i}
               className={styles.card}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-40px' }}
-              transition={{ delay: i * 0.1, duration: 0.55 }}
+              variants={staggerItem}
+              whileHover={{ y: -6 }}
+              transition={{ duration: 0.25, ease: EASE_OUT }}
             >
-              <div className={styles.bigHours}>{d.hours}</div>
+              <motion.div className={styles.bigHours} variants={scaleIn}>
+                {d.hours}
+              </motion.div>
               <div className={styles.unit}>{d.unit}</div>
               <div className={styles.name}>{d.name}</div>
-              <p className={styles.desc}>{d.desc}</p>
-              <div className={styles.price}>{d.price}</div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

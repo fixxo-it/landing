@@ -7,8 +7,7 @@ import ForEveryOccasion from '@/components/ForEveryOccasion';
 import HowItWorks from '@/components/HowItWorks';
 import Pillars from '@/components/Pillars';
 import WhySwitch from '@/components/WhySwitch';
-import PremiumAddons from '@/components/PremiumAddons';
-import Pricing from '@/components/Pricing';
+import OurTech from '@/components/OurTech';
 import Testimonials from '@/components/Testimonials';
 import FinalCTA from '@/components/FinalCTA';
 import Footer from '@/components/Footer';
@@ -26,8 +25,7 @@ export default function Home() {
       <HowItWorks />
       <Pillars />
       <WhySwitch />
-      <PremiumAddons />
-      <Pricing />
+      <OurTech />
       <Testimonials />
       <FinalCTA />
       <Footer />

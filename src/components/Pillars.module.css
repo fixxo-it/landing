@@ -20,8 +20,35 @@
   margin-bottom: 32px;
 }
 
+.checksWrap {
+  display: flex;
+  gap: 18px;
+  align-items: stretch;
+}
+
+/* 6-layer trust meter */
+.meterRail {
+  position: relative;
+  width: 3px;
+  border-radius: 3px;
+  background: rgba(20, 184, 166, 0.12);
+  flex-shrink: 0;
+  margin: 16px 0;
+}
+
+.meterFill {
+  position: absolute;
+  inset: 0;
+  border-radius: 3px;
+  background: linear-gradient(var(--primary), var(--primary-dark));
+  transform-origin: top center;
+  will-change: transform;
+}
+
 .checks {
   list-style: none;
+  flex: 1;
+  margin: 0;
 }
 
 .checkItem {
@@ -30,6 +57,18 @@
   align-items: flex-start;
   padding: 14px 0;
   border-bottom: 1px solid rgba(20, 184, 166, 0.08);
+}
+
+.checkBody {
+  flex: 1;
+}
+
+.checkMark {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  align-self: center;
+  overflow: visible;
 }
 
 .checkItem:last-child {
@@ -62,7 +101,7 @@
   line-height: 1.5;
 }
 
-/* RIGHT — panel */
+/* RIGHT - panel */
 .panel {
   background: var(--bg-color);
   border-radius: var(--radius-lg);
@@ -182,6 +221,16 @@
 .panelBtn:hover {
   background: var(--primary-dark);
   transform: translateY(-2px);
+}
+
+.arrow {
+  display: inline-block;
+  margin-left: 6px;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.panelBtn:hover .arrow {
+  transform: translateX(4px);
 }
 
 @media (max-width: 900px) {

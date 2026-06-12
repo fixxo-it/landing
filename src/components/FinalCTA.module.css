@@ -82,6 +82,16 @@
   box-shadow: 0 10px 24px rgba(0,0,0,0.15);
 }
 
+.arrow {
+  display: inline-block;
+  margin-left: 6px;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btnWhite:hover .arrow {
+  transform: translateX(4px);
+}
+
 .btnGhost {
   display: inline-flex;
   align-items: center;
