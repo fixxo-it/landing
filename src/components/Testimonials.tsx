@@ -73,7 +73,35 @@ const testimonials = [
   },
 ];
 
-const DOUBLED = [...testimonials, ...testimonials];
+// ── Actual user feedback (verified app store reviews) ────────────────────────
+const ACTUAL_TESTIMONIALS = [
+  {
+    name: 'Siwani Dubey',
+    location: 'Verified App Review · Jun 2026',
+    text: '"Excellent childcare app! Very easy to use and helps me quickly find reliable babysitters and childcare support when needed. The booking process is smooth and I feel safe choosing caregivers through the platform. Customer support is also responsive and helpful. Highly recommended!"',
+    initials: 'SD',
+    color: '#7C3AED',
+    stars: 5,
+    type: 'Baby Care',
+    typeBg: '#EDE7F6',
+    typeFg: '#5B21B6',
+  },
+  {
+    name: 'Puja Baranwal',
+    location: 'Verified App Review · Jun 2026',
+    text: '"Initially I had my inhibitions, but due to an office call with a small baby to care for, I decided to give FamCare a try. I was simply amazed - my 2.5 year daughter mingled so well with the caretaker in no time. She fed her, cleaned her, and they played all through the booking. My baby calls them \'Green Wali didi\' now. FamCare has become my go-to app!"',
+    initials: 'PB',
+    color: '#15803D',
+    stars: 5,
+    type: 'Baby Care',
+    typeBg: '#DCFCE7',
+    typeFg: '#14532D',
+  },
+];
+// ─────────────────────────────────────────────────────────────────────────────
+
+const ALL_TESTIMONIALS = [...testimonials, ...ACTUAL_TESTIMONIALS];
+const DOUBLED = [...ALL_TESTIMONIALS, ...ALL_TESTIMONIALS];
 
 export default function Testimonials() {
   return (
