@@ -1,11 +1,15 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import StatsStrip from '@/components/StatsStrip';
-import HowItWorks from '@/components/HowItWorks';
 import Services from '@/components/Services';
-import Expertise from '@/components/Expertise';
+import FlexibleHours from '@/components/FlexibleHours';
+import ForEveryOccasion from '@/components/ForEveryOccasion';
+import HowItWorks from '@/components/HowItWorks';
 import Pillars from '@/components/Pillars';
+import WhySwitch from '@/components/WhySwitch';
+import OurTech from '@/components/OurTech';
 import Testimonials from '@/components/Testimonials';
+import FinalCTA from '@/components/FinalCTA';
 import Footer from '@/components/Footer';
 import FloatingCTA from '@/components/FloatingCTA';
 
@@ -15,11 +19,15 @@ export default function Home() {
       <Navbar />
       <Hero />
       <StatsStrip />
-      <HowItWorks />
       <Services />
-      <Expertise />
+      <FlexibleHours />
+      <ForEveryOccasion />
+      <HowItWorks />
       <Pillars />
+      <WhySwitch />
+      <OurTech />
       <Testimonials />
+      <FinalCTA />
       <Footer />
       <FloatingCTA />
     </main>

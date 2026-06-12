@@ -2,13 +2,15 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import NextImage from 'next/image';
-import { X } from 'lucide-react';
+import { X, Baby } from 'lucide-react';
+import { springSoft } from '@/lib/motion';
+import { useStoreUrl } from '@/lib/useStoreUrl';
 import styles from './FloatingCTA.module.css';
 
 export default function FloatingCTA() {
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
+  const storeUrl = useStoreUrl();
 
   useEffect(() => {
     const onScroll = () => {
@@ -27,44 +29,25 @@ export default function FloatingCTA() {
           initial={{ y: 120, opacity: 0, x: '-50%' }}
           animate={{ y: 0, opacity: 1, x: '-50%' }}
           exit={{ y: 120, opacity: 0, x: '-50%' }}
-          transition={{ type: 'spring', stiffness: 320, damping: 30 }}
+          transition={springSoft}
         >
           <div className={styles.inner}>
+            <div className={styles.iconWrap}>
+              <Baby size={20} />
+            </div>
             <div className={styles.textBlock}>
-              <strong>FamCare</strong>
-              <span>Free on iOS &amp; Android</span>
+              <strong>Baby care at your door</strong>
+              <span>Verified nannies · ~10 min arrival</span>
             </div>
 
-            <div className={styles.storeLinks}>
-              <a
-                href="https://apps.apple.com/in/app/famcare/id6761720384"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.storeBtn}
-              >
-                <NextImage
-                  src="/appstore.png"
-                  alt="App Store"
-                  width={120}
-                  height={36}
-                  style={{ height: '34px', width: 'auto', objectFit: 'contain' }}
-                />
-              </a>
-              <a
-                href="https://play.google.com/store/apps/details?id=com.famcare.praja&pcampaignid=web_share"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.storeBtn}
-              >
-                <NextImage
-                  src="/googleplay.webp"
-                  alt="Google Play"
-                  width={120}
-                  height={36}
-                  style={{ height: '40px', width: 'auto', objectFit: 'contain' }}
-                />
-              </a>
-            </div>
+            <a
+              href={storeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.bookBtn}
+            >
+              Download Now →
+            </a>
 
             <button
               className={styles.dismiss}

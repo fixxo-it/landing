@@ -1,146 +1,118 @@
 .section {
-  padding: 100px 0;
-  background: #ffffff;
+  background: linear-gradient(160deg, var(--primary-dark) 0%, #0F172A 100%);
+  padding: 88px 0;
 }
 
 .header {
   text-align: center;
-  margin-bottom: 72px;
+  margin-bottom: 60px;
 }
 
 .eyebrow {
   display: inline-block;
-  font-size: 0.78rem;
+  font-size: 0.7rem;
   font-weight: 700;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--primary);
-  background: rgba(20, 184, 166, 0.1);
-  padding: 6px 16px;
-  border-radius: 999px;
-  margin-bottom: 20px;
-  border: 1px solid rgba(20, 184, 166, 0.2);
+  color: var(--primary-light);
+  opacity: 0.6;
+  margin-bottom: 14px;
+}
+
+.h2 {
+  font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  color: white;
+  margin-bottom: 10px;
+  letter-spacing: -0.02em;
 }
 
 .subhead {
-  color: var(--text-muted);
-  font-size: 1.1rem;
-  max-width: 460px;
-  margin: 14px auto 0;
-  line-height: 1.6;
+  font-size: 1rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.7;
 }
 
-/* ── Steps row ── */
 .stepsRow {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 0;
-}
-
-.stepWrapper {
-  display: contents;
-}
-
-.card {
-  flex: 1;
-  background: #fafafa;
-  border: 1px solid rgba(20, 184, 166, 0.1);
-  border-radius: 28px;
-  padding: 44px 36px 40px;
   position: relative;
-  overflow: hidden;
-  cursor: default;
 }
 
-.card:hover {
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.07);
-  border-color: rgba(20, 184, 166, 0.22);
-}
-
-.bigNumber {
+.connectorLine {
   position: absolute;
-  top: -14px;
-  right: 18px;
-  font-size: 7.5rem;
-  font-weight: 900;
-  color: rgba(20, 184, 166, 0.055);
-  line-height: 1;
-  letter-spacing: -0.05em;
-  pointer-events: none;
-  user-select: none;
+  top: 27px;
+  left: 12.5%;
+  right: 12.5%;
+  height: 1px;
+  background: rgba(20, 184, 166, 0.2);
 }
 
-.iconCircle {
+.step {
+  text-align: center;
+  padding: 0 16px;
+  position: relative;
+  cursor: pointer;
+}
+
+.stepCircle {
   width: 56px;
   height: 56px;
-  border-radius: 16px;
+  border-radius: 50%;
+  background: rgba(20, 184, 166, 0.12);
+  border: 2px solid rgba(20, 184, 166, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 22px;
+  margin: 0 auto 18px;
+  font-size: 1.4rem;
+  position: relative;
+  z-index: 1;
+  transition: background 0.3s, border-color 0.3s;
 }
 
-.title {
-  font-size: 1.35rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  margin-bottom: 14px;
-  line-height: 1.2;
+.step:hover .stepCircle {
+  background: rgba(20, 184, 166, 0.25);
+  border-color: rgba(20, 184, 166, 0.5);
 }
 
-.desc {
-  color: var(--text-muted);
-  font-size: 0.975rem;
-  line-height: 1.65;
-  margin: 0;
+.stepTime {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--primary-light);
+  opacity: 0.6;
+  margin-bottom: 8px;
+  text-transform: uppercase;
 }
 
-/* ── Arrow connector ── */
-.connector {
-  flex-shrink: 0;
-  width: 48px;
-  transform-origin: left center;
+.stepTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 8px;
 }
 
-.connector svg {
-  width: 100%;
-  height: 12px;
+.stepDesc {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.55;
 }
 
-@media (max-width: 860px) {
+@media (max-width: 900px) {
   .stepsRow {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
   }
 
-  .stepWrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  .connectorLine {
+    display: none;
   }
+}
 
-  .connector {
-    width: 12px;
-    height: 40px;
-    transform: rotate(90deg);
-    margin: 4px 0;
-  }
-
-  .card {
-    width: 100%;
-    padding: 32px 28px;
-  }
-
-  .bigNumber {
-    font-size: 5.5rem;
-  }
-
-  .section {
-    padding: 80px 0;
-  }
-
-  .header {
-    margin-bottom: 56px;
+@media (max-width: 480px) {
+  .stepsRow {
+    grid-template-columns: 1fr;
   }
 }

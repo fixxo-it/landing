@@ -1,130 +1,200 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, ShieldCheck, Video, ShieldAlert } from 'lucide-react';
+import { motion, type Variants } from 'framer-motion';
+import { EASE_OUT, EASE_SOFT, fadeUp, staggerContainer, viewportOnce } from '@/lib/motion';
 import styles from './Pillars.module.css';
 
-const milestones = [
+const checks = [
   {
-    title: 'Field Safety Auditing',
-    icon: ShieldAlert,
-    color: '#14B8A6',
-    items: [
-      { subtitle: 'Dedicated Mystery Auditor', desc: 'Every 15-20 caregivers receive unannounced checks.' },
-      { subtitle: 'Ensures Consistent Standards', desc: 'Maintains unparalleled service quality.' },
-      { subtitle: 'Market-first Differentiator', desc: 'Setting the highest bar in the industry.' },
-    ]
+    icon: '🔍',
+    title: 'Police background check',
+    desc: 'Verified against national records. Renewed every 6 months.',
   },
   {
-    title: 'Accountability & Verify',
-    icon: ShieldCheck,
-    color: '#E11D48',
-    items: [
-      { subtitle: 'In-Session Audio Monitoring', desc: 'Mics automatically activated for recorded duration.' },
-      { subtitle: 'Aadhaar-Based ID Verification', desc: 'Mandatory for all households, enhancing baseline safety.' },
-    ]
+    icon: '🪪',
+    title: 'Government ID verification',
+    desc: 'Aadhaar and PAN cross-checked and stored securely.',
   },
   {
-    title: 'Personalization',
-    icon: Video,
-    color: '#D97706',
-    items: [
-      { subtitle: 'Caregiver Continuity Option', desc: 'Request the same caregiver for repeat bookings.' },
-      { subtitle: 'In-App Video Calling', desc: 'Anytime check-ins. Auto-picks up in 3 rings for office parents.' },
-    ]
+    icon: '📋',
+    title: 'Employment history check',
+    desc: 'Past employers contacted and references verified.',
   },
   {
-    title: 'Expert Training',
-    icon: Sparkles,
-    color: '#059669',
-    items: [
-      { subtitle: 'Comprehensive Certification', desc: 'Prerequisite expert-led modules before deployment.' },
-      { subtitle: 'Ongoing Refresher Programs', desc: 'Soft skills, grooming, and professional conduct.' },
-      { subtitle: 'HR Professionals on Staff', desc: 'Expert support for compliance and labor standards.' },
-    ]
-  }
+    icon: '🎓',
+    title: 'Skill assessment',
+    desc: 'Practical baby care skills tested by our in-house trainers.',
+  },
+  {
+    icon: '💬',
+    title: 'In-person interview',
+    desc: 'Every caregiver meets our ops team before going live.',
+  },
+  {
+    icon: '⭐',
+    title: 'Ongoing rating review',
+    desc: 'Drop below 4.2 stars? Immediately paused and retrained.',
+  },
 ];
 
-export default function Pillars() {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+const sampleCaregivers = [
+  { name: 'Priya S.', role: 'Newborn specialist · 4 yrs exp', rating: '4.9' },
+  { name: 'Sunita K.', role: 'Toddler companion · 5 yrs exp', rating: '4.8' },
+  { name: 'Radha M.', role: 'Infant day care · 3 yrs exp', rating: '4.9' },
+];
 
+const checkItemVariants: Variants = {
+  hidden: { opacity: 0, x: -18 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.5, ease: EASE_OUT } },
+};
+
+const iconPop: Variants = {
+  hidden: { scale: 0.6, opacity: 0 },
+  show: { scale: 1, opacity: 1, transition: { duration: 0.45, ease: EASE_SOFT } },
+};
+
+const drawPath: Variants = {
+  hidden: { pathLength: 0, opacity: 0 },
+  show: {
+    pathLength: 1,
+    opacity: 1,
+    transition: {
+      pathLength: { duration: 0.45, ease: EASE_OUT, delay: 0.12 },
+      opacity: { duration: 0.01, delay: 0.12 },
+    },
+  },
+};
+
+// Badge "stamp" — small overshoot like a verification stamp being applied.
+const stampVariants: Variants = {
+  hidden: { scale: 1.35, opacity: 0 },
+  show: { scale: 1, opacity: 1, transition: { type: 'spring', stiffness: 500, damping: 18 } },
+};
+
+export default function Pillars() {
   return (
-    <section id="pillars" className={`section ${styles.pillarsSection}`}>
-      <div className="container">
-        <motion.div 
-          className={styles.header}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6 }}
+    <section id="verified" className={`section ${styles.section}`}>
+      <div className={`container ${styles.container}`}>
+        {/* Left: verification list */}
+        <motion.div
+          className={styles.left}
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={viewportOnce}
+          transition={{ duration: 0.7, ease: EASE_OUT }}
         >
-          <h2 className="h2" style={{ marginBottom: '0' }}>Safety And <span className="text-gradient">Journey with Trust</span></h2>
+          <div className="eyebrow">Zero compromise</div>
+          <h2 className="h2">
+            Every caregiver is verified.<br />
+            Not just screened.
+          </h2>
+          <p className={styles.intro}>
+            We don&apos;t just take anyone. Our 6-layer process means you know
+            exactly who is walking into your home.
+          </p>
+
+          <div className={styles.checksWrap}>
+            {/* 6-layer trust meter — fills as the checklist completes */}
+            <div className={styles.meterRail}>
+              <motion.div
+                className={styles.meterFill}
+                initial={{ scaleY: 0 }}
+                whileInView={{ scaleY: 1 }}
+                viewport={viewportOnce}
+                transition={{ duration: 1.4, ease: EASE_OUT, delay: 0.2 }}
+              />
+            </div>
+
+            <motion.ul
+              className={styles.checks}
+              variants={staggerContainer(0.12, 0.1)}
+              initial="hidden"
+              whileInView="show"
+              viewport={viewportOnce}
+            >
+              {checks.map((c, i) => (
+                <motion.li key={i} className={styles.checkItem} variants={checkItemVariants}>
+                  <motion.div className={styles.checkIcon} variants={iconPop}>
+                    {c.icon}
+                  </motion.div>
+                  <div className={styles.checkBody}>
+                    <div className={styles.checkTitle}>{c.title}</div>
+                    <div className={styles.checkDesc}>{c.desc}</div>
+                  </div>
+                  <svg
+                    className={styles.checkMark}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <motion.path
+                      d="M4 12.5l5 5L20 6.5"
+                      stroke="var(--primary)"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      variants={drawPath}
+                    />
+                  </svg>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </div>
         </motion.div>
 
-        <div className={styles.interactiveWrapper} onMouseLeave={() => setExpandedIndex(null)}>
-          <div className={styles.pillarsGrid}>
-            {milestones.map((milestone, idx) => (
-              <motion.div 
-                key={idx}
-                className={`${styles.pillarIconCard} ${expandedIndex === idx ? styles.activeCard : ''}`}
-                onMouseEnter={() => setExpandedIndex(idx)}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-              >
-                <div 
-                  className={styles.iconCircle}
-                  style={{ 
-                    color: milestone.color, 
-                    borderColor: expandedIndex === idx ? milestone.color : 'rgba(0,0,0,0.05)',
-                    backgroundColor: expandedIndex === idx ? `${milestone.color}15` : 'white'
-                  }}
+        {/* Right: sample caregiver panel */}
+        <motion.div
+          className={styles.panel}
+          variants={staggerContainer(0.1, 0.15)}
+          initial="hidden"
+          whileInView="show"
+          viewport={viewportOnce}
+        >
+          <motion.div className={styles.panelLabel} variants={fadeUp}>
+            Sample verified caregivers
+          </motion.div>
+          {sampleCaregivers.map((c, i) => (
+            <motion.div
+              key={i}
+              className={styles.caregiverCard}
+              variants={fadeUp}
+              whileHover={{ y: -4 }}
+              transition={{ duration: 0.25, ease: EASE_OUT }}
+            >
+              <div className={styles.avatar}>👩</div>
+              <div className={styles.caregiverInfo}>
+                <div className={styles.caregiverName}>{c.name}</div>
+                <div className={styles.caregiverRole}>{c.role}</div>
+                <motion.div
+                  className={styles.badges}
+                  variants={staggerContainer(0.08, 0.1)}
                 >
-                  <milestone.icon size={32} />
-                </div>
-                <h4>{milestone.title}</h4>
-              </motion.div>
-            ))}
-          </div>
+                  <motion.span className={`${styles.badge} ${styles.badgeGreen}`} variants={stampVariants}>
+                    ✓ Police verified
+                  </motion.span>
+                  <motion.span className={`${styles.badge} ${styles.badgeBlue}`} variants={stampVariants}>
+                    ✓ Aadhaar verified
+                  </motion.span>
+                  <motion.span className={`${styles.badge} ${styles.badgeGold}`} variants={stampVariants}>
+                    ⭐ {c.rating}
+                  </motion.span>
+                </motion.div>
+              </div>
+            </motion.div>
+          ))}
 
-          <AnimatePresence>
-            {expandedIndex !== null && (
-              <motion.div 
-                className={styles.expandedPanel}
-                initial={{ opacity: 0, height: 0, translateY: -20 }}
-                animate={{ opacity: 1, height: 'auto', translateY: 0 }}
-                exit={{ opacity: 0, height: 0, translateY: -20 }}
-                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                style={{ borderColor: milestones[expandedIndex].color }}
-              >
-
-                
-                <div className={styles.panelHeader}>
-                  <div className={styles.panelIcon} style={{ background: milestones[expandedIndex].color }}>
-                    {(() => {
-                      const Icon = milestones[expandedIndex].icon;
-                      return <Icon size={24} color="white" />;
-                    })()}
-                  </div>
-                  <h3 style={{ color: milestones[expandedIndex].color }}>
-                    {milestones[expandedIndex].title} Details
-                  </h3>
-                </div>
-
-                <div className={styles.panelGrid}>
-                  {milestones[expandedIndex].items.map((item, i) => (
-                    <div key={i} className={styles.panelItem} style={{ borderLeftColor: milestones[expandedIndex].color }}>
-                      <strong>{item.subtitle}</strong>
-                      <p>{item.desc}</p>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+          <motion.div className={styles.panelCta} variants={fadeUp}>
+            <p className={styles.panelCtaText}>Ready to book a verified caregiver?</p>
+            <a
+              href="https://apps.apple.com/in/app/famcare/id6761720384"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.panelBtn}
+            >
+              Book Now <span className={styles.arrow}>→</span>
+            </a>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

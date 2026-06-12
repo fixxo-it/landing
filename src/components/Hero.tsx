@@ -1,231 +1,197 @@
 'use client';
 
-import { useState } from 'react';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import NextImage from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Users, CheckSquare, Zap, X, CheckCircle2 } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { EASE_OUT, fadeUp, staggerContainer } from '@/lib/motion';
+import { useStoreUrl } from '@/lib/useStoreUrl';
 import styles from './Hero.module.css';
 
-const serviceDetails: Record<string, { title: string; items: string[] }> = {
-  child: {
-    title: 'Child Care',
-    items: ['After School Babysitting', 'WFH Babysitting', 'Quick Babysitting'],
-  },
-  elderly: {
-    title: 'Elderly Care',
-    items: ['Elderly Companion'],
-  },
-  pet: {
-    title: 'Pet Care',
-    items: ['Dog Walker'],
-  },
+const CARE_IMAGES = [
+  { src: '/images/babycare.png', alt: 'Baby care' },
+  { src: '/images/babycare2.png', alt: 'Baby care activity' },
+  { src: '/images/babycare3.png', alt: 'Professional baby care' },
+  { src: '/images/babysitting.webp', alt: 'Babysitting service' },
+  { src: '/images/childcare.webp', alt: 'Childcare' },
+  { src: '/images/childcare1.png', alt: 'Child care service' },
+  { src: '/images/childcare2.png', alt: 'Children care activity' },
+  { src: '/images/childcare3.png', alt: 'Professional childcare' },
+];
+
+// Each headline line rises out of an overflow-hidden mask.
+const lineReveal: Variants = {
+  hidden: { y: '115%' },
+  show: { y: 0, transition: { duration: 0.7, ease: EASE_OUT } },
 };
 
+const underlineVariants: Variants = {
+  hidden: { scaleX: 0 },
+  show: { scaleX: 1, transition: { duration: 0.5, ease: EASE_OUT, delay: 0.2 } },
+};
+
+const HEADLINE_LINES = [
+  <>On Demand &amp; Scheduled</>,
+  <>Verified Baby Care,</>,
+  <>at your door</>,
+  <>
+    in{' '}
+    <span className={styles.underlineHighlight}>
+      10 minutes.
+      <motion.span className={styles.underlineBar} variants={underlineVariants} />
+    </span>
+  </>,
+];
+
 export default function Hero() {
-  const [expandedService, setExpandedService] = useState<string | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const storeUrl = useStoreUrl();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % CARE_IMAGES.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className={styles.hero}>
-      {/* Animated background blobs */}
-      <div className={styles.blob1} />
-      <div className={styles.blob2} />
-      <div className={styles.blob3} />
-
-      <div className={`container ${styles.heroContainer}`}>
-
-        {/* ── LEFT COLUMN ── */}
-        <motion.div
-          className={styles.heroLeft}
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-        >
-          {/* Availability pill */}
-          <motion.div
-            className={styles.topBadge}
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15, duration: 0.5 }}
-          >
-            <Zap size={13} fill="currentColor" />
-            Available Now in Bengaluru
-          </motion.div>
-
-          <motion.h1
-            className={`h1 ${styles.headline}`}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.25, duration: 0.7 }}
-          >
-            <span className="text-gradient">In House Trusted Care</span>{' '}
-            in Minutes
-          </motion.h1>
-
-          <motion.p
-            className={styles.subtitle}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.45, duration: 0.7 }}
-          >
-            Experience the most modern caregiver app designed for your family's
-            safety and speed. Directly hired &amp; matched professionals at your
-            doorstep in minutes.
-          </motion.p>
-
-          {/* Service tiles */}
-          <motion.div
-            className={styles.servicesWrapper}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.7 }}
-            onMouseLeave={() => setExpandedService(null)}
-          >
-            <div className={styles.servicesGrid}>
-              {[
-                { key: 'child', src: '/images/childcare.webp', label: 'Child Care' },
-                { key: 'elderly', src: '/images/elderly.webp', label: 'Elderly Care' },
-                { key: 'pet', src: '/images/petcare.webp', label: 'Pet Care' },
-              ].map(({ key, src, label }) => (
-                <div
-                  key={key}
-                  className={`${styles.serviceItem} ${expandedService === key ? styles.activeService : ''}`}
-                  onMouseEnter={() => setExpandedService(key)}
-                >
-                  <div className={styles.serviceImageWrapper}>
-                    <NextImage src={src} alt={label} fill style={{ objectFit: 'cover' }} priority sizes="140px" />
-                  </div>
-                  <h4>{label}</h4>
-                </div>
-              ))}
-
-              <div className={`${styles.serviceItem} ${styles.comingSoonWrapper}`}>
-                <div className={styles.serviceImageWrapper} style={{ filter: 'grayscale(0.4)' }}>
-                  <NextImage src="/images/adult.webp" alt="Adult Care" fill style={{ objectFit: 'cover' }} />
-                </div>
-                <h4>Adult Care</h4>
-                <span className={styles.comingSoonBadge}>Coming Soon</span>
-              </div>
-            </div>
-
-            <AnimatePresence>
-              {expandedService && (
-                <motion.div
-                  className={styles.expandedDetails}
-                  initial={{ opacity: 0, height: 0, marginTop: 0 }}
-                  animate={{ opacity: 1, height: 'auto', marginTop: 16 }}
-                  exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <button className={styles.closeExpanded} onClick={() => setExpandedService(null)}>
-                    <X size={20} />
-                  </button>
-                  <h3 className={styles.expandedTitle}>
-                    {serviceDetails[expandedService].title} Includes:
-                  </h3>
-                  <div className={styles.expandedTags}>
-                    {serviceDetails[expandedService].items.map((item, idx) => (
-                      <div key={idx} className={styles.expandedTagItem}>
-                        <CheckCircle2 size={16} className={styles.tagIcon} />
-                        <span>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-
-          {/* Stats row */}
-          <motion.div
-            className={styles.stats}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.65, duration: 0.7 }}
-          >
-            <div className={styles.statItem}>
-              <Users className={styles.statIcon} />
-              <div>
-                <strong>100%</strong>
-                <span>Vetted Team</span>
-              </div>
-            </div>
-            <div className={styles.statItem}>
-              <CheckSquare className={styles.statIcon} />
-              <div>
-                <strong>Expert</strong>
-                <span>Trained Staff</span>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* App store buttons */}
-          <motion.div
-            className={styles.actions}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.5 }}
-          >
-            <a
-              href="https://apps.apple.com/in/app/famcare/id6761720384"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.playStoreLink}
-            >
-              <NextImage
-                src="/appstore.png"
-                alt="Download on the App Store"
-                width={400}
-                height={122}
-                className={styles.appStoreImg}
-              />
-            </a>
-            <a
-              href="https://play.google.com/store/apps/details?id=com.famcare.praja&pcampaignid=web_share"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.playStoreLink}
-            >
-              <NextImage
-                src="/googleplay.webp"
-                alt="Get it on Google Play"
-                width={400}
-                height={122}
-                className={styles.playStoreImg}
-              />
-            </a>
-          </motion.div>
+      {/* LEFT - content */}
+      <motion.div
+        className={styles.heroLeft}
+        variants={staggerContainer(0.12, 0.1)}
+        initial="hidden"
+        animate="show"
+      >
+        {/* Availability pill */}
+        <motion.div className={styles.eyebrow} variants={fadeUp}>
+          <span className={styles.liveDotWrap}>
+            <span className={styles.liveDot} />
+            <span className={styles.ping} />
+          </span>
+          <span>Live now · Whitefield, Bangalore</span>
         </motion.div>
 
-        {/* ── RIGHT COLUMN — Phones ── */}
-        <motion.div
-          className={styles.heroRight}
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.35, duration: 0.9, ease: 'easeOut' }}
-        >
-          <div className={styles.phonesRow}>
-            <div className={`${styles.phoneFrame} ${styles.phoneFrameSide}`}>
-              <div className={styles.phoneDynamicIsland} />
-              <div className={styles.phoneScreen}>
-                <NextImage src="/wdkndkd.png" alt="FamCare App Home" width={270} height={585} className={styles.phoneScreenImg} priority sizes="190px" />
-              </div>
-            </div>
-            <div className={`${styles.phoneFrame} ${styles.phoneFrameCenter}`}>
-              <div className={styles.phoneDynamicIsland} />
-              <div className={styles.phoneScreen}>
-                <NextImage src="/Screenshot_20260512-155001_FamCare.png" alt="FamCare App Services" width={270} height={585} className={styles.phoneScreenImg} priority sizes="190px" />
-              </div>
-            </div>
-            <div className={`${styles.phoneFrame} ${styles.phoneFrameSide}`}>
-              <div className={styles.phoneDynamicIsland} />
-              <div className={styles.phoneScreen}>
-                <NextImage src="/Screenshot_20260512-155009_FamCare.png" alt="FamCare App Booking" width={270} height={585} className={styles.phoneScreenImg} />
-              </div>
+        <motion.h1 className={styles.headline} variants={staggerContainer(0.1)}>
+          {HEADLINE_LINES.map((line, i) => (
+            <span key={i} className={styles.lineMask}>
+              <motion.span className={styles.line} variants={lineReveal}>
+                {line}
+              </motion.span>
+            </span>
+          ))}
+        </motion.h1>
+
+        <motion.p className={styles.subtitle} variants={fadeUp}>
+          Verified, trained nannies and baby caregivers - for newborns, toddlers, and everything
+          in between. On-demand or scheduled, whenever you need it.
+        </motion.p>
+
+        <motion.div className={styles.actions} variants={fadeUp}>
+          <a
+            href={storeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.btnDark}
+          >
+            <svg className={styles.appleIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Download Now
+          </a>
+          <a href="#tech" className={styles.btnSafety}>
+            Check Safety Features <span className={styles.arrow}>→</span>
+          </a>
+        </motion.div>
+      </motion.div>
+
+      {/* RIGHT - images */}
+      <motion.div
+        className={styles.heroRight}
+        initial={{ opacity: 0, x: 40 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.35, duration: 0.9, ease: EASE_OUT }}
+      >
+        <div className={styles.imageGallery}>
+          <div className={styles.carouselContainer}>
+            <motion.div
+              className={styles.carouselMain}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.55, duration: 0.8, ease: EASE_OUT }}
+            >
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentImageIndex}
+                  className={styles.carouselSlide}
+                  initial={{ opacity: 0, scale: 1.05 }}
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
+                    transition: {
+                      opacity: { duration: 0.6, ease: EASE_OUT },
+                      scale: { duration: 4, ease: 'linear' },
+                    },
+                  }}
+                  exit={{ opacity: 0, transition: { duration: 0.4 } }}
+                >
+                  <NextImage
+                    src={CARE_IMAGES[currentImageIndex].src}
+                    alt={CARE_IMAGES[currentImageIndex].alt}
+                    width={320}
+                    height={420}
+                    priority
+                    style={{ objectFit: 'cover', borderRadius: '16px', width: '100%', height: '100%' }}
+                  />
+                </motion.div>
+              </AnimatePresence>
+            </motion.div>
+            <div className={styles.carouselDots}>
+              {CARE_IMAGES.map((_, index) => (
+                <button
+                  key={index}
+                  className={`${styles.dot} ${index === currentImageIndex ? styles.dotActive : ''}`}
+                  onClick={() => setCurrentImageIndex(index)}
+                  aria-label={`View image ${index + 1}`}
+                />
+              ))}
             </div>
           </div>
-        </motion.div>
-
-      </div>
+          <div className={styles.leftColumn}>
+            <motion.div
+              className={styles.imageMedium}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.6, duration: 0.7, ease: EASE_OUT }}
+            >
+              <NextImage
+                src="/images/babycare.png"
+                alt="Baby care"
+                width={280}
+                height={280}
+                priority
+                style={{ objectFit: 'cover', borderRadius: '16px' }}
+              />
+            </motion.div>
+            <motion.div
+              className={styles.imageSmall}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.75, duration: 0.7, ease: EASE_OUT }}
+            >
+              <NextImage
+                src="/images/childcare.webp"
+                alt="Childcare"
+                width={200}
+                height={200}
+                priority
+                style={{ objectFit: 'cover', borderRadius: '12px' }}
+              />
+            </motion.div>
+          </div>
+        </div>
+      </motion.div>
     </section>
   );
 }

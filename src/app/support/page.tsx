@@ -10,7 +10,7 @@ import styles from './Support.module.css';
 const faqs = [
   {
     question: "How do I book a caregiver?",
-    answer: "Please download the FamCare app using the link provided on our website — available on both the Apple App Store and Google Play Store. Once installed, log in using your mobile number via OTP, enter your care requirements and preferred time, and confirm your booking. It's that simple!"
+    answer: "Please download the FamCare app using the link provided on our website - available on both the Apple App Store and Google Play Store. Once installed, log in using your mobile number via OTP, enter your care requirements and preferred time, and confirm your booking. It's that simple!"
   },
   {
     question: "How do you ensure the safety of caregivers?",
@@ -18,7 +18,7 @@ const faqs = [
   },
   {
     question: "What geographical areas do you serve?",
-    answer: "We are currently operational in only Bangalore. We are rapidly expanding to more cities across India."
+    answer: "We are currently operational in only Whitefield, Bangalore. We are rapidly expanding to more cities across India."
   },
   {
     question: "How do I cancel or reschedule a booking?",

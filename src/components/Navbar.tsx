@@ -5,13 +5,15 @@ import NextImage from 'next/image';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useStoreUrl } from '@/lib/useStoreUrl';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const storeUrl = useStoreUrl();
 
   return (
-    <motion.nav 
+    <motion.nav
       className={styles.navbar}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -19,11 +21,11 @@ export default function Navbar() {
     >
       <div className={styles.navContainer}>
         <Link href="/" className={styles.logo} onClick={() => setIsOpen(false)}>
-          <NextImage 
-            src="/logo.png" 
-            alt="FamCare" 
-            width={320} 
-            height={128} 
+          <NextImage
+            src="/logo-1.png"
+            alt="FamCare"
+            width={320}
+            height={128}
             priority
             style={{ objectFit: 'contain', objectPosition: 'left' }}
           />
@@ -31,16 +33,16 @@ export default function Navbar() {
 
         {/* Desktop Links */}
         <div className={styles.navLinks}>
-          <Link href="/#features">Features</Link>
-          <Link href="/#pillars">Quality</Link>
-          <Link href="/support">Support</Link>
+          <Link href="#services">Services</Link>
+          <Link href="#how">How it works</Link>
+          <Link href="#verified">Verified Caregivers</Link>
           <a
-            href="https://apps.apple.com/in/app/famcare/id6761720384"
+            href={storeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.getAppBtn}
+            className={styles.bookNowBtn}
           >
-            Get App ↗
+            Download Now
           </a>
         </div>
 
@@ -52,15 +54,24 @@ export default function Navbar() {
         {/* Mobile Menu */}
         <AnimatePresence>
           {isOpen && (
-            <motion.div 
+            <motion.div
               className={styles.mobileMenu}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
             >
-              <Link href="/#features" onClick={() => setIsOpen(false)}>Features</Link>
-              <Link href="/#pillars" onClick={() => setIsOpen(false)}>Quality</Link>
-              <Link href="/support" onClick={() => setIsOpen(false)}>Support</Link>
+              <Link href="#services" onClick={() => setIsOpen(false)}>Services</Link>
+              <Link href="#how" onClick={() => setIsOpen(false)}>How it works</Link>
+              <Link href="#verified" onClick={() => setIsOpen(false)}>Verified Caregivers</Link>
+              <a
+                href={storeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.mobileBookBtn}
+                onClick={() => setIsOpen(false)}
+              >
+                Download Now
+              </a>
             </motion.div>
           )}
         </AnimatePresence>

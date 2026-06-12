@@ -1,0 +1,149 @@
+.section {
+  background: var(--section-dark);
+  padding: 88px 0;
+}
+
+.inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--primary-light);
+  opacity: 0.5;
+  margin-bottom: 14px;
+}
+
+.h2 {
+  font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  color: white;
+  margin-bottom: 48px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+/* Table */
+.table {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.thead {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr 1fr;
+}
+
+.thFeat {
+  padding: 14px 22px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.02);
+}
+
+.thOld {
+  padding: 14px 22px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.04);
+  text-align: center;
+}
+
+.thNew {
+  padding: 14px 22px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: white;
+  background: var(--primary-dark);
+  text-align: center;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr 1fr;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+.cellFeat {
+  padding: 13px 22px;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.65);
+}
+
+.cellOld {
+  padding: 13px 22px;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.28);
+  text-align: center;
+}
+
+.cellNew {
+  padding: 13px 22px;
+  font-size: 0.85rem;
+  color: var(--primary-light);
+  font-weight: 600;
+  background: rgba(20, 184, 166, 0.05);
+  text-align: center;
+}
+
+.cellInner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.cross {
+  color: rgba(255, 255, 255, 0.22);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.checkMark {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.row:hover .cellFeat {
+  color: white;
+}
+
+.row:hover .cellNew {
+  background: rgba(20, 184, 166, 0.1);
+}
+
+@media (max-width: 768px) {
+  .inner {
+    padding: 0 20px;
+  }
+
+  .thead,
+  .row {
+    grid-template-columns: 1.5fr 1fr 1fr;
+  }
+
+  .thFeat,
+  .cellFeat {
+    font-size: 0.76rem;
+    padding: 12px 12px;
+  }
+
+  .thOld,
+  .cellOld,
+  .thNew,
+  .cellNew {
+    padding: 12px 8px;
+    font-size: 0.76rem;
+  }
+}

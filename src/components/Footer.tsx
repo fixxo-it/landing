@@ -2,134 +2,60 @@
 
 import NextImage from 'next/image';
 import Link from 'next/link';
+import styles from './Footer.module.css';
 
 export default function Footer() {
   return (
-    <footer style={{ backgroundColor: 'var(--bg-color)', padding: '80px 0 40px 0', borderTop: '1px solid rgba(20, 184, 166, 0.1)' }}>
-      <div className="container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-
-        {/* CTA block */}
-        <div style={{
-          width: '100%',
-          maxWidth: '640px',
-          background: 'linear-gradient(135deg, rgba(20,184,166,0.1) 0%, rgba(3,105,161,0.08) 100%)',
-          border: '1px solid rgba(20,184,166,0.18)',
-          borderRadius: '28px',
-          padding: '48px 40px',
-          marginBottom: '64px',
-        }}>
-          <h3 style={{ fontSize: '1.9rem', fontWeight: 800, letterSpacing: '-0.02em', marginBottom: '10px', color: 'var(--primary-dark)' }}>
-            Ready for trusted care?
-          </h3>
-          <p style={{ color: 'var(--text-muted)', marginBottom: '28px', fontSize: '1.05rem' }}>
-            Join thousands of families across Bengaluru.
+    <footer className={styles.footer}>
+      <div className={`container ${styles.inner}`}>
+        {/* Logo + tagline */}
+        <div className={styles.brand}>
+          <NextImage
+            src="/logo.png"
+            alt="FamCare"
+            width={160}
+            height={50}
+            style={{ objectFit: 'contain' }}
+          />
+          <p className={styles.tagline}>
+            Trusted baby care in Whitefield, Bangalore. Newborn, toddler, after-school - we&apos;ve got you covered.
           </p>
-          <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a href="https://apps.apple.com/in/app/famcare/id6761720384" target="_blank" rel="noopener noreferrer"
-              style={{ display: 'flex', transition: 'transform 0.2s' }}
-              onMouseOver={e => (e.currentTarget.style.transform = 'translateY(-3px)')}
-              onMouseOut={e => (e.currentTarget.style.transform = 'translateY(0)')}
-            >
-              <NextImage src="/appstore.png" alt="App Store" width={140} height={42} style={{ height: '44px', width: 'auto', objectFit: 'contain' }} />
-            </a>
-            <a href="https://play.google.com/store/apps/details?id=com.famcare.praja&pcampaignid=web_share" target="_blank" rel="noopener noreferrer"
-              style={{ display: 'flex', transition: 'transform 0.2s' }}
-              onMouseOver={e => (e.currentTarget.style.transform = 'translateY(-3px)')}
-              onMouseOut={e => (e.currentTarget.style.transform = 'translateY(0)')}
-            >
-              <NextImage src="/googleplay.webp" alt="Google Play" width={140} height={42} style={{ height: '52px', width: 'auto', objectFit: 'contain' }} />
-            </a>
+          <div className={styles.contact}>
+            <a href="tel:+919986905105">+91 99869 05105</a>
+            <span>·</span>
+            <a href="mailto:founders@famcare.co.in">founders@famcare.co.in</a>
           </div>
         </div>
 
-        <div style={{ marginBottom: '24px' }}>
-          <NextImage 
-            src="/logo.png" 
-            alt="FamCare" 
-            width={160} 
-            height={50} 
-            style={{ objectFit: 'contain' }}
-          />
+        {/* Links */}
+        <div className={styles.links}>
+          <div className={styles.linkGroup}>
+            <div className={styles.linkHeading}>Services</div>
+            <Link href="#services">Newborn care</Link>
+            <Link href="#services">Infant day care</Link>
+            <Link href="#services">Toddler companion</Link>
+            <Link href="#services">After-school care</Link>
+          </div>
+          <div className={styles.linkGroup}>
+            <div className={styles.linkHeading}>Company</div>
+            <Link href="#how">How it works</Link>
+            <Link href="#verified">Verified caregivers</Link>
+            <Link href="/support">Support</Link>
+          </div>
+          <div className={styles.linkGroup}>
+            <div className={styles.linkHeading}>Legal</div>
+            <Link href="/privacy-policy">Privacy Policy</Link>
+            <Link href="/terms-and-conditions">Terms &amp; Conditions</Link>
+            <Link href="/refund-policy">Refund Policy</Link>
+            <Link href="/deletion-of-data">Data Deletion</Link>
+          </div>
         </div>
-        <p style={{ color: 'var(--text-muted)', marginBottom: '16px', maxWidth: '400px' }}>
-          Pioneering Quality, Safety, and Trust in Caregiving. The modern solution for your family.
-        </p>
-        <div style={{ marginBottom: '32px', color: 'var(--text-muted)', fontSize: '0.925rem' }}>
-          <p style={{ marginBottom: '8px' }}>
-            Support: <a href="tel:+919986905105" style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>+91 99869 05105</a>
-          </p>
-          <p>
-            Email: <a href="mailto:founders@famcare.co.in" style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>founders@famcare.co.in</a>
-          </p>
-        </div>
+      </div>
 
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '24px 40px', marginBottom: '24px', color: 'var(--text-main)', fontWeight: 500 }}>
-          <Link href="/#features">Features</Link>
-          <Link href="/#pillars">Trust & Safety</Link>
-          <Link href="/#services">Services</Link>
-          <Link href="/support">Support</Link>
-        </div>
-
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '16px', marginBottom: '60px' }}>
-          <a
-            href="https://apps.apple.com/in/app/famcare/id6761720384"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              transition: 'transform 0.2s ease',
-              background: 'transparent',
-              border: 'none',
-              padding: '0'
-            }}
-            onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-4px)'}
-            onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
-          >
-            <NextImage
-              src="/appstore.png"
-              alt="Download on the App Store"
-              width={135}
-              height={40}
-              style={{ objectFit: 'contain' }}
-            />
-          </a>
-          <a 
-            href="https://play.google.com/store/apps/details?id=com.famcare.praja&pcampaignid=web_share" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            style={{ 
-              display: 'inline-flex', 
-              alignItems: 'center', 
-              transition: 'transform 0.2s ease',
-              background: 'transparent',
-              border: 'none',
-              padding: '0'
-            }}
-            onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-4px)'}
-            onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
-          >
-            <NextImage 
-              src="/googleplay.webp" 
-              alt="Get it on Google Play" 
-              width={135} 
-              height={40} 
-              style={{ objectFit: 'contain' }}
-            />
-          </a>
-        </div>
-
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '24px 40px', marginBottom: '40px', color: 'var(--text-muted)', fontSize: '0.875rem' }}>
-          <Link href="/privacy-policy">Privacy Policy</Link>
-          <Link href="/terms-and-conditions">Terms & Conditions</Link>
-          <Link href="/refund-policy">Refund Policy</Link>
-          <Link href="/deletion-of-data">Deletion of Data</Link>
-        </div>
-
-        <div style={{ borderTop: '1px solid rgba(20, 184, 166, 0.1)', width: '100%', paddingTop: '32px', marginTop: '8px' }}>
-          <span style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>
-            © {new Date().getFullYear()} Swad Hotels And Restaurants Private Limited. All rights reserved.
-          </span>
+      <div className={styles.bottom}>
+        <div className="container">
+          <span>© {new Date().getFullYear()} FAMCARE TECHNOLOGIES PRIVATE LIMITED. All rights reserved.</span>
+          <span className={styles.madeWith}>Made with ❤️ for Whitefield, Bangalore families</span>
         </div>
       </div>
     </footer>

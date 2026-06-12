@@ -46,10 +46,10 @@ export default function PrivacyPolicy() {
         <h2>7. Contact Us</h2>
         <p>If you have any questions about this Privacy Policy, please contact us at founders@famcare.co.in</p>
         <h2>8. Entity Information</h2>
-        <p>Address: 101, 1st Floor, 1st Main Road, 1st Block, HRBR Layout, Kalyan Nagar, Bangalore, Karnataka, India, 560043</p>
+        <p>Address: B503, vajram tiara apartment, AvalaHalli Yelahanka, Bengaluru - 560064, Karnataka</p>
         <p>This Privacy Policy applies to https://www.famcare.co.in/ ("platform"). We recognize the importance of maintaining your privacy and value your trust in us. This Policy describes how we treat user information we collect on https://www.famcare.co.in/ and other online sources.</p>
         <p>This Privacy Policy applies to current and former visitors to our website and to our online customers. By visiting and/or using our website, you agree to this Privacy Policy.</p>
-        <p>https://www.famcare.co.in is a property of Swad Hotels & Restaurants Private Limited, an Indian company registered under the Companies Act, 2013 having its registered office at 101, 1st Floor, 1st Main Road, 1st Block, HRBR Layout, Kalyan Nagar, Bangalore, Karnataka, India, 560043</p>
+        <p>https://www.famcare.co.in is a property of FAMCARE TECHNOLOGIES PRIVATE LIMITED, an Indian company registered under the Companies Act, 2013 having its registered office at B503, vajram tiara apartment, AvalaHalli Yelahanka, Bengaluru - 560064, Karnataka</p>
       </section>
     </LegalLayout>
   );
