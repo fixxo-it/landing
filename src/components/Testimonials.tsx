@@ -5,52 +5,70 @@ import styles from './Testimonials.module.css';
 
 const testimonials = [
   {
-    name: 'Anjali Sharma',
-    location: 'Bengaluru',
-    text: 'The peace of mind FamCare provides is unmatched. Our nanny is professional, punctual, and truly cares for our toddler as her own.',
-    initials: 'AS',
-    color: '#14B8A6',
+    name: 'Ananya R.',
+    location: 'Product Manager · Indiranagar',
+    text: '"My newborn was 3 weeks old and I had a work call I couldn\'t miss. A FamCare nanny was at my door in 11 minutes. She was calm, experienced, and my baby loved her."',
+    initials: 'AR',
+    color: '#2A5240',
     stars: 5,
+    type: 'Newborn care',
+    typeBg: '#FFF3E0',
+    typeFg: '#BF360C',
   },
   {
-    name: 'Rajesh Iyer',
-    location: 'Bengaluru',
-    text: 'Finding a reliable caregiver used to be a nightmare of calls and vetting. With FamCare, we were matched with a professional in minutes.',
-    initials: 'RI',
+    name: 'Vikram & Pooja S.',
+    location: 'Founders · HSR Layout',
+    text: '"We\'ve been using the monthly pass for 4 months. Same nanny every time, she knows our daughter\'s routine better than anyone. It\'s like having a family member."',
+    initials: 'VP',
     color: '#0F766E',
     stars: 5,
+    type: 'Infant day care',
+    typeBg: '#EDE7F6',
+    typeFg: '#4527A0',
   },
   {
-    name: 'Dr. Sunita Verma',
-    location: 'Bengaluru',
-    text: 'Transparent, safe, and professional. The exhaustive background checks and field auditing give us the extra layer of trust we need.',
-    initials: 'SV',
-    color: '#0369A1',
-    stars: 5,
-  },
-  {
-    name: 'Vikram & Neha',
-    location: 'Bengaluru',
-    text: 'Best decision for our newborn. The matched professional was highly trained and made our transition to parenthood so much easier.',
-    initials: 'VN',
-    color: '#7C3AED',
-    stars: 5,
-  },
-  {
-    name: 'Priya Menon',
-    location: 'Bengaluru',
-    text: 'The dog walker FamCare assigned is fantastic. Real-time updates and a caregiver who genuinely loves animals — couldn\'t ask for more.',
-    initials: 'PM',
+    name: 'Meera T.',
+    location: 'Architect · Koramangala',
+    text: '"My 2-year-old is impossible with strangers. The FamCare toddler companion they sent had him laughing in 10 minutes. I cried — happy tears. Finally some time to breathe."',
+    initials: 'MT',
     color: '#B45309',
     stars: 5,
+    type: 'Toddler companion',
+    typeBg: '#E8F5E9',
+    typeFg: '#1B5E20',
   },
   {
-    name: 'Arun Nair',
-    location: 'Bengaluru',
-    text: 'My elderly mother needed help after her surgery. The companion FamCare sent was trained, patient, and became part of our family.',
-    initials: 'AN',
-    color: '#0891B2',
+    name: 'Rohit & Deepa N.',
+    location: 'Engineers · Whitefield',
+    text: '"After-school care sorted! The caregiver picks up our 6-year-old, handles snacks and homework — by the time we\'re home everything is done. Absolute lifesaver."',
+    initials: 'RN',
+    color: '#0369A1',
     stars: 5,
+    type: 'After-school care',
+    typeBg: '#E3F2FD',
+    typeFg: '#0D47A1',
+  },
+  {
+    name: 'Kavitha M.',
+    location: 'Doctor · Jayanagar',
+    text: '"I had a night shift and needed overnight care for my 4-month-old. FamCare\'s night care caregiver was incredible — professional, gentle, and I could actually sleep knowing he was safe."',
+    initials: 'KM',
+    color: '#6D28D9',
+    stars: 5,
+    type: 'Night care',
+    typeBg: '#F5E6C8',
+    typeFg: '#B8832A',
+  },
+  {
+    name: 'Priya & Arjun K.',
+    location: 'Startup Founders · Koramangala',
+    text: '"Emergency booking at 7am on a Monday. Caregiver arrived in 9 minutes. Verified, warm, and our baby warmed up to her almost instantly. This service is magic."',
+    initials: 'PK',
+    color: '#059669',
+    stars: 5,
+    type: 'Emergency care',
+    typeBg: '#E8F5E9',
+    typeFg: '#1B5E20',
   },
 ];
 
@@ -59,9 +77,6 @@ const DOUBLED = [...testimonials, ...testimonials];
 export default function Testimonials() {
   return (
     <section className={styles.section}>
-      <div className={styles.bgCircle1} />
-      <div className={styles.bgCircle2} />
-
       <div className="container">
         <motion.div
           className={styles.header}
@@ -70,11 +85,11 @@ export default function Testimonials() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className={styles.eyebrow}>Real Stories</span>
-          <h2 className="h2">Trusted by Indian Families</h2>
-          <p className={styles.subhead}>
-            Real experiences from parents who found the perfect care with FamCare.
-          </p>
+          <div className="eyebrow">Real Bangalore families</div>
+          <h2 className="h2">
+            They trusted FamCare.<br />
+            Now they won&apos;t go back.
+          </h2>
         </motion.div>
       </div>
 
@@ -91,6 +106,12 @@ export default function Testimonials() {
                 <div>
                   <h4 className={styles.name}>{t.name}</h4>
                   <p className={styles.location}>{t.location}</p>
+                  <span
+                    className={styles.type}
+                    style={{ background: t.typeBg, color: t.typeFg }}
+                  >
+                    {t.type}
+                  </span>
                 </div>
               </div>
             </div>

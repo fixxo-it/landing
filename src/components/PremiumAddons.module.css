@@ -17,14 +17,14 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
 }
 
 .card {
   background: white;
   border-radius: var(--radius-md);
-  padding: 28px 22px;
+  padding: 22px;
   border: 1px solid rgba(20, 184, 166, 0.1);
   transition: transform 0.25s, box-shadow 0.25s;
   cursor: default;
@@ -36,48 +36,38 @@
   border-color: var(--primary-light);
 }
 
-.featuredCard {
-  border: 2px solid var(--primary);
-  background: rgba(20, 184, 166, 0.04);
-}
-
 .icon {
-  font-size: 2rem;
-  margin-bottom: 14px;
+  font-size: 1.7rem;
+  margin-bottom: 12px;
   line-height: 1;
 }
 
 .cardTitle {
-  font-size: 0.98rem;
+  font-size: 0.92rem;
   font-weight: 700;
   color: var(--text-main);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .cardDesc {
-  font-size: 0.83rem;
+  font-size: 0.78rem;
   color: var(--text-muted);
-  line-height: 1.6;
+  line-height: 1.55;
 }
 
-.tag {
+.pill {
   display: inline-block;
-  margin-top: 14px;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 700;
-  padding: 3px 10px;
-  border-radius: 10px;
-  background: rgba(20, 184, 166, 0.1);
-  color: var(--primary-dark);
+  padding: 2px 9px;
+  border-radius: 8px;
+  margin-top: 12px;
+  background: var(--gold-light);
+  color: #B45309;
   letter-spacing: 0.02em;
 }
 
-.tagFeatured {
-  background: var(--primary);
-  color: white;
-}
-
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .grid {
     grid-template-columns: 1fr 1fr;
   }
