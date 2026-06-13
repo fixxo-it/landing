@@ -89,6 +89,26 @@ const features = [
     pillBg: 'rgba(245, 158, 11, 0.1)',
     pillFg: '#92400E',
   },
+  {
+    icon: (
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+        <circle cx="24" cy="24" r="18" stroke="currentColor" strokeWidth="2.5" strokeDasharray="5 3" opacity="0.45" />
+        <circle cx="24" cy="24" r="11" stroke="currentColor" strokeWidth="2.5" strokeDasharray="4 2.5" opacity="0.65" />
+        <path d="M24 10c-4.4 0-8 3.6-8 8 0 6 8 14 8 14s8-8 8-14c0-4.4-3.6-8-8-8z" fill="currentColor" opacity="0.15" stroke="currentColor" strokeWidth="2.5" strokeLinejoin="round" />
+        <circle cx="24" cy="18" r="3" fill="currentColor" />
+        <path d="M38 8l4-4M38 8h-4M38 8v-4" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.7" />
+      </svg>
+    ),
+    title: 'Geo-Fencing Alerts',
+    subtitle: 'Real-Time Safety Monitoring',
+    desc: 'If a caregiver exits the designated care zone during a session, instant alerts are sent to both parents and the FamCare field audit team — helping ensure your child\'s safety at all times.',
+    color: '#0EA5E9',
+    bg: 'rgba(14, 165, 233, 0.07)',
+    border: 'rgba(14, 165, 233, 0.18)',
+    pill: 'Live Geo-Fencing',
+    pillBg: 'rgba(14, 165, 233, 0.1)',
+    pillFg: '#0369A1',
+  },
 ];
 
 export default function OurTech() {
