@@ -9,21 +9,31 @@ const durations = [
     hours: '1',
     unit: 'hour',
     name: 'Quick help',
+    badge: null,
   },
   {
     hours: '3',
     unit: 'hours',
     name: 'Quick support',
+    badge: null,
+  },
+  {
+    hours: '5',
+    unit: 'hours',
+    name: 'Extended care',
+    badge: 'Dedicated caregiver',
   },
   {
     hours: '6',
     unit: 'hours',
     name: 'Half-day',
+    badge: 'Dedicated caregiver',
   },
   {
     hours: '9',
     unit: 'hours',
     name: 'Full day',
+    badge: 'Dedicated caregiver',
   },
 ];
 
@@ -59,6 +69,9 @@ export default function FlexibleHours() {
               </motion.div>
               <div className={styles.unit}>{d.unit}</div>
               <div className={styles.name}>{d.name}</div>
+              {d.badge && (
+                <div className={styles.badge}>{d.badge}</div>
+              )}
             </motion.div>
           ))}
         </motion.div>
