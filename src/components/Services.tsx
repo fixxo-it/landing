@@ -13,6 +13,7 @@ const stages = [
     tag: 'On-demand',
     featured: false,
     image: '/images/babycare.png',
+    comingSoon: false,
   },
   {
     icon: '🏠',
@@ -21,6 +22,7 @@ const stages = [
     tag: 'Most booked',
     featured: true,
     image: '/images/babycare2.png',
+    comingSoon: false,
   },
   {
     icon: '🎨',
@@ -29,6 +31,7 @@ const stages = [
     tag: 'On-demand',
     featured: false,
     image: '/images/childcare1.png',
+    comingSoon: false,
   },
   {
     icon: '🎒',
@@ -37,6 +40,25 @@ const stages = [
     tag: 'Scheduled',
     featured: false,
     image: '/images/childcare2.png',
+    comingSoon: false,
+  },
+  {
+    icon: '👴',
+    title: 'Elderly care',
+    desc: 'Compassionate at-home support, mobility assistance, and daily routine help for seniors',
+    tag: 'Coming soon',
+    featured: false,
+    image: '/images/elderly.webp',
+    comingSoon: true,
+  },
+  {
+    icon: '🐾',
+    title: 'Pet care',
+    desc: 'Trusted in-home pet sitting, feeding, and companionship while you\'re away',
+    tag: 'Coming soon',
+    featured: false,
+    image: '/images/petcare.webp',
+    comingSoon: true,
   },
 ];
 
@@ -66,7 +88,7 @@ export default function Services() {
           {stages.map((stage, i) => (
             <motion.div
               key={i}
-              className={`${styles.card} ${stage.featured ? styles.featuredCard : ''}`}
+              className={`${styles.card} ${stage.featured ? styles.featuredCard : ''} ${stage.comingSoon ? styles.comingSoonCard : ''}`}
               variants={staggerItem}
             >
               <div className={styles.imageWrapper}>
@@ -77,6 +99,11 @@ export default function Services() {
                   height={240}
                   style={{ objectFit: 'cover', width: '100%', height: '100%' }}
                 />
+                {stage.comingSoon && (
+                  <div className={styles.comingSoonOverlay}>
+                    <span className={styles.comingSoonBadge}>Coming Soon</span>
+                  </div>
+                )}
               </div>
               <div className={styles.icon}>{stage.icon}</div>
               <h3 className={styles.cardTitle}>{stage.title}</h3>

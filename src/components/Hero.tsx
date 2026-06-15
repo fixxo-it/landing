@@ -104,6 +104,12 @@ export default function Hero() {
             Check Safety Features <span className={styles.arrow}>→</span>
           </a>
         </motion.div>
+
+        <motion.div className={styles.serviceChips} variants={fadeUp}>
+          <span className={styles.chipsLabel}>Also coming soon:</span>
+          <span className={styles.chip}>👴 Elderly Care</span>
+          <span className={styles.chip}>🐾 Pet Care</span>
+        </motion.div>
       </motion.div>
 
       {/* RIGHT - images */}

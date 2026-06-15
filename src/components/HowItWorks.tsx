@@ -67,7 +67,7 @@ export default function HowItWorks() {
           viewport={viewportOnce}
         >
           <div className={styles.eyebrow}>Simple &amp; fast</div>
-          <h2 className={styles.h2}>From need to caregiver in minutes.</h2>
+          <h2 className={styles.h2}>From need to caregiver in 10 minutes.</h2>
           <p className={styles.subhead}>
             No agency calls, no 3-day wait, no negotiations.
           </p>
