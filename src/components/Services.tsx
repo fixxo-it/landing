@@ -51,15 +51,6 @@ const stages = [
     image: '/images/elderly.webp',
     comingSoon: true,
   },
-  {
-    icon: '🐾',
-    title: 'Pet care',
-    desc: 'Trusted in-home pet sitting, feeding, and companionship while you\'re away',
-    tag: 'Coming soon',
-    featured: false,
-    image: '/images/petcare.webp',
-    comingSoon: true,
-  },
 ];
 
 export default function Services() {

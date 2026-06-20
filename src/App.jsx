@@ -10,7 +10,7 @@ const chatData = [
   { text: "Bangalore weather - suddenly raining and my umbrella ditched me. Can someone fix it ? 🌧️☂️🔧", color: "#FFF9C4", rotate: -4, side: 'left', avatar: 'Jasper' },
   { text: "Send a parcel to my friend in Koramangala. 📦🚚", color: "#DCFCE7", rotate: 5, side: 'right', avatar: 'Oliver' },
   { text: "Woke up with a headache, but my dog needs a run. Can you send a dogwalker ? 🤒🐕🏃", color: "#FFF9C4", rotate: -3, side: 'left', avatar: 'Sasha' },
-  { text: "Categories: Home Services, Errand Running, Personal Assistance, Pet Care 🏠🏃🧘🐾", color: "#DCFCE7", rotate: 2, side: 'right' },
+  { text: "Categories: Home Services, Errand Running, Personal Assistance 🏠🏃🧘", color: "#DCFCE7", rotate: 2, side: 'right' },
   { text: "Sudden train trip trip my bag chain is broken ? 🚆🎒⛓️", color: "#DCFCE7", rotate: -5, side: 'right', avatar: 'Leo' },
   { text: "Need a tutor for 10th grade math. 📚✏️", color: "#DCFCE7", rotate: 4, side: 'right' },
   { text: "I have a last-minute event and need an instant makeup artist! Can you send one? 💄✨", color: "#FFF9C4", rotate: -2, side: 'right', avatar: 'Maya' }

@@ -11,11 +11,6 @@ const occasions = [
     desc: 'New mother recovery care and newborn support in the first 40 days.',
   },
   {
-    icon: '✈️',
-    title: 'Travel care',
-    desc: 'Trusted care while you travel - hourly or multi-day, fully covered.',
-  },
-  {
     icon: '💑',
     title: 'Date night / outing',
     desc: 'Step out without worry. Evening care, booked in 2 minutes.',
