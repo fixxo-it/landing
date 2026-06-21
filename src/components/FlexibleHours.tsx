@@ -25,8 +25,8 @@ const durations = [
     hours: '5',
     unit: 'hours',
     name: 'Extended care',
-    badge: 'Dedicated caregiver',
-    label: 'Half Day',
+    badge: null,
+    label: null,
     comingSoon: true,
   },
 ];
