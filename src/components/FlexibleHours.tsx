@@ -11,6 +11,7 @@ const durations = [
     name: 'Quick help',
     badge: null,
     label: null,
+    comingSoon: false,
   },
   {
     hours: '3',
@@ -18,6 +19,7 @@ const durations = [
     name: 'Quick support',
     badge: null,
     label: null,
+    comingSoon: false,
   },
   {
     hours: '5',
@@ -25,13 +27,7 @@ const durations = [
     name: 'Extended care',
     badge: 'Dedicated caregiver',
     label: 'Half Day',
-  },
-  {
-    hours: '9',
-    unit: 'hours',
-    name: 'Full day',
-    badge: 'Dedicated caregiver',
-    label: null,
+    comingSoon: true,
   },
 ];
 
@@ -57,11 +53,14 @@ export default function FlexibleHours() {
           {durations.map((d, i) => (
             <motion.div
               key={i}
-              className={styles.card}
+              className={`${styles.card}${d.comingSoon ? ` ${styles.cardComingSoon}` : ''}`}
               variants={staggerItem}
               whileHover={{ y: -6 }}
               transition={{ duration: 0.25, ease: EASE_OUT }}
             >
+              {d.comingSoon && (
+                <div className={styles.comingSoonBadge}>Coming Soon</div>
+              )}
               <motion.div className={styles.bigHours} variants={scaleIn}>
                 {d.hours}
               </motion.div>
