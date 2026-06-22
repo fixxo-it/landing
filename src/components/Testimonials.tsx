@@ -61,6 +61,28 @@ const ACTUAL_TESTIMONIALS = [
     typeBg: '#FCE7F3',
     typeFg: '#9D174D',
   },
+  {
+    name: 'Aahan Senapati',
+    location: 'Verified App Review · Jun 2026',
+    text: '"Excellent service, my baby is in love with the caregiver. Very helpful."',
+    initials: 'AS',
+    color: '#0F766E',
+    stars: 5,
+    type: 'Baby Care',
+    typeBg: '#CCFBF1',
+    typeFg: '#134E4A',
+  },
+  {
+    name: 'Nikhil',
+    location: 'Verified App Review · Jun 2026',
+    text: '"Experience was very good...we are very happy to have caregiver from famcare ... She really took good take care of my kids and very professional as well."',
+    initials: 'N',
+    color: '#7C3AED',
+    stars: 5,
+    type: 'Baby Care',
+    typeBg: '#EDE7F6',
+    typeFg: '#5B21B6',
+  },
 ];
 // ─────────────────────────────────────────────────────────────────────────────
 
