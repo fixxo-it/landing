@@ -269,6 +269,21 @@
   overflow: hidden;
 }
 
+.phoneMockup {
+  position: relative;
+  z-index: 1;
+  border-radius: 36px;
+  overflow: hidden;
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.5), 0 0 0 2px rgba(255, 255, 255, 0.08);
+  width: 280px;
+}
+
+.phoneImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .imageGallery {
   display: flex;
   gap: 16px;
@@ -476,79 +491,14 @@
     font-size: clamp(2.2rem, 8vw, 3rem);
   }
 
-  .imageGallery {
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  .carouselMain {
-    width: 240px;
-    height: 300px;
-  }
-
-  .leftColumn {
-    gap: 12px;
-  }
-
-  .imageMedium {
-    width: 200px;
-    height: 200px;
-  }
-
-  .imageSmall {
-    width: 110px;
-    height: 110px;
-  }
-
-  .carouselDots {
-    gap: 6px;
-  }
-
-  .dot {
-    width: 6px;
-    height: 6px;
-  }
-
-  .dotActive {
-    width: 18px;
+  .phoneMockup {
+    width: 220px;
   }
 }
 
 @media (max-width: 480px) {
-  .imageGallery {
-    gap: 10px;
-    flex-direction: column;
-  }
-
-  .carouselMain {
-    width: 200px;
-    height: 240px;
-  }
-
-  .leftColumn {
-    gap: 10px;
-  }
-
-  .imageMedium {
-    width: 200px;
-    height: 200px;
-  }
-
-  .imageSmall {
-    width: 100px;
-    height: 100px;
-  }
-
-  .carouselDots {
-    gap: 4px;
-  }
-
-  .dot {
-    width: 6px;
-    height: 6px;
-  }
-
-  .dotActive {
-    width: 16px;
+  .phoneMockup {
+    width: 180px;
+    border-radius: 28px;
   }
 }
