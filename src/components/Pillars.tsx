@@ -31,6 +31,11 @@ const checks = [
     desc: 'Every caregiver meets our ops team before going live.',
   },
   {
+    icon: '🏠',
+    title: 'Physical address verified',
+    desc: 'Home address confirmed and on record before any assignment.',
+  },
+  {
     icon: '⭐',
     title: 'Ongoing rating review',
     desc: 'Drop below 4.2 stars? Immediately paused and retrained.',
@@ -38,9 +43,9 @@ const checks = [
 ];
 
 const sampleCaregivers = [
-  { name: 'Priya S.', role: 'Newborn specialist · 4 yrs exp', rating: '4.9' },
-  { name: 'Sunita K.', role: 'Toddler companion · 5 yrs exp', rating: '4.8' },
-  { name: 'Radha M.', role: 'Infant day care · 3 yrs exp', rating: '4.9' },
+  { name: 'Priya S.', role: 'Newborn specialist · 4 yrs exp', rating: '4.9', tasks: 312 },
+  { name: 'Sunita K.', role: 'Toddler companion · 5 yrs exp', rating: '4.8', tasks: 274 },
+  { name: 'Radha M.', role: 'Infant day care · 3 yrs exp', rating: '4.9', tasks: 198 },
 ];
 
 const checkItemVariants: Variants = {
@@ -177,6 +182,9 @@ export default function Pillars() {
                   </motion.span>
                   <motion.span className={`${styles.badge} ${styles.badgeGold}`} variants={stampVariants}>
                     ⭐ {c.rating}
+                  </motion.span>
+                  <motion.span className={`${styles.badge} ${styles.badgePurple}`} variants={stampVariants}>
+                    ✓ {c.tasks} tasks done
                   </motion.span>
                 </motion.div>
               </div>
