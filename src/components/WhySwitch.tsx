@@ -16,7 +16,6 @@ const rows = [
   { feature: 'Transparent pricing', old: 'Negotiated', new: 'Fixed, upfront' },
   { feature: 'Backup if caregiver cancels', old: "You're stranded", new: 'Instant replacement' },
   { feature: 'Verified ratings & reviews', old: 'Word of mouth', new: 'Post-session reviews' },
-  { feature: 'Book on Sunday at 9pm', old: 'Not possible', new: '24/7 available' },
 ];
 
 const rowVariants: Variants = {
