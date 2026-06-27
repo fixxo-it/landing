@@ -1,10 +1,22 @@
 'use client';
 
-import { motion, type Variants } from 'framer-motion';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import NextImage from 'next/image';
+import { useState, useEffect } from 'react';
 import { EASE_OUT, fadeUp, staggerContainer } from '@/lib/motion';
 import { useStoreUrl } from '@/lib/useStoreUrl';
 import styles from './Hero.module.css';
+
+const CARE_IMAGES = [
+  { src: '/images/babycare.png', alt: 'Baby care' },
+  { src: '/images/babycare2.png', alt: 'Baby care activity' },
+  { src: '/images/babycare3.png', alt: 'Professional baby care' },
+  { src: '/images/babysitting.webp', alt: 'Babysitting service' },
+  { src: '/images/childcare.webp', alt: 'Childcare' },
+  { src: '/images/childcare1.png', alt: 'Child care service' },
+  { src: '/images/childcare2.png', alt: 'Children care activity' },
+  { src: '/images/childcare3.png', alt: 'Professional childcare' },
+];
 
 // Each headline line rises out of an overflow-hidden mask.
 const lineReveal: Variants = {
@@ -31,7 +43,15 @@ const HEADLINE_LINES = [
 ];
 
 export default function Hero() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const storeUrl = useStoreUrl();
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % CARE_IMAGES.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className={styles.hero}>
@@ -91,28 +111,91 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* RIGHT - app screenshot */}
+      {/* RIGHT - images */}
       <motion.div
         className={styles.heroRight}
         initial={{ opacity: 0, x: 40 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.35, duration: 0.9, ease: EASE_OUT }}
       >
-        <motion.div
-          className={styles.phoneMockup}
-          initial={{ opacity: 0, scale: 0.9, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ delay: 0.55, duration: 0.8, ease: EASE_OUT }}
-        >
-          <NextImage
-            src="/wdkndkd.png"
-            alt="FamCare app"
-            width={1080}
-            height={2400}
-            priority
-            className={styles.phoneImage}
-          />
-        </motion.div>
+        <div className={styles.imageGallery}>
+          <div className={styles.carouselContainer}>
+            <motion.div
+              className={styles.carouselMain}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.55, duration: 0.8, ease: EASE_OUT }}
+            >
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentImageIndex}
+                  className={styles.carouselSlide}
+                  initial={{ opacity: 0, scale: 1.05 }}
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
+                    transition: {
+                      opacity: { duration: 0.6, ease: EASE_OUT },
+                      scale: { duration: 4, ease: 'linear' },
+                    },
+                  }}
+                  exit={{ opacity: 0, transition: { duration: 0.4 } }}
+                >
+                  <NextImage
+                    src={CARE_IMAGES[currentImageIndex].src}
+                    alt={CARE_IMAGES[currentImageIndex].alt}
+                    width={320}
+                    height={420}
+                    priority
+                    style={{ objectFit: 'cover', borderRadius: '16px', width: '100%', height: '100%' }}
+                  />
+                </motion.div>
+              </AnimatePresence>
+            </motion.div>
+            <div className={styles.carouselDots}>
+              {CARE_IMAGES.map((_, index) => (
+                <button
+                  key={index}
+                  className={`${styles.dot} ${index === currentImageIndex ? styles.dotActive : ''}`}
+                  onClick={() => setCurrentImageIndex(index)}
+                  aria-label={`View image ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+          <div className={styles.leftColumn}>
+            <motion.div
+              className={styles.imageMedium}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.6, duration: 0.7, ease: EASE_OUT }}
+            >
+              <NextImage
+                src="/images/babycare.png"
+                alt="Baby care"
+                width={280}
+                height={280}
+                priority
+                style={{ objectFit: 'cover', borderRadius: '16px' }}
+              />
+            </motion.div>
+            <motion.div
+              className={styles.imageSmall}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.75, duration: 0.7, ease: EASE_OUT }}
+            >
+              <NextImage
+                src="/images/childcare.webp"
+                alt="Childcare"
+                width={200}
+                height={200}
+                priority
+                style={{ objectFit: 'cover', borderRadius: '12px' }}
+              />
+            </motion.div>
+          </div>
+        </div>
       </motion.div>
     </section>
   );
