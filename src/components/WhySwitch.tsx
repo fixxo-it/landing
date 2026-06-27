@@ -7,12 +7,16 @@ import styles from './WhySwitch.module.css';
 const rows = [
   { feature: 'Time to find a caregiver', old: '3–7 days', new: '~10 minutes' },
   { feature: 'Background verification', old: 'Rarely done', new: 'Always done' },
+  { feature: 'Police background check', old: 'Never', new: 'Every caregiver, renewed every 6 months' },
+  { feature: 'Government ID verification', old: 'Not required', new: 'Aadhaar + PAN verified' },
+  { feature: 'Physical address verified', old: 'Unknown', new: 'Home address confirmed on record' },
+  { feature: 'SOS emergency button', old: 'Not available', new: 'One-tap SOS alert in-app' },
+  { feature: 'Geo-fenced safety zone', old: 'No protection', new: 'Caregiver stays within your zone' },
+  { feature: 'Real-time live tracking', old: 'No visibility', new: 'GPS tracking like Ola / Uber' },
   { feature: 'Transparent pricing', old: 'Negotiated', new: 'Fixed, upfront' },
   { feature: 'Backup if caregiver cancels', old: "You're stranded", new: 'Instant replacement' },
-  { feature: 'Real-time live tracking', old: 'No visibility', new: 'GPS tracking' },
   { feature: 'Verified ratings & reviews', old: 'Word of mouth', new: 'Post-session reviews' },
   { feature: 'Book on Sunday at 9pm', old: 'Not possible', new: '24/7 available' },
-  { feature: 'Geo-fenced safety zone', old: 'No protection', new: 'Caregiver stays within your zone' },
 ];
 
 const rowVariants: Variants = {
