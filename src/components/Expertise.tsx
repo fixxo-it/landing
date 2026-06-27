@@ -6,10 +6,10 @@ import NextImage from 'next/image';
 import styles from './Expertise.module.css';
 
 const items = [
-  'In-House Trained Caregivers',
-  'Directly Hired & Vetted Team',
-  'Verified Background Checks',
-  'Ensures Quality & Trust',
+  'In-House Verified Trained Caregivers',
+  'Authorised & Directly Hired Team',
+  'Criminal Record & Background Verified',
+  'Safety for Users & Caregivers',
 ];
 
 export default function Expertise() {
@@ -25,9 +25,9 @@ export default function Expertise() {
         >
           <div className={styles.badge}>
             <Settings size={16} />
-            Synergy of Human & Tech
+            Full-Stack Care Model
           </div>
-          <h2 className={styles.h2}>In House Human Expertise</h2>
+          <h2 className={styles.h2}>In-House Verified, Trained Caregivers</h2>
           
           <ul className={styles.list}>
             {items.map((item, idx) => (

@@ -82,8 +82,8 @@ export default function Hero() {
         </motion.h1>
 
         <motion.p className={styles.subtitle} variants={fadeUp}>
-          Verified, trained nannies and baby caregivers - for newborns, toddlers, and everything
-          in between. On-demand or scheduled, whenever you need it.
+          In-house trained, <strong>authorised caregivers</strong> — criminal record &amp; background verified.
+          Safety for both you and your caregiver, built into our full-stack care model.
         </motion.p>
 
         <motion.div className={styles.actions} variants={fadeUp}>
