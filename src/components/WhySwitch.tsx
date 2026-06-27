@@ -12,6 +12,7 @@ const rows = [
   { feature: 'Real-time live tracking', old: 'No visibility', new: 'GPS tracking' },
   { feature: 'Verified ratings & reviews', old: 'Word of mouth', new: 'Post-session reviews' },
   { feature: 'Book on Sunday at 9pm', old: 'Not possible', new: '24/7 available' },
+  { feature: 'Geo-fenced safety zone', old: 'No protection', new: 'Caregiver stays within your zone' },
 ];
 
 const rowVariants: Variants = {

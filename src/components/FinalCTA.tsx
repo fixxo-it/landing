@@ -14,7 +14,7 @@ export default function FinalCTA() {
           Go. We&apos;ve got them.
         </motion.h2>
         <motion.p className={styles.sub} variants={fadeUp}>
-          Your baby is in safe, verified hands. Book in 2 minutes, caregiver at your door in 10.
+          Your baby is in safe, verified hands. Book in 2 minutes, caregiver at your door in 10 minutes.
         </motion.p>
         <motion.div className={styles.actions} variants={fadeUp}>
           <a

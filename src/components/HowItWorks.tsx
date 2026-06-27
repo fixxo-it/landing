@@ -38,8 +38,8 @@ const STEPS = [
   {
     icon: '👤',
     time: '1 min',
-    title: 'Choose a caregiver',
-    desc: 'See verified profiles, ratings, and experience in seconds',
+    title: 'Caregiver is assigned',
+    desc: 'We match you with the best available verified caregiver instantly',
   },
   {
     icon: '✅',
@@ -51,7 +51,7 @@ const STEPS = [
     icon: '🏠',
     time: '~10 min',
     title: 'Caregiver arrives',
-    desc: 'Track their arrival live - like Ola, but for care',
+    desc: 'Track their arrival live — like Ola, Uber, or Swiggy, but for care',
   },
 ];
 
