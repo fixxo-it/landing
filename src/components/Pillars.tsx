@@ -7,8 +7,8 @@ import styles from './Pillars.module.css';
 const checks = [
   {
     icon: '🔍',
-    title: 'Police background check',
-    desc: 'Verified against national records. Renewed every 6 months.',
+    title: 'Criminal Records & Background Verification Check',
+    desc: 'Verified against national criminal records and police databases. Renewed every 6 months.',
   },
   {
     icon: '🪪',
@@ -90,12 +90,13 @@ export default function Pillars() {
         >
           <div className="eyebrow">Zero compromise</div>
           <h2 className="h2">
-            Every caregiver is verified.<br />
-            Not just screened.
+            Every caregiver is <em>authorised</em>,<br />
+            verified &amp; trained.
           </h2>
           <p className={styles.intro}>
             We don&apos;t just take anyone. Our 6-layer process means you know
-            exactly who is walking into your home.
+            exactly who is walking into your home. Safety is non-negotiable —
+            for our users <strong>and</strong> our caregivers.
           </p>
 
           <div className={styles.checksWrap}>
