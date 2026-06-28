@@ -15,7 +15,7 @@ export default function Footer() {
             alt="FamCare"
             width={160}
             height={50}
-            style={{ objectFit: 'contain' }}
+            style={{ objectFit: 'contain', objectPosition: 'left center' }}
           />
           <p className={styles.tagline}>Trusted baby care in 10 mins</p>
           <p className={styles.location}>Whitefield · Bangalore</p>
