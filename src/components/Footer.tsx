@@ -17,8 +17,8 @@ export default function Footer() {
             height={50}
             style={{ objectFit: 'contain', objectPosition: 'left center' }}
           />
-          <p className={styles.tagline}>Trusted baby care in 10 mins</p>
-          <p className={styles.location}>Whitefield · Bangalore</p>
+          <p className={styles.tagline}>Trusted Baby Care in 10 mins</p>
+          <p className={styles.location}>Whitefield - Bangalore</p>
           <div className={styles.contact}>
             <a href="tel:+919535711078">+91 95357 11078</a>
             <span>·</span>
