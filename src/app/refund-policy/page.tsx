@@ -32,10 +32,10 @@ export default function RefundPolicy() {
         <p>Discounted or promotional services are non-refundable unless otherwise specified in the promotion&apos;s terms and conditions.</p>
 
         <h2>6. Dispute Resolution</h2>
-        <p>In the event of a payment dispute, we encourage you to contact us directly at founders@famcare.co.in to resolve the issue before initiating a chargeback.</p>
+        <p>In the event of a payment dispute, we encourage you to contact us directly at support@famcare.co.in to resolve the issue before initiating a chargeback.</p>
 
         <h2>7. Contact Us</h2>
-        <p>If you have any questions about our Refund Policy or need assistance with a refund request, please contact us at founders@famcare.co.in.</p>
+        <p>If you have any questions about our Refund Policy or need assistance with a refund request, please contact us at support@famcare.co.in.</p>
       </section>
     </LegalLayout>
   );

@@ -86,8 +86,8 @@ export default function SupportPage() {
               </div>
               <h3>Email Us</h3>
               <p>For support, partnerships, or general inquiries.</p>
-              <a href="mailto:founders@famcare.co.in" className={styles.contactLink}>
-                founders@famcare.co.in
+              <a href="mailto:support@famcare.co.in" className={styles.contactLink}>
+                support@famcare.co.in
               </a>
             </motion.div>
 

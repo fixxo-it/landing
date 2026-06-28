@@ -23,7 +23,7 @@ export default function Footer() {
           <div className={styles.contact}>
             <a href="tel:+919986905105">+91 99869 05105</a>
             <span>·</span>
-            <a href="mailto:founders@famcare.co.in">founders@famcare.co.in</a>
+            <a href="mailto:support@famcare.co.in">support@famcare.co.in</a>
           </div>
         </div>
 
