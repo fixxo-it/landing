@@ -4,28 +4,13 @@ import { motion, type Variants } from 'framer-motion';
 import { EASE_OUT, fadeUp, staggerContainer, viewportOnce } from '@/lib/motion';
 import styles from './HowItWorks.module.css';
 
-const connectorVariants: Variants = {
-  hidden: { scaleX: 0 },
-  show: { scaleX: 1, transition: { duration: 0.8, ease: EASE_OUT } },
-};
-
-const stepVariants: Variants = {
-  hidden: { opacity: 0, y: 24 },
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 28 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.55, ease: EASE_OUT, staggerChildren: 0.08, delayChildren: 0.05 },
+    transition: { duration: 0.55, ease: EASE_OUT },
   },
-};
-
-const circlePop: Variants = {
-  hidden: { scale: 0 },
-  show: { scale: 1, transition: { type: 'spring', stiffness: 140, damping: 14 } },
-};
-
-const subFade: Variants = {
-  hidden: { opacity: 0, y: 6 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.35, ease: EASE_OUT } },
 };
 
 const STEPS = [
@@ -67,7 +52,7 @@ export default function HowItWorks() {
           viewport={viewportOnce}
         >
           <div className={styles.eyebrow}>Simple &amp; fast</div>
-          <h2 className={styles.h2}>From need to caregiver in 10 minutes.</h2>
+          <h2 className={styles.h2}>From need to caregiver<br />in 10 minutes.</h2>
           <p className={styles.subhead}>
             No agency calls, no 3-day wait, no negotiations.
           </p>
@@ -75,41 +60,28 @@ export default function HowItWorks() {
 
         <motion.div
           className={styles.stepsRow}
-          variants={staggerContainer(0.16, 0.1)}
+          variants={staggerContainer(0.14, 0.08)}
           initial="hidden"
           whileInView="show"
           viewport={viewportOnce}
         >
-          {/* connector line */}
-          <motion.div
-            className={styles.connectorLine}
-            variants={connectorVariants}
-            style={{ originX: 0 }}
-          />
-
           {STEPS.map((step, i) => (
             <motion.div
               key={i}
               className={styles.step}
-              variants={stepVariants}
-              whileHover={{ y: -8 }}
+              variants={itemVariants}
+              whileHover={{ y: -6, transition: { duration: 0.25, ease: EASE_OUT } }}
             >
-              <motion.div
-                className={styles.stepCircle}
-                variants={circlePop}
-                whileHover={{ scale: 1.12 }}
-              >
-                {step.icon}
-              </motion.div>
-              <motion.div className={styles.stepTime} variants={subFade}>
-                {step.time}
-              </motion.div>
-              <motion.div className={styles.stepTitle} variants={subFade}>
-                {step.title}
-              </motion.div>
-              <motion.p className={styles.stepDesc} variants={subFade}>
-                {step.desc}
-              </motion.p>
+              <div className={styles.stepNum}>0{i + 1}</div>
+              <div className={styles.stepHeader}>
+                <div className={styles.stepIcon}>{step.icon}</div>
+                <span className={styles.stepTime}>{step.time}</span>
+              </div>
+              <div className={styles.stepTitle}>{step.title}</div>
+              <p className={styles.stepDesc}>{step.desc}</p>
+              {i < STEPS.length - 1 && (
+                <div className={styles.connector} aria-hidden="true">→</div>
+              )}
             </motion.div>
           ))}
         </motion.div>

@@ -3,25 +3,25 @@
   bottom: 24px;
   left: 50%;
   z-index: 200;
-  width: min(540px, calc(100vw - 32px));
+  width: min(560px, calc(100vw - 32px));
 }
 
 .inner {
-  background: var(--section-dark);
-  border: 1px solid rgba(20, 184, 166, 0.15);
+  background: var(--dark);
+  border: 1px solid rgba(0, 127, 130, 0.2);
   border-radius: 999px;
   padding: 12px 14px 12px 16px;
   display: flex;
   align-items: center;
   gap: 12px;
-  box-shadow: 0 16px 48px rgba(0,0,0,0.35);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.42), 0 4px 16px rgba(0, 127, 130, 0.16);
 }
 
 .iconWrap {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: var(--primary);
+  background: var(--brand);
   color: white;
   display: flex;
   align-items: center;
@@ -38,37 +38,39 @@
 
 .textBlock strong {
   font-size: 0.88rem;
-  color: white;
+  color: var(--snow);
   font-weight: 700;
 }
 
 .textBlock span {
   font-size: 0.72rem;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255, 255, 255, 0.38);
 }
 
 .bookBtn {
   display: inline-flex;
   align-items: center;
-  background: var(--primary);
+  background: linear-gradient(135deg, var(--brand-mid) 0%, var(--brand) 55%, var(--brand-dark) 100%);
   color: white;
   padding: 9px 20px;
   border-radius: 999px;
   font-size: 0.84rem;
   font-weight: 700;
   white-space: nowrap;
-  transition: background 0.2s;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   flex-shrink: 0;
+  box-shadow: 0 2px 10px rgba(0, 127, 130, 0.35);
 }
 
 .bookBtn:hover {
-  background: var(--primary-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 127, 130, 0.48);
 }
 
 .dismiss {
   background: transparent;
   border: none;
-  color: rgba(255,255,255,0.3);
+  color: rgba(255, 255, 255, 0.28);
   cursor: pointer;
   padding: 4px;
   display: flex;
@@ -78,20 +80,11 @@
 }
 
 .dismiss:hover {
-  color: white;
+  color: rgba(255, 255, 255, 0.75);
 }
 
 @media (max-width: 480px) {
-  .textBlock strong {
-    font-size: 0.8rem;
-  }
-
-  .textBlock span {
-    display: none;
-  }
-
-  .bookBtn {
-    padding: 8px 14px;
-    font-size: 0.8rem;
-  }
+  .textBlock strong { font-size: 0.82rem; }
+  .textBlock span { display: none; }
+  .bookBtn { padding: 8px 14px; font-size: 0.8rem; }
 }

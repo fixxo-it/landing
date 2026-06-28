@@ -45,11 +45,14 @@ export default function WhySwitch() {
           viewport={viewportOnce}
           transition={{ duration: 0.6, ease: EASE_OUT }}
         >
-          <div className={styles.eyebrow}>Why switch</div>
+          <div className={styles.topLabel}>Why switch</div>
           <h2 className={styles.h2}>
             The old way of finding a nanny<br />
             is broken.
           </h2>
+          <p className={styles.tagline}>
+            See how FamCare compares to the traditional agency or referral model.
+          </p>
         </motion.div>
 
         <motion.div
@@ -81,7 +84,7 @@ export default function WhySwitch() {
                   <svg className={styles.checkMark} viewBox="0 0 24 24" fill="none" aria-hidden="true">
                     <motion.path
                       d="M4 12.5l5 5L20 6.5"
-                      stroke="var(--primary-light)"
+                      stroke="var(--brand-light)"
                       strokeWidth="3"
                       strokeLinecap="round"
                       strokeLinejoin="round"
