@@ -100,8 +100,8 @@ export default function SupportPage() {
               </div>
               <h3>Call Us</h3>
               <p>For immediate assistance and support.</p>
-              <a href="tel:+919986905105" className={styles.contactLink}>
-                +91 99869 05105
+              <a href="tel:+919535711078" className={styles.contactLink}>
+                +91 95357 11078
               </a>
             </motion.div>
 
