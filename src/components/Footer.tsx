@@ -21,7 +21,7 @@ export default function Footer() {
             Trusted baby care in Whitefield, Bangalore. Newborn, toddler, after-school - we&apos;ve got you covered.
           </p>
           <div className={styles.contact}>
-            <a href="tel:+919986905105">+91 99869 05105</a>
+            <a href="tel:+919535711078">+91 95357 11078</a>
             <span>·</span>
             <a href="mailto:support@famcare.co.in">support@famcare.co.in</a>
           </div>
