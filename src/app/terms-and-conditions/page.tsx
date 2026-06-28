@@ -31,7 +31,7 @@ export default function TermsAndConditions() {
         <p>These terms and conditions are governed by and construed in accordance with the laws of the jurisdiction where FamCare is registered. Any disputes shall be subject to the exclusive jurisdiction of the courts in that region.</p>
 
         <h2>9. Contact Us</h2>
-        <p>If you have any questions regarding these Terms and Conditions, please reach out to us at founders@famcare.co.in.</p>
+        <p>If you have any questions regarding these Terms and Conditions, please reach out to us at support@famcare.co.in.</p>
         <p>These Terms and Conditions applies to https://www.famcare.co.in/ ("platform"). We recognize the importance of maintaining your privacy and value your trust in us. This Policy describes how we treat user information we collect on https://www.famcare.co.in/ and other online sources.</p>
         <p>These Terms and Conditions applies to current and former visitors to our website and to our online customers. By visiting and/or using our website, you agree to this Privacy Policy.</p>
         <p>https://www.famcare.co.in is a property of FAMCARE TECHNOLOGIES PRIVATE LIMITED, an Indian company registered under the Companies Act, 2013 having its registered office at B503, vajram tiara apartment, AvalaHalli Yelahanka, Bengaluru - 560064, Karnataka</p>
