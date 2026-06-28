@@ -14,27 +14,29 @@
 .brand {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 0;
 }
 
 .brand img {
   filter: brightness(0) invert(1);
   opacity: 0.85;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .tagline {
   font-size: 0.88rem;
-  color: rgba(255,255,255,0.45);
-  line-height: 1.65;
-  max-width: 260px;
-  margin-bottom: 4px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.4;
+  margin: 0 0 4px 0;
+  padding: 0;
 }
 
 .location {
   font-size: 0.82rem;
   color: rgba(255,255,255,0.3);
-  margin-bottom: 16px;
+  margin: 0 0 20px 0;
+  padding: 0;
 }
 
 .contact {
