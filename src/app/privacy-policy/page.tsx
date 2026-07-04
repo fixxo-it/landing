@@ -44,7 +44,7 @@ export default function PrivacyPolicy() {
         <p>Our website uses cookies to enhance your browsing experience and analyze site traffic. You can manage cookie preferences through your browser settings.</p>
 
         <h2>7. Contact Us</h2>
-        <p>If you have any questions about this Privacy Policy, please contact us at founders@famcare.co.in</p>
+        <p>If you have any questions about this Privacy Policy, please contact us at support@famcare.co.in</p>
         <h2>8. Entity Information</h2>
         <p>Address: B503, vajram tiara apartment, AvalaHalli Yelahanka, Bengaluru - 560064, Karnataka</p>
         <p>This Privacy Policy applies to https://www.famcare.co.in/ ("platform"). We recognize the importance of maintaining your privacy and value your trust in us. This Policy describes how we treat user information we collect on https://www.famcare.co.in/ and other online sources.</p>

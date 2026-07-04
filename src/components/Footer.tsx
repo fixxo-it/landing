@@ -15,15 +15,14 @@ export default function Footer() {
             alt="FamCare"
             width={160}
             height={50}
-            style={{ objectFit: 'contain' }}
+            style={{ objectFit: 'contain', objectPosition: 'left center' }}
           />
-          <p className={styles.tagline}>
-            Trusted baby care in Whitefield, Bangalore. Newborn, toddler, after-school - we&apos;ve got you covered.
-          </p>
+          <p className={styles.tagline}>Trusted Baby Care in 10 mins</p>
+          <p className={styles.location}>Whitefield - Bangalore</p>
           <div className={styles.contact}>
-            <a href="tel:+919986905105">+91 99869 05105</a>
+            <a href="tel:+919535711078">+91 95357 11078</a>
             <span>·</span>
-            <a href="mailto:founders@famcare.co.in">founders@famcare.co.in</a>
+            <a href="mailto:support@famcare.co.in">support@famcare.co.in</a>
           </div>
         </div>
 

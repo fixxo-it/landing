@@ -16,7 +16,7 @@ export default function DeletionOfData() {
           border: '1px solid rgba(20, 184, 166, 0.1)',
           margin: '32px 0'
         }}>
-          <p style={{ margin: 0, fontWeight: 600 }}>Email Address: <a href="mailto:founders@famcare.co.in" style={{ color: 'var(--primary)', textDecoration: 'none' }}>founders@famcare.co.in</a></p>
+          <p style={{ margin: 0, fontWeight: 600 }}>Email Address: <a href="mailto:support@famcare.co.in" style={{ color: 'var(--primary)', textDecoration: 'none' }}>support@famcare.co.in</a></p>
           <p style={{ margin: '8px 0 0 0', fontSize: '0.9rem', color: 'var(--text-muted)' }}>Subject: Account Deletion Request - [Your Full Name]</p>
         </div>
 
