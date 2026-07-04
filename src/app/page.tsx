@@ -10,6 +10,7 @@ import WhySwitch from '@/components/WhySwitch';
 import OurTech from '@/components/OurTech';
 import Testimonials from '@/components/Testimonials';
 import FinalCTA from '@/components/FinalCTA';
+import FAQ from '@/components/FAQ';
 import Footer from '@/components/Footer';
 import FloatingCTA from '@/components/FloatingCTA';
 
@@ -28,6 +29,7 @@ export default function Home() {
       <OurTech />
       <Testimonials />
       <FinalCTA />
+      <FAQ />
       <Footer />
       <FloatingCTA />
     </main>
