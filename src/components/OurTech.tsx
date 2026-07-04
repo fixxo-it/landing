@@ -22,12 +22,12 @@ const features = [
     title: 'Live Tracking',
     subtitle: 'Always know where your caregiver is',
     desc: 'Track your caregiver in real time from the moment they leave until they arrive. Get live updates, estimated arrival time, and peace of mind — every step of the way.',
-    color: '#14B8A6',
-    bg: 'rgba(20, 184, 166, 0.08)',
-    border: 'rgba(20, 184, 166, 0.2)',
+    color: '#007F82',
+    bg: 'rgba(0, 127, 130, 0.08)',
+    border: 'rgba(0, 127, 130, 0.22)',
     pill: 'Real-time GPS',
-    pillBg: 'rgba(20, 184, 166, 0.12)',
-    pillFg: '#0F766E',
+    pillBg: 'rgba(0, 127, 130, 0.12)',
+    pillFg: '#005A5D',
   },
   {
     icon: (

@@ -66,39 +66,44 @@ export default function Services() {
         >
           <div className="eyebrow">Care for every stage</div>
           <h2 className="h2">
-            From newborn to school-going -<br />
+            From newborn to school-going —<br />
             we have the right caregiver.
           </h2>
           <p className={styles.subhead}>
-            Choose by your child's age and stage. Every caregiver is matched to
-            the specific needs of that age group.
+            Every caregiver is matched to the specific needs of your child's age group.
           </p>
         </motion.div>
 
-        <motion.div className={styles.grid} {...revealContainer(0.1)}>
-          {stages.map((stage, i) => (
+        <motion.div className={styles.grid} {...revealContainer(0.08)}>
+          {stages.map((s, i) => (
             <motion.div
               key={i}
-              className={`${styles.card} ${stage.featured ? styles.featuredCard : ''} ${stage.comingSoon ? styles.comingSoonCard : ''}`}
+              className={`${styles.card}${s.featured ? ` ${styles.featuredCard}` : ''}${s.comingSoon ? ` ${styles.comingSoonCard}` : ''}`}
               variants={staggerItem}
+              whileHover={{ scale: 1 }}
             >
-              <div className={styles.imageWrapper}>
+              <div className={styles.imageWrap}>
                 <NextImage
-                  src={stage.image}
-                  alt={stage.title}
+                  src={s.image}
+                  alt={s.title}
                   width={240}
                   height={240}
-                  style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                  style={{ objectFit: 'contain', width: '100%', height: '100%' }}
                 />
-                {stage.comingSoon && (
-                  <div className={styles.comingSoonOverlay}>
-                    <span className={styles.comingSoonBadge}>Coming Soon</span>
+                {s.featured && (
+                  <span className={styles.featuredLabel}>Most booked</span>
+                )}
+                {s.comingSoon && (
+                  <div className={styles.csOverlay}>
+                    <span className={styles.csBadge}>Coming Soon</span>
                   </div>
                 )}
               </div>
-              <div className={styles.icon}>{stage.icon}</div>
-              <h3 className={styles.cardTitle}>{stage.title}</h3>
-              <p className={styles.cardDesc}>{stage.desc}</p>
+              <div className={styles.body}>
+                <div className={styles.icon}>{s.icon}</div>
+                <h3 className={styles.cardTitle}>{s.title}</h3>
+                <p className={styles.cardDesc}>{s.desc}</p>
+              </div>
             </motion.div>
           ))}
         </motion.div>

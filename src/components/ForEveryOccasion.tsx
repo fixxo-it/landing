@@ -29,7 +29,7 @@ const occasions = [
 
 export default function ForEveryOccasion() {
   return (
-    <section className={`section ${styles.section}`}>
+    <section className={styles.section}>
       <div className="container">
         <motion.div
           className={styles.header}
@@ -38,8 +38,8 @@ export default function ForEveryOccasion() {
           whileInView="show"
           viewport={viewportOnce}
         >
-          <div className="eyebrow">For every situation</div>
-          <h2 className="h2">
+          <div className={styles.eyebrow}>For every situation</div>
+          <h2 className={styles.h2}>
             Whatever comes up,<br />
             we&apos;re ready.
           </h2>
@@ -54,8 +54,7 @@ export default function ForEveryOccasion() {
               key={i}
               className={styles.card}
               variants={staggerItem}
-              whileHover={{ y: -6 }}
-              transition={{ duration: 0.25, ease: EASE_OUT }}
+              whileHover={{ y: -6, transition: { duration: 0.25, ease: EASE_OUT } }}
             >
               <div className={styles.iconWrap}>{o.icon}</div>
               <div className={styles.content}>
