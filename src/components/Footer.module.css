@@ -1,6 +1,6 @@
 .footer {
-  background: var(--section-dark);
-  color: white;
+  background: var(--dark);
+  color: var(--snow);
 }
 
 .inner {
@@ -27,19 +27,10 @@
 
 .tagline {
   font-size: 0.88rem;
-  font-weight: 700;
-  color: rgba(255,255,255,0.75);
-  line-height: 1.4;
-  margin: 0 0 4px 0;
-  padding: 0;
-}
-
-.location {
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: rgba(255,255,255,0.75);
-  margin: 0 0 20px 0;
-  padding: 0;
+  color: rgba(255, 255, 255, 0.42);
+  line-height: 1.65;
+  max-width: 260px;
+  margin-bottom: 16px;
 }
 
 .contact {
@@ -47,22 +38,21 @@
   gap: 8px;
   align-items: center;
   font-size: 0.82rem;
-  color: rgba(255,255,255,0.35);
+  color: rgba(255, 255, 255, 0.32);
   flex-wrap: wrap;
 }
 
 .contact a {
-  color: var(--primary-light);
+  color: var(--brand-light);
   transition: color 0.2s;
   opacity: 0.8;
 }
 
 .contact a:hover {
-  color: var(--primary-light);
+  color: var(--brand-light);
   opacity: 1;
 }
 
-/* Links columns */
 .links {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -80,24 +70,23 @@
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--primary);
-  opacity: 0.6;
+  color: var(--brand);
+  opacity: 0.65;
   margin-bottom: 4px;
 }
 
 .linkGroup a {
   font-size: 0.88rem;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255, 255, 255, 0.42);
   transition: color 0.2s;
 }
 
 .linkGroup a:hover {
-  color: white;
+  color: var(--snow);
 }
 
-/* Bottom bar */
 .bottom {
-  border-top: 1px solid rgba(255,255,255,0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
   padding: 20px 0;
 }
 
@@ -111,31 +100,19 @@
 
 .bottom span {
   font-size: 0.78rem;
-  color: rgba(255,255,255,0.25);
+  color: rgba(255, 255, 255, 0.22);
 }
 
 .madeWith {
-  color: rgba(255,255,255,0.28) !important;
+  color: rgba(255, 255, 255, 0.25) !important;
 }
 
 @media (max-width: 900px) {
-  .inner {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .links {
-    grid-template-columns: 1fr 1fr;
-  }
+  .inner { grid-template-columns: 1fr; gap: 40px; }
+  .links { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 480px) {
-  .links {
-    grid-template-columns: 1fr;
-  }
-
-  .bottom .container {
-    flex-direction: column;
-    text-align: center;
-  }
+  .links { grid-template-columns: 1fr; }
+  .bottom .container { flex-direction: column; text-align: center; }
 }

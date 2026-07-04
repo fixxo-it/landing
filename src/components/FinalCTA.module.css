@@ -1,6 +1,6 @@
 .section {
-  background: linear-gradient(160deg, var(--primary-dark) 0%, #0F172A 100%);
-  padding: 100px 48px;
+  background: linear-gradient(160deg, var(--brand-dark) 0%, var(--dark) 55%, var(--brand-xdark) 100%);
+  padding: 112px 48px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -9,45 +9,47 @@
 .section::before {
   content: '';
   position: absolute;
-  top: -100px;
-  left: -100px;
+  top: -80px;
+  left: -80px;
   width: 400px;
   height: 400px;
   border-radius: 50%;
-  background: rgba(20, 184, 166, 0.07);
+  background: rgba(0, 127, 130, 0.1);
   pointer-events: none;
 }
 
 .section::after {
   content: '';
   position: absolute;
-  bottom: -80px;
-  right: -80px;
+  bottom: -60px;
+  right: -60px;
   width: 280px;
   height: 280px;
   border-radius: 50%;
-  background: rgba(20, 184, 166, 0.05);
+  background: rgba(0, 127, 130, 0.07);
   pointer-events: none;
 }
 
 .heading {
-  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6vw, 3.8rem);
   font-weight: 800;
-  color: white;
-  margin-bottom: 16px;
-  letter-spacing: -0.03em;
+  color: var(--snow);
+  margin-bottom: 18px;
+  letter-spacing: -0.04em;
   position: relative;
   z-index: 1;
+  line-height: 1.15;
 }
 
 .sub {
   font-size: 1.05rem;
-  color: rgba(255,255,255,0.6);
-  margin-bottom: 40px;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 44px;
   max-width: 500px;
   margin-left: auto;
   margin-right: auto;
-  line-height: 1.7;
+  line-height: 1.75;
   position: relative;
   z-index: 1;
 }
@@ -64,25 +66,25 @@
 .btnWhite {
   display: inline-flex;
   align-items: center;
-  background: white;
-  color: var(--primary-dark);
+  background: var(--snow);
+  color: var(--brand-dark);
   border: none;
-  padding: 16px 34px;
-  border-radius: 28px;
+  padding: 16px 38px;
+  border-radius: 999px;
   font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-body);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 2px 0 rgba(255,255,255,0.08) inset, 0 4px 16px rgba(0,0,0,0.12);
-  letter-spacing: 0.005em;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  letter-spacing: 0.01em;
 }
 
 .btnWhite:hover {
-  background: var(--primary-light);
-  color: var(--primary-dark);
+  background: var(--brand-pale);
+  color: var(--brand-dark);
   transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22);
 }
 
 .arrow {
@@ -95,28 +97,10 @@
   transform: translateX(4px);
 }
 
-.btnGhost {
-  display: inline-flex;
-  align-items: center;
-  background: transparent;
-  color: white;
-  border: 2px solid rgba(255,255,255,0.3);
-  padding: 14px 28px;
-  border-radius: 28px;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  font-family: 'Outfit', sans-serif;
-  transition: all 0.2s;
-}
-
-.btnGhost:hover {
-  background: rgba(255,255,255,0.1);
-  border-color: rgba(255,255,255,0.55);
-}
-
 @media (max-width: 768px) {
-  .section {
-    padding: 72px 24px;
-  }
+  .section { padding: 80px 24px; }
+}
+
+@media (max-width: 480px) {
+  .section { padding: 64px 16px; }
 }
