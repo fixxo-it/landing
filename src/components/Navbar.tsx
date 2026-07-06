@@ -26,9 +26,10 @@ export default function Navbar() {
 
         {/* Desktop links */}
         <div className={styles.navLinks}>
-          <Link href="#services">Services</Link>
-          <Link href="#how">How it works</Link>
-          <Link href="#verified">Verified Caregivers</Link>
+          <Link href="/#services">Services</Link>
+          <Link href="/#how">How it works</Link>
+          <Link href="/#about">About us</Link>
+          <Link href="/safe-360">Safe360™</Link>
           <a href={storeUrl} target="_blank" rel="noopener noreferrer" className={styles.downloadBtn}>
             Download Now
           </a>
@@ -49,9 +50,10 @@ export default function Navbar() {
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.22 }}
             >
-              <Link href="#services" onClick={() => setOpen(false)}>Services</Link>
-              <Link href="#how" onClick={() => setOpen(false)}>How it works</Link>
-              <Link href="#verified" onClick={() => setOpen(false)}>Verified Caregivers</Link>
+              <Link href="/#services" onClick={() => setOpen(false)}>Services</Link>
+              <Link href="/#how" onClick={() => setOpen(false)}>How it works</Link>
+              <Link href="/#about" onClick={() => setOpen(false)}>About us</Link>
+              <Link href="/safe-360" onClick={() => setOpen(false)}>Safe360™</Link>
               <a href={storeUrl} target="_blank" rel="noopener noreferrer" className={styles.mobileDownload} onClick={() => setOpen(false)}>
                 Download Now
               </a>

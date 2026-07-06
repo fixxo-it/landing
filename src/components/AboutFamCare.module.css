@@ -1,0 +1,152 @@
+.section {
+  padding: 112px 0;
+  background:
+    linear-gradient(rgba(0, 127, 130, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 127, 130, 0.035) 1px, transparent 1px),
+    #f5fbfb;
+  background-size: 42px 42px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.06fr) minmax(390px, 0.94fr);
+  gap: clamp(58px, 7vw, 100px);
+  align-items: center;
+}
+
+.story h2 {
+  max-width: 710px;
+  font-size: clamp(2.4rem, 4.2vw, 4rem);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -0.052em;
+}
+
+.story > p {
+  max-width: 740px;
+  margin-top: 18px;
+  color: var(--ink-60);
+  font-size: 0.9rem;
+  line-height: 1.78;
+}
+
+.story .lead {
+  color: var(--ink-80);
+  font-size: 1rem;
+  font-weight: 650;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 28px;
+  color: var(--brand);
+  font-size: 0.86rem;
+  font-weight: 750;
+}
+
+.link span { transition: transform 0.2s ease; }
+.link:hover span { transform: translateX(4px); }
+
+.stackPanel {
+  padding: 25px;
+  border: 1px solid rgba(126, 216, 218, 0.18);
+  border-radius: 28px;
+  color: #fff;
+  background: linear-gradient(155deg, #0b2633, #071925);
+  box-shadow: 0 30px 70px rgba(3, 31, 38, 0.18);
+}
+
+.stackHeader,
+.stackHeader b,
+.stackFooter {
+  display: flex;
+  align-items: center;
+}
+
+.stackHeader {
+  justify-content: space-between;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.stackHeader b {
+  gap: 7px;
+  color: #70ddc0;
+  font-size: 0.55rem;
+}
+
+.stackHeader i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #55e6bf;
+  box-shadow: 0 0 0 4px rgba(85, 230, 191, 0.11);
+}
+
+.stackGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.stackItem {
+  min-height: 155px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.stackIcon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  margin-bottom: 20px;
+  border-radius: 11px;
+  color: var(--brand-light);
+  background: #0b3540;
+}
+
+.stackItem h3 { font-size: 0.82rem; }
+
+.stackItem p {
+  margin-top: 5px;
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 0.65rem;
+  line-height: 1.5;
+}
+
+.stackFooter {
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.53);
+  font-size: 0.66rem;
+}
+
+.stackFooter svg { color: var(--brand-light); }
+
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: 1fr; }
+  .stackPanel { max-width: 740px; }
+}
+
+@media (max-width: 620px) {
+  .section { padding: 76px 0; }
+  .story h2 { font-size: 2.35rem; }
+  .stackPanel { padding: 16px; border-radius: 22px; }
+  .stackHeader { align-items: flex-start; gap: 10px; }
+  .stackGrid { grid-template-columns: 1fr; }
+  .stackItem { min-height: 0; }
+}
