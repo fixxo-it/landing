@@ -37,8 +37,9 @@ export default function Footer() {
           </div>
           <div className={styles.linkGroup}>
             <div className={styles.linkHeading}>Company</div>
-            <Link href="#how">How it works</Link>
-            <Link href="#verified">Verified caregivers</Link>
+            <Link href="/#how">How it works</Link>
+            <Link href="/#about">About FamCare</Link>
+            <Link href="/safe-360">Safe360™</Link>
             <Link href="/support">Support</Link>
           </div>
           <div className={styles.linkGroup}>
