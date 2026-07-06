@@ -2,6 +2,7 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import StatsStrip from '@/components/StatsStrip';
 import Services from '@/components/Services';
+import Safe360Architecture from '@/components/Safe360Architecture';
 import FlexibleHours from '@/components/FlexibleHours';
 import ForEveryOccasion from '@/components/ForEveryOccasion';
 import HowItWorks from '@/components/HowItWorks';
@@ -22,13 +23,14 @@ export default function Home() {
       <Hero />
       <StatsStrip />
       <Services />
+      <Safe360Architecture />
+      <AboutFamCare />
       <FlexibleHours />
       <ForEveryOccasion />
       <HowItWorks />
       <Pillars />
       <WhySwitch />
       <OurTech />
-      <AboutFamCare />
       <Testimonials />
       <FinalCTA />
       <FAQ />

@@ -40,7 +40,7 @@ export default function AboutFamCare() {
           <p>
             By building industrial-grade trust at scale, we help working couples and working women pursue their careers without compromising their families&apos; safety.
           </p>
-          <a href="/safe-360" className={styles.link}>Explore FamCare Safe360™ <span>→</span></a>
+          <a href="#safe360" className={styles.link}>Explore FamCare Safe360™ <span>→</span></a>
         </div>
 
         <div className={styles.stackPanel}>
