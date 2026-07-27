@@ -7,9 +7,9 @@ export default function AnnouncementBanner() {
       <div className={styles.content}>
         <AlertTriangle size={16} className={styles.icon} aria-hidden="true" />
         <p>
-          <strong>Apologies for the inconvenience</strong> — our app is
-          currently down on the App Store. Our team is working to restore it
-          as quickly as possible.
+          <strong>Apologies for the inconvenience</strong> — our IOS app is
+          currently down on the Apple App Store. Our team is working to
+          restore it as quickly as possible.
         </p>
       </div>
     </div>
