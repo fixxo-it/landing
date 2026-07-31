@@ -6,7 +6,7 @@ import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useStoreUrl } from '@/lib/useStoreUrl';
-import AnnouncementBanner from './AnnouncementBanner';
+// import AnnouncementBanner from './AnnouncementBanner';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
@@ -15,7 +15,7 @@ export default function Navbar() {
 
   return (
     <div className={styles.stickyWrap}>
-      <AnnouncementBanner />
+      {/* <AnnouncementBanner /> */}
       <motion.nav
         className={styles.navbar}
         initial={{ y: -80, opacity: 0 }}

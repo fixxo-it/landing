@@ -8,20 +8,22 @@
   color: #fff;
   padding: 10px 24px;
   text-align: center;
+  overflow-x: auto;
 }
 
 .content {
   display: flex;
   align-items: center;
   gap: 8px;
-  max-width: 900px;
+  flex-shrink: 0;
 }
 
 .content p {
-  font-size: 0.82rem;
+  font-size: clamp(0.68rem, 1.6vw, 0.82rem);
   font-weight: 500;
   line-height: 1.4;
   margin: 0;
+  white-space: nowrap;
 }
 
 .icon {
@@ -31,9 +33,5 @@
 @media (max-width: 640px) {
   .banner {
     padding: 10px 20px;
-  }
-
-  .content p {
-    font-size: 0.76rem;
   }
 }
