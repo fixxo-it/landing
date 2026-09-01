@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 240" preserveAspectRatio="none">
+  <!-- Used as a CSS mask, never as a picture: only the alpha matters, so every
+       shape here is painted flat black and the filter below is what carves the
+       watercolour out of it. Colour stays in the stylesheet. -->
+  <defs>
+    <!-- two passes. The displacement roughs the outline up so no edge is a
+         drawn curve any more; the second noise is turned into an alpha ramp
+         and clipped to that outline, which is the pigment pooling thick in
+         some places and thin in others. -->
+    <filter id="wash" x="-10%" y="-35%" width="125%" height="175%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.009 0.028" numOctaves="4" seed="11" result="warp"/>
+      <feDisplacementMap in="SourceGraphic" in2="warp" scale="17" xChannelSelector="R" yChannelSelector="G" result="ragged"/>
+
+      <feTurbulence type="fractalNoise" baseFrequency="0.055" numOctaves="3" seed="5" result="grain"/>
+      <feColorMatrix in="grain" type="matrix" result="grainAlpha"
+        values="0 0 0 0 0
+                0 0 0 0 0
+                0 0 0 0 0
+                0.42 0.30 0 0 0.62"/>
+      <feComposite in="grainAlpha" in2="ragged" operator="in"/>
+    </filter>
+
+    <!-- the dry end: the brush is running out of paint, so the streaks are
+         thinner and lighter than the body and break up faster -->
+    <filter id="dry" x="-10%" y="-60%" width="130%" height="240%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.02 0.06" numOctaves="3" seed="19" result="warp"/>
+      <feDisplacementMap in="SourceGraphic" in2="warp" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#wash)">
+    <!-- one loaded stroke: heavy on the left where the brush lands, lifting
+         and thinning towards the right where it leaves the paper -->
+    <path fill="#000" d="
+      M 10 44
+      C 74 20, 168 14, 268 18
+      C 372 22, 468 10, 566 18
+      C 604 21, 630 28, 644 40
+      C 632 80, 636 140, 642 198
+      C 596 218, 512 226, 402 229
+      C 292 232, 176 234, 96 226
+      C 56 222, 26 214, 12 200
+      C 4 150, 2 90, 10 44
+      Z"/>
+  </g>
+
+  <g filter="url(#dry)" fill="#000" opacity="0.55">
+    <path d="M 548 12 C 588 8, 620 9, 652 14 C 620 20, 586 20, 550 18 Z"/>
+    <path d="M 566 32 C 600 29, 628 30, 656 34 C 628 39, 598 39, 568 37 Z"/>
+    <path d="M 592 206 C 616 204, 634 206, 650 210 C 632 215, 610 215, 594 212 Z"/>
+  </g>
+</svg>
