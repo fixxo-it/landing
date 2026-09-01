@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { fadeUp, revealContainer } from '@/lib/motion';
 import { useStoreUrl } from '@/lib/useStoreUrl';
+import { openAppOrStore } from '@/lib/openAppOrStore';
 import styles from './FinalCTA.module.css';
 
 export default function FinalCTA() {
@@ -19,8 +20,10 @@ export default function FinalCTA() {
         <motion.div className={styles.actions} variants={fadeUp}>
           <a
             href={storeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+            onClick={(e) => {
+              e.preventDefault();
+              openAppOrStore(storeUrl);
+            }}
             className={styles.btnWhite}
           >
             Download Now <span className={styles.arrow}>→</span>
