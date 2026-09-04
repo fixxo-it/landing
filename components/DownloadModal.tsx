@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { EASE } from "@/components/motion/Reveal";
-import PixelatedQr from "@/components/PixelatedQr";
 
-const DOWNLOAD_URL = "https://famcare.onelink.me/LK0E/cgr3j0s7?af_qr=true";
-/* the same OneLink, without the QR attribution tag — a direct tap on a phone
+/* the OneLink, without the QR attribution tag — a direct tap on a phone
    is not a scan, and the smart link resolves to the App Store or Play Store
    on its own from the device's user agent */
 const DIRECT_URL = "https://famcare.onelink.me/LK0E/cgr3j0s7";
@@ -148,10 +147,12 @@ export default function DownloadModal() {
             </button>
 
             <span className="mx-auto mt-4 block w-fit rounded-2xl bg-white p-3 ring-1 ring-line">
-              <PixelatedQr
-                value={DOWNLOAD_URL}
-                size={220}
-                label="QR code to download the FamCare app"
+              <Image
+                src="/img/download-qr.jpeg"
+                alt="QR code to download the FamCare app"
+                width={220}
+                height={220}
+                quality={100}
                 className="block h-[200px] w-[200px] sm:h-[220px] sm:w-[220px]"
               />
             </span>
