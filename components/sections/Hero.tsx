@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { Container } from "@/components/ui/Section";
@@ -15,6 +15,14 @@ export default function Hero() {
   /* the clip only takes over once it can actually play — until then the still
      underneath is the hero, so there is never an empty frame to look at */
   const [playing, setPlaying] = useState(false);
+
+  /* the video can reach HAVE_FUTURE_DATA before this ref callback ever runs —
+     a fast/cached load wins the race against React attaching onCanPlay, and
+     that canplay event fires once and is gone. Checking readyState here
+     catches that case; the JSX handlers below cover the normal, slower one. */
+  const handleVideoRef = useCallback((node: HTMLVideoElement | null) => {
+    if (node && node.readyState >= 3) setPlaying(true);
+  }, []);
 
   /* above the fold, so this plays on load rather than on scroll. The delay
      lets the header land first, so the page assembles top-down. */
@@ -49,18 +57,17 @@ export default function Hero() {
                  container runs nearly full-bleed. text-balance is off here: the
                  typewriter would rebalance the lines on nearly every character
                  and the words would jump around as they arrived. */
-              className="max-w-[13ch] font-display text-h1 font-semibold text-ink lg:text-h1-lg"
+              className="max-w-[23ch] font-display text-[3.25rem] font-semibold leading-[1.06] tracking-[-0.03em] text-ink lg:text-[5rem] lg:leading-[1.04] lg:tracking-[-0.032em]"
             >
               {/* starts once the headline's own rise has landed */}
-              <Typewriter text="On demand baby care you can trust" delay={0.75} />
+              <Typewriter text="On-Demand Baby Care in 10 mins" delay={0.75} />
             </motion.h1>
 
             <motion.p
               variants={item}
               className="mt-5 max-w-[480px] text-lg leading-relaxed text-ink-muted lg:text-xl"
             >
-              Professionally trained, background-verified caregivers at your door in{" "}
-              <span className="font-semibold italic text-teal">10 minutes</span>.
+              Professionally trained, background-verified caregivers
             </motion.p>
 
             <motion.div variants={item} className="mt-8 flex flex-wrap items-center gap-3">
@@ -113,14 +120,18 @@ export default function Hero() {
                   second copy of the same still would only be a second
                   download. It cross-fades in over that still on canplay. */}
               <video
+                ref={handleVideoRef}
                 src="/video/hero.mp4"
                 autoPlay
                 muted
                 loop
                 playsInline
+                webkit-playsinline="true"
                 preload="auto"
                 aria-hidden
                 onCanPlay={() => setPlaying(true)}
+                onLoadedData={() => setPlaying(true)}
+                onPlaying={() => setPlaying(true)}
                 className={cn(
                   "absolute inset-0 h-full w-full object-cover object-bottom transition-opacity duration-700 ease-out",
                   playing ? "opacity-100" : "opacity-0",

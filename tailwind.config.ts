@@ -10,7 +10,7 @@ export default {
     extend: {
       colors: {
         teal: {
-          DEFAULT: "#016163",
+          DEFAULT: "#06555B",
           dark: "#014D4F",
           light: "#03c4c9",
           tint: "#F1F8F8",
@@ -33,8 +33,8 @@ export default {
         line: "rgba(11, 31, 32, 0.10)",
       },
       fontFamily: {
-        sans: ["var(--font-dm-sans)", "system-ui", "sans-serif"],
-        display: ["var(--font-instrument-sans)", "system-ui", "sans-serif"],
+        sans: ["var(--font-figtree)", "system-ui", "sans-serif"],
+        display: ["var(--font-figtree)", "system-ui", "sans-serif"],
       },
       /* one type ramp for the whole page — every heading picks from here */
       fontSize: {

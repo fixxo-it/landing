@@ -242,9 +242,14 @@ export default function Services() {
                 <button
                   type="button"
                   onClick={() => setComingSoon(false)}
-                  className="mt-6 inline-flex h-11 items-center justify-center rounded-full bg-teal px-6 text-sm font-semibold text-white transition-colors duration-200 hover:bg-teal-dark"
+                  className="relative mt-6 inline-flex h-11 items-center justify-center overflow-hidden rounded-full bg-teal px-6 text-sm font-semibold text-white transition-colors duration-200 hover:bg-teal-dark"
                 >
-                  Got it
+                  <span
+                    aria-hidden
+                    className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay"
+                    style={{ backgroundImage: "url(/img/Grainy.jpg)" }}
+                  />
+                  <span className="relative z-10">Got it</span>
                 </button>
               </div>
             </motion.div>
@@ -283,7 +288,12 @@ function ServiceCard({
       transition={{ duration: 0.3, ease: EASE }}
       /* no inner padding: the photo runs to the card edge, so the card's own
          radius has to clip it */
-      className="group flex w-[240px] shrink-0 flex-col overflow-hidden rounded-3xl border border-line bg-white transition-shadow duration-300 hover:shadow-float lg:w-[280px]"
+      /* narrower than the desktop card on phones — sized so the next card's
+         edge sits inside the viewport rather than flush against it, which is
+         the cue that the strip scrolls sideways at all. sm and up go back to
+         the full desktop-scale card, where the strip's own width already
+         makes the overflow obvious. */
+      className="group flex w-[78vw] max-w-[320px] shrink-0 flex-col overflow-hidden rounded-3xl border border-line bg-white transition-shadow duration-300 hover:shadow-float sm:w-[420px] sm:max-w-none lg:w-[560px]"
     >
       <div className="relative aspect-square w-full overflow-hidden bg-teal-tint">
         {/* photographic ground behind the cutout, in place of the flat tint */}
@@ -292,14 +302,14 @@ function ServiceCard({
           alt=""
           aria-hidden
           fill
-          sizes="(min-width: 1024px) 280px, 240px"
+          sizes="(min-width: 1024px) 560px, (min-width: 640px) 420px, 78vw"
           className="object-cover"
         />
         <Image
           src={image ?? "/img/service.png"}
           alt={name}
           fill
-          sizes="(min-width: 1024px) 280px, 240px"
+          sizes="(min-width: 1024px) 560px, (min-width: 640px) 420px, 78vw"
           /* cutout sits in the lower half of the canvas — anchor to the
              bottom so every tile frames the subject identically */
           className="object-cover object-bottom transition-transform duration-500 ease-out group-hover:scale-[1.04] motion-reduce:transition-none"
@@ -313,9 +323,9 @@ function ServiceCard({
         />
 
         <div className="absolute inset-x-0 bottom-0 flex flex-wrap items-baseline justify-center gap-x-2 px-4 pb-4 text-center">
-          <p className="text-lg font-semibold tracking-[-0.01em] text-white lg:text-xl">{name}</p>
+          <p className="text-xl font-semibold tracking-[-0.01em] text-white lg:text-2xl">{name}</p>
           {COMING_SOON.has(name) && (
-            <p className="text-sm text-white/75 lg:text-base">Coming soon</p>
+            <p className="text-base text-white/75 lg:text-lg">Coming soon</p>
           )}
         </div>
       </div>

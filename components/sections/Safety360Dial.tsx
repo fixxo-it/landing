@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Image from "next/image";
 import {
   motion,
   useInView,
@@ -9,7 +10,6 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import Image from "next/image";
 import { Container, SectionHeading } from "@/components/ui/Section";
 import { DURATION, EASE, IN_VIEW } from "@/components/motion/Reveal";
 import { cn } from "@/lib/cn";
@@ -104,7 +104,7 @@ export default function Safety360Dial() {
         )}
       >
         <Container className="w-full">
-          <SectionHeading size="lg" title="Safe360™" />
+          <SectionHeading size="lg" title="Safety360™" />
 
           <Stage revealed={reduced ? PILLARS.length : revealed} reduced={reduced} />
           <Spine revealed={reduced ? PILLARS.length : revealed} />
@@ -121,6 +121,15 @@ export default function Safety360Dial() {
    in CSS and a unit in the viewBox then land on the same pixel. */
 const W = 1080;
 const H = 600;
+
+/* Each pillar card is centred on its column line, not fenced by it — at the
+   widest card variant (2xl, 380px) it hangs 130px past COL.left/COl.right on
+   either side. Desktop got away with that because the page still had gutter
+   left outside the 1080 box; scaled all the way down to a phone there is none
+   to spare, so the scale basis below has to include this margin itself
+   rather than borrow it from whatever happens to surround the section. */
+const CANVAS_MARGIN = 140;
+const CANVAS_W = W + CANVAS_MARGIN * 2;
 
 /* The three numbers the whole board is derived from. The hub is 260 square and
    centred, so its edges fall at 410/670 across and 170/430 down; every trace
@@ -200,21 +209,40 @@ function Stage({ revealed, reduced }: { revealed: number; reduced: boolean | nul
   const boardIn = useInView(boardRef, IN_VIEW);
 
   return (
-    <div className="mt-12 hidden justify-center lg:flex">
-      {/* The ratio is what keeps the traces and the cards on one coordinate
-          system, so width is the only dial: the vh term caps it by height
-          instead, since height = width / 1.93 and the whole board has to clear
-          the heading inside a single pinned screen.
-
-          The board fades up as a whole when the section arrives; the pillars on
-          it are then driven by scroll, so this is the one beat they share. */}
+    /* Every child on the board is either a percentage of this box or a fixed
+       pixel size (badge, card, hub type) tuned to look right at the box's
+       native 1080×600. Rather than a different, simplified layout for narrow
+       screens, the whole board renders at that native size always and this
+       wrapper scales the result down to fit — position and size shrink
+       together, so mobile is a smaller copy of the exact same board rather
+       than a rearranged one. `container-type` turns this box into the query
+       context the scale below reads its width from. */
+    <div
+      className="relative mx-auto mt-12 hidden w-full max-w-[1440px] [container-type:inline-size] lg:block"
+      style={{ aspectRatio: `${CANVAS_W} / ${H}` }}
+    >
+      {/* The board fades up as a whole when the section arrives; the pillars on
+          it are then driven by scroll, so this is the one beat they share.
+          The rise only ever writes `transform: translateY(...)` here — the
+          responsive scale lives one level down so the two never fight over
+          the same CSS property. */}
       <motion.div
         ref={boardRef}
         initial={{ opacity: 0, y: 24 }}
         animate={boardIn ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
         transition={{ duration: DURATION, ease: EASE }}
-        className="relative aspect-[9/5] w-full max-w-[min(1320px,110vh)]"
+        className="absolute inset-0"
       >
+        <div
+          className="absolute left-0 top-0 origin-top-left"
+          style={{
+            width: W,
+            height: H,
+            /* right-to-left: the board is inset by the margin first, then the
+               whole thing — inset included — is scaled to the box */
+            transform: `scale(calc(100cqw / ${CANVAS_W}px)) translateX(${CANVAS_MARGIN}px)`,
+          }}
+        >
         {/* soft ground, so the board is not floating on bare white */}
         <span
           aria-hidden
@@ -270,7 +298,7 @@ function Stage({ revealed, reduced }: { revealed: number; reduced: boolean | nul
                   so keyPoints walks it back to front: the dot reads as leaving
                   each card and arriving at FamCare, not the other way round. */}
               {i < revealed && !reduced && (
-                <circle r={4} fill="#016163">
+                <circle r={4} fill="#06555B">
                   <animateMotion
                     dur="1s"
                     begin="0.55s"
@@ -299,26 +327,117 @@ function Stage({ revealed, reduced }: { revealed: number; reduced: boolean | nul
         {PILLARS.map((p, i) => (
           <PillarCard key={p.name} pillar={p} index={i} on={i < revealed} />
         ))}
+        </div>
       </motion.div>
     </div>
   );
 }
 
-/* the tile every trace runs back to — HUB square and centred, so its edges sit
+/* ── the spine ──────────────────────────────────────────────────────────── */
+
+/* Same four beats, straightened out: the corners of a phone cannot hold four
+   labels and a paragraph at phone width without shrinking the type past
+   reading size.
+
+   Driven by the same scroll-linked count as the desktop board rather than each
+   item watching its own arrival — pinned in place the same way, so the list
+   populates one pillar at a time while the section holds still, instead of
+   scrolling past four items that all happen to enter the screen together. */
+function Spine({ revealed }: { revealed: number }) {
+  return (
+    <ol className="relative mt-6 lg:hidden">
+      <span aria-hidden className="absolute bottom-6 left-6 top-6 w-px -translate-x-1/2 bg-line" />
+      {PILLARS.map((p, i) => (
+        <SpineItem key={p.name} pillar={p} on={i < revealed} />
+      ))}
+    </ol>
+  );
+}
+
+function SpineItem({
+  pillar,
+  on,
+}: {
+  pillar: (typeof PILLARS)[number];
+  on: boolean;
+}) {
+  return (
+    <motion.li
+      initial={{ opacity: 0, y: 20 }}
+      animate={on ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ duration: 0.5, ease: EASE }}
+      className="relative flex gap-5 pb-7 last:pb-0"
+    >
+      {/* same lime tracker badge as the desktop board — one circular pulse
+         glyph rather than a different flat icon per breakpoint */}
+      <span className="relative z-10 grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-full shadow-card">
+        <Radar />
+        <span
+          aria-hidden
+          className="absolute inset-0 rounded-full shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] ring-1 ring-inset ring-white/70"
+        />
+        <Glyph
+          d={pillar.icon}
+          className="relative h-5 w-5 text-teal"
+        />
+      </span>
+      <span className="pt-2">
+        <span className="block font-display text-h3 font-semibold text-ink">{pillar.name}</span>
+        <span className="mt-2 block max-w-[38ch] text-sm leading-relaxed text-ink-muted">
+          {pillar.body}
+        </span>
+      </span>
+    </motion.li>
+  );
+}
+
+/* the tile every trace runs back to — square and centred, so its edges sit
    exactly where the traces start */
 function Hub() {
   return (
     <div
       style={{ height: pct(HUB, H), width: pct(HUB, W) }}
-      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[26px]"
+      className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center"
     >
-      <Image
-        src="/img/Safety360.png"
-        alt="FamCare Safe360"
-        fill
-        sizes="210px"
-        className="object-cover"
-      />
+      {/* the clip path lives in a zero-size svg purely to host the <defs> —
+          both the fill and the grain below reference it by id so the two
+          layers share exactly one outline */}
+      <svg width="0" height="0" className="absolute">
+        <defs>
+          <clipPath id="safety-shield" clipPathUnits="objectBoundingBox">
+            <path d="M0.5,0.02 L0.88,0.16 L0.88,0.48 C0.88,0.74 0.72,0.9 0.5,0.99 C0.28,0.9 0.12,0.74 0.12,0.48 L0.12,0.16 Z" />
+          </clipPath>
+        </defs>
+      </svg>
+
+      <div className="relative h-full w-full" style={{ clipPath: "url(#safety-shield)" }}>
+        <div className="absolute inset-0 bg-teal" />
+        <Image
+          src="/img/Grainy.jpg"
+          alt=""
+          aria-hidden
+          fill
+          sizes={`${HUB}px`}
+          className="object-cover mix-blend-overlay opacity-40"
+        />
+      </div>
+
+      {/* the inner outline — same shield path as the clip above, scaled down
+          around its own centre so it reads as a second, inset border rather
+          than tracing the outer edge */}
+      <svg viewBox="0 0 100 100" fill="none" className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden>
+        <path
+          d="M50,2 L88,16 L88,48 C88,74 72,90 50,99 C28,90 12,74 12,48 L12,16 Z"
+          stroke="#E4FF5C"
+          strokeWidth={2}
+          style={{ transform: "scale(0.86)", transformOrigin: "50% 50%" }}
+        />
+      </svg>
+
+      <span className="absolute flex flex-col items-center whitespace-nowrap px-2 text-center font-display text-[2.8rem] font-semibold leading-[1.1] tracking-tight text-white">
+        <span>Fam</span>
+        <span>Care</span>
+      </span>
     </div>
   );
 }
@@ -385,64 +504,6 @@ function PillarCard({
         </span>
       </motion.span>
     </span>
-  );
-}
-
-/* ── the spine ──────────────────────────────────────────────────────────── */
-
-/* Same four beats, straightened out: the corners of a phone cannot hold four
-   labels and a paragraph at phone width without shrinking the type past
-   reading size.
-
-   Driven by the same scroll-linked count as the desktop board rather than each
-   item watching its own arrival — pinned in place the same way, so the list
-   populates one pillar at a time while the section holds still, instead of
-   scrolling past four items that all happen to enter the screen together. */
-function Spine({ revealed }: { revealed: number }) {
-  return (
-    <ol className="relative mt-6 lg:hidden">
-      <span aria-hidden className="absolute bottom-6 left-6 top-6 w-px -translate-x-1/2 bg-line" />
-      {PILLARS.map((p, i) => (
-        <SpineItem key={p.name} pillar={p} on={i < revealed} />
-      ))}
-    </ol>
-  );
-}
-
-function SpineItem({
-  pillar,
-  on,
-}: {
-  pillar: (typeof PILLARS)[number];
-  on: boolean;
-}) {
-  return (
-    <motion.li
-      initial={{ opacity: 0, y: 20 }}
-      animate={on ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.5, ease: EASE }}
-      className="relative flex gap-5 pb-7 last:pb-0"
-    >
-      {/* same lime tracker badge as the desktop board — one circular pulse
-         glyph rather than a different flat icon per breakpoint */}
-      <span className="relative z-10 grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-full shadow-card">
-        <Radar />
-        <span
-          aria-hidden
-          className="absolute inset-0 rounded-full shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] ring-1 ring-inset ring-white/70"
-        />
-        <Glyph
-          d={pillar.icon}
-          className="relative h-5 w-5 text-teal"
-        />
-      </span>
-      <span className="pt-2">
-        <span className="block font-display text-h3 font-semibold text-ink">{pillar.name}</span>
-        <span className="mt-2 block max-w-[38ch] text-sm leading-relaxed text-ink-muted">
-          {pillar.body}
-        </span>
-      </span>
-    </motion.li>
   );
 }
 

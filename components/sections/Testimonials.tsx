@@ -101,13 +101,19 @@ export default function Testimonials() {
           giving the foreground an explicit z-10 instead sidesteps it. */}
       <div
         aria-hidden
-        className="edge-fade absolute inset-0"
+        className="edge-fade absolute inset-0 bg-teal"
       >
-        <Image src="/img/testimonials.jpg" alt="" fill sizes="100vw" className="object-cover" />
+        <Image
+          src="/img/Grainy.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover mix-blend-overlay opacity-40"
+        />
       </div>
 
       <Container className="relative z-10">
-        <SectionHeading title="Real families. Real reviews. Zero filters" tone="dark" size="lg" />
+        <SectionHeading title="Real families. Real reviews. Zero filters." tone="dark" size="lg" />
       </Container>
 
       {/* full-bleed on purpose: the rails should run past the page gutter so the

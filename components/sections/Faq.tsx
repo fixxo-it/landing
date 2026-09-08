@@ -128,9 +128,9 @@ export default function Faq() {
           {/* mobile size matched to "Book in 4 steps" so the page's oversized
               headings all read at the same scale on a phone */}
           <h2 className="font-display text-h1 font-semibold text-ink lg:text-h2-lg">
-            Questions? Good.
+            Questions? Good
             <br />
-            Ask us anything.
+            Ask us anything
           </h2>
 
           {/* the filter actually drives the list on the right — one row,
@@ -145,10 +145,8 @@ export default function Faq() {
                 onClick={() => select(i)}
                 aria-pressed={i === tab}
                 className={cn(
-                  "relative shrink-0 rounded-full px-6 py-3 text-xs uppercase tracking-[0.08em] transition-colors duration-200",
-                  i === tab
-                    ? "font-semibold text-white"
-                    : "font-medium text-ink",
+                  "relative shrink-0 rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-[0.08em] transition-colors duration-200",
+                  i === tab ? "text-white" : "text-ink",
                 )}
               >
                 {i === tab && (
@@ -157,8 +155,14 @@ export default function Faq() {
                     transition={{ duration: 0.35, ease: EASE }}
                     /* brand teal now, not the lime highlight — the selected tab
                        is a state, not the "live" marker the lime is elsewhere */
-                    className="absolute inset-0 rounded-full bg-teal"
-                  />
+                    className="absolute inset-0 overflow-hidden rounded-full bg-teal"
+                  >
+                    <span
+                      aria-hidden
+                      className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay"
+                      style={{ backgroundImage: "url(/img/Grainy.jpg)" }}
+                    />
+                  </motion.span>
                 )}
                 {i !== tab && (
                   <span className="absolute inset-0 rounded-full border border-ink/30 bg-white/60" />

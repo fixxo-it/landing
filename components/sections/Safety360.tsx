@@ -84,6 +84,14 @@ function Plate({
 }) {
   return (
     <div className="relative flex h-full items-center justify-center overflow-hidden bg-teal px-8">
+      <Image
+        src="/img/Grainy.jpg"
+        alt=""
+        aria-hidden
+        fill
+        sizes="(min-width: 1024px) 400px, 100vw"
+        className="object-cover mix-blend-overlay opacity-40"
+      />
       <div
         className={cn(
           "relative z-10 w-full overflow-hidden rounded-2xl border border-white bg-white p-5 shadow-float before:absolute before:inset-x-6 before:top-0 before:h-10 before:rounded-full before:bg-gradient-to-b before:from-white/90 before:to-transparent before:blur-md before:content-[''] before:pointer-events-none",
