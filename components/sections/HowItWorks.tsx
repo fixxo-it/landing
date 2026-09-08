@@ -45,6 +45,13 @@ export default function HowItWorks() {
           fill has no seam to hide. Grain still sits on top, or the fill reads
           too flat next to every other section's textured ground. */}
       <div aria-hidden className="absolute inset-0 -z-10 bg-teal">
+        <Image
+          src="/img/Grainy.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover mix-blend-overlay opacity-40"
+        />
         <div className="grain pointer-events-none absolute inset-0" />
       </div>
 

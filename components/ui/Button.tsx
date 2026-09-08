@@ -72,6 +72,13 @@ export default function Button({
       onClick={onClick}
       className={cn(BASE, VARIANTS[variant], SIZES[size], className)}
     >
+      {variant === "solid" && (
+        <span
+          aria-hidden
+          className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay"
+          style={{ backgroundImage: "url(/img/Grainy.jpg)" }}
+        />
+      )}
       <span className="relative z-10 inline-flex items-center gap-2.5">
         {label}
         <Arrow />

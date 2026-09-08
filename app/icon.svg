@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <path
+    d="M50,2 L88,16 L88,48 C88,74 72,90 50,99 C28,90 12,74 12,48 L12,16 Z"
+    fill="#06555B"
+  />
+  <path
+    d="M50,2 L88,16 L88,48 C88,74 72,90 50,99 C28,90 12,74 12,48 L12,16 Z"
+    fill="none"
+    stroke="#E4FF5C"
+    stroke-width="2.5"
+    transform="translate(50 50) scale(0.86) translate(-50 -50)"
+  />
+  <text
+    x="50"
+    y="61"
+    text-anchor="middle"
+    font-family="Figtree, system-ui, sans-serif"
+    font-size="26"
+    font-weight="700"
+    fill="#FFFFFF"
+  >FC</text>
+</svg>

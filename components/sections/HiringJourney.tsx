@@ -18,10 +18,18 @@ import { cn } from "@/lib/cn";
 
 function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative w-full max-w-[340px]">
+    <div className="relative w-full max-w-[510px]">
       {/* offset ghost card, same stacked look as the bento visuals */}
-      <span className="absolute -bottom-2 left-1/2 h-full w-[88%] -translate-x-1/2 rounded-2xl border border-white bg-white" />
-      <div className="relative overflow-hidden rounded-2xl border border-white bg-white p-6 shadow-float before:absolute before:inset-x-6 before:top-0 before:h-10 before:rounded-full before:bg-gradient-to-b before:from-white/90 before:to-transparent before:blur-md before:content-[''] before:pointer-events-none">
+      <span className="absolute -bottom-3 left-1/2 h-full w-[88%] -translate-x-1/2 rounded-3xl border border-white bg-white" />
+      <div className="relative overflow-hidden rounded-3xl border border-white bg-white p-9 shadow-float before:absolute before:inset-x-9 before:top-0 before:h-14 before:rounded-full before:bg-gradient-to-b before:from-white/90 before:to-transparent before:blur-md before:content-[''] before:pointer-events-none">
+        <Image
+          src="/img/Grainy.jpg"
+          alt=""
+          aria-hidden
+          fill
+          sizes="510px"
+          className="object-cover mix-blend-overlay opacity-40"
+        />
         <div className="relative z-10">{children}</div>
       </div>
     </div>
@@ -31,23 +39,23 @@ function Shell({ children }: { children: React.ReactNode }) {
 function VisualHiring() {
   return (
     <Shell>
-      <div className="flex items-center gap-3">
-        <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full bg-teal-light/25">
-          <Image src="/img/candidate.png" alt="" aria-hidden fill sizes="44px" className="object-cover" />
+      <div className="flex items-center gap-[18px]">
+        <span className="relative h-[66px] w-[66px] shrink-0 overflow-hidden rounded-full bg-teal-light/25">
+          <Image src="/img/candidate.png" alt="" aria-hidden fill sizes="66px" className="object-cover" />
         </span>
         <span className="min-w-0">
-          <span className="block truncate text-sm font-semibold text-ink">Neha</span>
-          <span className="block text-[11px] text-ink-faint">Whitefield · 4 yrs experience</span>
+          <span className="block truncate text-[21px] font-semibold text-ink">Neha</span>
+          <span className="block text-[16px] text-ink-faint">Whitefield · 4 yrs experience</span>
         </span>
       </div>
-      <div className="mt-4 flex flex-wrap gap-2">
+      <div className="mt-6 flex flex-wrap gap-3">
         {["Patience", "Calm communication", "Cleanliness", "Empathy"].map((t) => (
-          <span key={t} className="rounded-full bg-teal/[0.07] px-2.5 py-1 text-[11px] font-medium text-teal">
+          <span key={t} className="rounded-full bg-teal/[0.07] px-[15px] py-1.5 text-[16px] font-medium text-teal">
             {t}
           </span>
         ))}
       </div>
-      <div className="mt-4 flex items-center justify-between border-t border-line pt-3 text-[11px]">
+      <div className="mt-6 flex items-center justify-between border-t border-line pt-[18px] text-[16px]">
         <span className="text-ink-faint">Interview rounds</span>
         <span className="font-semibold text-ink">2 of 2 cleared</span>
       </div>
@@ -58,22 +66,22 @@ function VisualHiring() {
 function VisualIdentity() {
   return (
     <Shell>
-      <div className="flex gap-3">
-        <span className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full bg-teal-light/20">
-          <Image src="/img/candidate.png" alt="" aria-hidden fill sizes="56px" className="object-cover" />
+      <div className="flex gap-[18px]">
+        <span className="relative h-[84px] w-[84px] shrink-0 overflow-hidden rounded-full bg-teal-light/20">
+          <Image src="/img/candidate.png" alt="" aria-hidden fill sizes="84px" className="object-cover" />
         </span>
-        <span className="flex min-w-0 flex-1 flex-col justify-center gap-1">
-          <span className="block truncate text-sm font-semibold text-ink">Neha</span>
-          <span className="block truncate text-[11px] text-ink-faint">Whitefield · Application #FC-2481</span>
+        <span className="flex min-w-0 flex-1 flex-col justify-center gap-1.5">
+          <span className="block truncate text-[21px] font-semibold text-ink">Neha</span>
+          <span className="block truncate text-[16px] text-ink-faint">Whitefield · Application #FC-2481</span>
         </span>
       </div>
-      <div className="mt-4 space-y-2">
+      <div className="mt-6 space-y-3">
         {["Government ID", "Address proof", "Background check"].map((t) => (
-          <span key={t} className="flex items-center justify-between text-[11px]">
+          <span key={t} className="flex items-center justify-between text-[16px]">
             <span className="text-ink-muted">{t}</span>
-            <span className="flex items-center gap-1 font-semibold text-teal">
+            <span className="flex items-center gap-1.5 font-semibold text-teal">
               Verified
-              <Check className="h-3.5 w-3.5" />
+              <Check className="h-[21px] w-[21px]" />
             </span>
           </span>
         ))}
@@ -91,15 +99,15 @@ function VisualTraining() {
   ];
   return (
     <Shell>
-      <p className="text-eyebrow font-semibold uppercase text-ink-faint">Training modules</p>
-      <div className="mt-4 space-y-3.5">
+      <p className="text-[16px] font-semibold uppercase tracking-[0.08em] text-ink-faint">Training modules</p>
+      <div className="mt-6 space-y-[21px]">
         {modules.map(([name, value]) => (
           <span key={name} className="block">
-            <span className="mb-1.5 flex items-center justify-between text-[11px]">
+            <span className="mb-[9px] flex items-center justify-between text-[16px]">
               <span className="font-medium text-ink">{name}</span>
               <span className="text-ink-faint">{value === 1 ? "Done" : "In progress"}</span>
             </span>
-            <span className="block h-1.5 w-full rounded-full bg-ink/[0.06]">
+            <span className="block h-[9px] w-full rounded-full bg-ink/[0.06]">
               <motion.span
                 initial={{ scaleX: 0 }}
                 animate={{ scaleX: value }}
@@ -117,26 +125,31 @@ function VisualTraining() {
 function VisualAssessment() {
   return (
     <Shell>
-      <div className="flex items-center gap-4">
-        <span className="relative flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-lime/30">
-          <span className="font-display text-lg font-bold text-teal">94</span>
+      <div className="flex items-center gap-6">
+        <span className="relative flex h-24 w-24 shrink-0 items-center justify-center rounded-full bg-lime/30">
+          <span className="font-display text-[27px] font-bold text-teal">94</span>
         </span>
         <span>
-          <span className="block text-sm font-semibold text-ink">Skill assessment</span>
-          <span className="block text-[11px] text-ink-faint">Practical, observed in-centre</span>
+          <span className="block text-[21px] font-semibold text-ink">Skill assessment</span>
+          <span className="block text-[16px] text-ink-faint">Practical, observed in-centre</span>
         </span>
       </div>
-      <div className="mt-4 space-y-2 border-t border-line pt-3">
+      <div className="mt-6 space-y-3 border-t border-line pt-[18px]">
         {["Feeding & sleep routine", "Emergency response drill", "Parent handover"].map((t) => (
-          <span key={t} className="flex items-center gap-2 text-[11px] text-ink-muted">
-            <Check className="h-3.5 w-3.5 shrink-0 text-teal" />
+          <span key={t} className="flex items-center gap-3 text-[16px] text-ink-muted">
+            <Check className="h-[21px] w-[21px] shrink-0 text-teal" />
             {t}
           </span>
         ))}
       </div>
-      <span className="mt-4 flex items-center justify-center gap-1.5 rounded-full bg-teal py-2 text-[11px] font-semibold text-white">
-        <Check className="h-3.5 w-3.5" />
-        Certified to book
+      <span className="relative mt-6 flex items-center justify-center gap-2 overflow-hidden rounded-full bg-teal py-3 text-[16px] font-semibold text-white">
+        <span
+          aria-hidden
+          className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay"
+          style={{ backgroundImage: "url(/img/Grainy.jpg)" }}
+        />
+        <Check className="relative z-10 h-[21px] w-[21px]" />
+        <span className="relative z-10">Certified to book</span>
       </span>
     </Shell>
   );
@@ -192,9 +205,9 @@ export default function HiringJourney() {
         size="lg"
         title={
           <>
-            We hire for character.
+            We hire for character
             <br />
-            We train for care.
+            We train for care
           </>
         }
       />
@@ -202,18 +215,18 @@ export default function HiringJourney() {
       <div className="mt-16 grid grid-cols-1 gap-x-16 lg:mt-24 lg:grid-cols-2">
         {/* sticky illustration — desktop only; mobile renders it inside each step */}
         <div className="hidden lg:block">
-          <div className="sticky top-[15vh] flex h-[70vh] items-center justify-center">
+          <div className="sticky top-[10vh] flex h-[80vh] items-center justify-center">
             {/* the reveal wraps the panel rather than the sticky element above
                 it: motion writes a transform, and a transformed sticky ancestor
                 would stop the panel pinning to the viewport */}
-            <Reveal className="relative isolate flex h-[420px] w-full items-center justify-center overflow-hidden rounded-card border border-line bg-white">
+            <Reveal className="relative isolate flex h-[630px] max-h-full w-full items-center justify-center overflow-hidden rounded-card border border-line bg-teal p-6">
               <Image
-                src="/img/testimonialsbg.jpg"
+                src="/img/Grainy.jpg"
                 alt=""
                 aria-hidden
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-cover"
+                className="object-cover mix-blend-overlay opacity-40"
               />
               <AnimatePresence mode="wait">
                 <motion.div
@@ -343,7 +356,7 @@ function Step({
 
       <div
         className={cn(
-          "pt-1 transition-opacity duration-300 motion-reduce:transition-none",
+          "min-w-0 flex-1 pt-1 transition-opacity duration-300 motion-reduce:transition-none",
           index === active ? "opacity-100" : "lg:opacity-40",
         )}
       >

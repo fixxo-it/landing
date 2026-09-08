@@ -83,21 +83,19 @@ function QrPhone() {
           the overhang stays constant whatever the section's bottom padding is,
           so the bleed into the footer survives a spacing change */}
       <div className="absolute inset-x-0 -bottom-[280px] top-0 rounded-t-[46px] bg-neutral-900 p-[10px] shadow-[0_30px_60px_-30px_rgba(1,97,99,0.5)]">
-        {/* the screen is a photo rather than flat grey — overflow-hidden is what
-            keeps it inside the rounded top corners, and bg-neutral-100 stays as
-            the colour before it decodes */}
-        <div className="relative h-full w-full overflow-hidden rounded-t-[38px] bg-neutral-100 px-4 pt-6">
-          <Image
-            src="/img/endingnote.jpg"
-            alt=""
+        {/* white screen, styled with soft blurred colour glows rather than a
+            photo — the blobs sit behind the notch and QR so the stacking
+            order below only needs to clear the fill layer's replacement */}
+        <div className="relative h-full w-full overflow-hidden rounded-t-[38px] bg-white px-4 pt-6">
+          <span
             aria-hidden
-            fill
-            sizes="340px"
-            className="object-cover"
+            className="pointer-events-none absolute -left-10 -top-10 h-40 w-40 rounded-full bg-teal-light/40 blur-3xl"
+          />
+          <span
+            aria-hidden
+            className="pointer-events-none absolute -bottom-16 -right-14 h-44 w-44 rounded-full bg-[#E4FF5C]/50 blur-3xl"
           />
 
-          {/* everything above the photo needs its own stacking order, or the
-              fill image paints over it */}
           <span className="relative mx-auto block h-[22px] w-[86px] rounded-full bg-neutral-900" />
           <div className="relative mt-6 flex justify-center">
             <div

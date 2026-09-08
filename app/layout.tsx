@@ -1,16 +1,10 @@
 import type { Metadata } from "next";
-import { DM_Sans, Instrument_Sans } from "next/font/google";
+import { Figtree } from "next/font/google";
 import "./globals.css";
 
-const dmSans = DM_Sans({
+const figtree = Figtree({
   subsets: ["latin"],
-  variable: "--font-dm-sans",
-  display: "swap",
-});
-
-const instrumentSans = Instrument_Sans({
-  subsets: ["latin"],
-  variable: "--font-instrument-sans",
+  variable: "--font-figtree",
   display: "swap",
 });
 
@@ -26,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${dmSans.variable} ${instrumentSans.variable} antialiased`}>
+      <body className={`${figtree.variable} antialiased`}>
         {children}
       </body>
     </html>

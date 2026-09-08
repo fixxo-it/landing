@@ -16,11 +16,11 @@ import { cn } from "@/lib/cn";
 export const NAV = [
   { label: "Services", href: "#services" },
   { label: "How it works", href: "#how-it-works" },
-  { label: "Safe360™", href: "#safety-360" },
+  { label: "Safety360™", href: "#safety-360" },
   { label: "FAQs", href: "#faq" },
 ];
 
-/* Safe360™ is the one nav item that is a mark rather than a destination, so it
+/* Safety360™ is the one nav item that is a mark rather than a destination, so it
    carries a glimmer instead of plain ink. lime-deep/lime-light collapsed to
    one hex a while back (both point at the same lime now), which flattened
    this into a static colour with no visible sweep — teal is what actually
@@ -146,7 +146,7 @@ export default function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "group relative py-1 text-[15px] font-medium uppercase tracking-[0.06em] transition-colors duration-200",
+                  "group relative py-1 text-[15px] font-semibold uppercase tracking-[0.06em] transition-colors duration-200",
                   item.href === "#safety-360" ? GLIMMER : "text-ink hover:text-teal",
                 )}
               >
