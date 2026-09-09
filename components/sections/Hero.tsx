@@ -49,17 +49,22 @@ export default function Hero() {
               variants={item}
               /* capped so the headline keeps its three-line shape now that the
                  container runs nearly full-bleed */
-              className="max-w-[23ch] font-display text-[3.25rem] font-semibold leading-[1.06] tracking-[-0.03em] text-ink lg:text-[5rem] lg:leading-[1.04] lg:tracking-[-0.032em]"
+              className="max-w-[23ch] font-display text-[2.35rem] font-semibold leading-[1.15] tracking-[-0.03em] text-ink sm:text-[3.25rem] sm:leading-[1.06] lg:text-[5rem] lg:leading-[1.04] lg:tracking-[-0.032em]"
             >
-              Get{" "}
-              <span className="relative inline-block">
-                {/* same swipe as "Caregiver" in Services — a layer of its own so
-                    the paint can overshoot the word rather than stop dead at it */}
-                <span
-                  aria-hidden
-                  className="brush-highlight absolute -inset-x-2 -inset-y-1 bg-[#E4FF5C]"
-                />
-                <RotatingWord words={ROTATING_WORDS} className="relative text-teal" />
+              {/* "Get" and the rotating word stay on one line at every width —
+                  the font shrinks on mobile so this fits rather than the line
+                  wrapping and splitting the two apart */}
+              <span className="whitespace-nowrap">
+                Get{" "}
+                <span className="relative inline-block">
+                  {/* same swipe as "Caregiver" in Services — a layer of its own so
+                      the paint can overshoot the word rather than stop dead at it */}
+                  <span
+                    aria-hidden
+                    className="brush-highlight absolute -inset-x-2 -inset-y-1 bg-[#E4FF5C]"
+                  />
+                  <RotatingWord words={ROTATING_WORDS} className="relative text-teal" />
+                </span>
               </span>
               <br />
               in 10 mins
