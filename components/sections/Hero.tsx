@@ -8,7 +8,12 @@ import { cn } from "@/lib/cn";
 import Button from "@/components/ui/Button";
 import { openAppOrStore } from "@/components/DownloadModal";
 import { DURATION, EASE, RISE } from "@/components/motion/Reveal";
-import Typewriter from "@/components/motion/Typewriter";
+import RotatingWord from "@/components/motion/RotatingWord";
+
+/* "Baby Care" leads the loop, then the same beat other sections carry —
+   the specific things a visit covers, so the headline itself demonstrates
+   what "care" means rather than just naming it */
+const ROTATING_WORDS = ["Baby Care", "Pram walk", "Indoor play", "Freshen up", "Feed time"];
 
 export default function Hero() {
   const reduced = useReducedMotion();
@@ -40,27 +45,29 @@ export default function Hero() {
       <Container>
         <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_520px] lg:gap-16 xl:grid-cols-[minmax(0,1fr)_620px]">
           <motion.div variants={container} initial="hidden" animate="show" className="order-2 lg:order-1">
-            <motion.div
-              variants={item}
-              className="mb-4 inline-flex w-fit items-center gap-2 text-xs font-semibold uppercase tracking-wide text-teal-dark"
-            >
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
-              </span>
-              Live in Whitefield &amp; Varthur, Bengaluru
-            </motion.div>
-
             <motion.h1
               variants={item}
               /* capped so the headline keeps its three-line shape now that the
-                 container runs nearly full-bleed. text-balance is off here: the
-                 typewriter would rebalance the lines on nearly every character
-                 and the words would jump around as they arrived. */
-              className="max-w-[23ch] font-display text-[3.25rem] font-semibold leading-[1.06] tracking-[-0.03em] text-ink lg:text-[5rem] lg:leading-[1.04] lg:tracking-[-0.032em]"
+                 container runs nearly full-bleed */
+              className="max-w-[23ch] font-display text-[2.35rem] font-semibold leading-[1.15] tracking-[-0.03em] text-ink sm:text-[3.25rem] sm:leading-[1.06] lg:text-[5rem] lg:leading-[1.04] lg:tracking-[-0.032em]"
             >
-              {/* starts once the headline's own rise has landed */}
-              <Typewriter text="On-Demand Baby Care in 10 mins" delay={0.75} />
+              {/* "Get" and the rotating word stay on one line at every width —
+                  the font shrinks on mobile so this fits rather than the line
+                  wrapping and splitting the two apart */}
+              <span className="whitespace-nowrap">
+                Get{" "}
+                <span className="relative inline-block">
+                  {/* same swipe as "Caregiver" in Services — a layer of its own so
+                      the paint can overshoot the word rather than stop dead at it */}
+                  <span
+                    aria-hidden
+                    className="brush-highlight absolute -inset-x-2 -inset-y-1 bg-[#E4FF5C]"
+                  />
+                  <RotatingWord words={ROTATING_WORDS} className="relative text-teal" />
+                </span>
+              </span>
+              <br />
+              in 10 mins
             </motion.h1>
 
             <motion.p
@@ -74,6 +81,7 @@ export default function Hero() {
               <Button
                 href="#book"
                 label="BOOK A CAREGIVER NOW"
+                variant="solid"
                 size="md"
                 onClick={(e) => {
                   e.preventDefault();
