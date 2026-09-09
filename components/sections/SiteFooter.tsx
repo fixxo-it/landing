@@ -15,7 +15,7 @@ const COLUMNS: { head: string; links: { label: string; href: string }[] }[] = [
   {
     head: "Company",
     links: [
-      { label: "Safe360™", href: "#safety" },
+      { label: "Safety360™", href: "#safety" },
       { label: "AI-first care", href: "#safety" },
       { label: "How it works", href: "#how-it-works" },
       { label: "Testimonials", href: "#stories" },
