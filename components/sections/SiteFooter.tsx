@@ -56,14 +56,14 @@ export default function SiteFooter() {
           <StaggerItem>
             <p className="font-display text-4xl font-bold tracking-[-0.03em] text-white">FamCare</p>
             <p className="mt-3 text-[15px] text-white/70">
-              Trusted Baby care in{" "}
+              Caregivers in{" "}
               <span className="font-medium italic text-lime-light">10 minutes</span>
             </p>
 
             <address className="mt-9 not-italic">
               <p className="text-[15px] text-white/70">
-                FamCare, 1st floor, Novel MSR Building, Subbaiah Reddy Colony, Marathahalli
-                Village, Marathahalli, Bengaluru, Karnataka 560037
+                1st floor, Novel MSR Building, Subbaiah Reddy Colony, Marathahalli Village,
+                Marathahalli, Bengaluru, Karnataka 560037
               </p>
               <p className="mt-2 flex flex-wrap gap-x-6 gap-y-1 text-[15px] text-white/70">
                 <a href="tel:+919535711078" className="transition-colors hover:text-white">

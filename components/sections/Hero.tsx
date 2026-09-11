@@ -45,6 +45,17 @@ export default function Hero() {
       <Container>
         <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_520px] lg:gap-16 xl:grid-cols-[minmax(0,1fr)_620px]">
           <motion.div variants={container} initial="hidden" animate="show" className="order-2 lg:order-1">
+            <motion.div
+              variants={item}
+              className="mb-4 inline-flex w-fit items-center gap-2 text-xs font-semibold uppercase tracking-wide text-teal-dark"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
+              </span>
+              Live in Whitefield &amp; Varthur, Bengaluru
+            </motion.div>
+
             <motion.h1
               variants={item}
               /* capped so the headline keeps its three-line shape now that the
