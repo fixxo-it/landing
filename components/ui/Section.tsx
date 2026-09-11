@@ -45,7 +45,7 @@ export function Section({
 const HEADING_SIZE = {
   default: "text-h2 lg:text-h2-lg",
   /* matches "Book in 4 steps" from mobile up to lg, so the page's other
-     oversized headings (Safe360™, Never alone, the hiring and testimonials
+     oversized headings (Safety360™, Never alone, the hiring and testimonials
      titles) read at the same size on a phone instead of a step down */
   lg: "text-h1 lg:text-[4.5rem] lg:leading-[1.04] lg:tracking-[-0.032em]",
 };

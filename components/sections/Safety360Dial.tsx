@@ -104,7 +104,7 @@ export default function Safety360Dial() {
         )}
       >
         <Container className="w-full">
-          <SectionHeading size="lg" title="Safe360™" />
+          <SectionHeading size="lg" title="Safety360™" />
 
           <Stage revealed={reduced ? PILLARS.length : revealed} reduced={reduced} />
           <Spine revealed={reduced ? PILLARS.length : revealed} />
