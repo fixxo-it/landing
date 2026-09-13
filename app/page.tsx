@@ -2,8 +2,8 @@ import SiteHeader from "@/components/sections/SiteHeader";
 import Hero from "@/components/sections/Hero";
 import Services from "@/components/sections/Services";
 import HowItWorks from "@/components/sections/HowItWorks";
-import Safety360Dial from "@/components/sections/Safety360Dial";
-import Safety360 from "@/components/sections/Safety360";
+import Safe360Dial from "@/components/sections/Safe360Dial";
+import Safe360 from "@/components/sections/Safe360";
 import HiringJourney from "@/components/sections/HiringJourney";
 import Testimonials from "@/components/sections/Testimonials";
 import Faq from "@/components/sections/Faq";
@@ -20,8 +20,8 @@ export default function Home() {
         <Hero />
         <Services />
         <HowItWorks />
-        <Safety360Dial />
-        <Safety360 />
+        <Safe360Dial />
+        <Safe360 />
         <HiringJourney />
         <Testimonials />
         <Faq />

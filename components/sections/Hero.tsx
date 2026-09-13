@@ -100,7 +100,7 @@ export default function Hero() {
                 }}
               />
               <Button
-                href="#safety-360"
+                href="#safe-360"
                 label="WHY CHOOSE US?"
                 variant="secondary"
                 size="md"

@@ -316,7 +316,7 @@ function Step({
         </span>
       )}
 
-      {/* same photo-backed chip as the Safety 360° board, so the two step
+      {/* same photo-backed chip as the Safe 360° board, so the two step
           sequences on the page are cut from one material */}
       <span className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl">
         <Image

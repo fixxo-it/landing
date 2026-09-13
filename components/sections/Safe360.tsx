@@ -10,7 +10,7 @@ import { cn } from "@/lib/cn";
 /* Copy rule for this section: say what the family gets, never how it is built.
    No models, no detection methods, nothing a competitor could lift. */
 
-export default function Safety360() {
+export default function Safe360() {
   return (
     <Section id="safety">
       <SectionHeading title="Never alone" size="lg" />

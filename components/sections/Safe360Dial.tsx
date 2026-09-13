@@ -52,7 +52,7 @@ const PILLARS: Pillar[] = [
    releases while the last pillar has only just arrived */
 const HOLD = 0.18;
 
-export default function Safety360Dial() {
+export default function Safe360Dial() {
   const reduced = useReducedMotion();
   const pinned = !reduced;
 
@@ -77,7 +77,7 @@ export default function Safety360Dial() {
   return (
     <section
       ref={wrapRef}
-      id="safety-360"
+      id="safe-360"
       /* The mobile spine gets its own, shorter pin: a four-item list has less
          to sit through than the desktop board's wired sequence, so giving it
          the same 250vh left a long stretch of nothing after the last item had
@@ -104,7 +104,7 @@ export default function Safety360Dial() {
         )}
       >
         <Container className="w-full">
-          <SectionHeading size="lg" title="Safety360™" />
+          <SectionHeading size="lg" title="Safe360™" />
 
           <Stage revealed={reduced ? PILLARS.length : revealed} reduced={reduced} />
           <Spine revealed={reduced ? PILLARS.length : revealed} />
