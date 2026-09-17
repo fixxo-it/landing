@@ -10,9 +10,13 @@ import {
   useScroll,
   useSpring,
 } from "framer-motion";
-import { Section, SectionHeading } from "@/components/ui/Section";
+import { Section } from "@/components/ui/Section";
 import Reveal, { DURATION, EASE, RISE, IN_VIEW } from "@/components/motion/Reveal";
+import Button from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
+
+const CAREGIVER_FORM_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSd0nbsl6e5aComlKLDFtUplPZ-f8apmw_4kznC1Eyi020H5aw/viewform?usp=publish-editor";
 
 /* ── illustrations ─────────────────────────────────────────────────────── */
 
@@ -201,16 +205,27 @@ export default function HiringJourney() {
 
   return (
     <Section id="caregivers">
-      <SectionHeading
-        size="lg"
-        title={
-          <>
-            We hire for character
-            <br />
-            We train for care
-          </>
-        }
-      />
+      <div className="flex flex-col items-center gap-8 text-center">
+        <Reveal
+          as="h2"
+          delay={0.05}
+          className="font-display text-h1 font-semibold text-balance text-ink lg:text-[4.5rem] lg:leading-[1.04] lg:tracking-[-0.032em]"
+        >
+          We hire for character
+          <br />
+          We train for care
+        </Reveal>
+        <Reveal delay={0.15}>
+          <Button
+            href={CAREGIVER_FORM_URL}
+            label="JOIN AS A CAREGIVER"
+            variant="solid"
+            size="md"
+            target="_blank"
+            className="text-sm uppercase tracking-[-0.01em]"
+          />
+        </Reveal>
+      </div>
 
       <div className="mt-16 grid grid-cols-1 gap-x-16 lg:mt-24 lg:grid-cols-2">
         {/* sticky illustration — desktop only; mobile renders it inside each step */}
