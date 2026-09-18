@@ -56,6 +56,7 @@ export default function Button({
   size = "sm",
   className,
   onClick,
+  target,
 }: {
   href: string;
   label: string;
@@ -65,11 +66,14 @@ export default function Button({
   /* when present the anchor is intercepted — the href stays as the no-JS
      fallback destination */
   onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+  target?: "_blank";
 }) {
   return (
     <a
       href={href}
       onClick={onClick}
+      target={target}
+      rel={target === "_blank" ? "noopener noreferrer" : undefined}
       className={cn(BASE, VARIANTS[variant], SIZES[size], className)}
     >
       {variant === "solid" && (
