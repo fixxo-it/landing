@@ -132,7 +132,7 @@ export default function SiteFooter() {
               in Bengaluru.
             </span>
             <a
-              href="https://www.linkedin.com/company/famcare-co-in/home"
+              href="https://www.linkedin.com/company/famcare-co-in/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="FamCare on LinkedIn"
