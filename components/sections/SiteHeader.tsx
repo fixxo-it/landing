@@ -17,7 +17,6 @@ export const NAV = [
   { label: "Services", href: "#services" },
   { label: "How it works", href: "#how-it-works" },
   { label: "Safe360™", href: "#safe-360" },
-  { label: "FAQs", href: "#faq" },
   {
     label: "Join as a caregiver",
     href: "https://docs.google.com/forms/d/e/1FAIpQLSd0nbsl6e5aComlKLDFtUplPZ-f8apmw_4kznC1Eyi020H5aw/viewform?usp=publish-editor",
