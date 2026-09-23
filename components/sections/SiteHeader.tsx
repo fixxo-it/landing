@@ -128,7 +128,7 @@ export default function SiteHeader() {
              own height animation never touches this box's height in turn. */
           "relative mx-auto w-full border border-white/70 bg-white/55 shadow-float backdrop-blur-xl backdrop-saturate-150 transition-[max-width,border-radius] duration-500 ease-out",
           "shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_18px_40px_-22px_rgba(11,31,32,0.35)]",
-          compact ? "max-w-[980px]" : "max-w-[1240px]",
+          compact ? "max-w-[1080px]" : "max-w-[1240px]",
           /* bottom corners flatten to butt flush against the dropdown's own
              square top edge — same merged-pill look as before, just achieved
              without the two sharing one growing box */
@@ -144,7 +144,7 @@ export default function SiteHeader() {
           </a>
 
           {/* links sit dead centre of the bar, independent of the two ends */}
-          <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-7 lg:flex">
+          <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 lg:flex">
             {NAV.map((item) => (
               <a
                 key={item.href}
@@ -152,7 +152,7 @@ export default function SiteHeader() {
                 target={item.external ? "_blank" : undefined}
                 rel={item.external ? "noopener noreferrer" : undefined}
                 className={cn(
-                  "group relative py-1 text-[15px] font-semibold uppercase tracking-[0.06em] transition-colors duration-200",
+                  "group relative whitespace-nowrap py-1 text-[15px] font-semibold uppercase tracking-[0.06em] transition-colors duration-200",
                   item.href === "#safe-360" ? GLIMMER : "text-ink hover:text-teal",
                 )}
               >
