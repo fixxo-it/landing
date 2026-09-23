@@ -18,6 +18,11 @@ export const NAV = [
   { label: "How it works", href: "#how-it-works" },
   { label: "Safe360™", href: "#safe-360" },
   { label: "FAQs", href: "#faq" },
+  {
+    label: "Join as a caregiver",
+    href: "https://docs.google.com/forms/d/e/1FAIpQLSd0nbsl6e5aComlKLDFtUplPZ-f8apmw_4kznC1Eyi020H5aw/viewform?usp=publish-editor",
+    external: true,
+  },
 ];
 
 /* Safe360™ is the one nav item that is a mark rather than a destination, so it
@@ -145,6 +150,8 @@ export default function SiteHeader() {
               <a
                 key={item.href}
                 href={item.href}
+                target={item.external ? "_blank" : undefined}
+                rel={item.external ? "noopener noreferrer" : undefined}
                 className={cn(
                   "group relative py-1 text-[15px] font-semibold uppercase tracking-[0.06em] transition-colors duration-200",
                   item.href === "#safe-360" ? GLIMMER : "text-ink hover:text-teal",
@@ -221,6 +228,8 @@ export default function SiteHeader() {
                     <li key={item.href}>
                       <a
                         href={item.href}
+                        target={item.external ? "_blank" : undefined}
+                        rel={item.external ? "noopener noreferrer" : undefined}
                         onClick={() => setOpen(false)}
                         className={cn(
                           "block py-3 text-base font-medium",
