@@ -3,27 +3,22 @@ import { cn } from "@/lib/cn";
 type Variant = "primary" | "secondary" | "onDark" | "solid";
 type Size = "sm" | "md";
 
-const BASE =
+export const BASE =
   "group relative isolate inline-flex shrink-0 items-center justify-center gap-2.5 overflow-hidden whitespace-nowrap rounded-full font-semibold tracking-[-0.01em] transition-[transform,background-color,border-color,color,box-shadow] duration-200 ease-out hover:-translate-y-0.5 active:translate-y-0 motion-reduce:hover:translate-y-0";
 
 export const PHOTO_TEAL = "bg-teal-dark";
 
-/* liquid glass, lime body with teal type: a blurred specular streak near the
-   top (before) for the glossy highlight, and a soft glow low in the pill
-   (after) for the inner-glow + shadow read. Text/Arrow sit on their own
-   stacking layer in the JSX below so the two pseudo layers can sit over the
-   body without covering them. */
-const VARIANTS: Record<Variant, string> = {
+/* lime jelly pill with teal type: lime rim, inner glow and drop shadow, matching the dark-green CTAs — no gloss layer */
+export const VARIANTS: Record<Variant, string> = {
   primary:
-    "bg-[#E4FF5C] text-teal shadow-[0_30px_45px_-20px_rgba(1,97,99,0.4)] before:absolute before:inset-x-[8%] before:top-[10%] before:h-[38%] before:rounded-full before:bg-gradient-to-b before:from-white/60 before:via-white/15 before:to-transparent before:blur-[3px] before:pointer-events-none before:content-[''] after:absolute after:inset-x-[20%] after:bottom-[6%] after:h-[26%] after:rounded-full after:bg-white/20 after:blur-lg after:pointer-events-none after:content-[''] hover:bg-[#d8f43f]",
+    "border border-[#A9C91F] bg-gradient-to-b from-[#EBFF7A] to-[#DDF74A] text-teal shadow-[0_10px_18px_-8px_rgba(120,150,10,0.7),inset_0_0_14px_rgba(255,255,255,0.5),inset_0_-3px_6px_rgba(110,140,0,0.3)] hover:brightness-105",
   secondary:
     "border border-line bg-white text-ink-muted hover:border-teal/40 hover:text-teal",
   onDark: "bg-white text-teal hover:bg-teal-tint",
-  /* flat brand teal, white type — no gloss/glow layers. The nav CTA uses it:
-     sitting inside the header bar all the way down the page, it wants to read
-     as plain chrome rather than as the lime call to action the sections
-     themselves carry. */
-  solid: "bg-teal text-white hover:bg-teal-dark",
+  /* the nav and hero CTAs use it: the dark-green jelly pill used across the join page: brand-green rim, a
+     lighter translucent core and a white gloss band along the top. */
+  solid:
+    "border border-[#013A3C] bg-gradient-to-b from-[#0E7A82] to-[#014D4F] text-white shadow-[0_10px_18px_-8px_rgba(1,77,79,0.7),inset_0_0_14px_rgba(120,220,215,0.35),inset_0_-3px_6px_rgba(0,30,32,0.4)] hover:brightness-110",
 };
 
 /* h-11 / h-12 only — two button heights across the whole page */
@@ -76,13 +71,6 @@ export default function Button({
       rel={target === "_blank" ? "noopener noreferrer" : undefined}
       className={cn(BASE, VARIANTS[variant], SIZES[size], className)}
     >
-      {variant === "solid" && (
-        <span
-          aria-hidden
-          className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay"
-          style={{ backgroundImage: "url(/img/Grainy.jpg)" }}
-        />
-      )}
       <span className="relative z-10 inline-flex items-center gap-2.5">
         {label}
         <Arrow />

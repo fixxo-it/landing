@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import { Container, SectionHeading } from "@/components/ui/Section";
 import Reveal from "@/components/motion/Reveal";
+import { JELLY_LIME, JellyGloss } from "@/components/ui/jelly";
 import { cn } from "@/lib/cn";
 
 type Quote = {
@@ -169,7 +170,7 @@ function Card({
          without lifting the hovered card, its own shadow would be cut off by
          the neighbour drawn after it. */
       className={cn(
-        "relative flex h-[300px] w-[300px] shrink-0 flex-col overflow-hidden rounded-3xl border border-white/40 shadow-[0_18px_40px_-22px_rgba(11,31,32,0.35)] transition-shadow duration-300 hover:z-10 hover:shadow-float sm:w-[360px]",
+        "relative flex h-[300px] w-[300px] shrink-0 flex-col overflow-hidden rounded-3xl border border-[#A9C91F]/70 bg-white shadow-[0_18px_40px_-22px_rgba(11,31,32,0.35)] transition-shadow duration-300 hover:z-10 hover:shadow-float sm:w-[360px]",
         className,
       )}
       {...rest}
@@ -182,19 +183,14 @@ function Card({
       {/* the same bright lime used elsewhere as the "live" highlight — the FAQ's
           active tab, the stepper's travelling dot — rather than the deeper
           brand-lime token, which reads more green than yellow */}
-      <div className="relative isolate shrink-0 bg-[#E4FF5C] px-6 pb-5 pt-6 lg:px-7 lg:pt-7">
-        {/* a specular highlight across the top edge, so the pane still reads as
-            a raised, lit surface rather than a flat colour fill */}
-        <span
-          aria-hidden
-          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-1/2 bg-gradient-to-b from-white/35 via-white/10 to-transparent"
-        />
+      <div className={cn("relative isolate shrink-0 overflow-hidden px-6 pb-5 pt-6 lg:px-7 lg:pt-7", JELLY_LIME)}>
+        <JellyGloss />
         {/* name and locality only: the portraits were stand-ins, and without
             them the card leads on the person's own words instead of a stock
             face. Brand teal is what stays legible against lime — white would
             wash out. */}
-        <figcaption className="min-w-0">
-          <span className="block truncate font-display text-xl font-semibold tracking-[-0.01em] text-teal-dark lg:text-2xl">
+        <figcaption className="relative min-w-0">
+          <span className="block truncate relative font-display text-xl font-bold tracking-[-0.01em] text-teal-dark lg:text-2xl">
             {quote.name}
           </span>
           {/* the date carries the same weight as the locality but a step

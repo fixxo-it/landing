@@ -7,7 +7,7 @@ import Button from "@/components/ui/Button";
 import { openDownloadModal } from "@/components/DownloadModal";
 import Reveal, { EASE, useReveal } from "@/components/motion/Reveal";
 
-export default function CtaBanner() {
+export default function CtaBanner({ heading }: { heading?: string } = {}) {
   const reduced = useReducedMotion();
   const phone = useReveal();
 
@@ -25,7 +25,13 @@ export default function CtaBanner() {
               {/* same ramp as the other section headings on the page */}
               {/* mobile size matched to "Book in 4 steps" so the page's
                   oversized headings all read at the same scale on a phone */}
-              <h2 className="max-w-[12ch] font-display text-h1 font-semibold text-balance text-ink lg:text-[4.5rem] lg:leading-[1.04] lg:tracking-[-0.032em]">
+              <h2
+                className={
+                  heading
+                    ? /* other pages size it to their own heading ramp */ heading
+                    : "max-w-[12ch] font-display text-[2.5rem] font-bold leading-[1.08] tracking-[-0.03em] lg:text-[3.75rem] lg:leading-[1.05] text-balance text-ink"
+                }
+              >
                 At your door in 10 minutes
               </h2>
               <p className="mt-5 max-w-[38ch] text-lg leading-relaxed text-ink-muted">

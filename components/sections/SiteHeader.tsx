@@ -16,15 +16,15 @@ import { cn } from "@/lib/cn";
 export const NAV = [
   { label: "Services", href: "#services" },
   { label: "How it works", href: "#how-it-works" },
-  { label: "Safe360™", href: "#safe-360" },
+  { label: "Safe360", href: "#safety-360" },
+  { label: "FAQs", href: "#faq" },
   {
     label: "Join as a caregiver",
-    href: "https://docs.google.com/forms/d/e/1FAIpQLSd0nbsl6e5aComlKLDFtUplPZ-f8apmw_4kznC1Eyi020H5aw/viewform?usp=publish-editor",
-    external: true,
+    href: "/join",
   },
 ];
 
-/* Safe360™ is the one nav item that is a mark rather than a destination, so it
+/* Safe360 is the one nav item that is a mark rather than a destination, so it
    carries a glimmer instead of plain ink. lime-deep/lime-light collapsed to
    one hex a while back (both point at the same lime now), which flattened
    this into a static colour with no visible sweep — teal is what actually
@@ -139,8 +139,9 @@ export default function SiteHeader() {
           className="relative flex h-[68px] items-center justify-between gap-6 px-3 sm:px-5 lg:px-7"
           aria-label="Main"
         >
-          <a href="#top" className="font-display text-2xl font-bold tracking-[-0.02em] text-teal">
-            FamCare
+          <a href="#top" className="leading-none">
+            <span className="block font-display text-[1.8rem] font-bold tracking-[-0.02em] text-teal">FamCare</span>
+            <span className="-mt-0.5 block text-xs font-medium leading-none text-ink-muted">Caregivers in 10 mins</span>
           </a>
 
           {/* links sit dead centre of the bar, independent of the two ends */}
@@ -149,11 +150,9 @@ export default function SiteHeader() {
               <a
                 key={item.href}
                 href={item.href}
-                target={item.external ? "_blank" : undefined}
-                rel={item.external ? "noopener noreferrer" : undefined}
                 className={cn(
                   "group relative whitespace-nowrap py-1 text-[15px] font-semibold uppercase tracking-[0.06em] transition-colors duration-200",
-                  item.href === "#safe-360" ? GLIMMER : "text-ink hover:text-teal",
+                  item.href === "#safety-360" ? GLIMMER : "text-ink hover:text-teal",
                 )}
               >
                 {item.label}
@@ -227,12 +226,10 @@ export default function SiteHeader() {
                     <li key={item.href}>
                       <a
                         href={item.href}
-                        target={item.external ? "_blank" : undefined}
-                        rel={item.external ? "noopener noreferrer" : undefined}
                         onClick={() => setOpen(false)}
                         className={cn(
                           "block py-3 text-base font-medium",
-                          item.href === "#safe-360" ? GLIMMER : "text-ink",
+                          item.href === "#safety-360" ? GLIMMER : "text-ink",
                         )}
                       >
                         {item.label}

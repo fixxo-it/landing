@@ -13,10 +13,11 @@ import {
 import { Section } from "@/components/ui/Section";
 import Reveal, { DURATION, EASE, RISE, IN_VIEW } from "@/components/motion/Reveal";
 import Button from "@/components/ui/Button";
+import BenefitIcon from "@/components/join/BenefitIcon";
+import { JELLY_GREEN } from "@/components/ui/jelly";
 import { cn } from "@/lib/cn";
 
-const CAREGIVER_FORM_URL =
-  "https://docs.google.com/forms/d/e/1FAIpQLSd0nbsl6e5aComlKLDFtUplPZ-f8apmw_4kznC1Eyi020H5aw/viewform?usp=publish-editor";
+const CAREGIVER_FORM_URL = "/join";
 
 /* ── illustrations ─────────────────────────────────────────────────────── */
 
@@ -25,7 +26,7 @@ function Shell({ children }: { children: React.ReactNode }) {
     <div className="relative w-full max-w-[510px]">
       {/* offset ghost card, same stacked look as the bento visuals */}
       <span className="absolute -bottom-3 left-1/2 h-full w-[88%] -translate-x-1/2 rounded-3xl border border-white bg-white" />
-      <div className="relative overflow-hidden rounded-3xl border border-white bg-white p-9 shadow-float before:absolute before:inset-x-9 before:top-0 before:h-14 before:rounded-full before:bg-gradient-to-b before:from-white/90 before:to-transparent before:blur-md before:content-[''] before:pointer-events-none">
+      <div className="relative overflow-hidden rounded-3xl border border-white bg-white p-6 shadow-float sm:p-9 before:absolute before:inset-x-9 before:top-0 before:h-14 before:rounded-full before:bg-gradient-to-b before:from-white/90 before:to-transparent before:blur-md before:content-[''] before:pointer-events-none">
         <Image
           src="/img/Grainy.jpg"
           alt=""
@@ -167,12 +168,7 @@ function Check({ className = "" }: { className?: string }) {
   );
 }
 
-const ICON_PATHS = [
-  /* person */ "M15.5 8.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0ZM4.5 19.5a7.5 7.5 0 0 1 15 0",
-  /* face scan */ "M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8m8 0h2.5A1.5 1.5 0 0 1 20 5.5V8m0 8v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16m5-4.5h.01M15 11.5h.01M9.5 15a3.5 3.5 0 0 0 5 0",
-  /* cap */ "M12 4 2.5 9 12 14l9.5-5L12 4Zm-6 7v4.5c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5V11",
-  /* clipboard check */ "M9 4h6v2H9V4Zm-1 1H6.5A1.5 1.5 0 0 0 5 6.5v12A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 17.5 5H16m-6.5 7.5 2 2 4-4",
-];
+const STEP_ICONS = ["heart", "shield", "training", "growth"];
 
 const STEPS = [
   {
@@ -205,11 +201,11 @@ export default function HiringJourney() {
 
   return (
     <Section id="caregivers">
-      <div className="flex flex-col items-center gap-8 text-center">
+      <div className="flex flex-col items-start gap-8 text-left lg:flex-row lg:items-end lg:justify-between">
         <Reveal
           as="h2"
           delay={0.05}
-          className="font-display text-h1 font-semibold text-balance text-ink lg:text-[4.5rem] lg:leading-[1.04] lg:tracking-[-0.032em]"
+          className="font-display text-[2.5rem] font-bold leading-[1.08] tracking-[-0.03em] lg:text-[3.75rem] lg:leading-[1.05] text-balance text-ink"
         >
           We hire for character
           <br />
@@ -221,7 +217,6 @@ export default function HiringJourney() {
             label="JOIN AS A CAREGIVER"
             variant="solid"
             size="md"
-            target="_blank"
             className="text-sm uppercase tracking-[-0.01em]"
           />
         </Reveal>
@@ -234,15 +229,7 @@ export default function HiringJourney() {
             {/* the reveal wraps the panel rather than the sticky element above
                 it: motion writes a transform, and a transformed sticky ancestor
                 would stop the panel pinning to the viewport */}
-            <Reveal className="relative isolate flex h-[630px] max-h-full w-full items-center justify-center overflow-hidden rounded-card border border-line bg-teal p-6">
-              <Image
-                src="/img/Grainy.jpg"
-                alt=""
-                aria-hidden
-                fill
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-cover mix-blend-overlay opacity-40"
-              />
+            <Reveal className={cn("relative isolate flex h-[630px] max-h-full w-full items-center justify-center overflow-hidden rounded-card p-6", JELLY_GREEN)}>
               <AnimatePresence mode="wait">
                 <motion.div
                   key={active}
@@ -331,42 +318,15 @@ function Step({
         </span>
       )}
 
-      {/* same photo-backed chip as the Safe 360° board, so the two step
-          sequences on the page are cut from one material */}
-      <span className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl">
-        <Image
-          src="/img/book3taps.jpg"
-          alt=""
-          aria-hidden
-          fill
-          sizes="40px"
-          className="object-cover"
-        />
-        {/* the glyph is white, so the wash has to be dark enough to carry it:
-            brand teal once the step is reached, a neutral scrim before */}
-        <span
-          aria-hidden
-          className={cn(
-            "absolute inset-0 backdrop-blur-[2px] transition-colors duration-300 motion-reduce:transition-none",
-            on ? "bg-[#E4FF5C]/90" : "bg-ink/45",
-          )}
-        />
-        <span
-          aria-hidden
-          className="absolute inset-0 rounded-xl shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] ring-1 ring-inset ring-white/40"
-        />
-        <svg
-          className={cn("relative h-5 w-5 transition-colors duration-300", on ? "text-teal" : "text-white")}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={1.6}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden
-        >
-          <path d={ICON_PATHS[index]} />
-        </svg>
+      {/* the glossy lime jelly glyphs from the join page; steps not yet
+          reached are held back to a faint tint */}
+      <span
+        className={cn(
+          "relative z-10 flex h-12 w-12 shrink-0 items-center justify-center transition-[opacity,filter] duration-300 motion-reduce:transition-none",
+          !on && "opacity-50 saturate-50",
+        )}
+      >
+        <BenefitIcon name={STEP_ICONS[index]} className="h-12 w-12" />
       </span>
 
       <div
@@ -375,7 +335,7 @@ function Step({
           index === active ? "opacity-100" : "lg:opacity-40",
         )}
       >
-        <h3 className="font-display text-h3 font-semibold text-ink lg:text-3xl">{step.title}</h3>
+        <h3 className="font-display text-h3 font-bold text-ink lg:text-3xl">{step.title}</h3>
         <p className="mt-3 max-w-[420px] text-base leading-relaxed text-ink-muted">{step.body}</p>
         <div className="mt-6 lg:hidden">
           <Visual />

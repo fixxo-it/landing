@@ -130,7 +130,7 @@ export default function Services() {
         <div className="relative z-20 shrink-0 bg-white px-6 sm:px-10 lg:w-[44%] lg:max-w-[560px] lg:px-16 xl:px-24 2xl:px-32">
           <Reveal
             as="h2"
-            className="font-display text-h2 font-semibold text-balance text-ink lg:text-h2-lg"
+            className="font-display text-[2.5rem] font-bold leading-[1.08] tracking-[-0.03em] lg:text-[3.75rem] lg:leading-[1.05] text-balance text-ink"
           >
             From newborn to school going,
             <br className="hidden sm:block" /> we have the right{" "}
@@ -235,7 +235,7 @@ export default function Services() {
                 />
               </div>
               <div className="p-8 text-left">
-                <p className="font-display text-h3 font-semibold text-ink">Coming soon</p>
+                <p className="font-display text-h3 font-bold text-ink">Coming soon</p>
                 <p className="mt-2 text-sm leading-relaxed text-ink-muted">
                   Elderly care is on its way, we will let you know the moment it is live.
                 </p>

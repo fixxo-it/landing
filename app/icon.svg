@@ -12,11 +12,13 @@
   />
   <text
     x="50"
-    y="61"
     text-anchor="middle"
     font-family="Figtree, system-ui, sans-serif"
-    font-size="26"
+    font-size="18"
     font-weight="700"
     fill="#FFFFFF"
-  >FC</text>
+  >
+    <tspan x="50" y="48">Fam</tspan>
+    <tspan x="50" y="70">Care</tspan>
+  </text>
 </svg>
