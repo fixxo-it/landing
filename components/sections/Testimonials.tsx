@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import Image from "next/image";
+import Image from 'next/image';
 
-import { Container, SectionHeading } from "@/components/ui/Section";
-import Reveal from "@/components/motion/Reveal";
-import { JELLY_LIME, JellyGloss } from "@/components/ui/jelly";
-import { cn } from "@/lib/cn";
+import { Container, SectionHeading } from '@/components/ui/Section';
+import Reveal from '@/components/motion/Reveal';
+import { JELLY_LIME, JellyGloss } from '@/components/ui/jelly';
+import { cn } from '@/lib/cn';
 
 type Quote = {
   quote: string;
@@ -20,58 +20,58 @@ type Quote = {
 const QUOTES: Quote[] = [
   {
     quote:
-      "Initially I had my inhibitions, but due to some office call and a small baby to take care simultaneously, I decided to give FamCare a try.",
-    name: "Puja Baranwal",
-    meta: "Whitefield · Mom of 1",
+      'Initially I had my inhibitions, but due to some office call and a small baby to take care simultaneously, I decided to give FamCare a try.',
+    name: 'Puja Baranwal',
+    meta: 'Whitefield · Mom of 1',
     when: "Aug '26",
   },
   {
     quote:
-      "Excellent childcare app! Very easy to use and helps me quickly find reliable babysitter and childcare support when needed.",
-    name: "Siwani Dubey",
-    meta: "Varthur · Mom of 1",
+      'Excellent childcare app! Very easy to use and helps me quickly find reliable babysitter and childcare support when needed.',
+    name: 'Siwani Dubey',
+    meta: 'Varthur · Mom of 1',
     when: "Aug '26",
   },
   {
     quote:
-      "Experience was very good. We are very happy to have a caregiver from FamCare. She really took good care of my kids and was very professional as well.",
-    name: "Nikhil",
-    meta: "Whitefield · Dad of 2",
+      'Experience was very good. We are very happy to have a caregiver from FamCare. She really took good care of my kids and was very professional as well.',
+    name: 'Nikhil',
+    meta: 'Whitefield · Dad of 2',
     when: "Jul '26",
   },
   {
     quote:
-      "Pleasant experience, we always felt completely at ease knowing our child was in safe and caring hands.",
-    name: "Gayatri Panda",
-    meta: "Varthur · Mom of 1",
+      'Pleasant experience, we always felt completely at ease knowing our child was in safe and caring hands.',
+    name: 'Gayatri Panda',
+    meta: 'Varthur · Mom of 1',
     when: "Jul '26",
   },
   {
     quote:
-      "It was a seamless experience, the babysitter was calm, accommodating, and took great care of the baby.",
-    name: "Archana Kammar",
-    meta: "Whitefield · Mom of 1",
+      'It was a seamless experience, the babysitter was calm, accommodating, and took great care of the baby.',
+    name: 'Archana Kammar',
+    meta: 'Whitefield · Mom of 1',
     when: "Jul '26",
   },
   {
     quote:
       "Very satisfied with the caregiver's service, she took care of the baby very calmly and kept her engaged.",
-    name: "Archana KK",
-    meta: "Varthur · Mom of 1",
+    name: 'Archana KK',
+    meta: 'Varthur · Mom of 1',
     when: "Jun '26",
   },
   {
     quote:
-      "Very professional and good care, the caregiver is very experienced and handled the child very well.",
-    name: "Swapna",
-    meta: "Whitefield · Mom of 1",
+      'Very professional and good care, the caregiver is very experienced and handled the child very well.',
+    name: 'Swapna',
+    meta: 'Whitefield · Mom of 1',
     when: "Jun '26",
   },
   {
     quote:
-      "Very good experience with the caregiver, she was very professional and polite. She managed the baby very well.",
-    name: "Neha",
-    meta: "Varthur · Mom of 1",
+      'Very good experience with the caregiver, she was very professional and polite. She managed the baby very well.',
+    name: 'Neha',
+    meta: 'Varthur · Mom of 1',
     when: "May '26",
   },
 ];
@@ -100,21 +100,22 @@ export default function Testimonials() {
           on top of it instead of behind, exactly like the background bleeding
           over the cards. Staying in normal DOM order (this paints first) and
           giving the foreground an explicit z-10 instead sidesteps it. */}
-      <div
-        aria-hidden
-        className="edge-fade absolute inset-0 bg-teal"
-      >
+      <div aria-hidden className="edge-fade absolute inset-0 bg-teal">
         <Image
           src="/img/Grainy.jpg"
           alt=""
           fill
           sizes="100vw"
-          className="object-cover mix-blend-overlay opacity-40"
+          className="object-cover opacity-40 mix-blend-overlay"
         />
       </div>
 
       <Container className="relative z-10">
-        <SectionHeading title="Real families. Real reviews. Zero filters." tone="dark" size="lg" />
+        <SectionHeading
+          title="Real families. Real reviews. Zero filters."
+          tone="dark"
+          size="lg"
+        />
       </Container>
 
       {/* full-bleed on purpose: the rails should run past the page gutter so the
@@ -132,8 +133,8 @@ export default function Testimonials() {
           <div key={i} className="flex overflow-x-auto py-5 lg:overflow-hidden">
             <div
               className={cn(
-                "marquee-track flex w-max gap-6",
-                i % 2 === 0 ? "animate-marquee" : "animate-marquee-reverse",
+                'marquee-track flex w-max gap-6',
+                i % 2 === 0 ? 'animate-marquee' : 'animate-marquee-reverse'
               )}
             >
               {/* the copy is duplicated so the track can loop on itself; the
@@ -170,8 +171,8 @@ function Card({
          without lifting the hovered card, its own shadow would be cut off by
          the neighbour drawn after it. */
       className={cn(
-        "relative flex h-[300px] w-[300px] shrink-0 flex-col overflow-hidden rounded-3xl border border-[#A9C91F]/70 bg-white shadow-[0_18px_40px_-22px_rgba(11,31,32,0.35)] transition-shadow duration-300 hover:z-10 hover:shadow-float sm:w-[360px]",
-        className,
+        'relative flex h-[300px] w-[300px] shrink-0 flex-col overflow-hidden rounded-3xl border border-[#A9C91F]/70 bg-white shadow-[0_18px_40px_-22px_rgba(11,31,32,0.35)] transition-shadow duration-300 hover:z-10 hover:shadow-float sm:w-[360px]',
+        className
       )}
       {...rest}
     >
@@ -183,21 +184,27 @@ function Card({
       {/* the same bright lime used elsewhere as the "live" highlight — the FAQ's
           active tab, the stepper's travelling dot — rather than the deeper
           brand-lime token, which reads more green than yellow */}
-      <div className={cn("relative isolate shrink-0 overflow-hidden px-6 pb-5 pt-6 lg:px-7 lg:pt-7", JELLY_LIME)}>
+      <div
+        className={cn(
+          'relative isolate shrink-0 overflow-hidden px-6 pb-5 pt-6 lg:px-7 lg:pt-7',
+          JELLY_LIME
+        )}
+      >
         <JellyGloss />
         {/* name and locality only: the portraits were stand-ins, and without
             them the card leads on the person's own words instead of a stock
             face. Brand teal is what stays legible against lime — white would
             wash out. */}
         <figcaption className="relative min-w-0">
-          <span className="block truncate relative font-display text-xl font-bold tracking-[-0.01em] text-teal-dark lg:text-2xl">
+          <span className="relative block truncate font-display text-xl font-bold tracking-[-0.01em] text-teal-dark lg:text-2xl">
             {quote.name}
           </span>
           {/* the date carries the same weight as the locality but a step
               lighter, so the line reads "who, where, when" without the month
               competing with the name above it */}
           <span className="mt-0.5 block truncate text-[15px] text-teal-dark/75">
-            {quote.meta} <span className="text-teal-dark/50">· {quote.when}</span>
+            {quote.meta}{' '}
+            <span className="text-teal-dark/50">· {quote.when}</span>
           </span>
         </figcaption>
       </div>

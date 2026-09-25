@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import { useInView, useReducedMotion } from "framer-motion";
-import { Section, SectionHeading } from "@/components/ui/Section";
-import { Stagger, StaggerItem } from "@/components/motion/Reveal";
-import { JELLY_GREEN } from "@/components/ui/jelly";
-import { cn } from "@/lib/cn";
+import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
+import { useInView, useReducedMotion } from 'framer-motion';
+import { Section, SectionHeading } from '@/components/ui/Section';
+import { Stagger, StaggerItem } from '@/components/motion/Reveal';
+import { JELLY_GREEN } from '@/components/ui/jelly';
+import { cn } from '@/lib/cn';
 
 /* Copy rule for this section: say what the family gets, never how it is built.
    No models, no detection methods, nothing a competitor could lift. */
@@ -62,10 +62,16 @@ function BentoCard({
   return (
     <StaggerItem className={className}>
       <div className="flex h-full flex-col overflow-hidden rounded-card border border-line bg-white shadow-card">
-        <div className="relative h-[340px] shrink-0 overflow-hidden lg:h-[400px]">{visual}</div>
+        <div className="relative h-[340px] shrink-0 overflow-hidden lg:h-[400px]">
+          {visual}
+        </div>
         <div className="px-8 pb-8 pt-6">
-          <h3 className="font-display text-h3 font-bold text-ink lg:text-3xl">{title}</h3>
-          <p className="mt-2 max-w-[420px] text-sm leading-relaxed text-ink-muted">{body}</p>
+          <h3 className="font-display text-h3 font-bold text-ink lg:text-3xl">
+            {title}
+          </h3>
+          <p className="mt-2 max-w-[420px] text-sm leading-relaxed text-ink-muted">
+            {body}
+          </p>
         </div>
       </div>
     </StaggerItem>
@@ -78,17 +84,22 @@ function BentoCard({
    than four separate screenshots on flat white. */
 function Plate({
   children,
-  width = "max-w-[240px]",
+  width = 'max-w-[240px]',
 }: {
   children: React.ReactNode;
   width?: string;
 }) {
   return (
-    <div className={cn("relative flex h-full items-center justify-center overflow-hidden px-8", JELLY_GREEN)}>
+    <div
+      className={cn(
+        'relative flex h-full items-center justify-center overflow-hidden px-8',
+        JELLY_GREEN
+      )}
+    >
       <div
         className={cn(
-          "relative z-10 w-full overflow-hidden rounded-2xl border border-white bg-white p-5 shadow-float before:absolute before:inset-x-6 before:top-0 before:h-10 before:rounded-full before:bg-gradient-to-b before:from-white/90 before:to-transparent before:blur-md before:content-[''] before:pointer-events-none",
-          width,
+          "relative z-10 w-full overflow-hidden rounded-2xl border border-white bg-white p-5 shadow-float before:pointer-events-none before:absolute before:inset-x-6 before:top-0 before:h-10 before:rounded-full before:bg-gradient-to-b before:from-white/90 before:to-transparent before:blur-md before:content-['']",
+          width
         )}
       >
         <div className="relative z-10">{children}</div>
@@ -141,10 +152,10 @@ function WatchVisual() {
 /* ── oversight ──────────────────────────────────────────────────────────── */
 
 const OVERSIGHT: [string, string][] = [
-  ["Live oversight", "Every active visit stays in view"],
-  ["Early warning", "We notice when a visit changes"],
-  ["Fast escalation", "The right person picks it up"],
-  ["Location safety", "Arrival and safe-zone cover"],
+  ['Live oversight', 'Every active visit stays in view'],
+  ['Early warning', 'We notice when a visit changes'],
+  ['Fast escalation', 'The right person picks it up'],
+  ['Location safety', 'Arrival and safe-zone cover'],
 ];
 
 /* the rows take turns being live, so the tile reads as something being watched
@@ -152,13 +163,16 @@ const OVERSIGHT: [string, string][] = [
 function OversightVisual() {
   const [live, setLive] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { margin: "-20% 0px" });
+  const inView = useInView(ref, { margin: '-20% 0px' });
   const reduced = useReducedMotion();
   const running = inView && !reduced;
 
   useEffect(() => {
     if (!running) return;
-    const id = setInterval(() => setLive((n) => (n + 1) % OVERSIGHT.length), 2200);
+    const id = setInterval(
+      () => setLive((n) => (n + 1) % OVERSIGHT.length),
+      2200
+    );
     return () => clearInterval(id);
   }, [running]);
 
@@ -166,7 +180,9 @@ function OversightVisual() {
     <div ref={ref} className="h-full">
       <Plate width="max-w-[300px]">
         <div className="flex items-center justify-between">
-          <span className="text-sm font-semibold text-ink">Real people, real time</span>
+          <span className="text-sm font-semibold text-ink">
+            Real people, real time
+          </span>
           <span className="rounded-full bg-teal/[0.08] px-2 py-1 text-[10px] font-semibold text-teal">
             On watch
           </span>
@@ -177,8 +193,8 @@ function OversightVisual() {
             <span
               key={title}
               className={cn(
-                "flex items-center gap-2.5 rounded-xl px-2.5 py-2 transition-colors duration-500",
-                live === i ? "bg-teal-tint" : "bg-transparent",
+                'flex items-center gap-2.5 rounded-xl px-2.5 py-2 transition-colors duration-500',
+                live === i ? 'bg-teal-tint' : 'bg-transparent'
               )}
             >
               <span className="relative flex h-2 w-2 shrink-0">
@@ -187,13 +203,15 @@ function OversightVisual() {
                 )}
                 <span
                   className={cn(
-                    "relative inline-flex h-2 w-2 rounded-full transition-colors duration-500",
-                    live === i ? "bg-teal" : "bg-ink/15",
+                    'relative inline-flex h-2 w-2 rounded-full transition-colors duration-500',
+                    live === i ? 'bg-teal' : 'bg-ink/15'
                   )}
                 />
               </span>
               <span className="min-w-0 flex-1">
-                <span className="block text-[11px] font-semibold text-ink">{title}</span>
+                <span className="block text-[11px] font-semibold text-ink">
+                  {title}
+                </span>
                 <span className="block text-[10px] text-ink-faint">{note}</span>
               </span>
             </span>
@@ -201,7 +219,8 @@ function OversightVisual() {
         </div>
 
         <p className="mt-4 border-t border-line pt-3 text-[10px] leading-relaxed text-ink-faint">
-          Risks are surfaced early, escalated quickly, and closed by a real person.
+          Risks are surfaced early, escalated quickly, and closed by a real
+          person.
         </p>
       </Plate>
     </div>
