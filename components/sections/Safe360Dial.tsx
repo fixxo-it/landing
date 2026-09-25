@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState } from "react";
-import Image from "next/image";
 import {
   motion,
   useInView,
@@ -12,6 +11,7 @@ import {
 } from "framer-motion";
 import { Container, SectionHeading } from "@/components/ui/Section";
 import { DURATION, EASE, IN_VIEW } from "@/components/motion/Reveal";
+import BenefitIcon from "@/components/join/BenefitIcon";
 import { cn } from "@/lib/cn";
 
 /* The order they arrive in as you scroll, and the order they stack in on
@@ -22,29 +22,29 @@ import { cn } from "@/lib/cn";
 type Pillar = {
   name: string;
   body: string;
-  icon: string;
+  jelly: string;
 };
 
 const PILLARS: Pillar[] = [
   {
     name: "Trust",
+    jelly: "shield",
     body: "Identity checks, police verification and behaviour scores.",
-    icon: "M12 3 4.5 6v6c0 4.4 3.2 8.5 7.5 9.5 4.3-1 7.5-5.1 7.5-9.5V6L12 3Zm-3 8.8 2.2 2.2L15 9.8",
   },
   {
     name: "Care",
+    jelly: "heart",
     body: "No-phone caregiving, live care logs, and a family support line that actually picks up.",
-    icon: "M12 20s-7-4.4-7-9a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4.6-7 9-7 9Z",
   },
   {
     name: "Technology",
+    jelly: "bolt",
     body: "AI risk detection, live tracking and instant escalation.",
-    icon: "M12 3v3m0 12v3m9-9h-3M6 12H3m14.5-6.5-2 2m-7 7-2 2m0-11 2 2m7 7 2 2M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z",
   },
   {
     name: "Quality",
+    jelly: "growth",
     body: "Reviewed after every visit. Fall below 4.2★ and you're paused. No exceptions, no warnings.",
-    icon: "M4 12a8 8 0 0 1 13.7-5.6M20 12a8 8 0 0 1-13.7 5.6M17 3v3.5h-3.5M7 21v-3.5h3.5",
   },
 ];
 
@@ -77,7 +77,7 @@ export default function Safe360Dial() {
   return (
     <section
       ref={wrapRef}
-      id="safe-360"
+      id="safety-360"
       /* The mobile spine gets its own, shorter pin: a four-item list has less
          to sit through than the desktop board's wired sequence, so giving it
          the same 250vh left a long stretch of nothing after the last item had
@@ -104,7 +104,7 @@ export default function Safe360Dial() {
         )}
       >
         <Container className="w-full">
-          <SectionHeading size="lg" title="Safe360™" />
+          <SectionHeading size="lg" title="Safe360" />
 
           <Stage revealed={reduced ? PILLARS.length : revealed} reduced={reduced} />
           <Spine revealed={reduced ? PILLARS.length : revealed} />
@@ -370,19 +370,11 @@ function SpineItem({
     >
       {/* same lime tracker badge as the desktop board — one circular pulse
          glyph rather than a different flat icon per breakpoint */}
-      <span className="relative z-10 grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-full shadow-card">
-        <Radar />
-        <span
-          aria-hidden
-          className="absolute inset-0 rounded-full shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] ring-1 ring-inset ring-white/70"
-        />
-        <Glyph
-          d={pillar.icon}
-          className="relative h-5 w-5 text-teal"
-        />
+      <span className="relative z-10 grid h-14 w-14 shrink-0 place-items-center">
+        <BenefitIcon name={pillar.jelly} className="h-14 w-14" />
       </span>
       <span className="pt-2">
-        <span className="block font-display text-h3 font-semibold text-ink">{pillar.name}</span>
+        <span className="block font-display text-h3 font-bold text-ink">{pillar.name}</span>
         <span className="mt-2 block max-w-[38ch] text-sm leading-relaxed text-ink-muted">
           {pillar.body}
         </span>
@@ -411,15 +403,7 @@ function Hub() {
       </svg>
 
       <div className="relative h-full w-full" style={{ clipPath: "url(#safety-shield)" }}>
-        <div className="absolute inset-0 bg-teal" />
-        <Image
-          src="/img/Grainy.jpg"
-          alt=""
-          aria-hidden
-          fill
-          sizes={`${HUB}px`}
-          className="object-cover mix-blend-overlay opacity-40"
-        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0E7A82] to-[#014D4F]" />
       </div>
 
       {/* the inner outline — same shield path as the clip above, scaled down
@@ -434,7 +418,7 @@ function Hub() {
         />
       </svg>
 
-      <span className="absolute flex flex-col items-center whitespace-nowrap px-2 text-center font-display text-[2.8rem] font-semibold leading-[1.1] tracking-tight text-white">
+      <span className="absolute flex flex-col items-center whitespace-nowrap px-2 text-center font-display text-[2.8rem] font-semibold leading-[0.9] tracking-tight text-white">
         <span>Fam</span>
         <span>Care</span>
       </span>
@@ -468,34 +452,17 @@ function PillarCard({
       >
         <span
           className={cn(
-            "relative grid h-20 w-20 shrink-0 place-items-center overflow-hidden rounded-full transition-shadow duration-300",
-            on ? "shadow-pill" : "shadow-card",
+            "relative grid h-24 w-24 shrink-0 place-items-center transition-[opacity,filter] duration-300",
+            !on && "opacity-50 saturate-50",
           )}
         >
-          <Radar />
-          {/* no wash: the photo carries the badge. The rim is what marks a pillar
-              as landed now that there is no teal to fade in — it was the only
-              other thing the wash was doing. */}
-          <span
-            aria-hidden
-            className={cn(
-              "absolute inset-0 rounded-full shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] ring-1 ring-inset transition-colors duration-300",
-              on ? "ring-white/70" : "ring-white/30",
-            )}
-          />
-          {/* teal reads clearly against the lime ground — the white-plus-shadow
-              treatment this replaced was for sitting on an unknown photo,
-              which the drawn radar ground no longer is */}
-          <Glyph
-            d={pillar.icon}
-            className="relative h-7 w-7 text-teal"
-          />
+          <BenefitIcon name={pillar.jelly} className="h-24 w-24" />
         </span>
 
         <span className="flex flex-col gap-2 text-left">
           {/* matched to the bento tiles in "Never alone", so the two safety
               sections read as one pair rather than two scales */}
-          <span className="block font-display text-h3 font-semibold text-ink 2xl:text-3xl">
+          <span className="block font-display text-h3 font-bold text-ink 2xl:text-3xl">
             {pillar.name}
           </span>
           <span className="block text-sm leading-relaxed text-ink-muted 2xl:text-[15px]">
@@ -504,81 +471,5 @@ function PillarCard({
         </span>
       </motion.span>
     </span>
-  );
-}
-
-/* ── the tracker pulse ──────────────────────────────────────────────────── */
-
-/* Drawn rather than filmed: it replaces the badge video on Trust, so the beat
-   costs nothing to load and it is the brand lime instead of whatever green the
-   footage happened to be.
-
-   The ground is banded rather than a smooth blend — one lime, stepped down
-   through opacity 100/80/60/40/20/0 from the centre out — over a white base,
-   so the badge reads as rings even at rest and the rim genuinely fades to
-   white rather than to a paler green. The `animate-radar` rings on top are the
-   same idea in motion: the same lime, only opacity moving, so the ring in
-   flight matches the ring pattern underneath it.
-
-   Three rings on a shared 2.4s loop, offset by a third each, so one is always
-   leaving the centre while another is dissolving at the rim — the sweep reads as
-   continuous. Each ring scales from 0 to fill the badge exactly, which is why
-   they carry no translate: the animation writes `transform`, and a centring
-   translate class on the same element would be dropped the moment it starts. */
-const RING_DELAYS = ["0s", "0.8s", "1.6s"];
-
-/* rgba, not the hex + Tailwind opacity slash: six hard-edged stops need six
-   exact alpha values, and building that many bg-lime/NN-derived strings by
-   hand is easier to get wrong than writing the alpha into the colour once. */
-const LIME = "228,255,92";
-
-function Radar() {
-  return (
-    <span aria-hidden className="absolute inset-0 overflow-hidden rounded-full bg-white">
-      <span
-        className="absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(circle at center," +
-            `rgba(${LIME},1) 0%, rgba(${LIME},1) 16%,` +
-            `rgba(${LIME},0.8) 16%, rgba(${LIME},0.8) 32%,` +
-            `rgba(${LIME},0.6) 32%, rgba(${LIME},0.6) 48%,` +
-            `rgba(${LIME},0.4) 48%, rgba(${LIME},0.4) 64%,` +
-            `rgba(${LIME},0.2) 64%, rgba(${LIME},0.2) 82%,` +
-            `rgba(${LIME},0) 82%, rgba(${LIME},0) 100%)`,
-        }}
-      />
-      {RING_DELAYS.map((delay) => (
-        <span
-          key={delay}
-          style={{ animationDelay: delay }}
-          className="absolute inset-0 rounded-full border-2 border-lime bg-transparent animate-radar motion-reduce:animate-none"
-        />
-      ))}
-      {/* the core the rings leave from — sits under the glyph as a soft lift, so
-          the badge still reads as live in the gap between two rings */}
-      {/* the grid wrapper does the centring and the child does the breathing —
-          same reason as the rings: the animation owns `transform` */}
-      <span className="absolute inset-0 grid place-items-center">
-        <span className="h-8 w-8 rounded-full bg-lime-light/55 blur-md animate-radar-dot motion-reduce:animate-none" />
-      </span>
-    </span>
-  );
-}
-
-function Glyph({ d, className }: { d: string; className: string }) {
-  return (
-    <svg
-      className={className}
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth={1.6}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-    >
-      <path d={d} />
-    </svg>
   );
 }

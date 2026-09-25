@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { EASE } from "@/components/motion/Reveal";
 import { openDownloadModal } from "@/components/DownloadModal";
+import PixelatedQr from "@/components/PixelatedQr";
+
+const DOWNLOAD_URL = "https://famcare.onelink.me/LK0E/cgr3j0s7?af_qr=true";
 
 /* The card is an allowlist now, not a latch: it rides along only while one of
    these sections is on screen and leaves as soon as the last one does. Add a
@@ -87,12 +89,10 @@ export default function DownloadQr() {
               className="flex items-center gap-5 text-left"
             >
               <span className="block shrink-0 rounded-xl bg-white p-1.5 ring-1 ring-line">
-                <Image
-                  src="/img/download-qr.jpeg"
-                  alt="QR code to download the FamCare app"
-                  width={96}
-                  height={96}
-                  quality={100}
+                <PixelatedQr
+                  value={DOWNLOAD_URL}
+                  size={96}
+                  label="QR code to download the FamCare app"
                   className="block h-24 w-24"
                 />
               </span>

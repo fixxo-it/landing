@@ -60,7 +60,7 @@ export default function Hero() {
               variants={item}
               /* capped so the headline keeps its three-line shape now that the
                  container runs nearly full-bleed */
-              className="max-w-[23ch] font-display text-[2.35rem] font-semibold leading-[1.15] tracking-[-0.03em] text-ink sm:text-[3.25rem] sm:leading-[1.06] lg:text-[5rem] lg:leading-[1.04] lg:tracking-[-0.032em]"
+              className="max-w-[23ch] font-display text-[min(3.25rem,calc((100vw-3.5rem)/6.75))] font-bold leading-[1.04] tracking-[-0.03em] text-ink sm:text-[3.25rem] lg:text-[5.25rem] lg:leading-[1.02] lg:tracking-[-0.032em]"
             >
               {/* "Get" and the rotating word stay on one line at every width —
                   the font shrinks on mobile so this fits rather than the line
@@ -100,7 +100,7 @@ export default function Hero() {
                 }}
               />
               <Button
-                href="#safe-360"
+                href="#safety-360"
                 label="WHY CHOOSE US?"
                 variant="secondary"
                 size="md"

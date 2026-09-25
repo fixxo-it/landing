@@ -20,10 +20,9 @@ const COLUMNS: {
     links: [
       {
         label: "Join as a caregiver",
-        href: "https://docs.google.com/forms/d/e/1FAIpQLSd0nbsl6e5aComlKLDFtUplPZ-f8apmw_4kznC1Eyi020H5aw/viewform?usp=publish-editor",
-        external: true,
+        href: "/join",
       },
-      { label: "Safe360™", href: "#safety" },
+      { label: "Safe360", href: "#safety" },
       { label: "AI-first care", href: "#safety" },
       { label: "How it works", href: "#how-it-works" },
     ],
@@ -47,7 +46,7 @@ export default function SiteFooter() {
       id="site-footer"
       /* sized to its content: with the oversized wordmark gone there is nothing
          left to fill a full screen of green with */
-      className="relative z-10 overflow-hidden rounded-t-[40px] bg-teal text-white lg:rounded-t-[56px]"
+      className="relative z-10 overflow-hidden rounded-t-[40px] border-t border-[#013A3C] bg-gradient-to-b from-[#0B6B72] to-[#014D4F] text-white shadow-[0_-14px_30px_-14px_rgba(1,77,79,0.6),inset_0_-3px_6px_rgba(0,30,32,0.4)] lg:rounded-t-[56px]"
     >
       <Image
         src="/img/Grainy.jpg"
@@ -61,11 +60,13 @@ export default function SiteFooter() {
       <Container className="relative">
         <Stagger className="grid gap-12 pt-16 lg:grid-cols-[minmax(0,1.5fr)_repeat(3,minmax(0,1fr))] lg:gap-x-10">
           <StaggerItem>
-            <p className="font-display text-4xl font-bold tracking-[-0.03em] text-white">FamCare</p>
-            <p className="mt-3 text-[15px] text-white/70">
-              Caregivers in{" "}
-              <span className="font-medium italic text-lime-light">10 minutes</span>
-            </p>
+            <div className="w-fit">
+              <p className="font-display text-5xl font-bold leading-none tracking-[-0.03em] text-white">FamCare</p>
+              <p className="mt-3 whitespace-nowrap text-[15px] font-bold text-white/70">
+                Caregivers in{" "}
+                <span className="font-bold italic text-lime-light">10 minutes</span>
+              </p>
+            </div>
 
             <address className="mt-9 not-italic">
               <p className="text-[15px] text-white/70">

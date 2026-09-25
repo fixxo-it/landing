@@ -5,6 +5,7 @@ import Image from "next/image";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion";
 import { Section } from "@/components/ui/Section";
 import Reveal, { EASE } from "@/components/motion/Reveal";
+import StepBadge from "@/components/join/StepBadge";
 import { cn } from "@/lib/cn";
 
 /* how long each screen holds before the next one slides in */
@@ -70,12 +71,12 @@ export default function HowItWorks() {
                still fit the left column at each breakpoint. max-w is in ch, so
                it scales with the font size — bumping the mobile size does not
                reopen the overflow risk nowrap is guarding against. */
-            className="whitespace-nowrap font-display text-h1 font-semibold text-white lg:text-[4.5rem] lg:leading-[1.04] lg:tracking-[-0.032em]"
+            className="whitespace-nowrap font-display text-[2.75rem] font-bold leading-[1.08] tracking-[-0.03em] lg:text-[5rem] lg:leading-[1.03] text-white"
           >
             Book in 4 steps
           </Reveal>
 
-          <Reveal delay={0.15} className="mt-10 w-full max-w-[420px] lg:mx-auto">
+          <Reveal delay={0.15} className="mt-12 w-full max-w-[520px] lg:mx-auto">
             <Stepper active={active} running={running} />
           </Reveal>
         </div>
@@ -117,39 +118,29 @@ function Stepper({ active, running }: { active: number; running: boolean }) {
 
       {/* the caption is absolutely placed, so switching steps never reflows the
          row — and the padding below reserves its space */}
-      <div className="relative hidden pb-12 lg:block">
+      <div className="relative hidden pb-16 lg:block">
         <div className="flex items-center gap-2.5">
         {Array.from({ length: SCREENS }, (_, i) => (
           <div key={i} className="flex min-w-0 flex-1 items-center gap-2.5">
             <span className="relative shrink-0">
               <span
-                className={cn(
-                  "grid h-7 w-7 place-items-center rounded-full border text-[11px] font-semibold shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] transition-colors duration-300",
-                  /* a circle turns lime with teal type the moment the travelling
-                     dot reaches it — the same colour the dot itself carries, so
-                     the number reads as "this is where the pulse landed" rather
-                     than a second, unrelated cue. */
-                  i <= active
-                    ? "border-lime bg-lime text-teal"
-                    : "border-white/60 bg-white/70 text-ink/70",
-                )}
-                aria-hidden
+                className={cn("block transition-[opacity,filter] duration-300", i > active && "opacity-50 saturate-50")}
               >
-                {i + 1}
+                <StepBadge n={i + 1} />
               </span>
 
               {/* every caption starts at its own dot's left edge, so the label
                   always reads as hanging off that number */}
               <AnimatePresence mode="wait">
                 {i === active && (
-                  <span className="absolute left-0 top-10 block whitespace-nowrap">
+                  <span className="absolute left-0 top-[68px] block whitespace-nowrap">
                     <motion.span
                       key={i}
                       initial={{ opacity: 0, y: -4 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 4 }}
                       transition={{ duration: 0.25, ease: EASE }}
-                      className="block font-display text-lg font-semibold text-white"
+                      className="block font-display text-xl font-bold text-white"
                     >
                       {STEPS[i]}
                     </motion.span>
@@ -168,7 +159,7 @@ function Stepper({ active, running }: { active: number; running: boolean }) {
                 /* 3px of dot to 3px of gap: the period is what sets how many
                    dots land on a segment, and an even split is the densest the
                    rail goes before the dots start reading as a dashed line */
-                className="absolute inset-0 block [background-image:repeating-linear-gradient(to_right,rgba(255,255,255,0.4)_0_3px,transparent_3px_6px)]"
+                className="absolute inset-0 block bg-white/30"
               />
               {i <= active && (
                 <motion.span
@@ -178,7 +169,7 @@ function Stepper({ active, running }: { active: number; running: boolean }) {
                      and drift off the white rail underneath. Growing the box
                      leaves the background anchored to the left edge, so the
                      pattern is revealed rather than distorted. */
-                  className="absolute left-0 top-0 block h-full [background-image:repeating-linear-gradient(to_right,#fff_0_3px,transparent_3px_6px)]"
+                  className="absolute left-0 top-0 block h-full bg-white"
                   initial={{ width: i < active ? "100%" : "0%" }}
                   animate={{ width: "100%" }}
                   transition={

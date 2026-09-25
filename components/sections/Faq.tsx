@@ -127,7 +127,7 @@ export default function Faq() {
               and the contact line, so it has to leave them room */}
           {/* mobile size matched to "Book in 4 steps" so the page's oversized
               headings all read at the same scale on a phone */}
-          <h2 className="font-display text-h1 font-semibold text-ink lg:text-h2-lg">
+          <h2 className="font-display text-[2.5rem] font-bold leading-[1.08] tracking-[-0.03em] lg:text-[3.75rem] lg:leading-[1.05] text-ink">
             Questions? Good
             <br />
             Ask us anything
@@ -155,17 +155,12 @@ export default function Faq() {
                     transition={{ duration: 0.35, ease: EASE }}
                     /* brand teal now, not the lime highlight — the selected tab
                        is a state, not the "live" marker the lime is elsewhere */
-                    className="absolute inset-0 overflow-hidden rounded-full bg-teal"
-                  >
-                    <span
-                      aria-hidden
-                      className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay"
-                      style={{ backgroundImage: "url(/img/Grainy.jpg)" }}
-                    />
-                  </motion.span>
+                    className="absolute inset-0 rounded-full border border-[#013A3C] bg-gradient-to-b from-[#0E7A82] to-[#014D4F] shadow-[0_10px_18px_-8px_rgba(1,77,79,0.7),inset_0_0_14px_rgba(120,220,215,0.35),inset_0_-3px_6px_rgba(0,30,32,0.4)]"
+                  />
+                
                 )}
                 {i !== tab && (
-                  <span className="absolute inset-0 rounded-full border border-ink/30 bg-white/60" />
+                  <span className="absolute inset-0 rounded-full border border-line bg-white shadow-card" />
                 )}
                 <span className="relative z-10 whitespace-nowrap">{g.tab}</span>
               </button>
@@ -175,7 +170,7 @@ export default function Faq() {
           {/* desktop only — pinned to the bottom of this column by mt-auto.
              The mobile copy lives after the accordion instead, see below. */}
           <div className="mt-10 hidden lg:mt-auto lg:block lg:pt-14">
-            <p className="font-display text-h3 font-semibold text-ink">Still have questions?</p>
+            <p className="font-display text-h3 font-bold text-ink">Still have questions?</p>
             <a
               href="mailto:support@famcare.co.in"
               className="mt-3 inline-block font-display text-lg font-semibold text-teal underline decoration-teal/30 underline-offset-4 transition-colors duration-200 hover:decoration-teal"
@@ -273,7 +268,7 @@ export default function Faq() {
            pinned to its bottom. Here it closes out the section instead of
            sitting between the filter and the accordion. */}
         <div className="mt-8 lg:hidden">
-          <p className="font-display text-h3 font-semibold text-ink">Still have questions?</p>
+          <p className="font-display text-h3 font-bold text-ink">Still have questions?</p>
           <a
             href="mailto:support@famcare.co.in"
             className="mt-3 inline-block font-display text-lg font-semibold text-teal underline decoration-teal/30 underline-offset-4 transition-colors duration-200 hover:decoration-teal"
