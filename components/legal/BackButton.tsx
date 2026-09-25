@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
 /* router.back() rather than a hardcoded href to "/": whichever footer link or
    external referrer sent someone here, this returns them to it — a fixed "/"

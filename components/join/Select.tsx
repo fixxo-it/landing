@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
-import { cn } from "@/lib/cn";
+import { useEffect, useRef, useState } from 'react';
+import { cn } from '@/lib/cn';
 
 /* a styled listbox in place of the native <select>, so the open menu matches
    the site rather than the OS */
@@ -26,15 +26,15 @@ export default function Select({
     const close = (e: MouseEvent) => {
       if (!ref.current?.contains(e.target as Node)) setOpen(false);
     };
-    document.addEventListener("mousedown", close);
-    return () => document.removeEventListener("mousedown", close);
+    document.addEventListener('mousedown', close);
+    return () => document.removeEventListener('mousedown', close);
   }, [open]);
 
   return (
     <div
       ref={ref}
       className="relative"
-      onKeyDown={(e) => e.key === "Escape" && setOpen(false)}
+      onKeyDown={(e) => e.key === 'Escape' && setOpen(false)}
     >
       <button
         type="button"
@@ -42,14 +42,17 @@ export default function Select({
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
         className={cn(
-          "flex h-14 w-full items-center justify-between rounded-2xl border bg-white px-5 text-left text-base outline-none transition-colors focus-visible:border-teal focus-visible:ring-2 focus-visible:ring-teal/20",
-          invalid ? "border-[#B4432F]" : "border-line",
-          value ? "text-ink" : "text-ink-faint",
+          'flex h-14 w-full items-center justify-between rounded-2xl border bg-white px-5 text-left text-base outline-none transition-colors focus-visible:border-teal focus-visible:ring-2 focus-visible:ring-teal/20',
+          invalid ? 'border-[#B4432F]' : 'border-line',
+          value ? 'text-ink' : 'text-ink-faint'
         )}
       >
         {value || placeholder}
         <svg
-          className={cn("h-4 w-4 text-teal transition-transform duration-200", open && "rotate-180")}
+          className={cn(
+            'h-4 w-4 text-teal transition-transform duration-200',
+            open && 'rotate-180'
+          )}
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -75,8 +78,8 @@ export default function Select({
                   setOpen(false);
                 }}
                 className={cn(
-                  "flex w-full items-center justify-between rounded-xl px-4 py-3 text-left text-[15px] font-medium transition-colors hover:bg-teal-tint",
-                  o === value ? "bg-teal-tint text-teal" : "text-ink",
+                  'flex w-full items-center justify-between rounded-xl px-4 py-3 text-left text-[15px] font-medium transition-colors hover:bg-teal-tint',
+                  o === value ? 'bg-teal-tint text-teal' : 'text-ink'
                 )}
               >
                 {o}

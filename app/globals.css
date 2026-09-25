@@ -100,8 +100,8 @@
      a brush that repeated or letterboxed itself would either tile visibly or
      leave the last letters unpainted. */
   .brush-highlight {
-    -webkit-mask-image: url("/img/brush-highlight.svg");
-    mask-image: url("/img/brush-highlight.svg");
+    -webkit-mask-image: url('/img/brush-highlight.svg');
+    mask-image: url('/img/brush-highlight.svg');
     -webkit-mask-size: 100% 100%;
     mask-size: 100% 100%;
     -webkit-mask-repeat: no-repeat;
