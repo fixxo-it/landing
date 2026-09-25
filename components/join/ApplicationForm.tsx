@@ -53,6 +53,8 @@ export default function ApplicationForm() {
   const [start, setStart] = useState("");
   const [dob, setDob] = useState("");
   const [tried, setTried] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
 
   const born = parseDob(dob);
@@ -79,10 +81,36 @@ export default function ApplicationForm() {
     <>
     <form
       ref={formRef}
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
         setTried(true);
-        if (experience && start && !dobInvalid && !dobUnderage) setDone(true);
+        if (sending || !experience || !start || dobInvalid || dobUnderage) return;
+        setSending(true);
+        setError("");
+        const f = new FormData(e.currentTarget);
+        const text = (k: string) => String(f.get(k) ?? "");
+        try {
+          const res = await fetch("/api/apply", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name: text("name"),
+              mobile: text("mobile"),
+              dob,
+              languages: text("languages"),
+              experience,
+              start,
+              currentAddress: text("currentAddress"),
+              permanentAddress: text("permanentAddress"),
+            }),
+          });
+          if (!res.ok) throw new Error();
+          setDone(true);
+        } catch {
+          setError("Something went wrong sending your application. Please try again.");
+        } finally {
+          setSending(false);
+        }
       }}
       className={`${PANEL} p-6 sm:p-10 lg:p-14`}
     >
@@ -143,11 +171,13 @@ export default function ApplicationForm() {
         </label>
         <button
           type="submit"
-          className={`${JELLY_BTN} h-12 px-7 text-base`}
+          disabled={sending}
+          className={`${JELLY_BTN} h-12 px-7 text-base disabled:opacity-60`}
         >
-          <span className="relative z-10 inline-flex items-center gap-2.5">SUBMIT <Arrow /></span>
+          <span className="relative z-10 inline-flex items-center gap-2.5">{sending ? "SENDING…" : "SUBMIT"} <Arrow /></span>
         </button>
       </div>
+      {error && <p className="relative mt-4 text-sm font-medium text-[#B4432F]">{error}</p>}
       <p className="relative mt-4 text-sm text-ink-muted">
         We use your details only for recruitment. Please don’t share Aadhaar numbers or other documents here.
       </p>
