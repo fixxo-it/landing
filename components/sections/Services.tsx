@@ -6,7 +6,6 @@ import {
   AnimatePresence,
   motion,
   useInView,
-  useReducedMotion,
   useScroll,
   useSpring,
   useTransform,
@@ -44,8 +43,8 @@ const HOLD = 0.2;
 const LEAD = 168;
 
 export default function Services() {
-  const reduced = useReducedMotion();
-  const pinned = !reduced;
+  const [isReduced, setIsReduced] = useState(false);
+  const pinned = !isReduced;
   const [comingSoon, setComingSoon] = useState(false);
 
   /* the scroll-driven pin is a lg-only effect — below it the strip is a plain
@@ -55,6 +54,9 @@ export default function Services() {
      than flush against the left edge. */
   const [wide, setWide] = useState(false);
   useEffect(() => {
+    const reducedMq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reducedMq.matches) setIsReduced(true);
+
     const mq = window.matchMedia("(min-width: 1024px)");
     const update = () => setWide(mq.matches);
     update();
@@ -168,8 +170,8 @@ export default function Services() {
             className="flex w-max gap-5 px-6 will-change-transform sm:px-10 lg:gap-6 lg:px-0"
             /* the strip fades up as the section arrives; the x above is the
                scroll-driven travel and is untouched by this */
-            initial={{ opacity: 0, y: reduced ? 0 : RISE }}
-            animate={stripInView ? { opacity: 1, y: 0 } : { opacity: 0, y: reduced ? 0 : RISE }}
+            initial={{ opacity: 0, y: RISE }}
+            animate={stripInView ? { opacity: 1, y: 0 } : { opacity: 0, y: RISE }}
             transition={{ duration: DURATION, ease: EASE, delay: 0.1 }}
           >
             {SERVICES.map(([name, image, subServiceId]) => (
@@ -178,7 +180,7 @@ export default function Services() {
                 name={name}
                 image={image}
                 subServiceId={subServiceId}
-                reduced={!!reduced}
+                reduced={isReduced}
                 onComingSoon={() => setComingSoon(true)}
               />
             ))}

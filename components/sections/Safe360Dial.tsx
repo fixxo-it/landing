@@ -1,14 +1,7 @@
 "use client";
 
-import { useRef, useState } from "react";
-import {
-  motion,
-  useInView,
-  useMotionValueEvent,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useInView, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import { Container, SectionHeading } from "@/components/ui/Section";
 import { DURATION, EASE, IN_VIEW } from "@/components/motion/Reveal";
 import BenefitIcon from "@/components/join/BenefitIcon";
@@ -53,12 +46,19 @@ const PILLARS: Pillar[] = [
 const HOLD = 0.18;
 
 export default function Safe360Dial() {
-  const reduced = useReducedMotion();
-  const pinned = !reduced;
+  const [isReduced, setIsReduced] = useState(false);
+  const pinned = !isReduced;
 
   const wrapRef = useRef<HTMLElement>(null);
-  /* reduced motion gets the finished stage outright — no pin, no sequence */
-  const [revealed, setRevealed] = useState(reduced ? PILLARS.length : 0);
+  const [revealed, setRevealed] = useState(0);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (mq.matches) {
+      setIsReduced(true);
+      setRevealed(PILLARS.length);
+    }
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: wrapRef,
@@ -106,8 +106,8 @@ export default function Safe360Dial() {
         <Container className="w-full">
           <SectionHeading size="lg" title="Safe360" />
 
-          <Stage revealed={reduced ? PILLARS.length : revealed} reduced={reduced} />
-          <Spine revealed={reduced ? PILLARS.length : revealed} />
+          <Stage revealed={revealed} reduced={isReduced} />
+          <Spine revealed={revealed} />
         </Container>
       </div>
     </section>

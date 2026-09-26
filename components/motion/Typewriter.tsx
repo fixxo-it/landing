@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useReducedMotion } from "framer-motion";
 
 /* Per-character cadence. Slow enough to read along with, fast enough that the
    headline is complete before anyone has finished looking at the image. */
@@ -22,13 +21,18 @@ export default function Typewriter({
   delay?: number;
   className?: string;
 }) {
-  const reduced = useReducedMotion();
   const [count, setCount] = useState(0);
+  const [isReduced, setIsReduced] = useState(false);
 
   useEffect(() => {
-    if (reduced) return;
-    let timer: ReturnType<typeof setTimeout>;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (mq.matches) {
+      setIsReduced(true);
+      setCount(text.length);
+      return;
+    }
 
+    let timer: ReturnType<typeof setTimeout>;
     const step = (i: number) => {
       setCount(i);
       if (i < text.length) timer = setTimeout(() => step(i + 1), SPEED);
@@ -36,9 +40,9 @@ export default function Typewriter({
 
     timer = setTimeout(() => step(1), delay * 1000);
     return () => clearTimeout(timer);
-  }, [text, delay, reduced]);
+  }, [text, delay]);
 
-  const done = reduced || count >= text.length;
+  const done = isReduced || count >= text.length;
 
   return (
     /* both copies share one grid cell, so the visible one is laid out on top of
@@ -48,7 +52,7 @@ export default function Typewriter({
         <span className="invisible col-start-1 row-start-1">{text}</span>
 
         <span className="col-start-1 row-start-1" aria-hidden>
-          {reduced ? text : text.slice(0, count)}
+          {isReduced ? text : text.slice(0, count)}
           {/* the caret keeps its width once typing ends so the last word does
               not shift sideways as it fades */}
           <span

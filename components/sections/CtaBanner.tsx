@@ -1,14 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Section";
 import Button from "@/components/ui/Button";
 import { openDownloadModal } from "@/components/DownloadModal";
 import Reveal, { EASE, useReveal } from "@/components/motion/Reveal";
 
 export default function CtaBanner({ heading }: { heading?: string } = {}) {
-  const reduced = useReducedMotion();
   const phone = useReveal();
 
   return (
@@ -64,8 +63,8 @@ export default function CtaBanner({ heading }: { heading?: string } = {}) {
               back to the right store if it isn't. */}
           <motion.div
             ref={phone.ref as React.Ref<HTMLDivElement>}
-            initial={{ opacity: 0, y: reduced ? 0 : 40 }}
-            animate={phone.inView ? { opacity: 1, y: 0 } : { opacity: 0, y: reduced ? 0 : 40 }}
+            initial={{ opacity: 0, y: 40 }}
+            animate={phone.inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
             transition={{ duration: 0.85, ease: EASE, delay: 0.1 }}
             className="mx-auto hidden lg:block"
           >

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { EASE } from "@/components/motion/Reveal";
 import { cn } from "@/lib/cn";
 
@@ -19,19 +19,24 @@ export default function RotatingWord({
   words: string[];
   className?: string;
 }) {
-  const reduced = useReducedMotion();
   const [index, setIndex] = useState(0);
+  const [isReduced, setIsReduced] = useState(false);
 
   useEffect(() => {
-    if (reduced) return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (mq.matches) {
+      setIsReduced(true);
+      return;
+    }
+
     const id = setInterval(() => {
       setIndex((i) => (i + 1) % words.length);
     }, INTERVAL);
     return () => clearInterval(id);
-  }, [words.length, reduced]);
+  }, [words.length]);
 
   const longest = words.reduce((a, b) => (b.length > a.length ? b : a), "");
-  const word = reduced ? words[0] : words[index];
+  const word = isReduced ? words[0] : words[index];
 
   return (
     <span className={cn("relative inline-grid overflow-hidden align-top", className)}>

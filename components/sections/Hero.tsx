@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from "react";
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Section";
 import { cn } from "@/lib/cn";
 import Button from "@/components/ui/Button";
@@ -16,7 +16,6 @@ import RotatingWord from "@/components/motion/RotatingWord";
 const ROTATING_WORDS = ["Baby Care", "Pram walk", "Indoor play", "Freshen up", "Feed time"];
 
 export default function Hero() {
-  const reduced = useReducedMotion();
   /* the clip only takes over once it can actually play — until then the still
      underneath is the hero, so there is never an empty frame to look at */
   const [playing, setPlaying] = useState(false);
@@ -36,7 +35,7 @@ export default function Hero() {
     show: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
   };
   const item = {
-    hidden: { opacity: 0, y: reduced ? 0 : RISE },
+    hidden: { opacity: 0, y: RISE },
     show: { opacity: 1, y: 0, transition: { duration: DURATION, ease: EASE } },
   };
 
@@ -113,8 +112,8 @@ export default function Hero() {
           <motion.div
             initial={{
               opacity: 0,
-              scale: reduced ? 1 : 0.96,
-              y: reduced ? 0 : 20,
+              scale: 0.96,
+              y: 20,
             }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.9, ease: EASE, delay: 0.25 }}
