@@ -84,7 +84,12 @@ function Plate({
   width?: string;
 }) {
   return (
-    <div className={cn("relative flex h-full items-center justify-center overflow-hidden px-8", JELLY_GREEN)}>
+    <div
+      className={cn(
+        "relative flex h-full items-center justify-center overflow-hidden px-8",
+        JELLY_GREEN,
+      )}
+    >
       <div
         className={cn(
           "relative z-10 w-full overflow-hidden rounded-2xl border border-white bg-white p-5 shadow-float before:absolute before:inset-x-6 before:top-0 before:h-10 before:rounded-full before:bg-gradient-to-b before:from-white/90 before:to-transparent before:blur-md before:content-[''] before:pointer-events-none",

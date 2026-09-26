@@ -140,8 +140,12 @@ export default function SiteHeader() {
           aria-label="Main"
         >
           <a href="#top" className="leading-none">
-            <span className="block font-display text-[1.8rem] font-bold tracking-[-0.02em] text-teal">FamCare</span>
-            <span className="-mt-0.5 block text-xs font-medium leading-none text-ink-muted">Caregivers in 10 mins</span>
+            <span className="block font-display text-[1.8rem] font-bold tracking-[-0.02em] text-teal">
+              FamCare
+            </span>
+            <span className="-mt-0.5 block text-xs font-medium leading-none text-ink-muted">
+              Caregivers in 10 mins
+            </span>
           </a>
 
           {/* links sit dead centre of the bar, independent of the two ends */}

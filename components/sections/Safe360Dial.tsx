@@ -200,8 +200,16 @@ const bottom = { bottom: pct(H - ROW.bottom, H), marginBottom: HALF_BADGE };
 const SLOTS = [
   { at: { left: pct(COL.left, W), ...top }, stack: "flex-col", from: -24 },
   { at: { left: pct(COL.right, W), ...top }, stack: "flex-col", from: 24 },
-  { at: { left: pct(COL.left, W), ...bottom }, stack: "flex-col-reverse", from: -24 },
-  { at: { left: pct(COL.right, W), ...bottom }, stack: "flex-col-reverse", from: 24 },
+  {
+    at: { left: pct(COL.left, W), ...bottom },
+    stack: "flex-col-reverse",
+    from: -24,
+  },
+  {
+    at: { left: pct(COL.right, W), ...bottom },
+    stack: "flex-col-reverse",
+    from: 24,
+  },
 ];
 
 function Stage({ revealed, reduced }: { revealed: number; reduced: boolean | null }) {
@@ -243,90 +251,90 @@ function Stage({ revealed, reduced }: { revealed: number; reduced: boolean | nul
             transform: `scale(calc(100cqw / ${CANVAS_W}px)) translateX(${CANVAS_MARGIN}px)`,
           }}
         >
-        {/* soft ground, so the board is not floating on bare white */}
-        <span
-          aria-hidden
-          className="pointer-events-none absolute left-1/2 top-1/2 h-[70%] w-[55%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal/[0.07] blur-3xl"
-        />
+          {/* soft ground, so the board is not floating on bare white */}
+          <span
+            aria-hidden
+            className="pointer-events-none absolute left-1/2 top-1/2 h-[70%] w-[55%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal/[0.07] blur-3xl"
+          />
 
-        <svg
-          viewBox={`0 0 ${W} ${H}`}
-          className="absolute inset-0 h-full w-full overflow-visible"
-          aria-hidden
-        >
-          {TRACES.map((d, i) => (
-            <g key={d}>
-              {/* The draw-in is a mask, not the stroke itself: animating
+          <svg
+            viewBox={`0 0 ${W} ${H}`}
+            className="absolute inset-0 h-full w-full overflow-visible"
+            aria-hidden
+          >
+            {TRACES.map((d, i) => (
+              <g key={d}>
+                {/* The draw-in is a mask, not the stroke itself: animating
                   pathLength makes framer write its own strokeDasharray, which
                   would overwrite the dotted pattern and leave a solid line.
                   Masking keeps the dots and still wipes them on. */}
-              <mask id={`trace-${i}`} maskUnits="userSpaceOnUse">
-                <motion.path
+                <mask id={`trace-${i}`} maskUnits="userSpaceOnUse">
+                  <motion.path
+                    d={d}
+                    fill="none"
+                    stroke="white"
+                    /* wide enough to clear the stroke it is revealing */
+                    strokeWidth={8}
+                    strokeLinecap="round"
+                    /* pathLength 1 normalises every trace, so they all draw in
+                     over the same beat however long they actually are */
+                    pathLength={1}
+                    initial={false}
+                    animate={{ pathLength: i < revealed ? 1 : 0 }}
+                    transition={{ duration: 0.55, ease: EASE }}
+                  />
+                </mask>
+
+                {/* the unlit board is always there — the live trace draws over it */}
+                <path
                   d={d}
                   fill="none"
-                  stroke="white"
-                  /* wide enough to clear the stroke it is revealing */
-                  strokeWidth={8}
+                  stroke="rgba(228,255,92,0.25)"
+                  strokeWidth={1.5}
                   strokeLinecap="round"
-                  /* pathLength 1 normalises every trace, so they all draw in
-                     over the same beat however long they actually are */
-                  pathLength={1}
-                  initial={false}
-                  animate={{ pathLength: i < revealed ? 1 : 0 }}
-                  transition={{ duration: 0.55, ease: EASE }}
                 />
-              </mask>
-
-              {/* the unlit board is always there — the live trace draws over it */}
-              <path
-                d={d}
-                fill="none"
-                stroke="rgba(228,255,92,0.25)"
-                strokeWidth={1.5}
-                strokeLinecap="round"
-              />
-              <path
-                d={d}
-                fill="none"
-                stroke="#E4FF5C"
-                strokeWidth={1.5}
-                strokeLinecap="round"
-                mask={`url(#trace-${i})`}
-              />
-              {/* the travelling pulse — only once the trace itself has finished
+                <path
+                  d={d}
+                  fill="none"
+                  stroke="#E4FF5C"
+                  strokeWidth={1.5}
+                  strokeLinecap="round"
+                  mask={`url(#trace-${i})`}
+                />
+                {/* the travelling pulse — only once the trace itself has finished
                   drawing in, and never for reduced motion. `d` runs hub → card,
                   so keyPoints walks it back to front: the dot reads as leaving
                   each card and arriving at FamCare, not the other way round. */}
-              {i < revealed && !reduced && (
-                <circle r={4} fill="#06555B">
-                  <animateMotion
-                    dur="1s"
-                    begin="0.55s"
-                    repeatCount="indefinite"
-                    keyPoints="1;0"
-                    keyTimes="0;1"
-                    calcMode="linear"
-                    path={d}
-                  />
-                  <animate
-                    attributeName="opacity"
-                    values="0;1;1;0"
-                    keyTimes="0;0.08;0.9;1"
-                    dur="1s"
-                    begin="0.55s"
-                    repeatCount="indefinite"
-                  />
-                </circle>
-              )}
-            </g>
+                {i < revealed && !reduced && (
+                  <circle r={4} fill="#06555B">
+                    <animateMotion
+                      dur="1s"
+                      begin="0.55s"
+                      repeatCount="indefinite"
+                      keyPoints="1;0"
+                      keyTimes="0;1"
+                      calcMode="linear"
+                      path={d}
+                    />
+                    <animate
+                      attributeName="opacity"
+                      values="0;1;1;0"
+                      keyTimes="0;0.08;0.9;1"
+                      dur="1s"
+                      begin="0.55s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                )}
+              </g>
+            ))}
+          </svg>
+
+          <Hub />
+
+          {PILLARS.map((p, i) => (
+            <PillarCard key={p.name} pillar={p} index={i} on={i < revealed} />
           ))}
-        </svg>
-
-        <Hub />
-
-        {PILLARS.map((p, i) => (
-          <PillarCard key={p.name} pillar={p} index={i} on={i < revealed} />
-        ))}
         </div>
       </motion.div>
     </div>
@@ -354,13 +362,7 @@ function Spine({ revealed }: { revealed: number }) {
   );
 }
 
-function SpineItem({
-  pillar,
-  on,
-}: {
-  pillar: (typeof PILLARS)[number];
-  on: boolean;
-}) {
+function SpineItem({ pillar, on }: { pillar: (typeof PILLARS)[number]; on: boolean }) {
   return (
     <motion.li
       initial={{ opacity: 0, y: 20 }}
@@ -409,7 +411,12 @@ function Hub() {
       {/* the inner outline — same shield path as the clip above, scaled down
           around its own centre so it reads as a second, inset border rather
           than tracing the outer edge */}
-      <svg viewBox="0 0 100 100" fill="none" className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden>
+      <svg
+        viewBox="0 0 100 100"
+        fill="none"
+        className="pointer-events-none absolute inset-0 h-full w-full"
+        aria-hidden
+      >
         <path
           d="M50,2 L88,16 L88,48 C88,74 72,90 50,99 C28,90 12,74 12,48 L12,16 Z"
           stroke="#E4FF5C"

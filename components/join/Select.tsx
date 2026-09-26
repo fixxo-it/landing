@@ -31,11 +31,7 @@ export default function Select({
   }, [open]);
 
   return (
-    <div
-      ref={ref}
-      className="relative"
-      onKeyDown={(e) => e.key === "Escape" && setOpen(false)}
-    >
+    <div ref={ref} className="relative" onKeyDown={(e) => e.key === "Escape" && setOpen(false)}>
       <button
         type="button"
         aria-haspopup="listbox"
@@ -49,7 +45,10 @@ export default function Select({
       >
         {value || placeholder}
         <svg
-          className={cn("h-4 w-4 text-teal transition-transform duration-200", open && "rotate-180")}
+          className={cn(
+            "h-4 w-4 text-teal transition-transform duration-200",
+            open && "rotate-180",
+          )}
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"

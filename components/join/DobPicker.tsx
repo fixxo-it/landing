@@ -4,8 +4,18 @@ import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
 
 const MONTHS = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December",
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
 ];
 const WEEKDAYS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
@@ -62,9 +72,22 @@ export function isAdult(born: Date) {
 const pad = (n: number) => String(n).padStart(2, "0");
 
 function Chevron({ dir }: { dir: "left" | "right" | "down" }) {
-  const d = { left: "M15 6l-6 6 6 6", right: "M9 6l6 6-6 6", down: "M6 9l6 6 6-6" }[dir];
+  const d = {
+    left: "M15 6l-6 6 6 6",
+    right: "M9 6l6 6-6 6",
+    down: "M6 9l6 6 6-6",
+  }[dir];
   return (
-    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+    <svg
+      className="h-4 w-4"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2.4}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
       <path d={d} />
     </svg>
   );
@@ -155,7 +178,16 @@ export default function DobPicker({
         onClick={toggle}
         className="absolute right-2 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-xl text-teal transition-colors hover:bg-teal-tint"
       >
-        <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <svg
+          className="h-5 w-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden
+        >
           <rect x="3.5" y="5" width="17" height="15.5" rx="3" />
           <path d="M3.5 10h17M8 3v4M16 3v4" />
         </svg>
@@ -165,22 +197,42 @@ export default function DobPicker({
         <div className="absolute left-0 top-full z-20 mt-2 w-[min(320px,calc(100vw-3rem))] rounded-2xl border border-line bg-white p-3 shadow-float">
           <div className="flex items-center justify-between gap-1">
             {mode === "days" ? (
-              <button type="button" aria-label="Previous month" disabled={!canPrev} onClick={() => step(-1)} className={navBtn}>
+              <button
+                type="button"
+                aria-label="Previous month"
+                disabled={!canPrev}
+                onClick={() => step(-1)}
+                className={navBtn}
+              >
                 <Chevron dir="left" />
               </button>
             ) : (
               <span className="h-9 w-9" />
             )}
             <div className="flex items-center">
-              <button type="button" onClick={() => setMode(mode === "months" ? "days" : "months")} className={headBtn}>
+              <button
+                type="button"
+                onClick={() => setMode(mode === "months" ? "days" : "months")}
+                className={headBtn}
+              >
                 {MONTHS[view.m]} <Chevron dir="down" />
               </button>
-              <button type="button" onClick={() => setMode(mode === "years" ? "days" : "years")} className={headBtn}>
+              <button
+                type="button"
+                onClick={() => setMode(mode === "years" ? "days" : "years")}
+                className={headBtn}
+              >
                 {view.y} <Chevron dir="down" />
               </button>
             </div>
             {mode === "days" ? (
-              <button type="button" aria-label="Next month" disabled={!canNext} onClick={() => step(1)} className={navBtn}>
+              <button
+                type="button"
+                aria-label="Next month"
+                disabled={!canNext}
+                onClick={() => step(1)}
+                className={navBtn}
+              >
                 <Chevron dir="right" />
               </button>
             ) : (
@@ -192,7 +244,9 @@ export default function DobPicker({
             <div className="mt-2">
               <div className="grid grid-cols-7 text-center text-xs font-semibold text-ink-muted">
                 {WEEKDAYS.map((w) => (
-                  <span key={w} className="py-2">{w}</span>
+                  <span key={w} className="py-2">
+                    {w}
+                  </span>
                 ))}
               </div>
               <div className="grid grid-cols-7 gap-y-1">

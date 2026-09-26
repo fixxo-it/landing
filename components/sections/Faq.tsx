@@ -106,7 +106,6 @@ export default function Faq() {
     setOpen(0);
   };
 
-
   return (
     /* trimmed bottom padding: the CTA below opens with its own top padding, so
        the two together left too much white between "Still have questions?" and
@@ -157,7 +156,6 @@ export default function Faq() {
                        is a state, not the "live" marker the lime is elsewhere */
                     className="absolute inset-0 rounded-full border border-[#013A3C] bg-gradient-to-b from-[#0E7A82] to-[#014D4F] shadow-[0_10px_18px_-8px_rgba(1,77,79,0.7),inset_0_0_14px_rgba(120,220,215,0.35),inset_0_-3px_6px_rgba(0,30,32,0.4)]"
                   />
-                
                 )}
                 {i !== tab && (
                   <span className="absolute inset-0 rounded-full border border-line bg-white shadow-card" />
@@ -181,10 +179,7 @@ export default function Faq() {
         </Reveal>
 
         {/* right panel — one row per question, split by white hairlines */}
-        <Reveal
-          delay={0.1}
-          className="overflow-hidden rounded-[20px] bg-white"
-        >
+        <Reveal delay={0.1} className="overflow-hidden rounded-[20px] bg-white">
           <AnimatePresence mode="wait">
             <motion.div
               key={tab}
@@ -224,17 +219,26 @@ export default function Faq() {
                           aria-hidden
                         >
                           <line
-                            x1="3" y1="10" x2="17" y2="10"
+                            x1="3"
+                            y1="10"
+                            x2="17"
+                            y2="10"
                             stroke="currentColor"
                             strokeWidth="2"
                             strokeLinecap="round"
                           />
                           <motion.line
-                            x1="10" y1="3" x2="10" y2="17"
+                            x1="10"
+                            y1="3"
+                            x2="10"
+                            y2="17"
                             stroke="currentColor"
                             strokeWidth="2"
                             strokeLinecap="round"
-                            animate={{ rotate: isOpen ? 90 : 0, opacity: isOpen ? 0 : 1 }}
+                            animate={{
+                              rotate: isOpen ? 90 : 0,
+                              opacity: isOpen ? 0 : 1,
+                            }}
                             transition={{ duration: 0.3, ease: EASE }}
                             style={{ transformOrigin: "10px 10px" }}
                           />

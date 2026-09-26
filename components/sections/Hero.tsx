@@ -44,7 +44,12 @@ export default function Hero() {
     <section id="top" className="scroll-mt-24 pb-16 pt-10 lg:pb-24 lg:pt-16">
       <Container>
         <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_520px] lg:gap-16 xl:grid-cols-[minmax(0,1fr)_620px]">
-          <motion.div variants={container} initial="hidden" animate="show" className="order-2 lg:order-1">
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className="order-2 lg:order-1"
+          >
             <motion.div
               variants={item}
               className="mb-4 inline-flex w-fit items-center gap-2 text-xs font-semibold uppercase tracking-wide text-teal-dark"
@@ -99,19 +104,18 @@ export default function Hero() {
                   openAppOrStore();
                 }}
               />
-              <Button
-                href="#safety-360"
-                label="WHY CHOOSE US?"
-                variant="secondary"
-                size="md"
-              />
+              <Button href="#safety-360" label="WHY CHOOSE US?" variant="secondary" size="md" />
             </motion.div>
 
             {/* replaces the empty space under the buttons with actual proof */}
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: reduced ? 1 : 0.96, y: reduced ? 0 : 20 }}
+            initial={{
+              opacity: 0,
+              scale: reduced ? 1 : 0.96,
+              y: reduced ? 0 : 20,
+            }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.9, ease: EASE, delay: 0.25 }}
             className="relative order-1 mx-auto w-full max-w-[520px] lg:order-2"

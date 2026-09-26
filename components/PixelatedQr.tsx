@@ -42,12 +42,7 @@ export default function PixelatedQr({
     for (let row = 0; row < count; row++) {
       for (let col = 0; col < count; col++) {
         if (!qr.modules.get(row, col)) continue;
-        ctx.fillRect(
-          (col + MARGIN) * cell,
-          (row + MARGIN) * cell,
-          cell + 0.5,
-          cell + 0.5,
-        );
+        ctx.fillRect((col + MARGIN) * cell, (row + MARGIN) * cell, cell + 0.5, cell + 0.5);
       }
     }
   }, [value, size]);

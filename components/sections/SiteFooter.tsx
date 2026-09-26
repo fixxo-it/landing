@@ -61,10 +61,11 @@ export default function SiteFooter() {
         <Stagger className="grid gap-12 pt-16 lg:grid-cols-[minmax(0,1.5fr)_repeat(3,minmax(0,1fr))] lg:gap-x-10">
           <StaggerItem>
             <div className="w-fit">
-              <p className="font-display text-5xl font-bold leading-none tracking-[-0.03em] text-white">FamCare</p>
+              <p className="font-display text-5xl font-bold leading-none tracking-[-0.03em] text-white">
+                FamCare
+              </p>
               <p className="mt-3 whitespace-nowrap text-[15px] font-bold text-white/70">
-                Caregivers in{" "}
-                <span className="font-bold italic text-lime-light">10 minutes</span>
+                Caregivers in <span className="font-bold italic text-lime-light">10 minutes</span>
               </p>
             </div>
 
@@ -127,7 +128,12 @@ export default function SiteFooter() {
           <p className="flex shrink-0 items-center gap-3">
             <span className="flex items-center gap-1.5">
               Made with
-              <svg className="h-3 w-3 shrink-0 fill-lime-light" viewBox="0 0 24 24" aria-label="love" role="img">
+              <svg
+                className="h-3 w-3 shrink-0 fill-lime-light"
+                viewBox="0 0 24 24"
+                aria-label="love"
+                role="img"
+              >
                 <path d="M12 21s-7.5-4.7-9.6-9A5.4 5.4 0 0 1 12 6.3 5.4 5.4 0 0 1 21.6 12c-2.1 4.3-9.6 9-9.6 9Z" />
               </svg>
               in Bengaluru.

@@ -27,9 +27,7 @@ export default function LegalPage({
       </div>
 
       <Container className="max-w-[820px] pb-24 pt-8 lg:pb-32 lg:pt-12">
-        <h1 className="font-display text-h1 font-semibold text-ink lg:text-h1-lg">
-          {title}
-        </h1>
+        <h1 className="font-display text-h1 font-semibold text-ink lg:text-h1-lg">{title}</h1>
         {updated && <p className="mt-3 text-sm text-ink-faint">{updated}</p>}
 
         {children ? (

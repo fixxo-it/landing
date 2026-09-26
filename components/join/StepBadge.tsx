@@ -32,7 +32,15 @@ export default function StepBadge({ n }: { n: number }) {
         <circle cx="24" cy="24" r="16.5" fill={`url(#${id}c)`} opacity={0.9} />
       </g>
       <g clipPath={`url(#${id}k)`}>
-        <ellipse cx="17" cy="12" rx="13" ry="6" fill="#fff" opacity={0.5} transform="rotate(-28 17 12)" />
+        <ellipse
+          cx="17"
+          cy="12"
+          rx="13"
+          ry="6"
+          fill="#fff"
+          opacity={0.5}
+          transform="rotate(-28 17 12)"
+        />
       </g>
       <circle cx="12.5" cy="17" r="1.8" fill="#fff" opacity={0.9} />
       <text
