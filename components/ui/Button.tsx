@@ -12,8 +12,7 @@ export const PHOTO_TEAL = "bg-teal-dark";
 export const VARIANTS: Record<Variant, string> = {
   primary:
     "border border-[#A9C91F] bg-gradient-to-b from-[#EBFF7A] to-[#DDF74A] text-teal shadow-[0_10px_18px_-8px_rgba(120,150,10,0.7),inset_0_0_14px_rgba(255,255,255,0.5),inset_0_-3px_6px_rgba(110,140,0,0.3)] hover:brightness-105",
-  secondary:
-    "border border-line bg-white text-ink-muted hover:border-teal/40 hover:text-teal",
+  secondary: "border border-line bg-white text-ink-muted hover:border-teal/40 hover:text-teal",
   onDark: "bg-white text-teal hover:bg-teal-tint",
   /* the nav and hero CTAs use it: the dark-green jelly pill used across the join page: brand-green rim, a
      lighter translucent core and a white gloss band along the top. */

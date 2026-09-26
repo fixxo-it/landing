@@ -100,10 +100,7 @@ export default function Testimonials() {
           on top of it instead of behind, exactly like the background bleeding
           over the cards. Staying in normal DOM order (this paints first) and
           giving the foreground an explicit z-10 instead sidesteps it. */}
-      <div
-        aria-hidden
-        className="edge-fade absolute inset-0 bg-teal"
-      >
+      <div aria-hidden className="edge-fade absolute inset-0 bg-teal">
         <Image
           src="/img/Grainy.jpg"
           alt=""
@@ -153,11 +150,7 @@ export default function Testimonials() {
   );
 }
 
-function Card({
-  quote,
-  className,
-  ...rest
-}: { quote: Quote } & React.HTMLAttributes<HTMLElement>) {
+function Card({ quote, className, ...rest }: { quote: Quote } & React.HTMLAttributes<HTMLElement>) {
   return (
     <figure
       /* one fixed height for every card, so the two rails read as two even
@@ -183,7 +176,12 @@ function Card({
       {/* the same bright lime used elsewhere as the "live" highlight — the FAQ's
           active tab, the stepper's travelling dot — rather than the deeper
           brand-lime token, which reads more green than yellow */}
-      <div className={cn("relative isolate shrink-0 overflow-hidden px-6 pb-5 pt-6 lg:px-7 lg:pt-7", JELLY_LIME)}>
+      <div
+        className={cn(
+          "relative isolate shrink-0 overflow-hidden px-6 pb-5 pt-6 lg:px-7 lg:pt-7",
+          JELLY_LIME,
+        )}
+      >
         <JellyGloss />
         {/* name and locality only: the portraits were stand-ins, and without
             them the card leads on the person's own words instead of a stock

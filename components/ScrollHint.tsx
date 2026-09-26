@@ -31,10 +31,10 @@ export default function ScrollHint() {
     const footer = document.getElementById("site-footer");
     if (!footer) return;
 
-    const io = new IntersectionObserver(
-      ([entry]) => setNearFooter(entry.isIntersecting),
-      { threshold: 0, rootMargin: HIDE_ROOT_MARGIN },
-    );
+    const io = new IntersectionObserver(([entry]) => setNearFooter(entry.isIntersecting), {
+      threshold: 0,
+      rootMargin: HIDE_ROOT_MARGIN,
+    });
     io.observe(footer);
     return () => io.disconnect();
   }, []);

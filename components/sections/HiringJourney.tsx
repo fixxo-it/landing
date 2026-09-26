@@ -2,14 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import {
-  AnimatePresence,
-  motion,
-  useInView,
-  useReducedMotion,
-  useScroll,
-  useSpring,
-} from "framer-motion";
+import { AnimatePresence, motion, useInView, useScroll, useSpring } from "framer-motion";
 import { Section } from "@/components/ui/Section";
 import Reveal, { DURATION, EASE, RISE, IN_VIEW } from "@/components/motion/Reveal";
 import Button from "@/components/ui/Button";
@@ -46,7 +39,14 @@ function VisualHiring() {
     <Shell>
       <div className="flex items-center gap-[18px]">
         <span className="relative h-[66px] w-[66px] shrink-0 overflow-hidden rounded-full bg-teal-light/25">
-          <Image src="/img/candidate.png" alt="" aria-hidden fill sizes="66px" className="object-cover" />
+          <Image
+            src="/img/candidate.png"
+            alt=""
+            aria-hidden
+            fill
+            sizes="66px"
+            className="object-cover"
+          />
         </span>
         <span className="min-w-0">
           <span className="block truncate text-[21px] font-semibold text-ink">Neha</span>
@@ -55,7 +55,10 @@ function VisualHiring() {
       </div>
       <div className="mt-6 flex flex-wrap gap-3">
         {["Patience", "Calm communication", "Cleanliness", "Empathy"].map((t) => (
-          <span key={t} className="rounded-full bg-teal/[0.07] px-[15px] py-1.5 text-[16px] font-medium text-teal">
+          <span
+            key={t}
+            className="rounded-full bg-teal/[0.07] px-[15px] py-1.5 text-[16px] font-medium text-teal"
+          >
             {t}
           </span>
         ))}
@@ -73,11 +76,20 @@ function VisualIdentity() {
     <Shell>
       <div className="flex gap-[18px]">
         <span className="relative h-[84px] w-[84px] shrink-0 overflow-hidden rounded-full bg-teal-light/20">
-          <Image src="/img/candidate.png" alt="" aria-hidden fill sizes="84px" className="object-cover" />
+          <Image
+            src="/img/candidate.png"
+            alt=""
+            aria-hidden
+            fill
+            sizes="84px"
+            className="object-cover"
+          />
         </span>
         <span className="flex min-w-0 flex-1 flex-col justify-center gap-1.5">
           <span className="block truncate text-[21px] font-semibold text-ink">Neha</span>
-          <span className="block truncate text-[16px] text-ink-faint">Whitefield · Application #FC-2481</span>
+          <span className="block truncate text-[16px] text-ink-faint">
+            Whitefield · Application #FC-2481
+          </span>
         </span>
       </div>
       <div className="mt-6 space-y-3">
@@ -104,7 +116,9 @@ function VisualTraining() {
   ];
   return (
     <Shell>
-      <p className="text-[16px] font-semibold uppercase tracking-[0.08em] text-ink-faint">Training modules</p>
+      <p className="text-[16px] font-semibold uppercase tracking-[0.08em] text-ink-faint">
+        Training modules
+      </p>
       <div className="mt-6 space-y-[21px]">
         {modules.map(([name, value]) => (
           <span key={name} className="block">
@@ -229,7 +243,12 @@ export default function HiringJourney() {
             {/* the reveal wraps the panel rather than the sticky element above
                 it: motion writes a transform, and a transformed sticky ancestor
                 would stop the panel pinning to the viewport */}
-            <Reveal className={cn("relative isolate flex h-[630px] max-h-full w-full items-center justify-center overflow-hidden rounded-card p-6", JELLY_GREEN)}>
+            <Reveal
+              className={cn(
+                "relative isolate flex h-[630px] max-h-full w-full items-center justify-center overflow-hidden rounded-card p-6",
+                JELLY_GREEN,
+              )}
+            >
               <AnimatePresence mode="wait">
                 <motion.div
                   key={active}
@@ -276,7 +295,6 @@ function Step({
   onActivate: (i: number) => void;
 }) {
   const ref = useRef<HTMLLIElement>(null);
-  const reduced = useReducedMotion();
 
   /* zero-height band at the viewport middle: whichever step crosses it wins */
   const inView = useInView(ref, { margin: "-50% 0px -50% 0px" });
@@ -290,7 +308,11 @@ function Step({
     target: ref,
     offset: ["start center", "end center"],
   });
-  const fill = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.4 });
+  const fill = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 30,
+    mass: 0.4,
+  });
 
   useEffect(() => {
     if (inView) onActivate(index);
@@ -304,15 +326,15 @@ function Step({
       ref={ref}
       /* each step arrives on its own as you reach it, rather than the whole
          list appearing at once when the section's top edge enters */
-      initial={{ opacity: 0, y: reduced ? 0 : RISE }}
-      animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: reduced ? 0 : RISE }}
+      initial={{ opacity: 0, y: RISE }}
+      animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: RISE }}
       transition={{ duration: DURATION, ease: EASE }}
       className="relative flex gap-5 pb-16 last:pb-0 lg:min-h-[70vh] lg:pb-0"
     >
       {!isLast && (
         <span className="absolute bottom-0 left-5 top-12 w-px -translate-x-1/2 bg-line">
           <motion.span
-            style={{ scaleY: reduced ? 1 : fill }}
+            style={{ scaleY: fill }}
             className="block h-full w-full origin-top bg-teal"
           />
         </span>

@@ -79,7 +79,9 @@ function attemptDeepLink(url: string) {
 }
 
 export function openServiceBooking(categoryId: string, subServiceId: string) {
-  attemptDeepLink(`famcare:///schedule-care?category_id=${categoryId}&sub_service_id=${subServiceId}`);
+  attemptDeepLink(
+    `famcare:///schedule-care?category_id=${categoryId}&sub_service_id=${subServiceId}`,
+  );
 }
 
 /* The generic "book a caregiver" CTAs have no specific service to deep link
@@ -142,7 +144,15 @@ export default function DownloadModal() {
               aria-label="Close"
               className="absolute right-5 top-5 grid h-10 w-10 place-items-center rounded-full border border-line text-ink-muted transition-colors duration-200 hover:border-teal/40 hover:text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
             >
-              <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" aria-hidden>
+              <svg
+                className="h-4 w-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={2}
+                strokeLinecap="round"
+                aria-hidden
+              >
                 <path d="M6 6l12 12M18 6L6 18" />
               </svg>
             </button>
@@ -164,8 +174,7 @@ export default function DownloadModal() {
             </h2>
             <p className="mx-auto mt-3 max-w-[30ch] text-sm leading-relaxed text-ink-muted">
               A trained, verified caregiver at your door in{" "}
-              <span className="font-medium italic text-teal">10 minutes</span>
-              .
+              <span className="font-medium italic text-teal">10 minutes</span>.
             </p>
           </motion.div>
         </motion.div>

@@ -1,13 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import {
-  AnimatePresence,
-  motion,
-  useMotionValueEvent,
-  useReducedMotion,
-  useScroll,
-} from "framer-motion";
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
 import Button from "@/components/ui/Button";
 import { openDownloadModal } from "@/components/DownloadModal";
 import { DURATION, EASE } from "@/components/motion/Reveal";
@@ -57,7 +51,6 @@ export default function SiteHeader() {
   const [compact, setCompact] = useState(false);
   const [hidden, setHidden] = useState(false);
   const heroEnd = useRef(0);
-  const reduced = useReducedMotion();
   const { scrollY } = useScroll();
 
   /* measured off the hero rather than a fixed number, so the bar narrows at the
@@ -117,7 +110,7 @@ export default function SiteHeader() {
       <motion.div
         /* the bar drops in on load, ahead of the hero — the page assembles
            top-down instead of the chrome being there before the content */
-        initial={{ opacity: 0, y: reduced ? 0 : -28 }}
+        initial={{ opacity: 0, y: -28 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: DURATION, ease: EASE }}
         className={cn(
@@ -140,8 +133,12 @@ export default function SiteHeader() {
           aria-label="Main"
         >
           <a href="#top" className="leading-none">
-            <span className="block font-display text-[1.8rem] font-bold tracking-[-0.02em] text-teal">FamCare</span>
-            <span className="-mt-0.5 block text-xs font-medium leading-none text-ink-muted">Caregivers in 10 mins</span>
+            <span className="block font-display text-[1.8rem] font-bold tracking-[-0.02em] text-teal">
+              FamCare
+            </span>
+            <span className="-mt-0.5 block text-xs font-medium leading-none text-ink-muted">
+              Caregivers in 10 mins
+            </span>
           </a>
 
           {/* links sit dead centre of the bar, independent of the two ends */}

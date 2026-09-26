@@ -1,21 +1,23 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Container } from "@/components/ui/Section";
 import Button from "@/components/ui/Button";
 import { openDownloadModal } from "@/components/DownloadModal";
 import Reveal, { EASE, useReveal } from "@/components/motion/Reveal";
 
 export default function CtaBanner({ heading }: { heading?: string } = {}) {
-  const reduced = useReducedMotion();
   const phone = useReveal();
 
   return (
     /* the bottom padding is the breathing room between the CTA and the footer;
        the phone's overhang below is measured to outrun it, so it still slides
        under the footer instead of ending on a hard edge */
-    <section id="book" className="relative scroll-mt-24 bg-white pb-16 pt-12 sm:pb-3 lg:pb-4 lg:pt-16">
+    <section
+      id="book"
+      className="relative scroll-mt-24 bg-white pb-16 pt-12 sm:pb-3 lg:pb-4 lg:pt-16"
+    >
       <Container className="relative">
         {/* no extra px here: the headline sits flush at Container's own
             gutter, same inset as the footer's wordmark below it */}
@@ -61,10 +63,8 @@ export default function CtaBanner({ heading }: { heading?: string } = {}) {
               back to the right store if it isn't. */}
           <motion.div
             ref={phone.ref as React.Ref<HTMLDivElement>}
-            initial={{ opacity: 0, y: reduced ? 0 : 40 }}
-            animate={
-              phone.inView ? { opacity: 1, y: 0 } : { opacity: 0, y: reduced ? 0 : 40 }
-            }
+            initial={{ opacity: 0, y: 40 }}
+            animate={phone.inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
             transition={{ duration: 0.85, ease: EASE, delay: 0.1 }}
             className="mx-auto hidden lg:block"
           >

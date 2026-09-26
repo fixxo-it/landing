@@ -120,88 +120,89 @@ function Stepper({ active, running }: { active: number; running: boolean }) {
          row — and the padding below reserves its space */}
       <div className="relative hidden pb-16 lg:block">
         <div className="flex items-center gap-2.5">
-        {Array.from({ length: SCREENS }, (_, i) => (
-          <div key={i} className="flex min-w-0 flex-1 items-center gap-2.5">
-            <span className="relative shrink-0">
-              <span
-                className={cn("block transition-[opacity,filter] duration-300", i > active && "opacity-50 saturate-50")}
-              >
-                <StepBadge n={i + 1} />
-              </span>
+          {Array.from({ length: SCREENS }, (_, i) => (
+            <div key={i} className="flex min-w-0 flex-1 items-center gap-2.5">
+              <span className="relative shrink-0">
+                <span
+                  className={cn(
+                    "block transition-[opacity,filter] duration-300",
+                    i > active && "opacity-50 saturate-50",
+                  )}
+                >
+                  <StepBadge n={i + 1} />
+                </span>
 
-              {/* every caption starts at its own dot's left edge, so the label
+                {/* every caption starts at its own dot's left edge, so the label
                   always reads as hanging off that number */}
-              <AnimatePresence mode="wait">
-                {i === active && (
-                  <span className="absolute left-0 top-[68px] block whitespace-nowrap">
-                    <motion.span
-                      key={i}
-                      initial={{ opacity: 0, y: -4 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 4 }}
-                      transition={{ duration: 0.25, ease: EASE }}
-                      className="block font-display text-xl font-bold text-white"
-                    >
-                      {STEPS[i]}
-                    </motion.span>
-                  </span>
-                )}
-              </AnimatePresence>
-            </span>
-            {/* the rail is white the whole way across; what the travelling dot
+                <AnimatePresence mode="wait">
+                  {i === active && (
+                    <span className="absolute left-0 top-[68px] block whitespace-nowrap">
+                      <motion.span
+                        key={i}
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 4 }}
+                        transition={{ duration: 0.25, ease: EASE }}
+                        className="block font-display text-xl font-bold text-white"
+                      >
+                        {STEPS[i]}
+                      </motion.span>
+                    </span>
+                  )}
+                </AnimatePresence>
+              </span>
+              {/* the rail is white the whole way across; what the travelling dot
                 leaves behind it is the same pattern at full strength over a
                 dimmed one, so a dot brightens as the line reaches it rather
                 than changing colour. Both copies share a grid, so the bright
                 dots land exactly on the dim ones they replace. */}
-            <span className="relative block h-[3px] min-w-0 flex-1">
-              <span
-                aria-hidden
-                /* 3px of dot to 3px of gap: the period is what sets how many
+              <span className="relative block h-[3px] min-w-0 flex-1">
+                <span
+                  aria-hidden
+                  /* 3px of dot to 3px of gap: the period is what sets how many
                    dots land on a segment, and an even split is the densest the
                    rail goes before the dots start reading as a dashed line */
-                className="absolute inset-0 block bg-white/30"
-              />
-              {i <= active && (
-                <motion.span
-                  aria-hidden
-                  key={`fill-${active}`}
-                  /* width, not scaleX: a scaled pattern would stretch its dots
+                  className="absolute inset-0 block bg-white/30"
+                />
+                {i <= active && (
+                  <motion.span
+                    aria-hidden
+                    key={`fill-${active}`}
+                    /* width, not scaleX: a scaled pattern would stretch its dots
                      and drift off the white rail underneath. Growing the box
                      leaves the background anchored to the left edge, so the
                      pattern is revealed rather than distorted. */
-                  className="absolute left-0 top-0 block h-full bg-white"
-                  initial={{ width: i < active ? "100%" : "0%" }}
-                  animate={{ width: "100%" }}
-                  transition={
-                    i === active && running
-                      ? { duration: DWELL, ease: "linear" }
-                      : { duration: 0.3, ease: EASE }
-                  }
-                />
-              )}
-              {i === active && (
-                <motion.span
-                  aria-hidden
-                  key={`dot-${active}`}
-                  /* left carries the travel and x re-centres the dot on it, so
+                    className="absolute left-0 top-0 block h-full bg-white"
+                    initial={{ width: i < active ? "100%" : "0%" }}
+                    animate={{ width: "100%" }}
+                    transition={
+                      i === active && running
+                        ? { duration: DWELL, ease: "linear" }
+                        : { duration: 0.3, ease: EASE }
+                    }
+                  />
+                )}
+                {i === active && (
+                  <motion.span
+                    aria-hidden
+                    key={`dot-${active}`}
+                    /* left carries the travel and x re-centres the dot on it, so
                      it starts and ends centred on its own dot rather than
                      half a width past them */
-                  /* both offsets live here, not in classes: motion writes
+                    /* both offsets live here, not in classes: motion writes
                      `transform` inline and would drop a -translate-y utility */
-                  style={{ x: "-50%", y: "-50%" }}
-                  className="absolute top-1/2 block h-2.5 w-2.5 rounded-full bg-[#E4FF5C] shadow-[0_0_8px_rgba(228,255,92,0.7)]"
-                  initial={{ left: "0%" }}
-                  animate={{ left: "100%" }}
-                  transition={
-                    running
-                      ? { duration: DWELL, ease: "linear" }
-                      : { duration: 0.3, ease: EASE }
-                  }
-                />
-              )}
-            </span>
-          </div>
-        ))}
+                    style={{ x: "-50%", y: "-50%" }}
+                    className="absolute top-1/2 block h-2.5 w-2.5 rounded-full bg-[#E4FF5C] shadow-[0_0_8px_rgba(228,255,92,0.7)]"
+                    initial={{ left: "0%" }}
+                    animate={{ left: "100%" }}
+                    transition={
+                      running ? { duration: DWELL, ease: "linear" } : { duration: 0.3, ease: EASE }
+                    }
+                  />
+                )}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </>
@@ -259,4 +260,3 @@ function PhoneMockup({ active }: { active: number }) {
     </div>
   );
 }
-

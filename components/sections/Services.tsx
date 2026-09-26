@@ -6,7 +6,6 @@ import {
   AnimatePresence,
   motion,
   useInView,
-  useReducedMotion,
   useScroll,
   useSpring,
   useTransform,
@@ -44,8 +43,8 @@ const HOLD = 0.2;
 const LEAD = 168;
 
 export default function Services() {
-  const reduced = useReducedMotion();
-  const pinned = !reduced;
+  const [isReduced, setIsReduced] = useState(false);
+  const pinned = !isReduced;
   const [comingSoon, setComingSoon] = useState(false);
 
   /* the scroll-driven pin is a lg-only effect — below it the strip is a plain
@@ -55,6 +54,9 @@ export default function Services() {
      than flush against the left edge. */
   const [wide, setWide] = useState(false);
   useEffect(() => {
+    const reducedMq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reducedMq.matches) setIsReduced(true);
+
     const mq = window.matchMedia("(min-width: 1024px)");
     const update = () => setWide(mq.matches);
     update();
@@ -102,11 +104,7 @@ export default function Services() {
   });
   /* the lead-in is travel too: the strip covers LEAD + travel over the same pin,
      so the pace is unchanged and the first card slides in from rest */
-  const raw = useTransform(
-    scrollYProgress,
-    [0, 1 - HOLD],
-    [pinned ? LEAD : 0, -travel],
-  );
+  const raw = useTransform(scrollYProgress, [0, 1 - HOLD], [pinned ? LEAD : 0, -travel]);
   /* stiff enough that the strip is not still catching up when the pin ends */
   const x = useSpring(raw, { stiffness: 260, damping: 40, mass: 0.3 });
 
@@ -163,8 +161,7 @@ export default function Services() {
             "-my-6 lg:-my-10",
             "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
             /* soft dissolve at the left edge so cards melt into the heading */
-            pinned &&
-              "lg:[mask-image:linear-gradient(to_right,transparent_0,black_140px)]",
+            pinned && "lg:[mask-image:linear-gradient(to_right,transparent_0,black_140px)]",
           )}
         >
           <motion.div
@@ -173,10 +170,8 @@ export default function Services() {
             className="flex w-max gap-5 px-6 will-change-transform sm:px-10 lg:gap-6 lg:px-0"
             /* the strip fades up as the section arrives; the x above is the
                scroll-driven travel and is untouched by this */
-            initial={{ opacity: 0, y: reduced ? 0 : RISE }}
-            animate={
-              stripInView ? { opacity: 1, y: 0 } : { opacity: 0, y: reduced ? 0 : RISE }
-            }
+            initial={{ opacity: 0, y: RISE }}
+            animate={stripInView ? { opacity: 1, y: 0 } : { opacity: 0, y: RISE }}
             transition={{ duration: DURATION, ease: EASE, delay: 0.1 }}
           >
             {SERVICES.map(([name, image, subServiceId]) => (
@@ -185,7 +180,7 @@ export default function Services() {
                 name={name}
                 image={image}
                 subServiceId={subServiceId}
-                reduced={!!reduced}
+                reduced={isReduced}
                 onComingSoon={() => setComingSoon(true)}
               />
             ))}
@@ -217,7 +212,15 @@ export default function Services() {
                 aria-label="Close"
                 className="absolute right-4 top-4 z-10 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-ink-muted shadow-float ring-1 ring-line transition-colors duration-200 hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
               >
-                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" aria-hidden>
+                <svg
+                  className="h-4 w-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  aria-hidden
+                >
                   <path d="M6 6l12 12M18 6L6 18" />
                 </svg>
               </button>
