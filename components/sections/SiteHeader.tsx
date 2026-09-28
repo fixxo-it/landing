@@ -5,7 +5,6 @@ import {
   AnimatePresence,
   motion,
   useMotionValueEvent,
-  useReducedMotion,
   useScroll,
 } from 'framer-motion';
 import Button from '@/components/ui/Button';
@@ -57,7 +56,6 @@ export default function SiteHeader() {
   const [compact, setCompact] = useState(false);
   const [hidden, setHidden] = useState(false);
   const heroEnd = useRef(0);
-  const reduced = useReducedMotion();
   const { scrollY } = useScroll();
 
   /* measured off the hero rather than a fixed number, so the bar narrows at the
@@ -117,7 +115,7 @@ export default function SiteHeader() {
       <motion.div
         /* the bar drops in on load, ahead of the hero — the page assembles
            top-down instead of the chrome being there before the content */
-        initial={{ opacity: 0, y: reduced ? 0 : -28 }}
+        initial={{ opacity: 0, y: -28 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: DURATION, ease: EASE }}
         className={cn(

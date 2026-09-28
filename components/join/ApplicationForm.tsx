@@ -45,20 +45,31 @@ function Field({
   label,
   className,
   labelClassName = 'text-teal-dark',
+  count,
+  maxCount,
   children,
 }: {
   label: string;
   className?: string;
   labelClassName?: string;
+  count?: number;
+  maxCount?: number;
   children: React.ReactNode;
 }) {
   return (
     <div className={className}>
-      <span
-        className={`mb-2 block text-[15px] font-semibold ${labelClassName}`}
-      >
-        {label} <span className="text-teal">*</span>
-      </span>
+      <div className="mb-2 flex items-center justify-between">
+        <span className={`block text-[15px] font-semibold ${labelClassName}`}>
+          {label} <span className="text-teal">*</span>
+        </span>
+        {maxCount && count !== undefined ? (
+          <span
+            className={`text-xs ${count > maxCount * 0.9 ? 'font-medium text-[#B4432F]' : 'text-ink-faint'}`}
+          >
+            {count}/{maxCount}
+          </span>
+        ) : null}
+      </div>
       {children}
     </div>
   );
@@ -66,12 +77,14 @@ function Field({
 
 export default function ApplicationForm() {
   const [done, setDone] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [apiError, setApiError] = useState<string | null>(null);
   const [experience, setExperience] = useState('');
   const [start, setStart] = useState('');
   const [dob, setDob] = useState('');
+  const [currentAddress, setCurrentAddress] = useState('');
+  const [permanentAddress, setPermanentAddress] = useState('');
   const [tried, setTried] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
   const born = parseDob(dob);
@@ -81,10 +94,12 @@ export default function ApplicationForm() {
   const closeThanks = () => {
     setDone(false);
     setTried(false);
-    setApiError(null);
+    setSubmitError(null);
     setExperience('');
     setStart('');
     setDob('');
+    setCurrentAddress('');
+    setPermanentAddress('');
     formRef.current?.reset();
   };
 
@@ -98,7 +113,7 @@ export default function ApplicationForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setTried(true);
-    setApiError(null);
+    setSubmitError(null);
 
     if (!experience || !start || dobInvalid || dobUnderage) {
       return;
@@ -108,43 +123,51 @@ export default function ApplicationForm() {
     if (!form) return;
 
     const formData = new FormData(form);
-    const payload = {
-      full_name: (formData.get('name') as string)?.trim(),
-      phone: (formData.get('mobile') as string)?.trim(),
-      dob: dob.trim(),
-      languages: (formData.get('languages') as string)?.trim(),
-      experience: experience.trim(),
-      availability: start.trim(),
-      current_address: (formData.get('currentAddress') as string)?.trim(),
-      permanent_address: (formData.get('permanentAddress') as string)?.trim(),
-      consent_contact: true,
-    };
+    const fullName = String(formData.get('name') || '').trim();
+    const phone = String(formData.get('mobile') || '').trim();
+    const languages = String(formData.get('languages') || '').trim();
+    const consent = formData.get('consent') === 'on';
+    const website = String(formData.get('website') || '').trim(); // Honeypot
 
-    setSubmitting(true);
+    setIsSubmitting(true);
+
     try {
       const res = await fetch('/api/apply', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-        body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          full_name: fullName,
+          phone,
+          dob,
+          languages,
+          experience,
+          availability: start,
+          current_address: currentAddress,
+          permanent_address: permanentAddress,
+          consent_contact: consent,
+          website,
+        }),
       });
 
+      const json = await res.json().catch(() => null);
+
       if (!res.ok) {
-        const errorData = await res
-          .json()
-          .catch(() => ({ error: 'Failed to submit application' }));
         throw new Error(
-          errorData.error || errorData.detail || 'Failed to submit application'
+          json?.error ||
+            json?.detail ||
+            'Failed to submit application. Please try again.'
         );
       }
 
       setDone(true);
-    } catch (err: any) {
-      setApiError(err.message || 'Something went wrong. Please try again.');
+    } catch (err: unknown) {
+      const msg =
+        err instanceof Error
+          ? err.message
+          : 'Something went wrong. Please check your details and try again.';
+      setSubmitError(msg);
     } finally {
-      setSubmitting(false);
+      setIsSubmitting(false);
     }
   };
 
@@ -163,17 +186,35 @@ export default function ApplicationForm() {
           Fields marked * are required.
         </p>
 
-        {apiError && (
-          <div className="relative mt-4 rounded-xl border border-red-200 bg-red-50 p-4 text-sm font-medium text-red-700">
-            {apiError}
+        {submitError && (
+          <div className="relative mt-6 flex items-start gap-3 rounded-2xl border border-red-200 bg-red-50/80 p-4 text-sm text-[#B4432F]">
+            <span className="shrink-0 text-base">⚠️</span>
+            <div className="flex-1 font-medium">{submitError}</div>
           </div>
         )}
+
+        {/* Honeypot field - Invisible to legitimate users, filled by bots */}
+        <div
+          className="hidden"
+          aria-hidden="true"
+          style={{ display: 'none', position: 'absolute', left: '-9999px' }}
+        >
+          <label htmlFor="website">Website</label>
+          <input
+            type="text"
+            id="website"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
 
         <div className="relative mt-8 grid gap-6 sm:grid-cols-2">
           <Field label="Full name">
             <input
               required
               name="name"
+              maxLength={100}
               placeholder="As on your ID"
               className={FIELD}
             />
@@ -185,6 +226,7 @@ export default function ApplicationForm() {
               type="tel"
               inputMode="numeric"
               pattern="[0-9]{10}"
+              maxLength={15}
               placeholder="10-digit number"
               className={FIELD}
             />
@@ -210,6 +252,7 @@ export default function ApplicationForm() {
             <input
               required
               name="languages"
+              maxLength={255}
               placeholder="e.g. Kannada, Hindi"
               className={FIELD}
             />
@@ -232,20 +275,36 @@ export default function ApplicationForm() {
               invalid={tried && !start}
             />
           </Field>
-          <Field label="Current address" className="sm:col-span-2">
+          <Field
+            label="Current address"
+            className="sm:col-span-2"
+            count={currentAddress.length}
+            maxCount={500}
+          >
             <textarea
               required
               name="currentAddress"
               rows={3}
+              maxLength={500}
+              value={currentAddress}
+              onChange={(e) => setCurrentAddress(e.target.value)}
               placeholder="House / flat, street, area, city, pincode"
               className={AREA}
             />
           </Field>
-          <Field label="Permanent address" className="sm:col-span-2">
+          <Field
+            label="Permanent address"
+            className="sm:col-span-2"
+            count={permanentAddress.length}
+            maxCount={500}
+          >
             <textarea
               required
               name="permanentAddress"
               rows={3}
+              maxLength={500}
+              value={permanentAddress}
+              onChange={(e) => setPermanentAddress(e.target.value)}
               placeholder="House / flat, street, area, city, pincode"
               className={AREA}
             />
@@ -258,7 +317,9 @@ export default function ApplicationForm() {
           <label className="flex items-start gap-3 text-[15px] font-semibold text-ink">
             <input
               required
+              name="consent"
               type="checkbox"
+              defaultChecked
               className="mt-0.5 h-6 w-6 shrink-0 rounded-md accent-teal"
             />
             <span>
@@ -268,12 +329,12 @@ export default function ApplicationForm() {
           </label>
           <button
             type="submit"
-            disabled={submitting}
-            className={`${JELLY_BTN} h-12 px-7 text-base ${submitting ? 'cursor-not-allowed opacity-75' : ''}`}
+            disabled={isSubmitting}
+            className={`${JELLY_BTN} h-12 px-7 text-base disabled:opacity-70`}
           >
             <span className="relative z-10 inline-flex items-center gap-2.5">
-              {submitting ? 'SUBMITTING...' : 'SUBMIT'}{' '}
-              {!submitting && <Arrow />}
+              {isSubmitting ? 'SUBMITTING...' : 'SUBMIT'}{' '}
+              {!isSubmitting && <Arrow />}
             </span>
           </button>
         </div>

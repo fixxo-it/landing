@@ -6,7 +6,6 @@ import {
   AnimatePresence,
   motion,
   useInView,
-  useReducedMotion,
   useScroll,
   useSpring,
 } from 'framer-motion';
@@ -344,7 +343,6 @@ function Step({
   onActivate: (i: number) => void;
 }) {
   const ref = useRef<HTMLLIElement>(null);
-  const reduced = useReducedMotion();
 
   /* zero-height band at the viewport middle: whichever step crosses it wins */
   const inView = useInView(ref, { margin: '-50% 0px -50% 0px' });
@@ -376,17 +374,15 @@ function Step({
       ref={ref}
       /* each step arrives on its own as you reach it, rather than the whole
          list appearing at once when the section's top edge enters */
-      initial={{ opacity: 0, y: reduced ? 0 : RISE }}
-      animate={
-        revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: reduced ? 0 : RISE }
-      }
+      initial={{ opacity: 0, y: RISE }}
+      animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: RISE }}
       transition={{ duration: DURATION, ease: EASE }}
       className="relative flex gap-5 pb-16 last:pb-0 lg:min-h-[70vh] lg:pb-0"
     >
       {!isLast && (
         <span className="absolute bottom-0 left-5 top-12 w-px -translate-x-1/2 bg-line">
           <motion.span
-            style={{ scaleY: reduced ? 1 : fill }}
+            style={{ scaleY: fill }}
             className="block h-full w-full origin-top bg-teal"
           />
         </span>

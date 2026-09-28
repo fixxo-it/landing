@@ -6,8 +6,7 @@ import { motion, useInView, type Variants } from 'framer-motion';
 /* Shared motion language for the page:
    – one easing curve (a soft out-expo) so nothing feels like a different site
    – a 28px rise: far enough that the arrival reads as an arrival, short enough
-     that nobody is left waiting on it
-   – every animation collapses to a plain fade when the OS asks for less motion */
+     that nobody is left waiting on it */
 export const EASE = [0.22, 1, 0.36, 1] as const;
 export const RISE = 28;
 export const DURATION = 0.75;
