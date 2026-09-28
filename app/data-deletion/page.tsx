@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
-import LegalPage from "@/components/legal/LegalPage";
+import type { Metadata } from 'next';
+import LegalPage from '@/components/legal/LegalPage';
 
 export const metadata: Metadata = {
-  title: "Data Deletion — FamCare",
+  title: 'Data Deletion — FamCare',
 };
 
 export default function DataDeletionPage() {
@@ -20,7 +20,7 @@ export default function DataDeletionPage() {
         registered email address.
       </p>
       <p>
-        Email Address:{" "}
+        Email Address:{' '}
         <a href="mailto:support@famcare.co.in">support@famcare.co.in</a>
       </p>
       <p>Subject: Account Deletion Request - [Your Full Name]</p>
@@ -33,8 +33,8 @@ export default function DataDeletionPage() {
       <ul>
         <li>
           <strong>Verification:</strong> We may contact you to verify your
-          identity before proceeding with the deletion to ensure the security
-          of your account.
+          identity before proceeding with the deletion to ensure the security of
+          your account.
         </li>
         <li>
           <strong>Data Removal:</strong> We will permanently delete your
@@ -52,8 +52,8 @@ export default function DataDeletionPage() {
       </ul>
 
       <p>
-        If you have any questions regarding our data handling practices,
-        please feel free to reach out to us at the same email address.
+        If you have any questions regarding our data handling practices, please
+        feel free to reach out to us at the same email address.
       </p>
     </LegalPage>
   );

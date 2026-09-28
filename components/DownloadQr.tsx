@@ -1,19 +1,17 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { EASE } from "@/components/motion/Reveal";
-import { openDownloadModal } from "@/components/DownloadModal";
-import PixelatedQr from "@/components/PixelatedQr";
+import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { EASE } from '@/components/motion/Reveal';
+import { openDownloadModal } from '@/components/DownloadModal';
+import PixelatedQr from '@/components/PixelatedQr';
 
-const DOWNLOAD_URL = "https://famcare.onelink.me/LK0E/cgr3j0s7?af_qr=true";
+const DOWNLOAD_URL = 'https://famcare.onelink.me/LK0E/cgr3j0s7?af_qr=true';
 
 /* The card is an allowlist now, not a latch: it rides along only while one of
    these sections is on screen and leaves as soon as the last one does. Add a
    section id here to have the card show over it too. */
-const SECTIONS = [
-  /* "Book in 3 taps" */ "#how-it-works",
-];
+const SECTIONS = [/* "Book in 3 taps" */ '#how-it-works'];
 
 export default function DownloadQr() {
   const [dismissed, setDismissed] = useState(false);
@@ -22,7 +20,7 @@ export default function DownloadQr() {
 
   useEffect(() => {
     const targets = SECTIONS.map((sel) => document.querySelector(sel)).filter(
-      (el): el is Element => el !== null,
+      (el): el is Element => el !== null
     );
     if (!targets.length) return;
 
@@ -38,7 +36,7 @@ export default function DownloadQr() {
         }
         setInSection(visible.size > 0);
       },
-      { threshold: 0 },
+      { threshold: 0 }
     );
 
     targets.forEach((el) => io.observe(el));
@@ -52,10 +50,19 @@ export default function DownloadQr() {
         <motion.aside
           initial={{ opacity: 0, y: 24, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 12, scale: 0.96, transition: { duration: 0.2 } }}
+          exit={{
+            opacity: 0,
+            y: 12,
+            scale: 0.96,
+            transition: { duration: 0.2 },
+          }}
           /* the 1s wait is a first-impression beat only — coming back after a
              scroll up should feel immediate */
-          transition={{ duration: 0.5, ease: EASE, delay: shown.current ? 0 : 1 }}
+          transition={{
+            duration: 0.5,
+            ease: EASE,
+            delay: shown.current ? 0 : 1,
+          }}
           onAnimationStart={() => {
             shown.current = true;
           }}

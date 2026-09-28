@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { EASE } from "@/components/motion/Reveal";
-import { cn } from "@/lib/cn";
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { EASE } from '@/components/motion/Reveal';
+import { cn } from '@/lib/cn';
 
 /* how long each word holds before the next one slides in */
 const INTERVAL = 1100;
@@ -30,12 +30,19 @@ export default function RotatingWord({
     return () => clearInterval(id);
   }, [words.length, reduced]);
 
-  const longest = words.reduce((a, b) => (b.length > a.length ? b : a), "");
+  const longest = words.reduce((a, b) => (b.length > a.length ? b : a), '');
   const word = reduced ? words[0] : words[index];
 
   return (
-    <span className={cn("relative inline-grid overflow-hidden align-top", className)}>
-      <span className="invisible col-start-1 row-start-1 whitespace-nowrap">{longest}</span>
+    <span
+      className={cn(
+        'relative inline-grid overflow-hidden align-top',
+        className
+      )}
+    >
+      <span className="invisible col-start-1 row-start-1 whitespace-nowrap">
+        {longest}
+      </span>
       <AnimatePresence mode="popLayout" initial={false}>
         <motion.span
           key={word}

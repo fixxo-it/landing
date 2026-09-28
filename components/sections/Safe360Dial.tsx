@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useRef, useState } from "react";
+import { useRef, useState } from 'react';
 import {
   motion,
   useInView,
@@ -8,11 +8,11 @@ import {
   useReducedMotion,
   useScroll,
   useTransform,
-} from "framer-motion";
-import { Container, SectionHeading } from "@/components/ui/Section";
-import { DURATION, EASE, IN_VIEW } from "@/components/motion/Reveal";
-import BenefitIcon from "@/components/join/BenefitIcon";
-import { cn } from "@/lib/cn";
+} from 'framer-motion';
+import { Container, SectionHeading } from '@/components/ui/Section';
+import { DURATION, EASE, IN_VIEW } from '@/components/motion/Reveal';
+import BenefitIcon from '@/components/join/BenefitIcon';
+import { cn } from '@/lib/cn';
 
 /* The order they arrive in as you scroll, and the order they stack in on
    mobile: top-left, top-right, bottom-left, bottom-right. Every pillar shares
@@ -27,23 +27,23 @@ type Pillar = {
 
 const PILLARS: Pillar[] = [
   {
-    name: "Trust",
-    jelly: "shield",
-    body: "Identity checks, police verification and behaviour scores.",
+    name: 'Trust',
+    jelly: 'shield',
+    body: 'Identity checks, police verification and behaviour scores.',
   },
   {
-    name: "Care",
-    jelly: "heart",
-    body: "No-phone caregiving, live care logs, and a family support line that actually picks up.",
+    name: 'Care',
+    jelly: 'heart',
+    body: 'No-phone caregiving, live care logs, and a family support line that actually picks up.',
   },
   {
-    name: "Technology",
-    jelly: "bolt",
-    body: "AI risk detection, live tracking and instant escalation.",
+    name: 'Technology',
+    jelly: 'bolt',
+    body: 'AI risk detection, live tracking and instant escalation.',
   },
   {
-    name: "Quality",
-    jelly: "growth",
+    name: 'Quality',
+    jelly: 'growth',
     body: "Reviewed after every visit. Fall below 4.2★ and you're paused. No exceptions, no warnings.",
   },
 ];
@@ -62,14 +62,18 @@ export default function Safe360Dial() {
 
   const { scrollYProgress } = useScroll({
     target: wrapRef,
-    offset: ["start start", "end end"],
+    offset: ['start start', 'end end'],
   });
 
   /* the scrollbar is the sequence: progress maps onto how many pillars have
      landed, so scrolling back up takes them off again in reverse */
-  const count = useTransform(scrollYProgress, [0, 1 - HOLD], [0, PILLARS.length]);
+  const count = useTransform(
+    scrollYProgress,
+    [0, 1 - HOLD],
+    [0, PILLARS.length]
+  );
 
-  useMotionValueEvent(count, "change", (v) => {
+  useMotionValueEvent(count, 'change', (v) => {
     const n = Math.min(PILLARS.length, Math.max(0, Math.ceil(v)));
     setRevealed((was) => (was === n ? was : n));
   });
@@ -83,11 +87,14 @@ export default function Safe360Dial() {
          the same 250vh left a long stretch of nothing after the last item had
          already landed, before the section let go. 170vh is enough travel for
          four reveals and a short settle, not enough to feel stuck. */
-      className={cn("relative scroll-mt-24", pinned && "h-[170vh] lg:h-[250vh]")}
+      className={cn(
+        'relative scroll-mt-24',
+        pinned && 'h-[170vh] lg:h-[250vh]'
+      )}
     >
       <div
         className={cn(
-          pinned ? "py-0" : "py-20",
+          pinned ? 'py-0' : 'py-20',
           /* pt is on the flex box, not the heading — padding on the centring
              parent carves out a reserved top band, so the centred content can
              never land closer to the nav than that band even on a short
@@ -100,13 +107,16 @@ export default function Safe360Dial() {
              the title. The desktop board is a fixed diagram rather than a
              growing list, so it keeps the centring. */
           pinned &&
-            "sticky top-0 flex h-screen items-start overflow-hidden pt-24 lg:items-center lg:pt-28",
+            'sticky top-0 flex h-screen items-start overflow-hidden pt-24 lg:items-center lg:pt-28'
         )}
       >
         <Container className="w-full">
           <SectionHeading size="lg" title="Safe360" />
 
-          <Stage revealed={reduced ? PILLARS.length : revealed} reduced={reduced} />
+          <Stage
+            revealed={reduced ? PILLARS.length : revealed}
+            reduced={reduced}
+          />
           <Spine revealed={reduced ? PILLARS.length : revealed} />
         </Container>
       </div>
@@ -159,7 +169,13 @@ const hubBottom = (H + HUB) / 2;
    stopping short of it at some and overshooting at others. */
 /* `dir` is the way the vertical leg travels: +1 up out of the hub's top edge,
    -1 down out of its bottom. It stops one radius short of the turn. */
-const trace = (x: number, toX: number, fromY: number, toY: number, dir: 1 | -1) =>
+const trace = (
+  x: number,
+  toX: number,
+  fromY: number,
+  toY: number,
+  dir: 1 | -1
+) =>
   `M${x} ${fromY} V${toY + R * dir} Q${x} ${toY} ${x + R * Math.sign(toX - x)} ${toY} H${toX}`;
 
 /* how far the vertical legs sit either side of centre. They have to leave the
@@ -198,13 +214,27 @@ const top = { top: pct(ROW.top, H), marginTop: HALF_BADGE };
 const bottom = { bottom: pct(H - ROW.bottom, H), marginBottom: HALF_BADGE };
 
 const SLOTS = [
-  { at: { left: pct(COL.left, W), ...top }, stack: "flex-col", from: -24 },
-  { at: { left: pct(COL.right, W), ...top }, stack: "flex-col", from: 24 },
-  { at: { left: pct(COL.left, W), ...bottom }, stack: "flex-col-reverse", from: -24 },
-  { at: { left: pct(COL.right, W), ...bottom }, stack: "flex-col-reverse", from: 24 },
+  { at: { left: pct(COL.left, W), ...top }, stack: 'flex-col', from: -24 },
+  { at: { left: pct(COL.right, W), ...top }, stack: 'flex-col', from: 24 },
+  {
+    at: { left: pct(COL.left, W), ...bottom },
+    stack: 'flex-col-reverse',
+    from: -24,
+  },
+  {
+    at: { left: pct(COL.right, W), ...bottom },
+    stack: 'flex-col-reverse',
+    from: 24,
+  },
 ];
 
-function Stage({ revealed, reduced }: { revealed: number; reduced: boolean | null }) {
+function Stage({
+  revealed,
+  reduced,
+}: {
+  revealed: number;
+  reduced: boolean | null;
+}) {
   const boardRef = useRef<HTMLDivElement>(null);
   const boardIn = useInView(boardRef, IN_VIEW);
 
@@ -243,90 +273,90 @@ function Stage({ revealed, reduced }: { revealed: number; reduced: boolean | nul
             transform: `scale(calc(100cqw / ${CANVAS_W}px)) translateX(${CANVAS_MARGIN}px)`,
           }}
         >
-        {/* soft ground, so the board is not floating on bare white */}
-        <span
-          aria-hidden
-          className="pointer-events-none absolute left-1/2 top-1/2 h-[70%] w-[55%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal/[0.07] blur-3xl"
-        />
+          {/* soft ground, so the board is not floating on bare white */}
+          <span
+            aria-hidden
+            className="pointer-events-none absolute left-1/2 top-1/2 h-[70%] w-[55%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal/[0.07] blur-3xl"
+          />
 
-        <svg
-          viewBox={`0 0 ${W} ${H}`}
-          className="absolute inset-0 h-full w-full overflow-visible"
-          aria-hidden
-        >
-          {TRACES.map((d, i) => (
-            <g key={d}>
-              {/* The draw-in is a mask, not the stroke itself: animating
+          <svg
+            viewBox={`0 0 ${W} ${H}`}
+            className="absolute inset-0 h-full w-full overflow-visible"
+            aria-hidden
+          >
+            {TRACES.map((d, i) => (
+              <g key={d}>
+                {/* The draw-in is a mask, not the stroke itself: animating
                   pathLength makes framer write its own strokeDasharray, which
                   would overwrite the dotted pattern and leave a solid line.
                   Masking keeps the dots and still wipes them on. */}
-              <mask id={`trace-${i}`} maskUnits="userSpaceOnUse">
-                <motion.path
+                <mask id={`trace-${i}`} maskUnits="userSpaceOnUse">
+                  <motion.path
+                    d={d}
+                    fill="none"
+                    stroke="white"
+                    /* wide enough to clear the stroke it is revealing */
+                    strokeWidth={8}
+                    strokeLinecap="round"
+                    /* pathLength 1 normalises every trace, so they all draw in
+                     over the same beat however long they actually are */
+                    pathLength={1}
+                    initial={false}
+                    animate={{ pathLength: i < revealed ? 1 : 0 }}
+                    transition={{ duration: 0.55, ease: EASE }}
+                  />
+                </mask>
+
+                {/* the unlit board is always there — the live trace draws over it */}
+                <path
                   d={d}
                   fill="none"
-                  stroke="white"
-                  /* wide enough to clear the stroke it is revealing */
-                  strokeWidth={8}
+                  stroke="rgba(228,255,92,0.25)"
+                  strokeWidth={1.5}
                   strokeLinecap="round"
-                  /* pathLength 1 normalises every trace, so they all draw in
-                     over the same beat however long they actually are */
-                  pathLength={1}
-                  initial={false}
-                  animate={{ pathLength: i < revealed ? 1 : 0 }}
-                  transition={{ duration: 0.55, ease: EASE }}
                 />
-              </mask>
-
-              {/* the unlit board is always there — the live trace draws over it */}
-              <path
-                d={d}
-                fill="none"
-                stroke="rgba(228,255,92,0.25)"
-                strokeWidth={1.5}
-                strokeLinecap="round"
-              />
-              <path
-                d={d}
-                fill="none"
-                stroke="#E4FF5C"
-                strokeWidth={1.5}
-                strokeLinecap="round"
-                mask={`url(#trace-${i})`}
-              />
-              {/* the travelling pulse — only once the trace itself has finished
+                <path
+                  d={d}
+                  fill="none"
+                  stroke="#E4FF5C"
+                  strokeWidth={1.5}
+                  strokeLinecap="round"
+                  mask={`url(#trace-${i})`}
+                />
+                {/* the travelling pulse — only once the trace itself has finished
                   drawing in, and never for reduced motion. `d` runs hub → card,
                   so keyPoints walks it back to front: the dot reads as leaving
                   each card and arriving at FamCare, not the other way round. */}
-              {i < revealed && !reduced && (
-                <circle r={4} fill="#06555B">
-                  <animateMotion
-                    dur="1s"
-                    begin="0.55s"
-                    repeatCount="indefinite"
-                    keyPoints="1;0"
-                    keyTimes="0;1"
-                    calcMode="linear"
-                    path={d}
-                  />
-                  <animate
-                    attributeName="opacity"
-                    values="0;1;1;0"
-                    keyTimes="0;0.08;0.9;1"
-                    dur="1s"
-                    begin="0.55s"
-                    repeatCount="indefinite"
-                  />
-                </circle>
-              )}
-            </g>
+                {i < revealed && !reduced && (
+                  <circle r={4} fill="#06555B">
+                    <animateMotion
+                      dur="1s"
+                      begin="0.55s"
+                      repeatCount="indefinite"
+                      keyPoints="1;0"
+                      keyTimes="0;1"
+                      calcMode="linear"
+                      path={d}
+                    />
+                    <animate
+                      attributeName="opacity"
+                      values="0;1;1;0"
+                      keyTimes="0;0.08;0.9;1"
+                      dur="1s"
+                      begin="0.55s"
+                      repeatCount="indefinite"
+                    />
+                  </circle>
+                )}
+              </g>
+            ))}
+          </svg>
+
+          <Hub />
+
+          {PILLARS.map((p, i) => (
+            <PillarCard key={p.name} pillar={p} index={i} on={i < revealed} />
           ))}
-        </svg>
-
-        <Hub />
-
-        {PILLARS.map((p, i) => (
-          <PillarCard key={p.name} pillar={p} index={i} on={i < revealed} />
-        ))}
         </div>
       </motion.div>
     </div>
@@ -346,7 +376,10 @@ function Stage({ revealed, reduced }: { revealed: number; reduced: boolean | nul
 function Spine({ revealed }: { revealed: number }) {
   return (
     <ol className="relative mt-6 lg:hidden">
-      <span aria-hidden className="absolute bottom-6 left-6 top-6 w-px -translate-x-1/2 bg-line" />
+      <span
+        aria-hidden
+        className="absolute bottom-6 left-6 top-6 w-px -translate-x-1/2 bg-line"
+      />
       {PILLARS.map((p, i) => (
         <SpineItem key={p.name} pillar={p} on={i < revealed} />
       ))}
@@ -374,7 +407,9 @@ function SpineItem({
         <BenefitIcon name={pillar.jelly} className="h-14 w-14" />
       </span>
       <span className="pt-2">
-        <span className="block font-display text-h3 font-bold text-ink">{pillar.name}</span>
+        <span className="block font-display text-h3 font-bold text-ink">
+          {pillar.name}
+        </span>
         <span className="mt-2 block max-w-[38ch] text-sm leading-relaxed text-ink-muted">
           {pillar.body}
         </span>
@@ -402,19 +437,27 @@ function Hub() {
         </defs>
       </svg>
 
-      <div className="relative h-full w-full" style={{ clipPath: "url(#safety-shield)" }}>
+      <div
+        className="relative h-full w-full"
+        style={{ clipPath: 'url(#safety-shield)' }}
+      >
         <div className="absolute inset-0 bg-gradient-to-b from-[#0E7A82] to-[#014D4F]" />
       </div>
 
       {/* the inner outline — same shield path as the clip above, scaled down
           around its own centre so it reads as a second, inset border rather
           than tracing the outer edge */}
-      <svg viewBox="0 0 100 100" fill="none" className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden>
+      <svg
+        viewBox="0 0 100 100"
+        fill="none"
+        className="pointer-events-none absolute inset-0 h-full w-full"
+        aria-hidden
+      >
         <path
           d="M50,2 L88,16 L88,48 C88,74 72,90 50,99 C28,90 12,74 12,48 L12,16 Z"
           stroke="#E4FF5C"
           strokeWidth={2}
-          style={{ transform: "scale(0.86)", transformOrigin: "50% 50%" }}
+          style={{ transform: 'scale(0.86)', transformOrigin: '50% 50%' }}
         />
       </svg>
 
@@ -448,12 +491,12 @@ function PillarCard({
       <motion.span
         animate={on ? { opacity: 1, x: 0 } : { opacity: 0, x: slot.from }}
         transition={{ duration: 0.45, delay: on ? 0.2 : 0, ease: EASE }}
-        className={cn("flex items-center gap-4", slot.stack)}
+        className={cn('flex items-center gap-4', slot.stack)}
       >
         <span
           className={cn(
-            "relative grid h-24 w-24 shrink-0 place-items-center transition-[opacity,filter] duration-300",
-            !on && "opacity-50 saturate-50",
+            'relative grid h-24 w-24 shrink-0 place-items-center transition-[opacity,filter] duration-300',
+            !on && 'opacity-50 saturate-50'
           )}
         >
           <BenefitIcon name={pillar.jelly} className="h-24 w-24" />

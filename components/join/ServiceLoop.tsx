@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import { cn } from "@/lib/cn";
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import { cn } from '@/lib/cn';
 
 const SERVICES: [string, string][] = [
-  ["Newborn care", "/img/newborncare.png"],
-  ["Infant day care", "/img/infantcare.png"],
-  ["Toddler companion", "/img/toddlercare.png"],
-  ["After school care", "/img/afterschoolcare.png"],
-  ["Elderly care", "/img/elderlycare.png"],
+  ['Newborn care', '/img/newborncare.png'],
+  ['Infant day care', '/img/infantcare.png'],
+  ['Toddler companion', '/img/toddlercare.png'],
+  ['After school care', '/img/afterschoolcare.png'],
+  ['Elderly care', '/img/elderlycare.png'],
 ];
 
 /* one service at a time, held for 2 seconds, crossfading to the next */
@@ -33,8 +33,8 @@ export default function ServiceLoop() {
             priority={idx === 0}
             sizes="460px"
             className={cn(
-              "object-cover transition-opacity duration-700 ease-out motion-reduce:transition-none",
-              idx === i ? "opacity-100" : "opacity-0",
+              'object-cover transition-opacity duration-700 ease-out motion-reduce:transition-none',
+              idx === i ? 'opacity-100' : 'opacity-0'
             )}
           />
         ))}

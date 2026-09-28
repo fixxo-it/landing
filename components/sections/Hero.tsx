@@ -1,22 +1,27 @@
-"use client";
+'use client';
 
-import { useCallback, useState } from "react";
-import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
-import { Container } from "@/components/ui/Section";
-import { cn } from "@/lib/cn";
-import Button from "@/components/ui/Button";
-import { openAppOrStore } from "@/components/DownloadModal";
-import { DURATION, EASE, RISE } from "@/components/motion/Reveal";
-import RotatingWord from "@/components/motion/RotatingWord";
+import { useCallback, useState } from 'react';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { Container } from '@/components/ui/Section';
+import { cn } from '@/lib/cn';
+import Button from '@/components/ui/Button';
+import { openAppOrStore } from '@/components/DownloadModal';
+import { DURATION, EASE, RISE } from '@/components/motion/Reveal';
+import RotatingWord from '@/components/motion/RotatingWord';
 
 /* "Baby Care" leads the loop, then the same beat other sections carry —
    the specific things a visit covers, so the headline itself demonstrates
    what "care" means rather than just naming it */
-const ROTATING_WORDS = ["Baby Care", "Pram walk", "Indoor play", "Freshen up", "Feed time"];
+const ROTATING_WORDS = [
+  'Baby Care',
+  'Pram walk',
+  'Indoor play',
+  'Freshen up',
+  'Feed time',
+];
 
 export default function Hero() {
-  const reduced = useReducedMotion();
   /* the clip only takes over once it can actually play — until then the still
      underneath is the hero, so there is never an empty frame to look at */
   const [playing, setPlaying] = useState(false);
@@ -36,7 +41,7 @@ export default function Hero() {
     show: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
   };
   const item = {
-    hidden: { opacity: 0, y: reduced ? 0 : RISE },
+    hidden: { opacity: 0, y: RISE },
     show: { opacity: 1, y: 0, transition: { duration: DURATION, ease: EASE } },
   };
 
@@ -44,7 +49,12 @@ export default function Hero() {
     <section id="top" className="scroll-mt-24 pb-16 pt-10 lg:pb-24 lg:pt-16">
       <Container>
         <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_520px] lg:gap-16 xl:grid-cols-[minmax(0,1fr)_620px]">
-          <motion.div variants={container} initial="hidden" animate="show" className="order-2 lg:order-1">
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className="order-2 lg:order-1"
+          >
             <motion.div
               variants={item}
               className="mb-4 inline-flex w-fit items-center gap-2 text-xs font-semibold uppercase tracking-wide text-teal-dark"
@@ -66,7 +76,7 @@ export default function Hero() {
                   the font shrinks on mobile so this fits rather than the line
                   wrapping and splitting the two apart */}
               <span className="whitespace-nowrap">
-                Get{" "}
+                Get{' '}
                 <span className="relative inline-block">
                   {/* same swipe as "Caregiver" in Services — a layer of its own so
                       the paint can overshoot the word rather than stop dead at it */}
@@ -74,7 +84,10 @@ export default function Hero() {
                     aria-hidden
                     className="brush-highlight absolute -inset-x-2 -inset-y-1 bg-[#E4FF5C]"
                   />
-                  <RotatingWord words={ROTATING_WORDS} className="relative text-teal" />
+                  <RotatingWord
+                    words={ROTATING_WORDS}
+                    className="relative text-teal"
+                  />
                 </span>
               </span>
               <br />
@@ -88,7 +101,10 @@ export default function Hero() {
               Professionally trained, background-verified caregivers
             </motion.p>
 
-            <motion.div variants={item} className="mt-8 flex flex-wrap items-center gap-3">
+            <motion.div
+              variants={item}
+              className="mt-8 flex flex-wrap items-center gap-3"
+            >
               <Button
                 href="#book"
                 label="BOOK A CAREGIVER NOW"
@@ -111,7 +127,11 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, scale: reduced ? 1 : 0.96, y: reduced ? 0 : 20 }}
+            initial={{
+              opacity: 0,
+              scale: 0.96,
+              y: 20,
+            }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.9, ease: EASE, delay: 0.25 }}
             className="relative order-1 mx-auto w-full max-w-[520px] lg:order-2"
@@ -152,8 +172,8 @@ export default function Hero() {
                 onLoadedData={() => setPlaying(true)}
                 onPlaying={() => setPlaying(true)}
                 className={cn(
-                  "absolute inset-0 h-full w-full object-cover object-bottom transition-opacity duration-700 ease-out",
-                  playing ? "opacity-100" : "opacity-0",
+                  'absolute inset-0 h-full w-full object-cover object-bottom transition-opacity duration-700 ease-out',
+                  playing ? 'opacity-100' : 'opacity-0'
                 )}
               />
             </div>

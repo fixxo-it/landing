@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import {
   AnimatePresence,
   motion,
@@ -10,27 +10,48 @@ import {
   useScroll,
   useSpring,
   useTransform,
-} from "framer-motion";
-import Reveal, { DURATION, EASE, RISE, IN_VIEW } from "@/components/motion/Reveal";
-import { openServiceBooking } from "@/components/DownloadModal";
-import { cn } from "@/lib/cn";
+} from 'framer-motion';
+import Reveal, {
+  DURATION,
+  EASE,
+  RISE,
+  IN_VIEW,
+} from '@/components/motion/Reveal';
+import { openServiceBooking } from '@/components/DownloadModal';
+import { cn } from '@/lib/cn';
 
 /* services without a booking flow yet just announce themselves instead of
    deep linking into the app */
-const COMING_SOON = new Set(["Elderly care"]);
+const COMING_SOON = new Set(['Elderly care']);
 
 /* every service shares one category, but each has its own sub-service id —
    that's the pair the deep link into the app needs. Elderly care has none
    yet since it opens the "coming soon" dialog instead. */
-const CATEGORY_ID = "4c031045-1100-4d4a-9a8d-0b60251c0f8d";
+const CATEGORY_ID = '4c031045-1100-4d4a-9a8d-0b60251c0f8d';
 
 /* cards without a dedicated photo fall back to the generic /img/service.png */
 const SERVICES: [string, string?, string?][] = [
-  ["Newborn care", "/img/newborncare.png", "bf18df9b-ff42-4457-b28d-850e9075d06a"],
-  ["Infant day care", "/img/infantcare.png", "a2abbd02-6472-4171-a3fd-12e42d3036b1"],
-  ["Toddler companion", "/img/toddlercare.png", "a82b6a6e-a05b-4a6c-8e4f-13da73caa95e"],
-  ["After school care", "/img/afterschoolcare.png", "3ad7e368-898d-4256-b4eb-1251a0d4f944"],
-  ["Elderly care", "/img/elderlycare.png"],
+  [
+    'Newborn care',
+    '/img/newborncare.png',
+    'bf18df9b-ff42-4457-b28d-850e9075d06a',
+  ],
+  [
+    'Infant day care',
+    '/img/infantcare.png',
+    'a2abbd02-6472-4171-a3fd-12e42d3036b1',
+  ],
+  [
+    'Toddler companion',
+    '/img/toddlercare.png',
+    'a82b6a6e-a05b-4a6c-8e4f-13da73caa95e',
+  ],
+  [
+    'After school care',
+    '/img/afterschoolcare.png',
+    '3ad7e368-898d-4256-b4eb-1251a0d4f944',
+  ],
+  ['Elderly care', '/img/elderlycare.png'],
 ];
 
 /* the last stretch of the pin is spent holding the settled strip, so the
@@ -55,11 +76,11 @@ export default function Services() {
      than flush against the left edge. */
   const [wide, setWide] = useState(false);
   useEffect(() => {
-    const mq = window.matchMedia("(min-width: 1024px)");
+    const mq = window.matchMedia('(min-width: 1024px)');
     const update = () => setWide(mq.matches);
     update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
   }, []);
 
   const wrapRef = useRef<HTMLElement>(null);
@@ -83,7 +104,7 @@ export default function Services() {
       const track = trackRef.current;
       const viewport = viewportRef.current;
       if (!track || !viewport) return;
-      const wide = window.matchMedia("(min-width: 1024px)").matches;
+      const wide = window.matchMedia('(min-width: 1024px)').matches;
       const last = track.lastElementChild;
       const offset = last
         ? last.getBoundingClientRect().left - track.getBoundingClientRect().left
@@ -92,20 +113,20 @@ export default function Services() {
     };
 
     measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
   }, [pinned]);
 
   const { scrollYProgress } = useScroll({
     target: wrapRef,
-    offset: ["start start", "end end"],
+    offset: ['start start', 'end end'],
   });
   /* the lead-in is travel too: the strip covers LEAD + travel over the same pin,
      so the pace is unchanged and the first card slides in from rest */
   const raw = useTransform(
     scrollYProgress,
     [0, 1 - HOLD],
-    [pinned ? LEAD : 0, -travel],
+    [pinned ? LEAD : 0, -travel]
   );
   /* stiff enough that the strip is not still catching up when the pin ends */
   const x = useSpring(raw, { stiffness: 260, damping: 40, mass: 0.3 });
@@ -118,22 +139,23 @@ export default function Services() {
          rather than stopping once it has cleared the right one, which is around
          a third further to travel — the pin is longer by the same proportion so
          the cards still move at the pace they did, rather than whipping past. */
-      className={cn("relative scroll-mt-24", pinned && "lg:h-[400vh]")}
+      className={cn('relative scroll-mt-24', pinned && 'lg:h-[400vh]')}
     >
       <div
         className={cn(
-          "flex flex-col gap-10 py-20 lg:gap-0 lg:py-0",
-          pinned && "lg:sticky lg:top-0 lg:h-screen lg:flex-row lg:items-center lg:overflow-hidden",
+          'flex flex-col gap-10 py-20 lg:gap-0 lg:py-0',
+          pinned &&
+            'lg:sticky lg:top-0 lg:h-screen lg:flex-row lg:items-center lg:overflow-hidden'
         )}
       >
         {/* heading rail — the strip disappears into this edge */}
         <div className="relative z-20 shrink-0 bg-white px-6 sm:px-10 lg:w-[44%] lg:max-w-[560px] lg:px-16 xl:px-24 2xl:px-32">
           <Reveal
             as="h2"
-            className="font-display text-[2.5rem] font-bold leading-[1.08] tracking-[-0.03em] lg:text-[3.75rem] lg:leading-[1.05] text-balance text-ink"
+            className="text-balance font-display text-[2.5rem] font-bold leading-[1.08] tracking-[-0.03em] text-ink lg:text-[3.75rem] lg:leading-[1.05]"
           >
             From newborn to school going,
-            <br className="hidden sm:block" /> we have the right{" "}
+            <br className="hidden sm:block" /> we have the right{' '}
             {/* the swipe is a layer of its own rather than the span's own
                 background: paint overshoots the word it marks, and a background
                 stops dead at the box. The insets are what let it run past the
@@ -158,13 +180,13 @@ export default function Services() {
             /* the vertical padding is headroom, not spacing: the viewport clips
                on both axes, so without it a card's hover lift and float shadow
                would be cut off at the top and bottom edges */
-            "min-w-0 flex-1 overflow-x-auto py-6 lg:overflow-hidden lg:py-10",
+            'min-w-0 flex-1 overflow-x-auto py-6 lg:overflow-hidden lg:py-10',
             /* pulled back out again so the headroom costs no layout space */
-            "-my-6 lg:-my-10",
-            "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+            '-my-6 lg:-my-10',
+            '[scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
             /* soft dissolve at the left edge so cards melt into the heading */
             pinned &&
-              "lg:[mask-image:linear-gradient(to_right,transparent_0,black_140px)]",
+              'lg:[mask-image:linear-gradient(to_right,transparent_0,black_140px)]'
           )}
         >
           <motion.div
@@ -175,7 +197,9 @@ export default function Services() {
                scroll-driven travel and is untouched by this */
             initial={{ opacity: 0, y: reduced ? 0 : RISE }}
             animate={
-              stripInView ? { opacity: 1, y: 0 } : { opacity: 0, y: reduced ? 0 : RISE }
+              stripInView
+                ? { opacity: 1, y: 0 }
+                : { opacity: 0, y: reduced ? 0 : RISE }
             }
             transition={{ duration: DURATION, ease: EASE, delay: 0.1 }}
           >
@@ -217,7 +241,15 @@ export default function Services() {
                 aria-label="Close"
                 className="absolute right-4 top-4 z-10 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-ink-muted shadow-float ring-1 ring-line transition-colors duration-200 hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
               >
-                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" aria-hidden>
+                <svg
+                  className="h-4 w-4"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  aria-hidden
+                >
                   <path d="M6 6l12 12M18 6L6 18" />
                 </svg>
               </button>
@@ -235,9 +267,12 @@ export default function Services() {
                 />
               </div>
               <div className="p-8 text-left">
-                <p className="font-display text-h3 font-bold text-ink">Coming soon</p>
+                <p className="font-display text-h3 font-bold text-ink">
+                  Coming soon
+                </p>
                 <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-                  Elderly care is on its way, we will let you know the moment it is live.
+                  Elderly care is on its way, we will let you know the moment it
+                  is live.
                 </p>
                 <button
                   type="button"
@@ -247,7 +282,7 @@ export default function Services() {
                   <span
                     aria-hidden
                     className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay"
-                    style={{ backgroundImage: "url(/img/Grainy.jpg)" }}
+                    style={{ backgroundImage: 'url(/img/Grainy.jpg)' }}
                   />
                   <span className="relative z-10">Got it</span>
                 </button>
@@ -306,7 +341,7 @@ function ServiceCard({
           className="object-cover"
         />
         <Image
-          src={image ?? "/img/service.png"}
+          src={image ?? '/img/service.png'}
           alt={name}
           fill
           sizes="(min-width: 1024px) 560px, (min-width: 640px) 420px, 78vw"
@@ -323,7 +358,9 @@ function ServiceCard({
         />
 
         <div className="absolute inset-x-0 bottom-0 flex flex-wrap items-baseline justify-center gap-x-2 px-4 pb-4 text-center">
-          <p className="text-xl font-semibold tracking-[-0.01em] text-white lg:text-2xl">{name}</p>
+          <p className="text-xl font-semibold tracking-[-0.01em] text-white lg:text-2xl">
+            {name}
+          </p>
           {COMING_SOON.has(name) && (
             <p className="text-base text-white/75 lg:text-lg">Coming soon</p>
           )}

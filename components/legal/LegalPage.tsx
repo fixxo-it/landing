@@ -1,5 +1,5 @@
-import { Container } from "@/components/ui/Section";
-import BackButton from "@/components/legal/BackButton";
+import { Container } from '@/components/ui/Section';
+import BackButton from '@/components/legal/BackButton';
 
 /* Shared shell for every legal page — the back button, the title, and a
    prose column for the content. One place to change the layout for all four
@@ -37,15 +37,7 @@ export default function LegalPage({
              are styled by hand here rather than with `prose` — h2 for each
              section, p for body copy, ul/li for lists. Content just writes
              plain JSX/HTML, this supplies the look. */
-          <div
-            className="mt-10 space-y-5 text-[15px] leading-relaxed text-ink-muted
-              [&_h2]:mt-10 [&_h2]:font-display [&_h2]:text-h3 [&_h2]:font-semibold [&_h2]:text-ink [&_h2]:first:mt-0
-              [&_h3]:mt-6 [&_h3]:font-display [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-ink
-              [&_a]:text-teal [&_a]:underline [&_a]:decoration-teal/30 [&_a]:underline-offset-4 [&_a:hover]:decoration-teal
-              [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-5
-              [&_ol]:list-decimal [&_ol]:space-y-2 [&_ol]:pl-5
-              [&_strong]:font-semibold [&_strong]:text-ink"
-          >
+          <div className="mt-10 space-y-5 text-[15px] leading-relaxed text-ink-muted [&_a:hover]:decoration-teal [&_a]:text-teal [&_a]:underline [&_a]:decoration-teal/30 [&_a]:underline-offset-4 [&_h2]:mt-10 [&_h2]:font-display [&_h2]:text-h3 [&_h2]:font-semibold [&_h2]:text-ink [&_h2]:first:mt-0 [&_h3]:mt-6 [&_h3]:font-display [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-ink [&_ol]:list-decimal [&_ol]:space-y-2 [&_ol]:pl-5 [&_strong]:font-semibold [&_strong]:text-ink [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-5">
             {children}
           </div>
         ) : (

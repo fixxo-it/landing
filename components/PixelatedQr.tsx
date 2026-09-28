@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useEffect, useRef } from "react";
-import QRCode from "qrcode";
+import { useEffect, useRef } from 'react';
+import QRCode from 'qrcode';
 
 /* quiet-zone modules around the code — scanners need this margin to lock on */
 const MARGIN = 4;
@@ -22,7 +22,7 @@ export default function PixelatedQr({
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const ctx = canvas?.getContext("2d");
+    const ctx = canvas?.getContext('2d');
     if (!canvas || !ctx) return;
 
     const dpr = window.devicePixelRatio || 1;
@@ -30,15 +30,15 @@ export default function PixelatedQr({
     canvas.height = size * dpr;
     ctx.scale(dpr, dpr);
 
-    const qr = QRCode.create(value, { errorCorrectionLevel: "H" });
+    const qr = QRCode.create(value, { errorCorrectionLevel: 'H' });
     const count = qr.modules.size;
     const total = count + MARGIN * 2;
     const cell = size / total;
 
-    ctx.fillStyle = "#fff";
+    ctx.fillStyle = '#fff';
     ctx.fillRect(0, 0, size, size);
 
-    ctx.fillStyle = "#000";
+    ctx.fillStyle = '#000';
     for (let row = 0; row < count; row++) {
       for (let col = 0; col < count; col++) {
         if (!qr.modules.get(row, col)) continue;
@@ -46,7 +46,7 @@ export default function PixelatedQr({
           (col + MARGIN) * cell,
           (row + MARGIN) * cell,
           cell + 0.5,
-          cell + 0.5,
+          cell + 0.5
         );
       }
     }

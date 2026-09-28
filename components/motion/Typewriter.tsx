@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import { useReducedMotion } from "framer-motion";
+import { useEffect, useState } from 'react';
+import { useReducedMotion } from 'framer-motion';
 
 /* Per-character cadence. Slow enough to read along with, fast enough that the
    headline is complete before anyone has finished looking at the image. */
@@ -53,9 +53,11 @@ export default function Typewriter({
               not shift sideways as it fades */}
           <span
             className={[
-              "ml-[0.08em] inline-block h-[0.78em] w-[0.06em] translate-y-[0.02em] rounded-[1px] bg-current align-middle",
-              done ? "opacity-0 transition-opacity duration-500" : "animate-caret",
-            ].join(" ")}
+              'ml-[0.08em] inline-block h-[0.78em] w-[0.06em] translate-y-[0.02em] rounded-[1px] bg-current align-middle',
+              done
+                ? 'opacity-0 transition-opacity duration-500'
+                : 'animate-caret',
+            ].join(' ')}
           />
         </span>
       </span>
