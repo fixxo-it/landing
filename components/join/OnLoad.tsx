@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import { DURATION, EASE } from "@/components/motion/Reveal";
+import { motion } from 'framer-motion';
+import { DURATION, EASE } from '@/components/motion/Reveal';
 
 /* plays on mount rather than on scroll: the header sits inside the top 10% of
    the viewport, which Reveal's in-view margin deliberately ignores */

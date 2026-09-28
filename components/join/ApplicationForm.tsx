@@ -1,23 +1,34 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
-import { Arrow } from "@/components/ui/Button";
-import { JELLY_BTN } from "@/components/join/jelly";
-import Select from "@/components/join/Select";
-import DobPicker, { isAdult, parseDob } from "@/components/join/DobPicker";
+import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { Arrow } from '@/components/ui/Button';
+import { JELLY_BTN } from '@/components/join/jelly';
+import Select from '@/components/join/Select';
+import DobPicker, { isAdult, parseDob } from '@/components/join/DobPicker';
 
-const EXPERIENCE = ["No experience yet", "Less than 1 year", "1–3 years", "3–5 years", "5+ years"];
-const AVAILABILITY = ["Immediately", "Within a week", "Within 2 weeks", "Within a month"];
+const EXPERIENCE = [
+  'No experience yet',
+  'Less than 1 year',
+  '1–3 years',
+  '3–5 years',
+  '5+ years',
+];
+const AVAILABILITY = [
+  'Immediately',
+  'Within a week',
+  'Within 2 weeks',
+  'Within a month',
+];
 
 const FIELD =
-  "h-14 w-full rounded-2xl border border-line bg-white px-5 text-base text-ink placeholder:text-ink-faint outline-none transition-colors focus:border-teal focus:ring-2 focus:ring-teal/20";
+  'h-14 w-full rounded-2xl border border-line bg-white px-5 text-base text-ink placeholder:text-ink-faint outline-none transition-colors focus:border-teal focus:ring-2 focus:ring-teal/20';
 
-const AREA = FIELD.replace("h-14", "min-h-[104px] resize-y py-4");
+const AREA = FIELD.replace('h-14', 'min-h-[104px] resize-y py-4');
 
 /* white panel with only a whisper of the brand green: a thin dark-green bar along the top */
 const PANEL =
-  "relative isolate overflow-hidden rounded-[32px] bg-white shadow-float ring-1 ring-teal/10";
+  'relative isolate overflow-hidden rounded-[32px] bg-white shadow-float ring-1 ring-teal/10';
 
 function Glow() {
   return (
@@ -33,7 +44,7 @@ function Glow() {
 function Field({
   label,
   className,
-  labelClassName = "text-teal-dark",
+  labelClassName = 'text-teal-dark',
   count,
   maxCount,
   children,
@@ -53,7 +64,7 @@ function Field({
         </span>
         {maxCount && count !== undefined ? (
           <span
-            className={`text-xs ${count > maxCount * 0.9 ? "font-medium text-[#B4432F]" : "text-ink-faint"}`}
+            className={`text-xs ${count > maxCount * 0.9 ? 'font-medium text-[#B4432F]' : 'text-ink-faint'}`}
           >
             {count}/{maxCount}
           </span>
@@ -66,11 +77,11 @@ function Field({
 
 export default function ApplicationForm() {
   const [done, setDone] = useState(false);
-  const [experience, setExperience] = useState("");
-  const [start, setStart] = useState("");
-  const [dob, setDob] = useState("");
-  const [currentAddress, setCurrentAddress] = useState("");
-  const [permanentAddress, setPermanentAddress] = useState("");
+  const [experience, setExperience] = useState('');
+  const [start, setStart] = useState('');
+  const [dob, setDob] = useState('');
+  const [currentAddress, setCurrentAddress] = useState('');
+  const [permanentAddress, setPermanentAddress] = useState('');
   const [tried, setTried] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -84,19 +95,19 @@ export default function ApplicationForm() {
     setDone(false);
     setTried(false);
     setSubmitError(null);
-    setExperience("");
-    setStart("");
-    setDob("");
-    setCurrentAddress("");
-    setPermanentAddress("");
+    setExperience('');
+    setStart('');
+    setDob('');
+    setCurrentAddress('');
+    setPermanentAddress('');
     formRef.current?.reset();
   };
 
   useEffect(() => {
     if (!done) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && closeThanks();
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && closeThanks();
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
   }, [done]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -112,18 +123,18 @@ export default function ApplicationForm() {
     if (!form) return;
 
     const formData = new FormData(form);
-    const fullName = String(formData.get("name") || "").trim();
-    const phone = String(formData.get("mobile") || "").trim();
-    const languages = String(formData.get("languages") || "").trim();
-    const consent = formData.get("consent") === "on";
-    const website = String(formData.get("website") || "").trim(); // Honeypot
+    const fullName = String(formData.get('name') || '').trim();
+    const phone = String(formData.get('mobile') || '').trim();
+    const languages = String(formData.get('languages') || '').trim();
+    const consent = formData.get('consent') === 'on';
+    const website = String(formData.get('website') || '').trim(); // Honeypot
 
     setIsSubmitting(true);
 
     try {
-      const res = await fetch("/api/apply", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch('/api/apply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           full_name: fullName,
           phone,
@@ -142,7 +153,9 @@ export default function ApplicationForm() {
 
       if (!res.ok) {
         throw new Error(
-          json?.error || json?.detail || "Failed to submit application. Please try again.",
+          json?.error ||
+            json?.detail ||
+            'Failed to submit application. Please try again.'
         );
       }
 
@@ -151,7 +164,7 @@ export default function ApplicationForm() {
       const msg =
         err instanceof Error
           ? err.message
-          : "Something went wrong. Please check your details and try again.";
+          : 'Something went wrong. Please check your details and try again.';
       setSubmitError(msg);
     } finally {
       setIsSubmitting(false);
@@ -160,12 +173,18 @@ export default function ApplicationForm() {
 
   return (
     <>
-      <form ref={formRef} onSubmit={handleSubmit} className={`${PANEL} p-6 sm:p-10 lg:p-14`}>
+      <form
+        ref={formRef}
+        onSubmit={handleSubmit}
+        className={`${PANEL} p-6 sm:p-10 lg:p-14`}
+      >
         <Glow />
         <h3 className="relative font-display text-h3 font-semibold text-teal-dark lg:text-4xl">
           Caregiver application
         </h3>
-        <p className="relative mt-2 text-ink-muted">Fields marked * are required.</p>
+        <p className="relative mt-2 text-ink-muted">
+          Fields marked * are required.
+        </p>
 
         {submitError && (
           <div className="relative mt-6 flex items-start gap-3 rounded-2xl border border-red-200 bg-red-50/80 p-4 text-sm text-[#B4432F]">
@@ -178,10 +197,16 @@ export default function ApplicationForm() {
         <div
           className="hidden"
           aria-hidden="true"
-          style={{ display: "none", position: "absolute", left: "-9999px" }}
+          style={{ display: 'none', position: 'absolute', left: '-9999px' }}
         >
           <label htmlFor="website">Website</label>
-          <input type="text" id="website" name="website" tabIndex={-1} autoComplete="off" />
+          <input
+            type="text"
+            id="website"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+          />
         </div>
 
         <div className="relative mt-8 grid gap-6 sm:grid-cols-2">
@@ -298,8 +323,8 @@ export default function ApplicationForm() {
               className="mt-0.5 h-6 w-6 shrink-0 rounded-md accent-teal"
             />
             <span>
-              I agree that FamCare may contact me about this application by phone or WhatsApp.{" "}
-              <span className="text-teal">*</span>
+              I agree that FamCare may contact me about this application by
+              phone or WhatsApp. <span className="text-teal">*</span>
             </span>
           </label>
           <button
@@ -308,13 +333,14 @@ export default function ApplicationForm() {
             className={`${JELLY_BTN} h-12 px-7 text-base disabled:opacity-70`}
           >
             <span className="relative z-10 inline-flex items-center gap-2.5">
-              {isSubmitting ? "SUBMITTING..." : "SUBMIT"} {!isSubmitting && <Arrow />}
+              {isSubmitting ? 'SUBMITTING...' : 'SUBMIT'}{' '}
+              {!isSubmitting && <Arrow />}
             </span>
           </button>
         </div>
         <p className="relative mt-4 text-sm text-ink-muted">
-          We use your details only for recruitment. Please don’t share Aadhaar numbers or other
-          documents here.
+          We use your details only for recruitment. Please don’t share Aadhaar
+          numbers or other documents here.
         </p>
       </form>
 
@@ -337,11 +363,15 @@ export default function ApplicationForm() {
               >
                 ✓
               </span>
-              <h3 id="thanks-title" className="mt-5 font-display text-3xl font-bold text-ink">
+              <h3
+                id="thanks-title"
+                className="mt-5 font-display text-3xl font-bold text-ink"
+              >
                 Thank you for applying.
               </h3>
               <p className="mt-3 text-ink-muted">
-                Our hiring team will review your details and contact you if you are shortlisted.
+                Our hiring team will review your details and contact you if you
+                are shortlisted.
               </p>
               <button
                 type="button"
@@ -352,7 +382,7 @@ export default function ApplicationForm() {
               </button>
             </div>
           </div>,
-          document.body,
+          document.body
         )}
     </>
   );

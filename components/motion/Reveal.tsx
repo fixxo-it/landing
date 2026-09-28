@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useRef } from "react";
-import { motion, useInView, type Variants } from "framer-motion";
+import { useRef } from 'react';
+import { motion, useInView, type Variants } from 'framer-motion';
 
 /* Shared motion language for the page:
    – one easing curve (a soft out-expo) so nothing feels like a different site
@@ -15,14 +15,14 @@ export const DURATION = 0.75;
    until the element is properly inside the viewport rather than firing while it
    is still a sliver at the bottom edge — otherwise the animation is over before
    it has scrolled somewhere you can see it. */
-export const VIEWPORT = { once: true, margin: "-15% 0px -10% 0px" } as const;
+export const VIEWPORT = { once: true, margin: '-15% 0px -10% 0px' } as const;
 
 /* The same trigger, expressed for the `useInView` hook. Everything on the page
    reveals through this rather than through the declarative `whileInView` prop:
    the hook is a plain IntersectionObserver we drive ourselves, so a reveal can
    never be left stranded at opacity 0 by the motion feature bundle failing to
    pick the viewport gesture up. */
-export const IN_VIEW = { once: true, margin: "-10% 0px -10% 0px" } as const;
+export const IN_VIEW = { once: true, margin: '-10% 0px -10% 0px' } as const;
 
 export function useReveal() {
   const ref = useRef<HTMLElement>(null);
@@ -30,10 +30,10 @@ export function useReveal() {
   return { ref, inView };
 }
 
-type Tag = "div" | "span" | "p" | "h2" | "h3" | "li" | "ul" | "section";
+type Tag = 'div' | 'span' | 'p' | 'h2' | 'h3' | 'li' | 'ul' | 'section';
 
 export default function Reveal({
-  as = "div",
+  as = 'div',
   delay = 0,
   y = RISE,
   className,
@@ -66,7 +66,7 @@ export function Stagger({
   className,
   delay = 0,
   step = 0.08,
-  as = "div",
+  as = 'div',
   children,
 }: {
   className?: string;
@@ -82,7 +82,7 @@ export function Stagger({
       ref={ref as React.Ref<HTMLDivElement>}
       className={className}
       initial="hidden"
-      animate={inView ? "show" : "hidden"}
+      animate={inView ? 'show' : 'hidden'}
       variants={{
         hidden: {},
         show: { transition: { staggerChildren: step, delayChildren: delay } },
@@ -95,7 +95,7 @@ export function Stagger({
 
 export function StaggerItem({
   className,
-  as = "div",
+  as = 'div',
   children,
 }: {
   className?: string;

@@ -1,35 +1,43 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion";
-import { Section } from "@/components/ui/Section";
-import Reveal, { EASE } from "@/components/motion/Reveal";
-import StepBadge from "@/components/join/StepBadge";
-import { cn } from "@/lib/cn";
+import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
+import {
+  AnimatePresence,
+  motion,
+  useInView,
+  useReducedMotion,
+} from 'framer-motion';
+import { Section } from '@/components/ui/Section';
+import Reveal, { EASE } from '@/components/motion/Reveal';
+import StepBadge from '@/components/join/StepBadge';
+import { cn } from '@/lib/cn';
 
 /* how long each screen holds before the next one slides in */
 const DWELL = 2.2;
 
 /* one caption per phone screen — the stepper shows the live one under its dot */
 const STEPS = [
-  "Tell us what you need (30 sec)",
-  "Select a service",
-  "Confirm & pay (2 min)",
-  "They arrive (~10 min)",
+  'Tell us what you need (30 sec)',
+  'Select a service',
+  'Confirm & pay (2 min)',
+  'They arrive (~10 min)',
 ];
 const SCREENS = STEPS.length;
 
 export default function HowItWorks() {
   const [active, setActive] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { margin: "-25% 0px" });
+  const inView = useInView(ref, { margin: '-25% 0px' });
   const reduced = useReducedMotion();
   const running = inView && !reduced;
 
   useEffect(() => {
     if (!running) return;
-    const id = setTimeout(() => setActive((i) => (i + 1) % SCREENS), DWELL * 1000);
+    const id = setTimeout(
+      () => setActive((i) => (i + 1) % SCREENS),
+      DWELL * 1000
+    );
     return () => clearTimeout(id);
   }, [active, running]);
 
@@ -39,7 +47,7 @@ export default function HowItWorks() {
        dissolve: content has to start below where the wash finishes. */
     <Section
       id="how-it-works"
-      className="relative isolate overflow-hidden pt-40 pb-40 lg:pt-52 lg:pb-52"
+      className="relative isolate overflow-hidden pb-40 pt-40 lg:pb-52 lg:pt-52"
     >
       {/* flat brand teal, hard edge top and bottom — the fade mask existed to
           blend a photo's crop into the white sections either side, and a solid
@@ -51,7 +59,7 @@ export default function HowItWorks() {
           alt=""
           fill
           sizes="100vw"
-          className="object-cover mix-blend-overlay opacity-40"
+          className="object-cover opacity-40 mix-blend-overlay"
         />
         <div className="grain pointer-events-none absolute inset-0" />
       </div>
@@ -71,12 +79,15 @@ export default function HowItWorks() {
                still fit the left column at each breakpoint. max-w is in ch, so
                it scales with the font size — bumping the mobile size does not
                reopen the overflow risk nowrap is guarding against. */
-            className="whitespace-nowrap font-display text-[2.75rem] font-bold leading-[1.08] tracking-[-0.03em] lg:text-[5rem] lg:leading-[1.03] text-white"
+            className="whitespace-nowrap font-display text-[2.75rem] font-bold leading-[1.08] tracking-[-0.03em] text-white lg:text-[5rem] lg:leading-[1.03]"
           >
             Book in 4 steps
           </Reveal>
 
-          <Reveal delay={0.15} className="mt-12 w-full max-w-[520px] lg:mx-auto">
+          <Reveal
+            delay={0.15}
+            className="mt-12 w-full max-w-[520px] lg:mx-auto"
+          >
             <Stepper active={active} running={running} />
           </Reveal>
         </div>
@@ -125,8 +136,8 @@ function Stepper({ active, running }: { active: number; running: boolean }) {
               <span className="relative shrink-0">
                 <span
                   className={cn(
-                    "block transition-[opacity,filter] duration-300",
-                    i > active && "opacity-50 saturate-50",
+                    'block transition-[opacity,filter] duration-300',
+                    i > active && 'opacity-50 saturate-50'
                   )}
                 >
                   <StepBadge n={i + 1} />
@@ -173,11 +184,11 @@ function Stepper({ active, running }: { active: number; running: boolean }) {
                      leaves the background anchored to the left edge, so the
                      pattern is revealed rather than distorted. */
                     className="absolute left-0 top-0 block h-full bg-white"
-                    initial={{ width: i < active ? "100%" : "0%" }}
-                    animate={{ width: "100%" }}
+                    initial={{ width: i < active ? '100%' : '0%' }}
+                    animate={{ width: '100%' }}
                     transition={
                       i === active && running
-                        ? { duration: DWELL, ease: "linear" }
+                        ? { duration: DWELL, ease: 'linear' }
                         : { duration: 0.3, ease: EASE }
                     }
                   />
@@ -191,12 +202,14 @@ function Stepper({ active, running }: { active: number; running: boolean }) {
                      half a width past them */
                     /* both offsets live here, not in classes: motion writes
                      `transform` inline and would drop a -translate-y utility */
-                    style={{ x: "-50%", y: "-50%" }}
+                    style={{ x: '-50%', y: '-50%' }}
                     className="absolute top-1/2 block h-2.5 w-2.5 rounded-full bg-[#E4FF5C] shadow-[0_0_8px_rgba(228,255,92,0.7)]"
-                    initial={{ left: "0%" }}
-                    animate={{ left: "100%" }}
+                    initial={{ left: '0%' }}
+                    animate={{ left: '100%' }}
                     transition={
-                      running ? { duration: DWELL, ease: "linear" } : { duration: 0.3, ease: EASE }
+                      running
+                        ? { duration: DWELL, ease: 'linear' }
+                        : { duration: 0.3, ease: EASE }
                     }
                   />
                 )}
@@ -215,10 +228,10 @@ function Stepper({ active, running }: { active: number; running: boolean }) {
    its own status bar and chrome, so no drawn chrome sits between it and the
    phone frame. */
 const SCREEN_IMAGES: string[] = [
-  "/img/home.png",
-  "/img/selectservice.png",
-  "/img/confirmpay.png",
-  "/img/assign.png",
+  '/img/home.png',
+  '/img/selectservice.png',
+  '/img/confirmpay.png',
+  '/img/assign.png',
 ];
 
 function PhoneMockup({ active }: { active: number }) {

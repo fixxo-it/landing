@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { EASE } from "@/components/motion/Reveal";
-import { openDownloadModal } from "@/components/DownloadModal";
-import PixelatedQr from "@/components/PixelatedQr";
+import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { EASE } from '@/components/motion/Reveal';
+import { openDownloadModal } from '@/components/DownloadModal';
+import PixelatedQr from '@/components/PixelatedQr';
 
-const DOWNLOAD_URL = "https://famcare.onelink.me/LK0E/cgr3j0s7?af_qr=true";
+const DOWNLOAD_URL = 'https://famcare.onelink.me/LK0E/cgr3j0s7?af_qr=true';
 
 /* The card is an allowlist now, not a latch: it rides along only while one of
    these sections is on screen and leaves as soon as the last one does. Add a
    section id here to have the card show over it too. */
-const SECTIONS = [/* "Book in 3 taps" */ "#how-it-works"];
+const SECTIONS = [/* "Book in 3 taps" */ '#how-it-works'];
 
 export default function DownloadQr() {
   const [dismissed, setDismissed] = useState(false);
@@ -20,7 +20,7 @@ export default function DownloadQr() {
 
   useEffect(() => {
     const targets = SECTIONS.map((sel) => document.querySelector(sel)).filter(
-      (el): el is Element => el !== null,
+      (el): el is Element => el !== null
     );
     if (!targets.length) return;
 
@@ -36,7 +36,7 @@ export default function DownloadQr() {
         }
         setInSection(visible.size > 0);
       },
-      { threshold: 0 },
+      { threshold: 0 }
     );
 
     targets.forEach((el) => io.observe(el));

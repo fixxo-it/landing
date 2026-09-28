@@ -1,19 +1,25 @@
-"use client";
+'use client';
 
-import { useCallback, useState } from "react";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { Container } from "@/components/ui/Section";
-import { cn } from "@/lib/cn";
-import Button from "@/components/ui/Button";
-import { openAppOrStore } from "@/components/DownloadModal";
-import { DURATION, EASE, RISE } from "@/components/motion/Reveal";
-import RotatingWord from "@/components/motion/RotatingWord";
+import { useCallback, useState } from 'react';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { Container } from '@/components/ui/Section';
+import { cn } from '@/lib/cn';
+import Button from '@/components/ui/Button';
+import { openAppOrStore } from '@/components/DownloadModal';
+import { DURATION, EASE, RISE } from '@/components/motion/Reveal';
+import RotatingWord from '@/components/motion/RotatingWord';
 
 /* "Baby Care" leads the loop, then the same beat other sections carry —
    the specific things a visit covers, so the headline itself demonstrates
    what "care" means rather than just naming it */
-const ROTATING_WORDS = ["Baby Care", "Pram walk", "Indoor play", "Freshen up", "Feed time"];
+const ROTATING_WORDS = [
+  'Baby Care',
+  'Pram walk',
+  'Indoor play',
+  'Freshen up',
+  'Feed time',
+];
 
 export default function Hero() {
   /* the clip only takes over once it can actually play — until then the still
@@ -70,7 +76,7 @@ export default function Hero() {
                   the font shrinks on mobile so this fits rather than the line
                   wrapping and splitting the two apart */}
               <span className="whitespace-nowrap">
-                Get{" "}
+                Get{' '}
                 <span className="relative inline-block">
                   {/* same swipe as "Caregiver" in Services — a layer of its own so
                       the paint can overshoot the word rather than stop dead at it */}
@@ -78,7 +84,10 @@ export default function Hero() {
                     aria-hidden
                     className="brush-highlight absolute -inset-x-2 -inset-y-1 bg-[#E4FF5C]"
                   />
-                  <RotatingWord words={ROTATING_WORDS} className="relative text-teal" />
+                  <RotatingWord
+                    words={ROTATING_WORDS}
+                    className="relative text-teal"
+                  />
                 </span>
               </span>
               <br />
@@ -92,7 +101,10 @@ export default function Hero() {
               Professionally trained, background-verified caregivers
             </motion.p>
 
-            <motion.div variants={item} className="mt-8 flex flex-wrap items-center gap-3">
+            <motion.div
+              variants={item}
+              className="mt-8 flex flex-wrap items-center gap-3"
+            >
               <Button
                 href="#book"
                 label="BOOK A CAREGIVER NOW"
@@ -103,7 +115,12 @@ export default function Hero() {
                   openAppOrStore();
                 }}
               />
-              <Button href="#safety-360" label="WHY CHOOSE US?" variant="secondary" size="md" />
+              <Button
+                href="#safety-360"
+                label="WHY CHOOSE US?"
+                variant="secondary"
+                size="md"
+              />
             </motion.div>
 
             {/* replaces the empty space under the buttons with actual proof */}
@@ -155,8 +172,8 @@ export default function Hero() {
                 onLoadedData={() => setPlaying(true)}
                 onPlaying={() => setPlaying(true)}
                 className={cn(
-                  "absolute inset-0 h-full w-full object-cover object-bottom transition-opacity duration-700 ease-out",
-                  playing ? "opacity-100" : "opacity-0",
+                  'absolute inset-0 h-full w-full object-cover object-bottom transition-opacity duration-700 ease-out',
+                  playing ? 'opacity-100' : 'opacity-0'
                 )}
               />
             </div>

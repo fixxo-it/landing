@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { Container } from "@/components/ui/Section";
-import Button from "@/components/ui/Button";
-import { openDownloadModal } from "@/components/DownloadModal";
-import Reveal, { EASE, useReveal } from "@/components/motion/Reveal";
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { Container } from '@/components/ui/Section';
+import Button from '@/components/ui/Button';
+import { openDownloadModal } from '@/components/DownloadModal';
+import Reveal, { EASE, useReveal } from '@/components/motion/Reveal';
 
 export default function CtaBanner({ heading }: { heading?: string } = {}) {
   const phone = useReveal();
@@ -31,7 +31,7 @@ export default function CtaBanner({ heading }: { heading?: string } = {}) {
                 className={
                   heading
                     ? /* other pages size it to their own heading ramp */ heading
-                    : "max-w-[12ch] font-display text-[2.5rem] font-bold leading-[1.08] tracking-[-0.03em] lg:text-[3.75rem] lg:leading-[1.05] text-balance text-ink"
+                    : 'max-w-[12ch] text-balance font-display text-[2.5rem] font-bold leading-[1.08] tracking-[-0.03em] text-ink lg:text-[3.75rem] lg:leading-[1.05]'
                 }
               >
                 At your door in 10 minutes
@@ -64,7 +64,9 @@ export default function CtaBanner({ heading }: { heading?: string } = {}) {
           <motion.div
             ref={phone.ref as React.Ref<HTMLDivElement>}
             initial={{ opacity: 0, y: 40 }}
-            animate={phone.inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+            animate={
+              phone.inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }
+            }
             transition={{ duration: 0.85, ease: EASE, delay: 0.1 }}
             className="mx-auto hidden lg:block"
           >
