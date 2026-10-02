@@ -10,7 +10,7 @@ const ADDRESS =
 
 export default function TermsAndConditionsPage() {
   return (
-    <LegalPage title="Terms of Use" updated="Effective Date: August 2026">
+    <LegalPage title="Terms of Use" updated="Last Updated: 1 October 2026">
       <p>
         The FamCare mobile application is owned, developed, and operated by
         FamCare Technologies Private Limited, a company incorporated under the
