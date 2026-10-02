@@ -407,9 +407,22 @@ export default function TermsAndConditionsPage() {
       <p>
         6.2 Cancellations &mdash; Cancellation of confirmed bookings shall be
         subject to FamCare&rsquo;s cancellation and refund policy as published
-        on the Platform from time to time. FamCare reserves the right to impose
+        on the Platform from time to time. A User may cancel a confirmed
+        Session without cancellation charges provided such cancellation is made
+        at least four (4) hours before the scheduled commencement time of the
+        Session. Cancellations made less than four (4) hours before the
+        scheduled commencement time, or any failure by the User to be available
+        at the commencement of the Session (&ldquo;no-show&rdquo;), may attract
         cancellation charges in accordance with the applicable policy. FamCare
-        may modify the cancellation policy upon reasonable notice to Users.
+        reserves the right to impose cancellation charges in accordance with the
+        applicable policy. FamCare may modify the cancellation policy upon
+        reasonable notice to Users.
+      </p>
+      <p>
+        6.2.1 Exceptional Circumstances &mdash; FamCare may review genuine
+        medical emergencies or other exceptional situations on a case-by-case
+        basis. Any refund or credit provided under such circumstances shall be
+        at FamCare&rsquo;s sole discretion.
       </p>
       <p>
         6.3 Payments &mdash; All payments for caregiving services shall be made
