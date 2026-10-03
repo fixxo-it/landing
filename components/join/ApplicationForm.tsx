@@ -155,7 +155,7 @@ export default function ApplicationForm() {
         throw new Error(
           json?.error ||
             json?.detail ||
-            'Failed to submit application. Please try again.'
+            'Failed to submit application, please try again'
         );
       }
 
@@ -164,7 +164,7 @@ export default function ApplicationForm() {
       const msg =
         err instanceof Error
           ? err.message
-          : 'Something went wrong. Please check your details and try again.';
+          : 'Something went wrong, please check your details and try again';
       setSubmitError(msg);
     } finally {
       setIsSubmitting(false);
@@ -183,7 +183,7 @@ export default function ApplicationForm() {
           Caregiver application
         </h3>
         <p className="relative mt-2 text-ink-muted">
-          Fields marked * are required.
+          Fields marked * are required
         </p>
 
         {submitError && (
@@ -244,7 +244,7 @@ export default function ApplicationForm() {
             )}
             {tried && dobUnderage && (
               <p className="mt-2 text-sm font-medium text-[#B4432F]">
-                You must be 18 or older to apply.
+                You must be 18 or older to apply
               </p>
             )}
           </Field>
@@ -339,8 +339,8 @@ export default function ApplicationForm() {
           </button>
         </div>
         <p className="relative mt-4 text-sm text-ink-muted">
-          We use your details only for recruitment. Please don’t share Aadhaar
-          numbers or other documents here.
+          We use your details only for recruitment, please don’t share Aadhaar
+          numbers or other documents here
         </p>
       </form>
 
@@ -367,11 +367,11 @@ export default function ApplicationForm() {
                 id="thanks-title"
                 className="mt-5 font-display text-3xl font-bold text-ink"
               >
-                Thank you for applying.
+                Thank you for applying
               </h3>
               <p className="mt-3 text-ink-muted">
                 Our hiring team will review your details and contact you if you
-                are shortlisted.
+                are shortlisted
               </p>
               <button
                 type="button"
