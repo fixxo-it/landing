@@ -107,7 +107,7 @@ export default function ApplicationForm() {
           if (!res.ok) throw new Error();
           setDone(true);
         } catch {
-          setError("Something went wrong sending your application. Please try again.");
+          setError("Something went wrong sending your application, please try again");
         } finally {
           setSending(false);
         }
@@ -116,7 +116,7 @@ export default function ApplicationForm() {
     >
       <Glow />
       <h3 className="relative font-display text-h3 font-semibold text-teal-dark lg:text-4xl">Caregiver application</h3>
-      <p className="relative mt-2 text-ink-muted">Fields marked * are required.</p>
+      <p className="relative mt-2 text-ink-muted">Fields marked * are required</p>
 
       <div className="relative mt-8 grid gap-6 sm:grid-cols-2">
         <Field label="Full name">
@@ -139,7 +139,7 @@ export default function ApplicationForm() {
             <p className="mt-2 text-sm font-medium text-[#B4432F]">Enter a valid date as DD/MM/YYYY.</p>
           )}
           {tried && dobUnderage && (
-            <p className="mt-2 text-sm font-medium text-[#B4432F]">You must be 18 or older to apply.</p>
+            <p className="mt-2 text-sm font-medium text-[#B4432F]">You must be 18 or older to apply</p>
           )}
         </Field>
         <Field label="Languages you speak">
@@ -179,7 +179,7 @@ export default function ApplicationForm() {
       </div>
       {error && <p className="relative mt-4 text-sm font-medium text-[#B4432F]">{error}</p>}
       <p className="relative mt-4 text-sm text-ink-muted">
-        We use your details only for recruitment. Please don’t share Aadhaar numbers or other documents here.
+        We use your details only for recruitment, please don’t share Aadhaar numbers or other documents here
       </p>
     </form>
 
@@ -199,10 +199,10 @@ export default function ApplicationForm() {
             ✓
           </span>
           <h3 id="thanks-title" className="mt-5 font-display text-3xl font-bold text-ink">
-            Thank you for applying.
+            Thank you for applying
           </h3>
           <p className="mt-3 text-ink-muted">
-            Our hiring team will review your details and contact you if you are shortlisted.
+            Our hiring team will review your details and contact you if you are shortlisted
           </p>
           <button type="button" onClick={closeThanks} className={`${JELLY_BTN} mt-7 h-12 px-8 text-base`}>
             <span className="relative z-10">DONE</span>
