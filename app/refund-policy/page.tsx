@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function RefundPolicyPage() {
   return (
-    <LegalPage title="Refund Policy" updated="Last Updated: May 2026">
+    <LegalPage title="Refund Policy" updated="Last Updated: October 2026">
       <p>
         At FamCare, we aim to provide exceptional caregiving services for your
         loved ones. We understand that plans can change, and we strive to
@@ -26,15 +26,21 @@ export default function RefundPolicyPage() {
       <h3>Scheduled Bookings</h3>
       <ul>
         <li>
-          <strong>30+ Minutes Notice:</strong> If you cancel a scheduled
-          appointment at least 30 minutes before the booking time, you are
-          eligible for a full refund or credit for a future session.
+          <strong>4+ Hours Notice:</strong> If you cancel a confirmed Session at
+          least four (4) hours before its scheduled start time, no cancellation
+          charges apply and you are eligible for a full refund or credit for a
+          future Session.
         </li>
         <li>
-          <strong>Less Than 30 Minutes Notice:</strong> Cancellations with less
-          than 30 minutes notice before a scheduled booking are non-refundable,
-          as resources have already been allocated and the caregiver has been
-          assigned.
+          <strong>Less Than 4 Hours Notice:</strong> Cancellations made less
+          than four (4) hours before the scheduled start time may attract
+          cancellation charges, up to the full Session fee, as resources have
+          already been allocated and the caregiver has been assigned.
+        </li>
+        <li>
+          <strong>No-Show:</strong> If you are not available when the Session is
+          due to begin, the booking is treated as a late cancellation and the
+          same charges may apply.
         </li>
       </ul>
 
@@ -42,11 +48,28 @@ export default function RefundPolicyPage() {
       <ul>
         <li>
           <strong>Cancellation After Confirmation:</strong> You may cancel an
-          instant booking at any time; however, charges will apply as the
-          caregiver may already be on the way and resources may have been
-          utilised.
+          instant booking at any time; however, as an instant booking begins
+          within four (4) hours of confirmation, cancellation charges may apply,
+          since the caregiver may already be on the way and resources may have
+          been utilised.
         </li>
       </ul>
+
+      <h3>Cancellations by FamCare</h3>
+      <p>
+        If FamCare cancels a confirmed booking &mdash; for example due to
+        caregiver unavailability, safety concerns, or operational issues &mdash;
+        you will receive a full refund of the fees paid for that Session, unless
+        the cancellation results from your own conduct or a breach of our{' '}
+        <a href="/terms-and-conditions">Terms of Use</a>.
+      </p>
+
+      <h3>Exceptional Circumstances</h3>
+      <p>
+        Genuine medical emergencies and other exceptional situations may be
+        reviewed on a case-by-case basis. Any refund or credit in such cases is
+        at FamCare&rsquo;s sole discretion.
+      </p>
 
       <h2>3. Service Quality Refund</h2>
       <p>
@@ -59,8 +82,9 @@ export default function RefundPolicyPage() {
       <h2>4. Refund Processing</h2>
       <p>
         Refunds are processed using the original payment method and within 5-10
-        business days of the refund approval. Transaction fees may not be
-        refundable depending on the payment processor&rsquo;s terms.
+        business days of the refund approval. FamCare is not liable for any
+        transaction fees or charges imposed by banks or payment service
+        providers in connection with processing a refund.
       </p>
 
       <h2>5. Promotional Services</h2>

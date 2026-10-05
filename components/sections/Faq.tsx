@@ -22,11 +22,11 @@ const GROUPS: Group[] = [
       ],
       [
         'Can I see who is coming before they arrive?',
-        'Yes, the moment your booking is confirmed. Profile, photo, verification status and experience are in the app, and you can track the arrival live.',
+        'Yes, the moment your booking is confirmed — profile, photo, verification status and experience are in the app, and you can track the arrival live. At the door, scan the QR code on their FamCare ID card and only let them in if it matches.',
       ],
       [
         'What happens in an emergency?',
-        'The FamCare concierge answers 24/7 from inside the app. Every visit also carries accident cover and emergency medical assistance at no extra cost.',
+        'Call emergency services (112) first, then press SOS in the app — the FamCare concierge answers 24/7. Every visit also carries accident cover and emergency medical assistance at no extra cost.',
       ],
     ],
   },
@@ -52,7 +52,7 @@ const GROUPS: Group[] = [
       ],
       [
         'Can I cancel or reschedule?',
-        'Free of charge until the caregiver is dispatched. After dispatch a small cancellation fee applies.',
+        'Free of charge up to 4 hours before the visit starts. Cancelling later, or not being home when the caregiver arrives, may carry a cancellation charge.',
       ],
     ],
   },
@@ -61,7 +61,7 @@ const GROUPS: Group[] = [
     items: [
       [
         'Can I request the same caregiver again?',
-        'Yes, and you do not have to ask. FamCare Match™ learns who your child bonds with and prioritises them on your next bookings.',
+        'Yes, and you do not have to ask. FamCare Match™ uses your ratings and repeat bookings to prioritise the caregivers you liked.',
       ],
       [
         'What if my child does not settle with a caregiver?',
@@ -73,8 +73,8 @@ const GROUPS: Group[] = [
     tab: 'Pricing & payments',
     items: [
       [
-        'Is there a visit or platform fee?',
-        'No. The price shown before you confirm is the price you pay — no visit charge, no surge pricing, no hidden fees.',
+        'Are there any extra charges?',
+        "No surprises — the price shown before you confirm already includes FamCare's service fee, with no surge pricing. Applicable taxes are added on top, and waiting time or extending a visit is charged separately.",
       ],
       [
         'When am I charged?',

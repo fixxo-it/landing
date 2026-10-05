@@ -23,11 +23,11 @@ const FAQS: [string, string][] = [
   ],
   [
     'How do I cancel or reschedule a booking?',
-    'Cancel or reschedule directly from the FamCare app. Cancellations made at least 30 minutes before the scheduled time are fully refunded; a small fee applies after that.',
+    'Cancel or reschedule directly from the FamCare app. Cancellations made at least 4 hours before the scheduled time are free and fully refunded; later cancellations or no-shows may attract a cancellation charge.',
   ],
   [
     'What is your pricing?',
-    'Pricing is transparent and standardised by the type of care and duration of the service — you see the exact quote in the app before you confirm.',
+    "Pricing is transparent and standardised by the type of care and duration of the service — you see the quote, including FamCare's service fee, in the app before you confirm. Applicable taxes, waiting time and session extensions are charged in addition.",
   ],
 ];
 
