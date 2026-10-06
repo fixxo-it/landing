@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Container } from '@/components/ui/Section';
+import PageHero from '@/components/ui/PageHero';
+import Tilt from '@/components/motion/Tilt';
 import Reveal, { EASE } from '@/components/motion/Reveal';
 import BackButton from '@/components/legal/BackButton';
 import SiteFooter from '@/components/sections/SiteFooter';
@@ -19,7 +21,7 @@ const FAQS: [string, string][] = [
   ],
   [
     'What areas do you serve?',
-    'We currently operate in Whitefield and Varthur, Bengaluru, and are expanding across east Bengaluru through the year.',
+    'We currently operate in Whitefield, Varthur and Mahadevapura, Bengaluru, and are expanding across east Bengaluru through the year.',
   ],
   [
     'How do I cancel or reschedule a booking?',
@@ -158,42 +160,40 @@ export default function SupportPage() {
         </Container>
       </div>
 
-      <Container className="pb-20 pt-8 lg:pb-28 lg:pt-12">
-        <h1 className="font-display text-h1 font-semibold text-ink lg:text-h1-lg">
-          Support &amp; Contact
-        </h1>
-        <Reveal
-          as="p"
-          delay={0.05}
-          className="mt-4 max-w-[560px] text-lg leading-relaxed text-ink-muted"
-        >
-          We&rsquo;re here to help with any questions about our caregiving
-          services.
-        </Reveal>
+      <PageHero
+        eyebrow="Help centre"
+        title="Support & Contact"
+        sub={
+          <>
+            We&rsquo;re here to help with any questions about our caregiving
+            services.
+          </>
+        }
+      />
 
+      <Container className="pb-20 pt-4 lg:pb-28">
         <Reveal
           delay={0.1}
           className="mt-12 grid gap-6 sm:grid-cols-2 lg:max-w-[720px]"
         >
           {CONTACTS.map(({ icon: Icon, title, body, href, label }) => (
-            <div
-              key={title}
-              className="flex flex-col items-start gap-3 rounded-[20px] border border-line bg-white p-8 shadow-float"
-            >
-              <span className="grid h-14 w-14 place-items-center rounded-full bg-teal-tint text-teal">
-                <Icon />
-              </span>
-              <h3 className="font-display text-lg font-semibold text-ink">
-                {title}
-              </h3>
-              <p className="text-[15px] text-ink-muted">{body}</p>
-              <a
-                href={href}
-                className="mt-1 font-display text-base font-semibold text-teal underline decoration-teal/30 underline-offset-4 transition-colors duration-200 hover:decoration-teal"
-              >
-                {label}
-              </a>
-            </div>
+            <Tilt key={title} max={6} className="rounded-[20px]">
+              <div className="flex h-full flex-col items-start gap-3 rounded-[20px] border border-line bg-white p-8 shadow-float">
+                <span className="grid h-14 w-14 place-items-center rounded-full bg-teal-tint text-teal">
+                  <Icon />
+                </span>
+                <h3 className="font-display text-lg font-semibold text-ink">
+                  {title}
+                </h3>
+                <p className="text-[15px] text-ink-muted">{body}</p>
+                <a
+                  href={href}
+                  className="mt-1 font-display text-base font-semibold text-teal underline decoration-teal/30 underline-offset-4 transition-colors duration-200 hover:decoration-teal"
+                >
+                  {label}
+                </a>
+              </div>
+            </Tilt>
           ))}
         </Reveal>
 

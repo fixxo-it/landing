@@ -6,6 +6,8 @@ import { Container } from '@/components/ui/Section';
 import Button from '@/components/ui/Button';
 import { openDownloadModal } from '@/components/DownloadModal';
 import Reveal, { EASE, useReveal } from '@/components/motion/Reveal';
+import SplitText from '@/components/motion/SplitText';
+import Tilt from '@/components/motion/Tilt';
 
 export default function CtaBanner({ heading }: { heading?: string } = {}) {
   const phone = useReveal();
@@ -31,10 +33,10 @@ export default function CtaBanner({ heading }: { heading?: string } = {}) {
                 className={
                   heading
                     ? /* other pages size it to their own heading ramp */ heading
-                    : 'max-w-[12ch] text-balance font-display text-[2.5rem] font-bold leading-[1.08] tracking-[-0.03em] text-ink lg:text-[3.75rem] lg:leading-[1.05]'
+                    : 'max-w-[12ch] text-balance font-display text-[2.5rem] font-bold leading-[1.08] tracking-[-0.02em] text-ink lg:text-[3.75rem] lg:leading-[1.05]'
                 }
               >
-                At your door in 10 minutes
+                <SplitText text="At your door in 10 minutes" />
               </h2>
               <p className="mt-5 max-w-[38ch] text-lg leading-relaxed text-ink-muted">
                 Your child&rsquo;s favorite companion,
@@ -70,7 +72,9 @@ export default function CtaBanner({ heading }: { heading?: string } = {}) {
             transition={{ duration: 0.85, ease: EASE, delay: 0.1 }}
             className="mx-auto hidden lg:block"
           >
-            <QrPhone />
+            <Tilt max={8} glare={false}>
+              <QrPhone />
+            </Tilt>
           </motion.div>
         </div>
       </Container>

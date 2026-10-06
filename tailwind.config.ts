@@ -38,12 +38,12 @@ export default {
       },
       /* one type ramp for the whole page — every heading picks from here */
       fontSize: {
-        eyebrow: ['0.6875rem', { lineHeight: '1', letterSpacing: '0.12em' }],
+        eyebrow: ['0.6875rem', { lineHeight: '1', letterSpacing: '-0.02em' }],
         h3: ['1.5rem', { lineHeight: '1.25', letterSpacing: '-0.02em' }],
-        h2: ['2rem', { lineHeight: '1.12', letterSpacing: '-0.025em' }],
-        'h2-lg': ['3.25rem', { lineHeight: '1.08', letterSpacing: '-0.028em' }],
-        h1: ['2.75rem', { lineHeight: '1.06', letterSpacing: '-0.03em' }],
-        'h1-lg': ['4.25rem', { lineHeight: '1.04', letterSpacing: '-0.032em' }],
+        h2: ['2rem', { lineHeight: '1.12', letterSpacing: '-0.02em' }],
+        'h2-lg': ['3.25rem', { lineHeight: '1.08', letterSpacing: '-0.02em' }],
+        h1: ['2.75rem', { lineHeight: '1.06', letterSpacing: '-0.02em' }],
+        'h1-lg': ['4.25rem', { lineHeight: '1.04', letterSpacing: '-0.02em' }],
       },
       boxShadow: {
         card: '0 6px 20px -10px rgba(11, 31, 32, 0.22)',
@@ -59,6 +59,17 @@ export default {
       /* the testimonial rails: each track holds two identical copies, so
          sliding exactly one copy width loops with no visible seam */
       keyframes: {
+        /* the hero's light blobs: a slow orbit with a breathing scale, so the
+           dark panel never sits perfectly still */
+        aurora: {
+          '0%, 100%': { transform: 'translate(0, 0) scale(1) rotate(0deg)' },
+          '33%': { transform: 'translate(8%, -6%) scale(1.15) rotate(25deg)' },
+          '66%': { transform: 'translate(-6%, 8%) scale(0.92) rotate(-20deg)' },
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-14px)' },
+        },
         marquee: {
           from: { transform: 'translateX(0)' },
           to: { transform: 'translateX(-50%)' },
@@ -106,6 +117,10 @@ export default {
         },
       },
       animation: {
+        aurora: 'aurora 18s ease-in-out infinite',
+        'aurora-slow': 'aurora 26s ease-in-out infinite reverse',
+        float: 'float 6s ease-in-out infinite',
+        'float-late': 'float 7s ease-in-out 1.2s infinite',
         marquee: 'marquee 35s linear infinite',
         'marquee-reverse': 'marquee-reverse 35s linear infinite',
         caret: 'caret 1s steps(1, end) infinite',

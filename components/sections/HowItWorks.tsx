@@ -7,10 +7,14 @@ import {
   motion,
   useInView,
   useReducedMotion,
+  useScroll,
+  useTransform,
 } from 'framer-motion';
 import { Section } from '@/components/ui/Section';
 import Reveal, { EASE } from '@/components/motion/Reveal';
 import StepBadge from '@/components/join/StepBadge';
+import SplitText from '@/components/motion/SplitText';
+import Tilt from '@/components/motion/Tilt';
 import { cn } from '@/lib/cn';
 
 /* how long each screen holds before the next one slides in */
@@ -31,6 +35,21 @@ export default function HowItWorks() {
   const inView = useInView(ref, { margin: '-25% 0px' });
   const reduced = useReducedMotion();
   const running = inView && !reduced;
+
+  /* the teal ground opens out as the section arrives: it starts as an inset,
+     heavily rounded card and grows to full bleed by the time its top edge
+     reaches the top of the screen */
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'start start'],
+  });
+  const inset = useTransform(scrollYProgress, [0, 1], [reduced ? 0 : 8, 0]);
+  const radius = useTransform(scrollYProgress, [0, 1], [reduced ? 0 : 120, 0]);
+  const clipPath = useTransform(
+    [inset, radius] as const,
+    ([i, r]: number[]) => `inset(${i}% ${i}% 0% ${i}% round ${r}px)`
+  );
 
   useEffect(() => {
     if (!running) return;
@@ -53,7 +72,16 @@ export default function HowItWorks() {
           blend a photo's crop into the white sections either side, and a solid
           fill has no seam to hide. Grain still sits on top, or the fill reads
           too flat next to every other section's textured ground. */}
-      <div aria-hidden className="absolute inset-0 -z-10 bg-teal">
+      <div
+        ref={sectionRef}
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10"
+      />
+      <motion.div
+        aria-hidden
+        style={{ clipPath }}
+        className="absolute inset-0 -z-10 bg-teal-dark"
+      >
         <Image
           src="/img/Grainy.jpg"
           alt=""
@@ -62,7 +90,10 @@ export default function HowItWorks() {
           className="object-cover opacity-40 mix-blend-overlay"
         />
         <div className="grain pointer-events-none absolute inset-0" />
-      </div>
+        {/* two slow light blobs so the teal has depth rather than reading flat */}
+        <span className="absolute -left-[10%] top-[10%] h-[50vw] max-h-[700px] w-[50vw] max-w-[700px] animate-aurora rounded-full bg-teal-light/20 blur-[120px] motion-reduce:animate-none" />
+        <span className="absolute -right-[10%] bottom-0 h-[40vw] max-h-[600px] w-[40vw] max-w-[600px] animate-aurora-slow rounded-full bg-[#0E7A82]/50 blur-[120px] motion-reduce:animate-none" />
+      </motion.div>
 
       {/* heading left, phone right. Both tracks size to their content and the
           pair is then centred as a unit — a 1fr text column would be wider than
@@ -79,9 +110,9 @@ export default function HowItWorks() {
                still fit the left column at each breakpoint. max-w is in ch, so
                it scales with the font size — bumping the mobile size does not
                reopen the overflow risk nowrap is guarding against. */
-            className="whitespace-nowrap font-display text-[2.75rem] font-bold leading-[1.08] tracking-[-0.03em] text-white lg:text-[5rem] lg:leading-[1.03]"
+            className="whitespace-nowrap font-display text-[2.75rem] font-bold leading-[1.08] tracking-[-0.02em] text-white lg:text-[5rem] lg:leading-[1.03]"
           >
-            Book in 4 steps
+            <SplitText text="Book in 4 steps" />
           </Reveal>
 
           <Reveal
@@ -93,7 +124,9 @@ export default function HowItWorks() {
         </div>
 
         <Reveal>
-          <PhoneMockup active={active} />
+          <Tilt max={12} glare={false}>
+            <PhoneMockup active={active} />
+          </Tilt>
         </Reveal>
       </div>
     </Section>

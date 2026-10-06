@@ -10,6 +10,7 @@
 
   body {
     @apply bg-white font-sans text-ink antialiased;
+    letter-spacing: -0.02em;
   }
 
   /* one visible focus treatment for every interactive element */

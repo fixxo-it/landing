@@ -52,8 +52,27 @@ export default function Reveal({
     <Component
       ref={ref as React.Ref<HTMLDivElement>}
       className={className}
-      initial={{ opacity: 0, y }}
-      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y }}
+      initial={{
+        opacity: 0,
+        y: y,
+        filter: 'blur(10px)',
+      }}
+      animate={
+        inView
+          ? /* filter is dropped once settled: a lingering filter would turn
+               this into the containing block for any fixed child */
+            {
+              opacity: 1,
+              y: 0,
+              filter: 'blur(0px)',
+              transitionEnd: { filter: 'none' },
+            }
+          : {
+              opacity: 0,
+              y: y,
+              filter: 'blur(10px)',
+            }
+      }
       transition={{ duration: DURATION, delay, ease: EASE }}
     >
       {children}
@@ -104,8 +123,20 @@ export function StaggerItem({
 }) {
   const Component = motion[as] as typeof motion.div;
   const variants: Variants = {
-    hidden: { opacity: 0, y: RISE },
-    show: { opacity: 1, y: 0, transition: { duration: DURATION, ease: EASE } },
+    hidden: {
+      opacity: 0,
+      y: RISE * 1.6,
+      scale: 0.96,
+      filter: 'blur(10px)',
+    },
+    show: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      filter: 'blur(0px)',
+      transition: { duration: 0.9, ease: EASE },
+      transitionEnd: { filter: 'none' },
+    },
   };
   return (
     <Component className={className} variants={variants}>

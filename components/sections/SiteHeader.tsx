@@ -153,7 +153,7 @@ export default function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  'group relative whitespace-nowrap py-1 text-[15px] font-semibold uppercase tracking-[0.06em] transition-colors duration-200',
+                  'group relative whitespace-nowrap py-1 text-[15px] font-semibold uppercase tracking-[-0.02em] transition-colors duration-200',
                   item.href === '#safety-360'
                     ? GLIMMER
                     : 'text-ink hover:text-teal'

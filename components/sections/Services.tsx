@@ -10,14 +10,11 @@ import {
   useSpring,
   useTransform,
 } from 'framer-motion';
-import Reveal, {
-  DURATION,
-  EASE,
-  RISE,
-  IN_VIEW,
-} from '@/components/motion/Reveal';
+import { DURATION, EASE, RISE, IN_VIEW } from '@/components/motion/Reveal';
 import { openServiceBooking } from '@/components/DownloadModal';
 import { cn } from '@/lib/cn';
+import Tilt from '@/components/motion/Tilt';
+import SplitText from '@/components/motion/SplitText';
 
 /* services without a booking flow yet just announce themselves instead of
    deep linking into the app */
@@ -152,12 +149,10 @@ export default function Services() {
       >
         {/* heading rail — the strip disappears into this edge */}
         <div className="relative z-20 shrink-0 bg-white px-6 sm:px-10 lg:w-[44%] lg:max-w-[560px] lg:px-16 xl:px-24 2xl:px-32">
-          <Reveal
-            as="h2"
-            className="text-balance font-display text-[2.5rem] font-bold leading-[1.08] tracking-[-0.03em] text-ink lg:text-[3.75rem] lg:leading-[1.05]"
-          >
-            From newborn to school going,
-            <br className="hidden sm:block" /> we have the right{' '}
+          <h2 className="text-balance font-display text-[2.5rem] font-bold leading-[1.08] tracking-[-0.02em] text-ink lg:text-[3.75rem] lg:leading-[1.05]">
+            <SplitText text="From newborn to school going," />
+            <br className="hidden sm:block" />{' '}
+            <SplitText text="we have the right" delay={0.3} />{' '}
             {/* the swipe is a layer of its own rather than the span's own
                 background: paint overshoots the word it marks, and a background
                 stops dead at the box. The insets are what let it run past the
@@ -172,7 +167,7 @@ export default function Services() {
               />
               <span className="relative">Caregiver</span>
             </span>
-          </Reveal>
+          </h2>
         </div>
 
         {/* strip viewport: native swipe on mobile, scroll-driven on desktop */}
@@ -204,14 +199,15 @@ export default function Services() {
             transition={{ duration: DURATION, ease: EASE, delay: 0.1 }}
           >
             {SERVICES.map(([name, image, subServiceId]) => (
-              <ServiceCard
-                key={name}
-                name={name}
-                image={image}
-                subServiceId={subServiceId}
-                reduced={isReduced}
-                onComingSoon={() => setComingSoon(true)}
-              />
+              <Tilt key={name} max={7} className="shrink-0 rounded-3xl">
+                <ServiceCard
+                  name={name}
+                  image={image}
+                  subServiceId={subServiceId}
+                  reduced={isReduced}
+                  onComingSoon={() => setComingSoon(true)}
+                />
+              </Tilt>
             ))}
           </motion.div>
         </div>
@@ -358,7 +354,7 @@ function ServiceCard({
         />
 
         <div className="absolute inset-x-0 bottom-0 flex flex-wrap items-baseline justify-center gap-x-2 px-4 pb-4 text-center">
-          <p className="text-xl font-semibold tracking-[-0.01em] text-white lg:text-2xl">
+          <p className="text-xl font-semibold tracking-[-0.02em] text-white lg:text-2xl">
             {name}
           </p>
           {COMING_SOON.has(name) && (
