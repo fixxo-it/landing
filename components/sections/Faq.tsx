@@ -5,8 +5,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Section } from '@/components/ui/Section';
 import Reveal, { EASE } from '@/components/motion/Reveal';
 import { cn } from '@/lib/cn';
+import SplitText from '@/components/motion/SplitText';
 
-type Group = { tab: string; items: [string, string][] };
+/* An answer is a paragraph, or a list of "Label: text" points rendered as bullets */
+type Answer = string | string[];
+type Group = { tab: string; items: [string, Answer][] };
 
 /* Answer shape, held to across every entry below: the direct answer is the
    first sentence, the proof is the second, and there is no third. A parent
@@ -48,11 +51,15 @@ const GROUPS: Group[] = [
     items: [
       [
         'How quickly can someone reach me?',
-        'About 10 minutes in Whitefield and Varthur — that is the median for an instant booking, not a best case. Visits can also be scheduled up to 30 days ahead.',
+        [
+          'Instant Care: Caregivers aim to arrive in about 10 minutes, but this depends on uncontrollable external factors like heavy rain, severe traffic, and general road conditions.',
+          'Scheduled Care: Visits can be planned and locked in up to 30 days in advance.',
+          'Safety First: Arrival times prioritize the safety and security of the FamCare caregivers on the road.',
+        ],
       ],
       [
         'Can I cancel or reschedule?',
-        'Free of charge up to 4 hours before the visit starts. Cancelling later, or not being home when the caregiver arrives, may carry a cancellation charge.',
+        'You can cancel or reschedule for free at least 4 hours before your booking starts. Within 4 hours, cancellations are non-refundable. Rescheduling is treated as a cancellation and requires a new booking.',
       ],
     ],
   },
@@ -87,7 +94,7 @@ const GROUPS: Group[] = [
     items: [
       [
         'Where is FamCare available?',
-        'Whitefield and Varthur, Bengaluru, today. We are expanding across east Bengaluru through the year.',
+        'Whitefield, Varthur and Mahadevapura, Bengaluru, today. We are expanding across east Bengaluru through the year.',
       ],
       [
         'Can I request my area?',
@@ -126,10 +133,10 @@ export default function Faq() {
               and the contact line, so it has to leave them room */}
           {/* mobile size matched to "Book in 4 steps" so the page's oversized
               headings all read at the same scale on a phone */}
-          <h2 className="font-display text-[2.5rem] font-bold leading-[1.08] tracking-[-0.03em] text-ink lg:text-[3.75rem] lg:leading-[1.05]">
-            Questions? Good
+          <h2 className="font-display text-[2.5rem] font-bold leading-[1.08] tracking-[-0.02em] text-ink lg:text-[3.75rem] lg:leading-[1.05]">
+            <SplitText text="Questions? Good" />
             <br />
-            Ask us anything
+            <SplitText text="Ask us anything" delay={0.15} />
           </h2>
 
           {/* the filter actually drives the list on the right — one row,
@@ -144,7 +151,7 @@ export default function Faq() {
                 onClick={() => select(i)}
                 aria-pressed={i === tab}
                 className={cn(
-                  'relative shrink-0 rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-[0.08em] transition-colors duration-200',
+                  'relative shrink-0 rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-[-0.02em] transition-colors duration-200',
                   i === tab ? 'text-white' : 'text-ink'
                 )}
               >
@@ -257,9 +264,25 @@ export default function Faq() {
                           transition={{ duration: 0.35, ease: EASE }}
                           className="overflow-hidden"
                         >
-                          <p className="max-w-[62ch] px-6 pb-6 text-[15px] leading-relaxed text-ink-muted sm:px-8 lg:text-base">
-                            {a}
-                          </p>
+                          {typeof a === 'string' ? (
+                            <p className="max-w-[62ch] px-6 pb-6 text-[15px] leading-relaxed text-ink-muted sm:px-8 lg:text-base">
+                              {a}
+                            </p>
+                          ) : (
+                            <ul className="max-w-[62ch] list-disc space-y-2 pb-6 pl-11 pr-6 text-[15px] leading-relaxed text-ink-muted marker:text-teal sm:pl-[3.25rem] sm:pr-8 lg:text-base">
+                              {a.map((point) => {
+                                const [label, ...rest] = point.split(': ');
+                                return (
+                                  <li key={point}>
+                                    <span className="font-semibold text-ink">
+                                      {label}:
+                                    </span>{' '}
+                                    {rest.join(': ')}
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          )}
                         </motion.div>
                       )}
                     </AnimatePresence>

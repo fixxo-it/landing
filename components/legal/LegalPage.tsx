@@ -1,5 +1,7 @@
 import { Container } from '@/components/ui/Section';
 import BackButton from '@/components/legal/BackButton';
+import PageHero from '@/components/ui/PageHero';
+import Reveal from '@/components/motion/Reveal';
 
 /* Shared shell for every legal page — the back button, the title, and a
    prose column for the content. One place to change the layout for all four
@@ -26,20 +28,17 @@ export default function LegalPage({
         </Container>
       </div>
 
-      <Container className="max-w-[820px] pb-24 pt-8 lg:pb-32 lg:pt-12">
-        <h1 className="font-display text-h1 font-semibold text-ink lg:text-h1-lg">
-          {title}
-        </h1>
-        {updated && <p className="mt-3 text-sm text-ink-faint">{updated}</p>}
+      <PageHero eyebrow="FamCare legal" title={title} sub={updated} />
 
+      <Container className="max-w-[820px] pb-24 pt-4 lg:pb-32">
         {children ? (
           /* no typography plugin in this project, so the content's own tags
              are styled by hand here rather than with `prose` — h2 for each
              section, p for body copy, ul/li for lists. Content just writes
              plain JSX/HTML, this supplies the look. */
-          <div className="mt-10 space-y-5 text-[15px] leading-relaxed text-ink-muted [&_a:hover]:decoration-teal [&_a]:text-teal [&_a]:underline [&_a]:decoration-teal/30 [&_a]:underline-offset-4 [&_h2]:mt-10 [&_h2]:font-display [&_h2]:text-h3 [&_h2]:font-semibold [&_h2]:text-ink [&_h2]:first:mt-0 [&_h3]:mt-6 [&_h3]:font-display [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-ink [&_ol]:list-decimal [&_ol]:space-y-2 [&_ol]:pl-5 [&_strong]:font-semibold [&_strong]:text-ink [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-5">
+          <Reveal className="mt-10 space-y-5 text-[15px] leading-relaxed text-ink-muted [&_a:hover]:decoration-teal [&_a]:text-teal [&_a]:underline [&_a]:decoration-teal/30 [&_a]:underline-offset-4 [&_h2]:mt-10 [&_h2]:font-display [&_h2]:text-h3 [&_h2]:font-semibold [&_h2]:text-ink [&_h2]:first:mt-0 [&_h3]:mt-6 [&_h3]:font-display [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-ink [&_ol]:list-decimal [&_ol]:space-y-2 [&_ol]:pl-5 [&_strong]:font-semibold [&_strong]:text-ink [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-5">
             {children}
-          </div>
+          </Reveal>
         ) : (
           /* placeholder until the real copy is dropped in — kept visually
              distinct (dashed, muted) so nobody mistakes it for the actual

@@ -1,5 +1,6 @@
 import { cn } from '@/lib/cn';
 import Reveal from '@/components/motion/Reveal';
+import SplitText from '@/components/motion/SplitText';
 
 /* Every section on the page shares this gutter + measure, so the left edge of
    the hero headline lines up with the left edge of the footer wordmark. */
@@ -47,7 +48,7 @@ const HEADING_SIZE = {
   /* matches "Book in 4 steps" from mobile up to lg, so the page's other
      oversized headings (Safe360, Never alone, the hiring and testimonials
      titles) read at the same size on a phone instead of a step down */
-  lg: 'text-h1 lg:text-[4.5rem] lg:leading-[1.04] lg:tracking-[-0.032em]',
+  lg: 'text-h1 lg:text-[4.5rem] lg:leading-[1.04] lg:tracking-[-0.02em]',
 };
 
 export function SectionHeading({
@@ -80,17 +81,31 @@ export function SectionHeading({
         className
       )}
     >
-      <Reveal
-        as="h2"
-        delay={0.05}
-        className={cn(
-          'text-balance font-display font-semibold',
-          HEADING_SIZE[size],
-          tone === 'dark' ? 'text-white' : 'text-ink'
-        )}
-      >
-        {title}
-      </Reveal>
+      {/* plain-string titles assemble word by word; richer titles (spans,
+          highlights) keep the block reveal */}
+      {typeof title === 'string' ? (
+        <h2
+          className={cn(
+            'text-balance font-display font-semibold',
+            HEADING_SIZE[size],
+            tone === 'dark' ? 'text-white' : 'text-ink'
+          )}
+        >
+          <SplitText text={title} delay={0.05} />
+        </h2>
+      ) : (
+        <Reveal
+          as="h2"
+          delay={0.05}
+          className={cn(
+            'text-balance font-display font-semibold',
+            HEADING_SIZE[size],
+            tone === 'dark' ? 'text-white' : 'text-ink'
+          )}
+        >
+          {title}
+        </Reveal>
+      )}
       {body && (
         <Reveal
           as="p"

@@ -1,6 +1,13 @@
 'use client';
 
+import { useRef } from 'react';
 import Image from 'next/image';
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from 'framer-motion';
 
 import { Container, SectionHeading } from '@/components/ui/Section';
 import Reveal from '@/components/motion/Reveal';
@@ -82,8 +89,24 @@ export default function Testimonials() {
   const half = Math.ceil(QUOTES.length / 2);
   const rows = [QUOTES.slice(0, half), QUOTES.slice(half)];
 
+  /* same arrival as How it works: the teal ground starts as an inset, heavily
+     rounded card and opens out to full bleed as the section reaches the top */
+  const reduced = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'start start'],
+  });
+  const inset = useTransform(scrollYProgress, [0, 1], [reduced ? 0 : 8, 0]);
+  const radius = useTransform(scrollYProgress, [0, 1], [reduced ? 0 : 120, 0]);
+  const clipPath = useTransform(
+    [inset, radius] as const,
+    ([i, r]: number[]) => `inset(${i}% ${i}% 0% ${i}% round ${r}px)`
+  );
+
   return (
     <section
+      ref={sectionRef}
       id="stories"
       /* the padding is the price of the dissolve below: the heading has to
          start below where the wash finishes */
@@ -100,7 +123,11 @@ export default function Testimonials() {
           on top of it instead of behind, exactly like the background bleeding
           over the cards. Staying in normal DOM order (this paints first) and
           giving the foreground an explicit z-10 instead sidesteps it. */}
-      <div aria-hidden className="edge-fade absolute inset-0 bg-teal">
+      <motion.div
+        aria-hidden
+        style={{ clipPath }}
+        className="absolute inset-0 overflow-hidden bg-teal-dark"
+      >
         <Image
           src="/img/Grainy.jpg"
           alt=""
@@ -108,7 +135,11 @@ export default function Testimonials() {
           sizes="100vw"
           className="object-cover opacity-40 mix-blend-overlay"
         />
-      </div>
+        <div className="grain pointer-events-none absolute inset-0" />
+        {/* two slow light blobs so the teal has depth rather than reading flat */}
+        <span className="absolute -left-[10%] top-[10%] h-[50vw] max-h-[700px] w-[50vw] max-w-[700px] animate-aurora rounded-full bg-teal-light/20 blur-[120px] motion-reduce:animate-none" />
+        <span className="absolute -right-[10%] bottom-0 h-[40vw] max-h-[600px] w-[40vw] max-w-[600px] animate-aurora-slow rounded-full bg-[#0E7A82]/50 blur-[120px] motion-reduce:animate-none" />
+      </motion.div>
 
       <Container className="relative z-10">
         <SectionHeading
@@ -196,7 +227,7 @@ function Card({
             face. Brand teal is what stays legible against lime — white would
             wash out. */}
         <figcaption className="relative min-w-0">
-          <span className="relative block truncate font-display text-xl font-bold tracking-[-0.01em] text-teal-dark lg:text-2xl">
+          <span className="relative block truncate font-display text-xl font-bold tracking-[-0.02em] text-teal-dark lg:text-2xl">
             {quote.name}
           </span>
           {/* the date carries the same weight as the locality but a step

@@ -1,10 +1,19 @@
+'use client';
+
+import { useRef } from 'react';
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+} from 'framer-motion';
 import { cn } from '@/lib/cn';
 
-type Variant = 'primary' | 'secondary' | 'onDark' | 'solid';
+type Variant = 'primary' | 'secondary' | 'onDark' | 'solid' | 'ghost';
 type Size = 'sm' | 'md';
 
 export const BASE =
-  'group relative isolate inline-flex shrink-0 items-center justify-center gap-2.5 overflow-hidden whitespace-nowrap rounded-full font-semibold tracking-[-0.01em] transition-[transform,background-color,border-color,color,box-shadow] duration-200 ease-out hover:-translate-y-0.5 active:translate-y-0 motion-reduce:hover:translate-y-0';
+  'group relative isolate inline-flex shrink-0 items-center justify-center gap-2.5 overflow-hidden whitespace-nowrap rounded-full font-semibold tracking-[-0.02em] transition-[transform,background-color,border-color,color,box-shadow] duration-200 ease-out hover:-translate-y-0.5 active:translate-y-0 motion-reduce:hover:translate-y-0';
 
 export const PHOTO_TEAL = 'bg-teal-dark';
 
@@ -15,6 +24,9 @@ export const VARIANTS: Record<Variant, string> = {
   secondary:
     'border border-line bg-white text-ink-muted hover:border-teal/40 hover:text-teal',
   onDark: 'bg-white text-teal hover:bg-teal-tint',
+  /* outline on a dark teal ground — the quiet partner to an onDark pill */
+  ghost:
+    'border border-white/30 bg-white/5 text-white backdrop-blur hover:border-white/60 hover:bg-white/10',
   /* the nav and hero CTAs use it: the dark-green jelly pill used across the join page: brand-green rim, a
      lighter translucent core and a white gloss band along the top. */
   solid:
@@ -68,18 +80,67 @@ export default function Button({
   onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
   target?: '_blank';
 }) {
+  /* magnetic: the pill leans toward the cursor while it is over it, then
+     springs home. Driven by motion values, so the CSS hover lift in BASE is
+     superseded by the inline transform rather than fighting it. */
+  const reduced = useReducedMotion();
+  const ref = useRef<HTMLAnchorElement>(null);
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const x = useSpring(mx, { stiffness: 260, damping: 16, mass: 0.4 });
+  const y = useSpring(my, { stiffness: 260, damping: 16, mass: 0.4 });
+  const tx = useSpring(useMotionValue(0), {
+    stiffness: 260,
+    damping: 16,
+    mass: 0.4,
+  });
+  const ty = useSpring(useMotionValue(0), {
+    stiffness: 260,
+    damping: 16,
+    mass: 0.4,
+  });
+
+  const onMove = (e: React.PointerEvent<HTMLAnchorElement>) => {
+    if (reduced || e.pointerType !== 'mouse' || !ref.current) return;
+    const r = ref.current.getBoundingClientRect();
+    const dx = e.clientX - (r.left + r.width / 2);
+    const dy = e.clientY - (r.top + r.height / 2);
+    mx.set(dx * 0.3);
+    my.set(dy * 0.4);
+    tx.set(dx * 0.12);
+    ty.set(dy * 0.15);
+  };
+  const onLeave = () => {
+    mx.set(0);
+    my.set(0);
+    tx.set(0);
+    ty.set(0);
+  };
+
   return (
-    <a
+    <motion.a
+      ref={ref}
       href={href}
       onClick={onClick}
+      onPointerMove={onMove}
+      onPointerLeave={onLeave}
+      style={{ x, y }}
       target={target}
       rel={target === '_blank' ? 'noopener noreferrer' : undefined}
-      className={cn(BASE, VARIANTS[variant], SIZES[size], className)}
+      className={cn(
+        BASE.replace('transition-[transform,', 'transition-['),
+        VARIANTS[variant],
+        SIZES[size],
+        className
+      )}
     >
-      <span className="relative z-10 inline-flex items-center gap-2.5">
+      <motion.span
+        style={{ x: tx, y: ty }}
+        className="relative z-10 inline-flex items-center gap-2.5"
+      >
         {label}
         <Arrow />
-      </span>
-    </a>
+      </motion.span>
+    </motion.a>
   );
 }

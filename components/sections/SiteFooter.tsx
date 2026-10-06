@@ -56,12 +56,20 @@ export default function SiteFooter() {
         sizes="100vw"
         className="object-cover opacity-40 mix-blend-overlay"
       />
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -left-[10%] -top-[40%] h-[60vw] max-h-[800px] w-[60vw] max-w-[800px] animate-aurora rounded-full bg-teal-light/[0.12] blur-[120px] motion-reduce:animate-none"
+      />
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -bottom-[50%] -right-[10%] h-[50vw] max-h-[700px] w-[50vw] max-w-[700px] animate-aurora-slow rounded-full bg-[#014D4F]/80 blur-[120px] motion-reduce:animate-none"
+      />
 
       <Container className="relative">
         <Stagger className="grid gap-12 pt-16 lg:grid-cols-[minmax(0,1.5fr)_repeat(3,minmax(0,1fr))] lg:gap-x-10">
           <StaggerItem>
             <div className="w-fit">
-              <p className="font-display text-5xl font-bold leading-none tracking-[-0.03em] text-white">
+              <p className="font-display text-5xl font-bold leading-none tracking-[-0.02em] text-white">
                 FamCare
               </p>
               <p className="mt-3 whitespace-nowrap text-[15px] font-bold text-white/70">
@@ -97,7 +105,7 @@ export default function SiteFooter() {
           {COLUMNS.map((col) => (
             <StaggerItem key={col.head}>
               <nav aria-label={col.head}>
-                <h2 className="font-display text-sm font-bold uppercase tracking-[0.04em] text-white">
+                <h2 className="font-display text-sm font-bold uppercase tracking-[-0.02em] text-white">
                   {col.head}
                 </h2>
                 <ul className="mt-6 space-y-4 text-[15px]">

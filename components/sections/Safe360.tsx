@@ -7,6 +7,7 @@ import { Section, SectionHeading } from '@/components/ui/Section';
 import { Stagger, StaggerItem } from '@/components/motion/Reveal';
 import { JELLY_GREEN } from '@/components/ui/jelly';
 import { cn } from '@/lib/cn';
+import Tilt from '@/components/motion/Tilt';
 
 /* Copy rule for this section: say what the family gets, never how it is built.
    No models, no detection methods, nothing a competitor could lift. */
@@ -61,19 +62,21 @@ function BentoCard({
 }) {
   return (
     <StaggerItem className={className}>
-      <div className="flex h-full flex-col overflow-hidden rounded-card border border-line bg-white shadow-card">
-        <div className="relative h-[340px] shrink-0 overflow-hidden lg:h-[400px]">
-          {visual}
+      <Tilt max={4} className="h-full rounded-card">
+        <div className="flex h-full flex-col overflow-hidden rounded-card border border-line bg-white shadow-card transition-shadow duration-300 hover:shadow-float">
+          <div className="relative h-[340px] shrink-0 overflow-hidden lg:h-[400px]">
+            {visual}
+          </div>
+          <div className="px-8 pb-8 pt-6">
+            <h3 className="font-display text-h3 font-bold text-ink lg:text-3xl">
+              {title}
+            </h3>
+            <p className="mt-2 max-w-[420px] text-sm leading-relaxed text-ink-muted">
+              {body}
+            </p>
+          </div>
         </div>
-        <div className="px-8 pb-8 pt-6">
-          <h3 className="font-display text-h3 font-bold text-ink lg:text-3xl">
-            {title}
-          </h3>
-          <p className="mt-2 max-w-[420px] text-sm leading-relaxed text-ink-muted">
-            {body}
-          </p>
-        </div>
-      </div>
+      </Tilt>
     </StaggerItem>
   );
 }

@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Figtree } from 'next/font/google';
 import './globals.css';
+import PageFx from '@/components/fx/PageFx';
+import MotionPrefs from '@/components/fx/MotionPrefs';
 
 const figtree = Figtree({
   subsets: ['latin'],
@@ -11,7 +13,7 @@ const figtree = Figtree({
 export const metadata: Metadata = {
   title: 'FamCare - On demand Baby care you can trust',
   description:
-    'Professional trained background verified caregivers in 10 minutes. Live in Whitefield & Varthur.',
+    'Professional trained background verified caregivers in 10 minutes. Live in Whitefield, Varthur & Mahadevapura.',
 };
 
 export default function RootLayout({
@@ -21,7 +23,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${figtree.variable} antialiased`}>{children}</body>
+      <body className={`${figtree.variable} antialiased`}>
+        <MotionPrefs>{children}</MotionPrefs>
+        <PageFx />
+      </body>
     </html>
   );
 }

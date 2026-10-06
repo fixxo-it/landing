@@ -464,7 +464,7 @@ function Hub() {
         />
       </svg>
 
-      <span className="absolute flex flex-col items-center whitespace-nowrap px-2 text-center font-display text-[2.8rem] font-semibold leading-[0.9] tracking-tight text-white">
+      <span className="absolute flex flex-col items-center whitespace-nowrap px-2 text-center font-display text-[2.8rem] font-semibold leading-[0.9] tracking-[-0.02em] text-white">
         <span>Fam</span>
         <span>Care</span>
       </span>

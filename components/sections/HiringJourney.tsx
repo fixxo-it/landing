@@ -20,6 +20,7 @@ import Button from '@/components/ui/Button';
 import BenefitIcon from '@/components/join/BenefitIcon';
 import { JELLY_GREEN } from '@/components/ui/jelly';
 import { cn } from '@/lib/cn';
+import SplitText from '@/components/motion/SplitText';
 
 const CAREGIVER_FORM_URL = '/join';
 
@@ -138,7 +139,7 @@ function VisualTraining() {
   ];
   return (
     <Shell>
-      <p className="text-[16px] font-semibold uppercase tracking-[0.08em] text-ink-faint">
+      <p className="text-[16px] font-semibold uppercase tracking-[-0.02em] text-ink-faint">
         Training modules
       </p>
       <div className="mt-6 space-y-[21px]">
@@ -264,22 +265,18 @@ export default function HiringJourney() {
   return (
     <Section id="caregivers">
       <div className="flex flex-col items-start gap-8 text-left lg:flex-row lg:items-end lg:justify-between">
-        <Reveal
-          as="h2"
-          delay={0.05}
-          className="text-balance font-display text-[2.5rem] font-bold leading-[1.08] tracking-[-0.03em] text-ink lg:text-[3.75rem] lg:leading-[1.05]"
-        >
-          We hire for character
+        <h2 className="text-balance font-display text-[2.5rem] font-bold leading-[1.08] tracking-[-0.02em] text-ink lg:text-[3.75rem] lg:leading-[1.05]">
+          <SplitText text="We hire for character" delay={0.05} />
           <br />
-          We train for care
-        </Reveal>
+          <SplitText text="We train for care" delay={0.25} />
+        </h2>
         <Reveal delay={0.15}>
           <Button
             href={CAREGIVER_FORM_URL}
             label="JOIN AS A CAREGIVER"
             variant="solid"
             size="md"
-            className="text-sm uppercase tracking-[-0.01em]"
+            className="text-sm uppercase tracking-[-0.02em]"
           />
         </Reveal>
       </div>
