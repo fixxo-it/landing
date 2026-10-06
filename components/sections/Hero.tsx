@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import {
   motion,
@@ -12,7 +12,6 @@ import { Container } from '@/components/ui/Section';
 import { cn } from '@/lib/cn';
 import Button from '@/components/ui/Button';
 import { openAppOrStore } from '@/components/DownloadModal';
-import { DURATION, EASE, RISE } from '@/components/motion/Reveal';
 import RotatingWord from '@/components/motion/RotatingWord';
 import SplitText from '@/components/motion/SplitText';
 import Tilt from '@/components/motion/Tilt';
@@ -55,16 +54,24 @@ export default function Hero() {
   const mediaY = useTransform(scrollYProgress, [0, 1], [0, reduced ? 0 : 60]);
   const fade = useTransform(scrollYProgress, [0, 0.8], [1, reduced ? 1 : 0.35]);
 
+  /* the clip is decoration, so it waits until the page has finished loading
+     rather than competing with the JS bundle and the poster for bandwidth —
+     on a phone that megabyte of video was holding up everything else */
+  const [videoSrc, setVideoSrc] = useState<string>();
+  useEffect(() => {
+    const start = () => setVideoSrc('/video/hero.mp4');
+    if (document.readyState === 'complete') {
+      start();
+      return;
+    }
+    window.addEventListener('load', start, { once: true });
+    return () => window.removeEventListener('load', start);
+  }, []);
+
   /* above the fold, so this plays on load rather than on scroll. The delay
-     lets the header land first, so the page assembles top-down. */
-  const container = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.1, delayChildren: 0.5 } },
-  };
-  const item = {
-    hidden: { opacity: 0, y: RISE },
-    show: { opacity: 1, y: 0, transition: { duration: DURATION, ease: EASE } },
-  };
+     lets the header land first, so the page assembles top-down. The entrances
+     are CSS (.hero-rise etc. in globals.css) so they run before hydration. */
+  const rise = (delayMs: number) => ({ animationDelay: `${delayMs}ms` });
 
   return (
     <section
@@ -79,18 +86,16 @@ export default function Hero() {
               style={{ y: copyY, opacity: fade }}
               className="order-2 lg:order-1"
             >
-              <motion.div variants={container} initial="hidden" animate="show">
-                <motion.div
-                  variants={item}
-                  className="mb-4 inline-flex w-fit items-center gap-2 text-xs font-semibold uppercase tracking-[-0.02em] text-teal-dark"
-                >
-                  <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
-                  </span>
-                  Live in Whitefield, Varthur &amp; Mahadevapura, Bengaluru
-                </motion.div>
-              </motion.div>
+              <div
+                style={rise(500)}
+                className="hero-rise mb-4 inline-flex w-fit items-center gap-2 text-xs font-semibold uppercase tracking-[-0.02em] text-teal-dark"
+              >
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
+                </span>
+                Live in Whitefield, Varthur &amp; Mahadevapura, Bengaluru
+              </div>
 
               <h1 className="max-w-[23ch] font-display text-[min(3.25rem,calc((100vw-3.5rem)/6.75))] font-bold leading-[1.04] tracking-[-0.02em] text-ink sm:text-[3.25rem] lg:text-[5.25rem] lg:leading-[1.02]">
                 {/* "Get" and the rotating word stay on one line at every width —
@@ -98,21 +103,7 @@ export default function Hero() {
                     wrapping and splitting the two apart */}
                 <span className="whitespace-nowrap">
                   <SplitText text="Get" onMount delay={0.35} />{' '}
-                  <motion.span
-                    className="relative inline-block"
-                    initial={{
-                      opacity: 0,
-                      scale: 0.6,
-                      rotate: -6,
-                    }}
-                    animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                    transition={{
-                      type: 'spring',
-                      stiffness: 180,
-                      damping: 14,
-                      delay: 0.55,
-                    }}
-                  >
+                  <span className="hero-pop relative inline-block">
                     {/* the one lime moment in the hero — a swipe of it behind
                         the rotating word, overshooting the letters */}
                     <span
@@ -123,63 +114,47 @@ export default function Hero() {
                       words={ROTATING_WORDS}
                       className="relative text-teal"
                     />
-                  </motion.span>
+                  </span>
                 </span>
                 <br />
                 <SplitText text="in 10 mins" onMount delay={0.7} step={0.09} />
               </h1>
 
-              <motion.div variants={container} initial="hidden" animate="show">
-                <motion.p
-                  variants={item}
-                  className="mt-6 max-w-[480px] text-lg leading-relaxed text-ink-muted lg:text-xl"
-                >
-                  Professionally trained, background-verified caregivers
-                </motion.p>
+              <p
+                style={rise(500)}
+                className="hero-rise mt-6 max-w-[480px] text-lg leading-relaxed text-ink-muted lg:text-xl"
+              >
+                Professionally trained, background-verified caregivers
+              </p>
 
-                <motion.div
-                  variants={item}
-                  className="mt-9 flex flex-wrap items-center gap-3"
-                >
-                  <Button
-                    href="#book"
-                    label="BOOK A CAREGIVER NOW"
-                    variant="solid"
-                    size="md"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      openAppOrStore();
-                    }}
-                  />
-                  <Button
-                    href="#safety-360"
-                    label="WHY CHOOSE US?"
-                    variant="secondary"
-                    size="md"
-                  />
-                </motion.div>
-              </motion.div>
+              <div
+                style={rise(600)}
+                className="hero-rise mt-9 flex flex-wrap items-center gap-3"
+              >
+                <Button
+                  href="#book"
+                  label="BOOK A CAREGIVER NOW"
+                  variant="solid"
+                  size="md"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    openAppOrStore();
+                  }}
+                />
+                <Button
+                  href="#safety-360"
+                  label="WHY CHOOSE US?"
+                  variant="secondary"
+                  size="md"
+                />
+              </div>
             </motion.div>
 
             <motion.div
               style={{ y: mediaY }}
               className="relative order-1 mx-auto w-full max-w-[520px] lg:order-2"
             >
-              <motion.div
-                initial={{
-                  opacity: 0,
-                  scale: 0.85,
-                  rotate: 4,
-                  clipPath: 'inset(12% 12% 12% 12% round 120px)',
-                }}
-                animate={{
-                  opacity: 1,
-                  scale: 1,
-                  rotate: 0,
-                  clipPath: 'inset(0% 0% 0% 0% round 28px)',
-                }}
-                transition={{ duration: 1.3, ease: EASE, delay: 0.25 }}
-              >
+              <div className="hero-media">
                 <Tilt max={8}>
                   {/* the frame is shorter than the clip's native 3:4 by 10% of the
                       height, and object-bottom anchors the crop to the top edge */}
@@ -203,13 +178,13 @@ export default function Hero() {
                         No `poster` of its own — the image above is the poster. */}
                     <video
                       ref={handleVideoRef}
-                      src="/video/hero.mp4"
+                      src={videoSrc}
                       autoPlay
                       muted
                       loop
                       playsInline
                       webkit-playsinline="true"
-                      preload="auto"
+                      preload="none"
                       aria-hidden
                       onCanPlay={() => setPlaying(true)}
                       onLoadedData={() => setPlaying(true)}
@@ -221,7 +196,7 @@ export default function Hero() {
                     />
                   </div>
                 </Tilt>
-              </motion.div>
+              </div>
             </motion.div>
           </div>
         </Container>

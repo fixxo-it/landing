@@ -9,7 +9,7 @@ import {
 } from 'framer-motion';
 import Button from '@/components/ui/Button';
 import { openDownloadModal } from '@/components/DownloadModal';
-import { DURATION, EASE } from '@/components/motion/Reveal';
+import { EASE } from '@/components/motion/Reveal';
 import { cn } from '@/lib/cn';
 
 export const NAV = [
@@ -112,13 +112,12 @@ export default function SiteHeader() {
         hidden && 'pointer-events-none -translate-y-[130%] opacity-0'
       )}
     >
-      <motion.div
+      <div
         /* the bar drops in on load, ahead of the hero — the page assembles
-           top-down instead of the chrome being there before the content */
-        initial={{ opacity: 0, y: -28 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: DURATION, ease: EASE }}
+           top-down instead of the chrome being there before the content.
+           CSS (.header-drop) so it plays before hydration, not after it. */
         className={cn(
+          'header-drop',
           /* the bar is deliberately narrower than the 1800 page measure — it
              floats as its own object rather than spanning the content edges,
              then pulls in again once the hero is behind you. `relative` is
@@ -257,7 +256,7 @@ export default function SiteHeader() {
             </motion.div>
           )}
         </AnimatePresence>
-      </motion.div>
+      </div>
     </header>
   );
 }
