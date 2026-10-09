@@ -51,9 +51,15 @@ export default function SiteHeader() {
              the anchor the dropdown below positions itself against, so its
              own height animation never touches this box's height in turn. */
           'relative mx-auto w-full max-w-[1800px] border transition-[border-radius,background-color,border-color,box-shadow] duration-500 ease-out',
-          /* the open mobile menu gets a solid ground so its links read */
+          /* the open mobile menu is white glass, the same treatment as the
+             hero's "Why choose us?" pill: a faint white tint and a hairline
+             white rim over a heavy blur of the video behind it. The blur
+             itself lives on a layer inside (below), not on this box: a
+             backdrop-filter here would make the bar the backdrop root for
+             the dropdown it contains, and the dropdown's own blur would then
+             see nothing behind it but would not blur the video */
           open
-            ? 'border-white/10 bg-teal-dark/85 shadow-float backdrop-blur-xl backdrop-saturate-150'
+            ? 'border-white/30 shadow-float'
             : 'border-transparent bg-transparent',
           /* bottom corners flatten to butt flush against the dropdown's own
              square top edge — same merged-pill look as before, just achieved
@@ -61,6 +67,12 @@ export default function SiteHeader() {
           open ? 'rounded-t-[28px]' : 'rounded-full'
         )}
       >
+        {open && (
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 -z-10 rounded-t-[28px] bg-white/10 backdrop-blur-xl backdrop-saturate-150 lg:hidden"
+          />
+        )}
         <nav
           /* carries the page's own gutter, so the logo sits on the same left
              edge as the hero headline */
@@ -148,9 +160,9 @@ export default function SiteHeader() {
               /* absolute and pinned to the bar's own bottom edge — it overlays
                  the page below rather than sitting in flow, so its height
                  animation never pushes the header's own box taller and the
-                 page never shifts under it. Same glass treatment as the bar
-                 above so the two read as one shape with no seam. */
-              className="absolute inset-x-0 top-full overflow-hidden rounded-b-[28px] border-x border-b border-white/10 bg-teal-dark/95 shadow-float backdrop-blur-2xl backdrop-saturate-150 lg:hidden"
+                 page never shifts under it. Same white glass as the bar above
+                 so the two read as one shape with no seam. */
+              className="absolute inset-x-0 top-full overflow-hidden rounded-b-[28px] border-x border-b border-white/30 bg-white/10 shadow-float backdrop-blur-xl backdrop-saturate-150 lg:hidden"
             >
               <div className="px-3 pb-6 sm:px-5 lg:px-7">
                 <ul className="flex flex-col border-t border-white/15 pt-2">
