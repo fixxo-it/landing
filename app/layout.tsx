@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Figtree } from 'next/font/google';
+import { Caveat, Figtree } from 'next/font/google';
 import './globals.css';
 import PageFx from '@/components/fx/PageFx';
 import MotionPrefs from '@/components/fx/MotionPrefs';
@@ -7,6 +7,13 @@ import MotionPrefs from '@/components/fx/MotionPrefs';
 const figtree = Figtree({
   subsets: ['latin'],
   variable: '--font-figtree',
+  display: 'swap',
+});
+
+/* handwritten face for the signatures on the testimonial notes only */
+const caveat = Caveat({
+  subsets: ['latin'],
+  variable: '--font-caveat',
   display: 'swap',
 });
 
@@ -23,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${figtree.variable} antialiased`}>
+      <body className={`${figtree.variable} ${caveat.variable} antialiased`}>
         <MotionPrefs>{children}</MotionPrefs>
         <PageFx />
       </body>

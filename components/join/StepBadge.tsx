@@ -1,7 +1,7 @@
 import { useId } from 'react';
 
 /* the numbered step circle in the same jelly-glass finish as the benefit
-   icons: saturated rim, lighter translucent core, white gloss and highlight */
+   icons: saturated rim and a lighter translucent core, no shine */
 export default function StepBadge({ n }: { n: number }) {
   const id = useId().replace(/:/g, '');
   return (
@@ -19,9 +19,6 @@ export default function StepBadge({ n }: { n: number }) {
           <stop offset="0" stopColor="#F6FFC2" />
           <stop offset="1" stopColor="#E4FF5C" />
         </linearGradient>
-        <clipPath id={`${id}k`}>
-          <circle cx="24" cy="24" r="21" />
-        </clipPath>
         <filter id={`${id}s`} x="-20%" y="-20%" width="140%" height="150%">
           <feDropShadow
             dx="0"
@@ -48,18 +45,6 @@ export default function StepBadge({ n }: { n: number }) {
       <g filter={`url(#${id}q)`}>
         <circle cx="24" cy="24" r="16.5" fill={`url(#${id}c)`} opacity={0.9} />
       </g>
-      <g clipPath={`url(#${id}k)`}>
-        <ellipse
-          cx="17"
-          cy="12"
-          rx="13"
-          ry="6"
-          fill="#fff"
-          opacity={0.5}
-          transform="rotate(-28 17 12)"
-        />
-      </g>
-      <circle cx="12.5" cy="17" r="1.8" fill="#fff" opacity={0.9} />
       <text
         x="24"
         y="24"

@@ -5,11 +5,11 @@ import {
   motion,
   useMotionTemplate,
   useMotionValue,
-  useReducedMotion,
   useSpring,
   useTransform,
 } from 'framer-motion';
 import { cn } from '@/lib/cn';
+import { useSafeReducedMotion } from '@/components/fx/MotionPrefs';
 
 /* Leans toward the pointer in 3D, with a soft white glare that tracks it across
    the surface. Mouse only — a touch has no hover to lean toward. */
@@ -24,7 +24,7 @@ export default function Tilt({
   glare?: boolean;
   children: React.ReactNode;
 }) {
-  const reduced = useReducedMotion();
+  const reduced = useSafeReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
   const px = useMotionValue(0.5);
   const py = useMotionValue(0.5);
@@ -54,11 +54,13 @@ export default function Tilt({
       ref={ref}
       onPointerMove={onMove}
       onPointerLeave={onLeave}
-      style={{ rotateX, rotateY, transformPerspective: 1100 }}
+      style={
+        reduced ? undefined : { rotateX, rotateY, transformPerspective: 1100 }
+      }
       className={cn('relative [transform-style:preserve-3d]', className)}
     >
       {children}
-      {glare && (
+      {glare && !reduced && (
         <motion.span
           aria-hidden
           style={{ background: glareBg, opacity: glareOpacity }}

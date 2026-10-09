@@ -2,96 +2,68 @@
 
 import { useRef } from 'react';
 import Image from 'next/image';
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 import { Container, SectionHeading } from '@/components/ui/Section';
 import Reveal from '@/components/motion/Reveal';
-import { JELLY_LIME, JellyGloss } from '@/components/ui/jelly';
 import { cn } from '@/lib/cn';
+import { useSafeReducedMotion } from '@/components/fx/MotionPrefs';
 
 type Quote = {
   quote: string;
   name: string;
+  /* who they are to the child, then where — the line under the signature */
   meta: string;
-  /* when the review was left. Placeholders spread over the last four months —
-     swap each one for the real date from the review export before launch. */
-  when: string;
 };
 
-/* real reviews, taken verbatim from famcare.co.in */
+/* the six strongest real reviews, taken verbatim from famcare.co.in */
 const QUOTES: Quote[] = [
-  {
-    quote:
-      'Initially I had my inhibitions, but due to some office call and a small baby to take care simultaneously, I decided to give FamCare a try.',
-    name: 'Puja Baranwal',
-    meta: 'Whitefield · Mom of 1',
-    when: "Aug '26",
-  },
-  {
-    quote:
-      'Excellent childcare app! Very easy to use and helps me quickly find reliable babysitter and childcare support when needed.',
-    name: 'Siwani Dubey',
-    meta: 'Varthur · Mom of 1',
-    when: "Aug '26",
-  },
   {
     quote:
       'Experience was very good. We are very happy to have a caregiver from FamCare. She really took good care of my kids and was very professional as well.',
     name: 'Nikhil',
-    meta: 'Whitefield · Dad of 2',
-    when: "Jul '26",
+    meta: 'Dad of 2 · Whitefield',
   },
   {
     quote:
       'Pleasant experience, we always felt completely at ease knowing our child was in safe and caring hands.',
     name: 'Gayatri Panda',
-    meta: 'Varthur · Mom of 1',
-    when: "Jul '26",
+    meta: 'Mom of 1 · Varthur',
+  },
+  {
+    quote:
+      'Initially I had my inhibitions, but due to some office call and a small baby to take care simultaneously, I decided to give FamCare a try.',
+    name: 'Puja Baranwal',
+    meta: 'Mom of 1 · Whitefield',
   },
   {
     quote:
       'It was a seamless experience, the babysitter was calm, accommodating, and took great care of the baby.',
     name: 'Archana Kammar',
-    meta: 'Whitefield · Mom of 1',
-    when: "Jul '26",
+    meta: 'Mom of 1 · Whitefield',
   },
   {
     quote:
-      "Very satisfied with the caregiver's service, she took care of the baby very calmly and kept her engaged.",
-    name: 'Archana KK',
-    meta: 'Varthur · Mom of 1',
-    when: "Jun '26",
+      'Excellent childcare app! Very easy to use and helps me quickly find reliable babysitter and childcare support when needed.',
+    name: 'Siwani Dubey',
+    meta: 'Mom of 1 · Varthur',
   },
   {
     quote:
       'Very professional and good care, the caregiver is very experienced and handled the child very well.',
     name: 'Swapna',
-    meta: 'Whitefield · Mom of 1',
-    when: "Jun '26",
-  },
-  {
-    quote:
-      'Very good experience with the caregiver, she was very professional and polite. She managed the baby very well.',
-    name: 'Neha',
-    meta: 'Varthur · Mom of 1',
-    when: "May '26",
+    meta: 'Mom of 1 · Whitefield',
   },
 ];
 
-export default function Testimonials() {
-  /* two rails moving against each other reads as a wall of voices rather than
-     one long queue — split down the middle so both are equally full */
-  const half = Math.ceil(QUOTES.length / 2);
-  const rows = [QUOTES.slice(0, half), QUOTES.slice(half)];
+/* each note sits at its own slight angle, like notes pinned up by hand —
+   a fixed sequence rather than random so server and client render the same */
+const TILTS = [-4, 2.5, -1.5, 3.5, -3, 1.5];
 
+export default function Testimonials() {
   /* same arrival as How it works: the teal ground starts as an inset, heavily
      rounded card and opens out to full bleed as the section reaches the top */
-  const reduced = useReducedMotion();
+  const reduced = useSafeReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -143,7 +115,7 @@ export default function Testimonials() {
 
       <Container className="relative z-10">
         <SectionHeading
-          title="Real families. Real reviews. Zero filters."
+          title="What our users are saying"
           tone="dark"
           size="lg"
         />
@@ -158,28 +130,26 @@ export default function Testimonials() {
         delay={0.15}
         className="relative z-10 mt-14 flex flex-col gap-6 lg:mt-16 lg:[mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]"
       >
-        {rows.map((row, i) => (
-          /* the rail is a scroll container, so it clips vertically too — the
-             padding keeps the card shadows off that edge */
-          <div key={i} className="flex overflow-x-auto py-5 lg:overflow-hidden">
-            <div
-              className={cn(
-                'marquee-track flex w-max gap-6',
-                i % 2 === 0 ? 'animate-marquee' : 'animate-marquee-reverse'
-              )}
-            >
-              {/* the copy is duplicated so the track can loop on itself; the
-                  clone is hidden from screen readers and from tab order */}
-              {[0, 1].map((copy) => (
-                <div key={copy} className="flex shrink-0 gap-6">
-                  {row.map((q) => (
-                    <Card key={q.quote} quote={q} aria-hidden={copy === 1} />
-                  ))}
-                </div>
-              ))}
-            </div>
+        {/* one rail. The vertical padding is room for the tilted corners and
+            the card shadows, which the scroll container would otherwise clip. */}
+        <div className="flex overflow-x-auto py-10 lg:overflow-hidden">
+          <div className="marquee-track flex w-max animate-marquee gap-8">
+            {/* the copy is duplicated so the track can loop on itself; the
+                clone is hidden from screen readers and from tab order */}
+            {[0, 1].map((copy) => (
+              <div key={copy} className="flex shrink-0 gap-8">
+                {QUOTES.map((q, i) => (
+                  <Card
+                    key={q.quote}
+                    quote={q}
+                    tilt={TILTS[i % TILTS.length]}
+                    aria-hidden={copy === 1}
+                  />
+                ))}
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </Reveal>
     </section>
   );
@@ -187,73 +157,54 @@ export default function Testimonials() {
 
 function Card({
   quote,
+  tilt,
   className,
+  style,
   ...rest
-}: { quote: Quote } & React.HTMLAttributes<HTMLElement>) {
+}: { quote: Quote; tilt: number } & React.HTMLAttributes<HTMLElement>) {
   return (
     <figure
-      /* one fixed height for every card, so the two rails read as two even
-         bands rather than a ragged skyline — flex stretch only equalises
-         within a row, and the rows are separate containers. No padding or fill
-         of its own any more — the two halves below own their own colour and
-         padding, and the split between them is what the hairline sits on.
-         relative + z-10 on hover: the -ml-px overlap between touching cards
-         means each one's left edge sits on top of its neighbour's right edge —
-         without lifting the hovered card, its own shadow would be cut off by
-         the neighbour drawn after it. */
+      /* a lime note: quote on top, signature row pinned to the bottom so the
+         signatures line up across the rail whatever the quote's length */
       className={cn(
-        'relative flex h-[300px] w-[300px] shrink-0 flex-col overflow-hidden rounded-3xl border border-[#A9C91F]/70 bg-white shadow-[0_18px_40px_-22px_rgba(11,31,32,0.35)] transition-shadow duration-300 hover:z-10 hover:shadow-float sm:w-[360px]',
+        'relative isolate flex min-h-[300px] w-[300px] shrink-0 flex-col justify-between overflow-hidden bg-[#F4FCCB] p-7 text-teal-dark shadow-[0_24px_50px_-24px_rgba(0,0,0,0.55)] sm:w-[360px] lg:p-8',
         className
       )}
+      style={{ transform: `rotate(${tilt}deg)`, ...style }}
       {...rest}
     >
-      {/* upper half: lime, sized to its content rather than a fixed height —
-          the name and locality are both single-line truncated spans, so this
-          block is the same height on every card regardless of that card's
-          quote length, which is what keeps the seam below at one consistent
-          line across the whole rail. */}
-      {/* the same bright lime used elsewhere as the "live" highlight — the FAQ's
-          active tab, the stepper's travelling dot — rather than the deeper
-          brand-lime token, which reads more green than yellow */}
-      <div
-        className={cn(
-          'relative isolate shrink-0 overflow-hidden px-6 pb-5 pt-6 lg:px-7 lg:pt-7',
-          JELLY_LIME
-        )}
-      >
-        <JellyGloss />
-        {/* name and locality only: the portraits were stand-ins, and without
-            them the card leads on the person's own words instead of a stock
-            face. Brand teal is what stays legible against lime — white would
-            wash out. */}
-        <figcaption className="relative min-w-0">
-          <span className="relative block truncate font-display text-xl font-bold tracking-[-0.02em] text-teal-dark lg:text-2xl">
+      {/* the page's grain, multiplied in faintly so the note reads as paper
+          rather than a flat fill */}
+      <span
+        aria-hidden
+        className="grain pointer-events-none absolute inset-0 -z-10 opacity-[0.22] mix-blend-multiply"
+      />
+
+      <blockquote className="text-[17px] leading-relaxed lg:text-lg">
+        &ldquo;{quote.quote}&rdquo;
+      </blockquote>
+
+      <figcaption className="mt-8 flex items-center gap-4">
+        {/* initials rather than a portrait — the stock faces were stand-ins */}
+        <span
+          aria-hidden
+          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-teal-dark/15 bg-white text-base font-bold text-teal-dark shadow-sm"
+        >
+          {quote.name
+            .split(' ')
+            .map((w) => w[0])
+            .slice(0, 2)
+            .join('')}
+        </span>
+        <span className="min-w-0">
+          <span className="block truncate font-hand text-[28px] font-semibold leading-none">
             {quote.name}
           </span>
-          {/* the date carries the same weight as the locality but a step
-              lighter, so the line reads "who, where, when" without the month
-              competing with the name above it */}
-          <span className="mt-0.5 block truncate text-[15px] text-teal-dark/75">
-            {quote.meta}{' '}
-            <span className="text-teal-dark/50">· {quote.when}</span>
+          <span className="mt-1.5 block truncate text-sm text-teal-dark/70">
+            {quote.meta}
           </span>
-        </figcaption>
-      </div>
-
-      {/* the seam itself — a dedicated line rather than a border on the block
-          above it, so it survives that block's own padding changing later
-          without drifting off the colour boundary it marks */}
-      <div aria-hidden className="h-px shrink-0 bg-teal-dark/15" />
-
-      {/* lower half: white, takes whatever height is left. min-h-0 is load
-          bearing on a flex child — without it the quote's own height would
-          floor this block above the space actually available and push the
-          card taller than its fixed 300px. */}
-      <div className="min-h-0 flex-1 overflow-hidden bg-white px-6 pb-6 pt-5 lg:px-7 lg:pb-7">
-        <blockquote className="text-[17px] font-semibold leading-relaxed text-teal-dark">
-          &ldquo;{quote.quote}&rdquo;
-        </blockquote>
-      </div>
+        </span>
+      </figcaption>
     </figure>
   );
 }

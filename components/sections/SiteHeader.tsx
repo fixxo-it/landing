@@ -1,16 +1,12 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import {
-  AnimatePresence,
-  motion,
-  useMotionValueEvent,
-  useScroll,
-} from 'framer-motion';
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import Button from '@/components/ui/Button';
 import { openDownloadModal } from '@/components/DownloadModal';
 import { EASE } from '@/components/motion/Reveal';
 import { cn } from '@/lib/cn';
+import { useSafeReducedMotion } from '@/components/fx/MotionPrefs';
 
 export const NAV = [
   { label: 'Services', href: '#services' },
@@ -33,99 +29,32 @@ export const NAV = [
    way, so it reads as a highlight passing over rather than the whole word
    pulsing. Reduced motion gets the flat lime. */
 const GLIMMER =
-  'animate-shimmer bg-[length:300%_100%] bg-gradient-to-r from-lime via-teal via-50% to-lime bg-clip-text font-semibold text-transparent motion-reduce:animate-none motion-reduce:bg-none motion-reduce:text-lime';
-
-/* how far past the hero's bottom edge the bar stays wide, and how much of that
-   it keeps on the way back up — the gap between the two is hysteresis, so a
-   scroll that rests right on the boundary cannot flicker the width */
-const ENTER = 0;
-const EXIT = 80;
-
-/* the bar has nothing left to point at once you reach the closing CTA, and it
-   would otherwise sit on top of the download phone — so it steps aside */
-const HIDE_OVER = ['#book', '#site-footer'];
-
-/* …but not the instant a sliver of the CTA appears under the FAQ. The root is
-   shrunk from the bottom so the section only counts as "reached" once its top
-   has climbed past the upper 45% of the viewport — by then the FAQ is behind
-   you and the bar has genuinely run out of page to point at. */
-const HIDE_ROOT_MARGIN = '0px 0px -55% 0px';
+  'animate-shimmer bg-[length:300%_100%] bg-gradient-to-r from-lime via-white via-50% to-lime bg-clip-text font-semibold text-transparent motion-reduce:animate-none motion-reduce:bg-none motion-reduce:text-lime';
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
-  const [compact, setCompact] = useState(false);
-  const [hidden, setHidden] = useState(false);
-  const heroEnd = useRef(0);
-  const { scrollY } = useScroll();
-
-  /* measured off the hero rather than a fixed number, so the bar narrows at the
-     moment the hero leaves regardless of how tall it renders */
-  useEffect(() => {
-    const measure = () => {
-      const hero = document.getElementById('top');
-      heroEnd.current = hero ? hero.offsetTop + hero.offsetHeight - 140 : 420;
-    };
-    measure();
-    window.addEventListener('resize', measure);
-    return () => window.removeEventListener('resize', measure);
-  }, []);
-
-  useMotionValueEvent(scrollY, 'change', (v) =>
-    setCompact((was) => v > heroEnd.current - (was ? EXIT : ENTER))
-  );
-
-  /* observed rather than measured off scrollY, so it keeps working whatever
-     height the CTA and footer end up being */
-  useEffect(() => {
-    const targets = HIDE_OVER.map((sel) => document.querySelector(sel)).filter(
-      (el): el is Element => el !== null
-    );
-    if (!targets.length) return;
-
-    const showing = new Set<Element>();
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) showing.add(e.target);
-          else showing.delete(e.target);
-        }
-        setHidden(showing.size > 0);
-      },
-      { threshold: 0, rootMargin: HIDE_ROOT_MARGIN }
-    );
-
-    targets.forEach((el) => io.observe(el));
-    return () => io.disconnect();
-  }, []);
-
-  /* a menu left open would keep taking clicks from behind the hidden bar */
-  useEffect(() => {
-    if (hidden) setOpen(false);
-  }, [hidden]);
+  const reduced = useSafeReducedMotion();
 
   return (
-    /* floating glass bar: it rides above the page rather than sitting on a
-       band of its own, so the hero reads through it as you scroll */
-    <header
-      className={cn(
-        'sticky top-0 z-50 px-3 pt-3 transition-[transform,opacity] duration-300 ease-out sm:px-5 sm:pt-4',
-        hidden && 'pointer-events-none -translate-y-[130%] opacity-0'
-      )}
-    >
+    /* lives on the hero only: absolutely placed over the top of the video and
+       scrolls away with it, rather than following you down the page. The bar
+       is see-through — white type straight on the video, spanning the page
+       measure like the hero copy beneath it. */
+    <header className="absolute inset-x-0 top-0 z-50 pt-3 sm:pt-4">
       <div
         /* the bar drops in on load, ahead of the hero — the page assembles
            top-down instead of the chrome being there before the content.
            CSS (.header-drop) so it plays before hydration, not after it. */
         className={cn(
           'header-drop',
-          /* the bar is deliberately narrower than the 1800 page measure — it
-             floats as its own object rather than spanning the content edges,
-             then pulls in again once the hero is behind you. `relative` is
+          /* spans the 1800 page measure, like the hero copy. `relative` is
              the anchor the dropdown below positions itself against, so its
              own height animation never touches this box's height in turn. */
-          'relative mx-auto w-full border border-white/70 bg-white/55 shadow-float backdrop-blur-xl backdrop-saturate-150 transition-[max-width,border-radius] duration-500 ease-out',
-          'shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_18px_40px_-22px_rgba(11,31,32,0.35)]',
-          compact ? 'max-w-[1080px]' : 'max-w-[1240px]',
+          'relative mx-auto w-full max-w-[1800px] border transition-[border-radius,background-color,border-color,box-shadow] duration-500 ease-out',
+          /* the open mobile menu gets a solid ground so its links read */
+          open
+            ? 'border-white/10 bg-teal-dark/85 shadow-float backdrop-blur-xl backdrop-saturate-150'
+            : 'border-transparent bg-transparent',
           /* bottom corners flatten to butt flush against the dropdown's own
              square top edge — same merged-pill look as before, just achieved
              without the two sharing one growing box */
@@ -133,16 +62,16 @@ export default function SiteHeader() {
         )}
       >
         <nav
-          className="relative flex h-[68px] items-center justify-between gap-6 px-3 sm:px-5 lg:px-7"
+          /* carries the page's own gutter, so the logo sits on the same left
+             edge as the hero headline */
+          className="relative flex h-[68px] items-center justify-between gap-6 px-6 sm:px-10 lg:px-16 xl:px-24 2xl:px-32"
           aria-label="Main"
         >
-          <a href="#top" className="leading-none">
-            <span className="block font-display text-[1.8rem] font-bold tracking-[-0.02em] text-teal">
-              FamCare
-            </span>
-            <span className="-mt-0.5 block text-xs font-medium leading-none text-ink-muted">
-              Caregivers in 10 mins
-            </span>
+          <a
+            href="#top"
+            className="font-display text-[1.8rem] font-bold leading-none tracking-[-0.02em] text-white"
+          >
+            FamCare
           </a>
 
           {/* links sit dead centre of the bar, independent of the two ends */}
@@ -152,14 +81,14 @@ export default function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  'group relative whitespace-nowrap py-1 text-[15px] font-semibold uppercase tracking-[-0.02em] transition-colors duration-200',
+                  'group relative whitespace-nowrap py-1 text-base font-medium tracking-[-0.02em] transition-colors duration-200',
                   item.href === '#safety-360'
                     ? GLIMMER
-                    : 'text-ink hover:text-teal'
+                    : 'text-white/90 hover:text-white'
                 )}
               >
                 {item.label}
-                <span className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-teal transition-transform duration-300 ease-out group-hover:scale-x-100 motion-reduce:transition-none" />
+                <span className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-white transition-transform duration-300 ease-out group-hover:scale-x-100 motion-reduce:transition-none" />
               </a>
             ))}
           </div>
@@ -168,7 +97,7 @@ export default function SiteHeader() {
             <Button
               href="#book"
               label="BOOK NOW"
-              variant="solid"
+              variant="onDark"
               className="hidden sm:inline-flex"
               onClick={(e) => {
                 e.preventDefault();
@@ -181,7 +110,7 @@ export default function SiteHeader() {
               aria-expanded={open}
               aria-controls="mobile-nav"
               aria-label={open ? 'Close menu' : 'Open menu'}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-line text-ink lg:hidden"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/40 text-white lg:hidden"
             >
               <span className="relative block h-3 w-4">
                 <span
@@ -221,10 +150,10 @@ export default function SiteHeader() {
                  animation never pushes the header's own box taller and the
                  page never shifts under it. Same glass treatment as the bar
                  above so the two read as one shape with no seam. */
-              className="absolute inset-x-0 top-full overflow-hidden rounded-b-[28px] border-x border-b border-white/70 bg-white/95 shadow-float backdrop-blur-2xl backdrop-saturate-150 lg:hidden"
+              className="absolute inset-x-0 top-full overflow-hidden rounded-b-[28px] border-x border-b border-white/10 bg-teal-dark/95 shadow-float backdrop-blur-2xl backdrop-saturate-150 lg:hidden"
             >
               <div className="px-3 pb-6 sm:px-5 lg:px-7">
-                <ul className="flex flex-col border-t border-line pt-2">
+                <ul className="flex flex-col border-t border-white/15 pt-2">
                   {NAV.map((item) => (
                     <li key={item.href}>
                       <a
@@ -232,7 +161,7 @@ export default function SiteHeader() {
                         onClick={() => setOpen(false)}
                         className={cn(
                           'block py-3 text-base font-medium',
-                          item.href === '#safety-360' ? GLIMMER : 'text-ink'
+                          item.href === '#safety-360' ? GLIMMER : 'text-white'
                         )}
                       >
                         {item.label}
@@ -243,7 +172,7 @@ export default function SiteHeader() {
                 <Button
                   href="#book"
                   label="BOOK NOW"
-                  variant="solid"
+                  variant="onDark"
                   size="md"
                   className="mt-4 w-full sm:hidden"
                   onClick={(e) => {

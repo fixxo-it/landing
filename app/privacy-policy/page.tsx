@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import LegalPage from '@/components/legal/LegalPage';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy — FamCare',
+  title: 'Privacy Policy | FamCare',
 };
 
 const ADDRESS =
@@ -272,28 +272,28 @@ export default function PrivacyPolicyPage() {
         the scope of notice and consent unless otherwise permitted by law.
       </p>
       <p>
-        4.5 Data Minimisation &mdash; FamCare shall collect, process, and retain
-        only such Personal Data as is adequate, relevant, and reasonably
-        necessary for the specific purpose for which it is collected. No
-        excessive, irrelevant, or disproportionate Personal Data shall be
-        requested or processed.
+        4.5 Data Minimisation: FamCare shall collect, process, and retain only
+        such Personal Data as is adequate, relevant, and reasonably necessary
+        for the specific purpose for which it is collected. No excessive,
+        irrelevant, or disproportionate Personal Data shall be requested or
+        processed.
       </p>
       <p>
-        4.6 Purpose Limitation &mdash; Personal Data collected by FamCare shall
-        be processed only for the purposes specified in this Privacy Policy, the
+        4.6 Purpose Limitation: Personal Data collected by FamCare shall be
+        processed only for the purposes specified in this Privacy Policy, the
         relevant privacy notice, or as otherwise permitted under applicable law.
         Personal Data shall not be processed for purposes incompatible with or
         unrelated to the original purpose of collection unless fresh notice and
         consent, where required by law, have been obtained.
       </p>
       <p>
-        4.7 Accuracy of Personal Data Maintained by FamCare &mdash; In addition
-        to the obligation of Users and Caregivers to provide accurate
-        information under subsection 3.6, FamCare shall take reasonable steps to
-        ensure that Personal Data under its control remains accurate and updated
-        to the extent necessary for the purposes for which such data is
-        processed. FamCare does not independently verify the accuracy of all
-        Personal Data provided by Users and Caregivers.
+        4.7 Accuracy of Personal Data Maintained by FamCare: In addition to the
+        obligation of Users and Caregivers to provide accurate information under
+        subsection 3.6, FamCare shall take reasonable steps to ensure that
+        Personal Data under its control remains accurate and updated to the
+        extent necessary for the purposes for which such data is processed.
+        FamCare does not independently verify the accuracy of all Personal Data
+        provided by Users and Caregivers.
       </p>
 
       <h2>v. Purposes of Processing</h2>
@@ -463,7 +463,7 @@ export default function PrivacyPolicyPage() {
         from such sources.
       </p>
       <p>
-        6.9 Vendor Due Diligence &mdash; Before engaging any Third-Party Service
+        6.9 Vendor Due Diligence: Before engaging any Third-Party Service
         Provider or Data Processor, FamCare shall undertake reasonable due
         diligence to assess such entity&rsquo;s information security practices,
         technical capabilities, legal compliance, confidentiality measures, and
@@ -532,22 +532,21 @@ export default function PrivacyPolicyPage() {
         DPDP Act or any other applicable law.
       </p>
       <p>
-        7.7 Account Deletion Procedure &mdash; A User or Caregiver may request
-        deletion of their account and Personal Data through the Platform,
-        designated customer support channels, or by contacting the Grievance
-        Officer. FamCare may verify the identity of the requester before
-        processing such request. Deletion requests shall ordinarily be processed
-        within a reasonable period, subject to applicable legal, contractual,
-        regulatory, fraud prevention, audit, taxation, dispute resolution, or
-        law enforcement obligations.
+        7.7 Account Deletion Procedure: A User or Caregiver may request deletion
+        of their account and Personal Data through the Platform, designated
+        customer support channels, or by contacting the Grievance Officer.
+        FamCare may verify the identity of the requester before processing such
+        request. Deletion requests shall ordinarily be processed within a
+        reasonable period, subject to applicable legal, contractual, regulatory,
+        fraud prevention, audit, taxation, dispute resolution, or law
+        enforcement obligations.
       </p>
       <p>
-        7.8 Litigation Hold and Legal Preservation &mdash; Notwithstanding any
-        request for deletion or erasure, FamCare may preserve Personal Data
-        where such preservation is reasonably necessary for pending or
-        anticipated litigation, arbitration, regulatory proceedings,
-        investigations, law enforcement requests, audits, or compliance with
-        applicable law.
+        7.8 Litigation Hold and Legal Preservation: Notwithstanding any request
+        for deletion or erasure, FamCare may preserve Personal Data where such
+        preservation is reasonably necessary for pending or anticipated
+        litigation, arbitration, regulatory proceedings, investigations, law
+        enforcement requests, audits, or compliance with applicable law.
       </p>
 
       <h2>viii. Security of Personal Data</h2>
@@ -585,7 +584,7 @@ export default function PrivacyPolicyPage() {
         guarantee absolute security of personal data.
       </p>
       <p>
-        8.6 Internal Access Controls &mdash; Access to Personal Data shall be
+        8.6 Internal Access Controls: Access to Personal Data shall be
         restricted to authorised employees, officers, contractors, consultants,
         interns, or service providers strictly on a need-to-know basis and only
         to the extent necessary for the performance of their authorised duties.
@@ -593,12 +592,12 @@ export default function PrivacyPolicyPage() {
         required.
       </p>
       <p>
-        8.7 Personal Data Breach Notification &mdash; Where a Personal Data
-        Breach or reportable cyber security incident occurs, FamCare shall
-        investigate the incident, implement appropriate remedial measures, and
-        notify affected Data Principals, the appropriate regulatory authorities,
-        and the Indian Computer Emergency Response Team (CERT-In), where
-        required, within the timelines prescribed under applicable law.
+        8.7 Personal Data Breach Notification: Where a Personal Data Breach or
+        reportable cyber security incident occurs, FamCare shall investigate the
+        incident, implement appropriate remedial measures, and notify affected
+        Data Principals, the appropriate regulatory authorities, and the Indian
+        Computer Emergency Response Team (CERT-In), where required, within the
+        timelines prescribed under applicable law.
       </p>
 
       <h2>ix. Rights of Data Principals</h2>
@@ -686,13 +685,13 @@ export default function PrivacyPolicyPage() {
         measures are completed.
       </p>
       <p>
-        10.8 Children&rsquo;s Photographs and Media &mdash; Where Parents or
-        Guardians voluntarily upload photographs, videos, medical instructions,
-        or other information relating to a Child for service delivery, such
-        information shall be used solely for providing childcare services,
-        safety, identity verification, emergency response, or other stated
-        purposes, and shall not be disclosed except as permitted under this
-        Privacy Policy or applicable law.
+        10.8 Children&rsquo;s Photographs and Media: Where Parents or Guardians
+        voluntarily upload photographs, videos, medical instructions, or other
+        information relating to a Child for service delivery, such information
+        shall be used solely for providing childcare services, safety, identity
+        verification, emergency response, or other stated purposes, and shall
+        not be disclosed except as permitted under this Privacy Policy or
+        applicable law.
       </p>
 
       <h2>xi. Cookies and Tracking Technologies</h2>
@@ -711,21 +710,21 @@ export default function PrivacyPolicyPage() {
         networks or data brokers for third-party ad monetisation.
       </p>
       <p>
-        11.4 Push Notifications &mdash; FamCare may send transactional,
-        safety-related, booking, payment, emergency, and service notifications
-        through push notifications, SMS, email, telephone, or other
-        communication channels. Promotional communications shall be sent only
-        where permitted by applicable law and, where required, with the Data
-        Principal&rsquo;s consent. Users may manage notification preferences
-        through device settings or the Platform where available.
+        11.4 Push Notifications: FamCare may send transactional, safety-related,
+        booking, payment, emergency, and service notifications through push
+        notifications, SMS, email, telephone, or other communication channels.
+        Promotional communications shall be sent only where permitted by
+        applicable law and, where required, with the Data Principal&rsquo;s
+        consent. Users may manage notification preferences through device
+        settings or the Platform where available.
       </p>
       <p>
-        11.5 Communication Service Providers &mdash; FamCare may engage
-        authorised email delivery providers, SMS gateway providers, push
-        notification service providers, customer support platforms, and other
-        communication service providers for operational communications. Such
-        providers shall process Personal Data solely for authorised purposes and
-        subject to appropriate contractual and security obligations.
+        11.5 Communication Service Providers: FamCare may engage authorised
+        email delivery providers, SMS gateway providers, push notification
+        service providers, customer support platforms, and other communication
+        service providers for operational communications. Such providers shall
+        process Personal Data solely for authorised purposes and subject to
+        appropriate contractual and security obligations.
       </p>
 
       <h2>xii. Cross-Border Transfer of Data</h2>
@@ -739,18 +738,18 @@ export default function PrivacyPolicyPage() {
         Government.
       </p>
       <p>
-        12.3 Cloud Infrastructure and Data Localisation &mdash; While FamCare
-        primarily stores Personal Data within India, certain cloud
-        infrastructure providers may maintain encrypted backup, disaster
-        recovery, redundancy, or mirrored infrastructure across multiple
-        jurisdictions. Any such processing or storage shall be undertaken only
-        in accordance with applicable law and appropriate contractual,
-        technical, and organisational safeguards. Where Children&rsquo;s
-        personal data is involved, FamCare shall use reasonable efforts to
-        ensure that the primary storage of such data is within India, provided
-        that transient processing, caching, or incidental access by cloud
-        infrastructure providers shall not constitute a breach of this
-        obligation, subject to applicable law.
+        12.3 Cloud Infrastructure and Data Localisation: While FamCare primarily
+        stores Personal Data within India, certain cloud infrastructure
+        providers may maintain encrypted backup, disaster recovery, redundancy,
+        or mirrored infrastructure across multiple jurisdictions. Any such
+        processing or storage shall be undertaken only in accordance with
+        applicable law and appropriate contractual, technical, and
+        organisational safeguards. Where Children&rsquo;s personal data is
+        involved, FamCare shall use reasonable efforts to ensure that the
+        primary storage of such data is within India, provided that transient
+        processing, caching, or incidental access by cloud infrastructure
+        providers shall not constitute a breach of this obligation, subject to
+        applicable law.
       </p>
 
       <h2>xiii. Grievance Officer</h2>
@@ -826,8 +825,8 @@ export default function PrivacyPolicyPage() {
         guidelines.
       </p>
       <p>
-        16.4 Artificial Intelligence-Assisted Services &mdash; FamCare may, in
-        the future, deploy artificial intelligence or machine learning tools to
+        16.4 Artificial Intelligence-Assisted Services: FamCare may, in the
+        future, deploy artificial intelligence or machine learning tools to
         assist in caregiver matching, scheduling, fraud detection, service
         recommendations, operational efficiency, or customer support. Such tools
         shall function only as decision-support mechanisms and shall not
@@ -836,13 +835,13 @@ export default function PrivacyPolicyPage() {
         oversight and compliance with applicable law.
       </p>
       <p>
-        16.5 CCTV and Visual Evidence &mdash; Where CCTV recordings,
-        photographs, videos, or other visual evidence are voluntarily submitted
-        by Users or Caregivers for safety verification, complaint investigation,
-        dispute resolution, incident reporting, insurance claims, or legal
-        compliance, such material shall be processed only for the relevant
-        purpose, retained for an appropriate period, and protected in accordance
-        with this Privacy Policy and applicable law.
+        16.5 CCTV and Visual Evidence: Where CCTV recordings, photographs,
+        videos, or other visual evidence are voluntarily submitted by Users or
+        Caregivers for safety verification, complaint investigation, dispute
+        resolution, incident reporting, insurance claims, or legal compliance,
+        such material shall be processed only for the relevant purpose, retained
+        for an appropriate period, and protected in accordance with this Privacy
+        Policy and applicable law.
       </p>
 
       <h2>xvii. Amendments</h2>

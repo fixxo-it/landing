@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { EASE } from '@/components/motion/Reveal';
 import { cn } from '@/lib/cn';
+import { useSafeReducedMotion } from '@/components/fx/MotionPrefs';
 
 /* how long each word holds before the next one slides in */
 const INTERVAL = 1100;
@@ -19,24 +20,19 @@ export default function RotatingWord({
   words: string[];
   className?: string;
 }) {
+  const reduced = useSafeReducedMotion();
   const [index, setIndex] = useState(0);
-  const [isReduced, setIsReduced] = useState(false);
 
   useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (mq.matches) {
-      setIsReduced(true);
-      return;
-    }
-
+    if (reduced) return;
     const id = setInterval(() => {
       setIndex((i) => (i + 1) % words.length);
     }, INTERVAL);
     return () => clearInterval(id);
-  }, [words.length]);
+  }, [words.length, reduced]);
 
   const longest = words.reduce((a, b) => (b.length > a.length ? b : a), '');
-  const word = isReduced ? words[0] : words[index];
+  const word = reduced ? words[0] : words[index];
 
   return (
     <span

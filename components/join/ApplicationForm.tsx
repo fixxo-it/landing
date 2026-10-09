@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Arrow } from '@/components/ui/Button';
 import { JELLY_BTN } from '@/components/join/jelly';
-import Select from '@/components/join/Select';
+import Select, { MultiSelect } from '@/components/join/Select';
 import DobPicker, { isAdult, parseDob } from '@/components/join/DobPicker';
 
 const EXPERIENCE = [
@@ -20,6 +20,21 @@ const AVAILABILITY = [
   'Within 2 weeks',
   'Within a month',
 ];
+const LANGUAGES = [
+  'Kannada',
+  'Hindi',
+  'English',
+  'Tamil',
+  'Telugu',
+  'Malayalam',
+  'Marathi',
+  'Bengali',
+  'Odia',
+  'Urdu',
+];
+
+/* the required-field mark, in red so it reads as a rule rather than decoration */
+const REQUIRED = <span className="text-[#E5383B]">*</span>;
 
 const FIELD =
   'h-14 w-full rounded-2xl border border-line bg-white px-5 text-base text-ink placeholder:text-ink-faint outline-none transition-colors focus:border-teal focus:ring-2 focus:ring-teal/20';
@@ -45,6 +60,7 @@ function Field({
   label,
   className,
   labelClassName = 'text-teal-dark',
+  optional,
   count,
   maxCount,
   children,
@@ -52,6 +68,7 @@ function Field({
   label: string;
   className?: string;
   labelClassName?: string;
+  optional?: boolean;
   count?: number;
   maxCount?: number;
   children: React.ReactNode;
@@ -60,7 +77,12 @@ function Field({
     <div className={className}>
       <div className="mb-2 flex items-center justify-between">
         <span className={`block text-[15px] font-semibold ${labelClassName}`}>
-          {label} <span className="text-teal">*</span>
+          {label}{' '}
+          {optional ? (
+            <span className="font-normal text-ink-faint">(optional)</span>
+          ) : (
+            REQUIRED
+          )}
         </span>
         {maxCount && count !== undefined ? (
           <span
@@ -80,6 +102,7 @@ export default function ApplicationForm() {
   const [experience, setExperience] = useState('');
   const [start, setStart] = useState('');
   const [dob, setDob] = useState('');
+  const [languages, setLanguages] = useState<string[]>([]);
   const [currentAddress, setCurrentAddress] = useState('');
   const [permanentAddress, setPermanentAddress] = useState('');
   const [tried, setTried] = useState(false);
@@ -98,6 +121,7 @@ export default function ApplicationForm() {
     setExperience('');
     setStart('');
     setDob('');
+    setLanguages([]);
     setCurrentAddress('');
     setPermanentAddress('');
     formRef.current?.reset();
@@ -115,7 +139,13 @@ export default function ApplicationForm() {
     setTried(true);
     setSubmitError(null);
 
-    if (!experience || !start || dobInvalid || dobUnderage) {
+    if (
+      !experience ||
+      !start ||
+      !languages.length ||
+      dobInvalid ||
+      dobUnderage
+    ) {
       return;
     }
 
@@ -125,7 +155,6 @@ export default function ApplicationForm() {
     const formData = new FormData(form);
     const fullName = String(formData.get('name') || '').trim();
     const phone = String(formData.get('mobile') || '').trim();
-    const languages = String(formData.get('languages') || '').trim();
     const consent = formData.get('consent') === 'on';
     const website = String(formData.get('website') || '').trim(); // Honeypot
 
@@ -139,7 +168,7 @@ export default function ApplicationForm() {
           full_name: fullName,
           phone,
           dob,
-          languages,
+          languages: languages.join(', '),
           experience,
           availability: start,
           current_address: currentAddress,
@@ -183,7 +212,7 @@ export default function ApplicationForm() {
           Caregiver application
         </h3>
         <p className="relative mt-2 text-ink-muted">
-          Fields marked * are required
+          Fields marked {REQUIRED} are required
         </p>
 
         {submitError && (
@@ -249,12 +278,12 @@ export default function ApplicationForm() {
             )}
           </Field>
           <Field label="Languages you speak">
-            <input
-              required
-              name="languages"
-              maxLength={255}
-              placeholder="e.g. Kannada, Hindi"
-              className={FIELD}
+            <MultiSelect
+              value={languages}
+              onChange={setLanguages}
+              options={LANGUAGES}
+              placeholder="Select languages"
+              invalid={tried && !languages.length}
             />
           </Field>
           <Field label="Baby care experience">
@@ -277,12 +306,12 @@ export default function ApplicationForm() {
           </Field>
           <Field
             label="Current address"
+            optional
             className="sm:col-span-2"
             count={currentAddress.length}
             maxCount={500}
           >
             <textarea
-              required
               name="currentAddress"
               rows={3}
               maxLength={500}
@@ -294,12 +323,12 @@ export default function ApplicationForm() {
           </Field>
           <Field
             label="Permanent address"
+            optional
             className="sm:col-span-2"
             count={permanentAddress.length}
             maxCount={500}
           >
             <textarea
-              required
               name="permanentAddress"
               rows={3}
               maxLength={500}
@@ -324,7 +353,7 @@ export default function ApplicationForm() {
             />
             <span>
               I agree that FamCare may contact me about this application by
-              phone or WhatsApp. <span className="text-teal">*</span>
+              phone or WhatsApp. {REQUIRED}
             </span>
           </label>
           <button
@@ -339,8 +368,8 @@ export default function ApplicationForm() {
           </button>
         </div>
         <p className="relative mt-4 text-sm text-ink-muted">
-          We use your details only for recruitment, please don’t share Aadhaar
-          numbers or other documents here
+          We only use your details for hiring. Please don’t share your Aadhaar
+          number or other documents here
         </p>
       </form>
 
@@ -370,8 +399,8 @@ export default function ApplicationForm() {
                 Thank you for applying
               </h3>
               <p className="mt-3 text-ink-muted">
-                Our hiring team will review your details and contact you if you
-                are shortlisted
+                Our hiring team will go through your details and get in touch if
+                you’re shortlisted
               </p>
               <button
                 type="button"

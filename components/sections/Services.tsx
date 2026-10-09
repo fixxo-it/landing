@@ -15,6 +15,7 @@ import { openServiceBooking } from '@/components/DownloadModal';
 import { cn } from '@/lib/cn';
 import Tilt from '@/components/motion/Tilt';
 import SplitText from '@/components/motion/SplitText';
+import { useSafeReducedMotion } from '@/components/fx/MotionPrefs';
 
 /* services without a booking flow yet just announce themselves instead of
    deep linking into the app */
@@ -61,8 +62,8 @@ const HOLD = 0.2;
 const LEAD = 168;
 
 export default function Services() {
-  const [isReduced, setIsReduced] = useState(false);
-  const pinned = !isReduced;
+  const reduced = useSafeReducedMotion();
+  const pinned = !reduced;
   const [comingSoon, setComingSoon] = useState(false);
 
   /* the scroll-driven pin is a lg-only effect — below it the strip is a plain
@@ -72,9 +73,6 @@ export default function Services() {
      than flush against the left edge. */
   const [wide, setWide] = useState(false);
   useEffect(() => {
-    const reducedMq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (reducedMq.matches) setIsReduced(true);
-
     const mq = window.matchMedia('(min-width: 1024px)');
     const update = () => setWide(mq.matches);
     update();
@@ -192,9 +190,11 @@ export default function Services() {
             className="flex w-max gap-5 px-6 will-change-transform sm:px-10 lg:gap-6 lg:px-0"
             /* the strip fades up as the section arrives; the x above is the
                scroll-driven travel and is untouched by this */
-            initial={{ opacity: 0, y: RISE }}
+            initial={{ opacity: 0, y: reduced ? 0 : RISE }}
             animate={
-              stripInView ? { opacity: 1, y: 0 } : { opacity: 0, y: RISE }
+              stripInView
+                ? { opacity: 1, y: 0 }
+                : { opacity: 0, y: reduced ? 0 : RISE }
             }
             transition={{ duration: DURATION, ease: EASE, delay: 0.1 }}
           >
@@ -204,7 +204,7 @@ export default function Services() {
                   name={name}
                   image={image}
                   subServiceId={subServiceId}
-                  reduced={isReduced}
+                  reduced={!!reduced}
                   onComingSoon={() => setComingSoon(true)}
                 />
               </Tilt>
@@ -267,8 +267,8 @@ export default function Services() {
                   Coming soon
                 </p>
                 <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-                  Elderly care is on its way, we will let you know the moment it
-                  is live.
+                  Elderly care is coming soon. We&rsquo;ll let you know as soon
+                  as it&rsquo;s live.
                 </p>
                 <button
                   type="button"

@@ -2,12 +2,13 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { useInView, useReducedMotion } from 'framer-motion';
+import { useInView } from 'framer-motion';
 import { Section, SectionHeading } from '@/components/ui/Section';
 import { Stagger, StaggerItem } from '@/components/motion/Reveal';
 import { JELLY_GREEN } from '@/components/ui/jelly';
 import { cn } from '@/lib/cn';
 import Tilt from '@/components/motion/Tilt';
+import { useSafeReducedMotion } from '@/components/fx/MotionPrefs';
 
 /* Copy rule for this section: say what the family gets, never how it is built.
    No models, no detection methods, nothing a competitor could lift. */
@@ -167,7 +168,7 @@ function OversightVisual() {
   const [live, setLive] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { margin: '-20% 0px' });
-  const reduced = useReducedMotion();
+  const reduced = useSafeReducedMotion();
   const running = inView && !reduced;
 
   useEffect(() => {
