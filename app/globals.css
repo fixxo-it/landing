@@ -139,8 +139,11 @@
      headline and the LCP image at opacity 0 until the bundle has downloaded and
      hydrated, which on a phone is seconds of blank screen. Timings and curves
      match the framer versions they replace (EASE = 0.22, 1, 0.36, 1). */
+  /* `backwards`, not `both`: a fill that outlives the animation keeps the
+     bar a backdrop root, and the glass of the open mobile menu inside it
+     then has nothing behind it to blur */
   .header-drop {
-    animation: header-drop 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation: header-drop 0.75s cubic-bezier(0.22, 1, 0.36, 1) backwards;
   }
   .hero-rise {
     animation: hero-rise 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
