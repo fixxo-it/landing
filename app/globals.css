@@ -214,3 +214,11 @@
     }
   }
 }
+
+/* the hero clip is decorative: never show WebKit's start-playback button over it */
+video.hero-video::-webkit-media-controls,
+video.hero-video::-webkit-media-controls-start-playback-button,
+video.hero-video::-webkit-media-controls-overlay-play-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
