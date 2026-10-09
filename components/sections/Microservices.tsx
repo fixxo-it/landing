@@ -1,7 +1,8 @@
 'use client';
 
 import Image from 'next/image';
-import { Container, SectionHeading } from '@/components/ui/Section';
+import { Container } from '@/components/ui/Section';
+import SplitText from '@/components/motion/SplitText';
 import Reveal from '@/components/motion/Reveal';
 import { openDownloadModal } from '@/components/DownloadModal';
 import { cn } from '@/lib/cn';
@@ -38,7 +39,10 @@ export default function Microservices() {
       className="relative scroll-mt-24 overflow-hidden py-20 lg:py-28"
     >
       <Container>
-        <SectionHeading size="lg" align="left" title="Microservices" />
+        {/* same weight and size as "From newborn to school going," above */}
+        <h2 className="text-balance font-display text-[2.5rem] font-bold leading-[1.08] tracking-[-0.02em] text-ink lg:text-[3.75rem] lg:leading-[1.05]">
+          <SplitText text="Microservices" />
+        </h2>
       </Container>
 
       {/* two rails that run on their own, full-bleed so it reads as continuous

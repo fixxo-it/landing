@@ -2,6 +2,9 @@ import { Container } from '@/components/ui/Section';
 import BackButton from '@/components/legal/BackButton';
 import PageHero from '@/components/ui/PageHero';
 import Reveal from '@/components/motion/Reveal';
+import CtaBanner from '@/components/sections/CtaBanner';
+import SiteFooter from '@/components/sections/SiteFooter';
+import DownloadModal from '@/components/DownloadModal';
 
 /* Shared shell for every legal page — the back button, the title, and a
    prose column for the content. One place to change the layout for all four
@@ -28,7 +31,13 @@ export default function LegalPage({
         </Container>
       </div>
 
-      <PageHero eyebrow="FamCare legal" title={title} sub={updated} />
+      {/* centred to sit over the centred prose column below */}
+      <PageHero
+        eyebrow="FamCare legal"
+        title={title}
+        sub={updated}
+        align="center"
+      />
 
       <Container className="max-w-[820px] pb-24 pt-4 lg:pb-32">
         {children ? (
@@ -48,6 +57,11 @@ export default function LegalPage({
           </p>
         )}
       </Container>
+
+      {/* every page closes the same way the home page does */}
+      <CtaBanner />
+      <SiteFooter />
+      <DownloadModal />
     </main>
   );
 }

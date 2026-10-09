@@ -8,6 +8,8 @@ import Tilt from '@/components/motion/Tilt';
 import Reveal, { EASE } from '@/components/motion/Reveal';
 import BackButton from '@/components/legal/BackButton';
 import SiteFooter from '@/components/sections/SiteFooter';
+import CtaBanner from '@/components/sections/CtaBanner';
+import DownloadModal from '@/components/DownloadModal';
 import { cn } from '@/lib/cn';
 
 const FAQS: [string, string][] = [
@@ -218,7 +220,9 @@ export default function SupportPage() {
         </div>
       </Container>
 
+      <CtaBanner />
       <SiteFooter />
+      <DownloadModal />
     </main>
   );
 }

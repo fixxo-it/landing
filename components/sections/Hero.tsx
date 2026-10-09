@@ -35,7 +35,7 @@ export default function Hero() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const handleVideoRef = useCallback((node: HTMLVideoElement | null) => {
     videoRef.current = node;
-    if (node && node.readyState >= 3) setPlaying(true);
+    if (node && !node.paused && node.readyState >= 3) setPlaying(true);
   }, []);
 
   /* as you scroll past, the copy drifts up faster than the video, so the hero
@@ -148,11 +148,13 @@ export default function Hero() {
           webkit-playsinline="true"
           preload="none"
           aria-hidden
-          onCanPlay={() => setPlaying(true)}
-          onLoadedData={() => setPlaying(true)}
+          /* revealed only once frames are actually moving: where autoplay is
+             blocked the clip still loads, and showing it then put the OS play
+             button over the hero on phones. Until it plays, the poster stays. */
           onPlaying={() => setPlaying(true)}
+          onPause={() => setPlaying(false)}
           className={cn(
-            'absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out',
+            'hero-video pointer-events-none absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out',
             playing ? 'opacity-100' : 'opacity-0'
           )}
         />

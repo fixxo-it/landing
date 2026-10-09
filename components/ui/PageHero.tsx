@@ -16,6 +16,7 @@ export default function PageHero({
   sub,
   className,
   containerClassName,
+  align = 'left',
   children,
 }: {
   eyebrow?: string;
@@ -23,6 +24,7 @@ export default function PageHero({
   sub?: React.ReactNode;
   className?: string;
   containerClassName?: string;
+  align?: 'left' | 'center';
   children?: React.ReactNode;
 }) {
   const reduced = useSafeReducedMotion();
@@ -50,7 +52,13 @@ export default function PageHero({
       )}
     >
       <TealGround grid spotlight />
-      <Container className={cn('py-16 lg:py-24', containerClassName)}>
+      <Container
+        className={cn(
+          'py-16 lg:py-24',
+          align === 'center' && 'flex flex-col items-center text-center',
+          containerClassName
+        )}
+      >
         {eyebrow && (
           <motion.p
             {...fade(0.1)}
