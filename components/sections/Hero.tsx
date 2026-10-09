@@ -32,7 +32,9 @@ export default function Hero() {
      a fast/cached load wins the race against React attaching onCanPlay, and
      that canplay event fires once and is gone. Checking readyState here
      catches that case; the JSX handlers below cover the normal, slower one. */
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const handleVideoRef = useCallback((node: HTMLVideoElement | null) => {
+    videoRef.current = node;
     if (node && node.readyState >= 3) setPlaying(true);
   }, []);
 
@@ -60,6 +62,46 @@ export default function Hero() {
     window.addEventListener('load', start, { once: true });
     return () => window.removeEventListener('load', start);
   }, []);
+
+  /* phones are stricter about autoplay than desktops: iOS only lets a clip
+     play unprompted if it is muted and inline as properties, not just as
+     JSX attributes, and a src that arrives after mount is not always picked
+     up by `autoPlay`. So once the src is in, set both and start it by hand.
+     Where autoplay is refused outright (Low Power Mode, data saver), the
+     first touch or scroll counts as the gesture that lets it start, and it
+     resumes when the tab comes back into view. */
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !videoSrc) return;
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+
+    const play = () => {
+      if (video.paused) video.play().catch(() => {});
+    };
+    const gestures = ['touchstart', 'pointerdown', 'scroll'] as const;
+    const onGesture = () => {
+      play();
+      gestures.forEach((g) => window.removeEventListener(g, onGesture));
+    };
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') play();
+    };
+
+    video.play().catch(() => {
+      gestures.forEach((g) =>
+        window.addEventListener(g, onGesture, { passive: true })
+      );
+    });
+    document.addEventListener('visibilitychange', onVisible);
+    return () => {
+      gestures.forEach((g) => window.removeEventListener(g, onGesture));
+      document.removeEventListener('visibilitychange', onVisible);
+    };
+  }, [videoSrc]);
 
   /* above the fold, so this plays on load rather than on scroll. The delay
      lets the header land first, so the page assembles top-down. The entrances
@@ -127,12 +169,14 @@ export default function Hero() {
         className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/10 to-transparent"
       />
 
-      <Container className="relative pb-24 pt-40 lg:pb-32">
+      {/* on a phone the copy sits low, just clear of the bottom edge, so the
+          clip has the screen above it; from `sm` up it keeps its old inset */}
+      <Container className="relative pb-10 pt-32 sm:pb-24 sm:pt-40 lg:pb-32">
         <motion.div
           style={{ y: copyY, opacity: fade }}
           className="flex max-w-4xl flex-col items-start text-left"
         >
-          <h1 className="font-display text-[min(3.25rem,calc((100vw-3.5rem)/6.75))] font-bold leading-[1.04] tracking-[-0.02em] text-white sm:text-[3.25rem] lg:text-[5.75rem] lg:leading-[1.02]">
+          <h1 className="font-display text-[min(2.5rem,calc((100vw-3.5rem)/7.5))] font-bold leading-[1.04] tracking-[-0.02em] text-white sm:text-[3.25rem] lg:text-[5.75rem] lg:leading-[1.02]">
             {/* "Get" and the rotating word stay on one line at every width —
                 the font shrinks on mobile so this fits rather than the line
                 wrapping and splitting the two apart */}
@@ -152,14 +196,14 @@ export default function Hero() {
           <div className="flex flex-col items-start">
             <p
               style={rise(500)}
-              className="hero-rise mt-6 max-w-[480px] text-lg leading-relaxed text-white/85 lg:text-xl"
+              className="hero-rise mt-4 max-w-[480px] text-base leading-relaxed text-white/85 sm:mt-6 sm:text-lg lg:text-xl"
             >
               Trained, background-checked caregivers you can actually trust
             </p>
 
             <div
               style={rise(600)}
-              className="hero-rise mt-9 flex flex-wrap items-center gap-3"
+              className="hero-rise mt-6 flex flex-wrap items-center gap-3 sm:mt-9"
             >
               <Button
                 href="#book"
