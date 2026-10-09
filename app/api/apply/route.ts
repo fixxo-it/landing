@@ -79,7 +79,8 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 3. Client payload validation & length guards
+    // 3. Client payload validation & length guards. The addresses are
+    //    optional on the form, so they may arrive empty.
     const fullName = String(body.full_name || body.name || '').trim();
     const phone = String(body.phone || body.mobile || '').trim();
     const dob = String(body.dob || '').trim();
@@ -100,9 +101,7 @@ export async function POST(req: NextRequest) {
       !dob ||
       !languages ||
       !experience ||
-      !availability ||
-      !currentAddress ||
-      !permanentAddress
+      !availability
     ) {
       return NextResponse.json(
         { error: 'All required fields must be filled.' },

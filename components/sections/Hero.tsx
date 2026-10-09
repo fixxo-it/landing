@@ -2,19 +2,14 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-} from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Container } from '@/components/ui/Section';
 import { cn } from '@/lib/cn';
 import Button from '@/components/ui/Button';
 import { openAppOrStore } from '@/components/DownloadModal';
 import RotatingWord from '@/components/motion/RotatingWord';
 import SplitText from '@/components/motion/SplitText';
-import Tilt from '@/components/motion/Tilt';
+import { useSafeReducedMotion } from '@/components/fx/MotionPrefs';
 
 /* "Baby Care" leads the loop, then the same beat other sections carry —
    the specific things a visit covers, so the headline itself demonstrates
@@ -28,9 +23,7 @@ const ROTATING_WORDS = [
 ];
 
 export default function Hero() {
-  /* only feeds the scroll-linked transforms below, which start at the same
-     value either way, so server and client markup still match */
-  const reduced = useReducedMotion();
+  const reduced = useSafeReducedMotion();
   /* the clip only takes over once it can actually play — until then the still
      underneath is the hero, so there is never an empty frame to look at */
   const [playing, setPlaying] = useState(false);
@@ -74,133 +67,120 @@ export default function Hero() {
   const rise = (delayMs: number) => ({ animationDelay: `${delayMs}ms` });
 
   return (
+    /* full-bleed, a full screen tall; the header is absolutely placed over its
+       top, so the clip runs to the top edge with the bar floating on it */
     <section
       id="top"
       ref={sectionRef}
-      className="relative scroll-mt-24 pb-16 pt-10 lg:pb-24 lg:pt-16"
+      className="relative flex min-h-[100svh] scroll-mt-24 items-end overflow-hidden bg-teal-dark"
     >
-      <div>
-        <Container>
-          <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_520px] lg:gap-16 xl:grid-cols-[minmax(0,1fr)_620px]">
-            <motion.div
-              style={{ y: copyY, opacity: fade }}
-              className="order-2 lg:order-1"
-            >
-              <div
-                style={rise(500)}
-                className="hero-rise mb-4 inline-flex w-fit items-center gap-2 text-xs font-semibold uppercase tracking-[-0.02em] text-teal-dark"
-              >
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
-                </span>
-                Live in Whitefield, Varthur &amp; Mahadevapura, Bengaluru
-              </div>
+      {/* oversized top and bottom so the parallax drift never uncovers an edge */}
+      <motion.div
+        style={{ y: mediaY }}
+        className="absolute inset-x-0 -bottom-16 -top-16"
+      >
+        {/* The first frame of the clip, served through next/image so it arrives
+            as a sized AVIF/WebP with a preload hint in the head — it is what
+            paints the hero, and it paints before the video has a single byte.
+            `priority` because this is the LCP element. */}
+        <Image
+          src="/img/hero-poster.jpg"
+          alt=""
+          aria-hidden
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
 
-              <h1 className="max-w-[23ch] font-display text-[min(3.25rem,calc((100vw-3.5rem)/6.75))] font-bold leading-[1.04] tracking-[-0.02em] text-ink sm:text-[3.25rem] lg:text-[5.25rem] lg:leading-[1.02]">
-                {/* "Get" and the rotating word stay on one line at every width —
-                    the font shrinks on mobile so this fits rather than the line
-                    wrapping and splitting the two apart */}
-                <span className="whitespace-nowrap">
-                  <SplitText text="Get" onMount delay={0.35} />{' '}
-                  <span className="hero-pop relative inline-block">
-                    {/* the one lime moment in the hero — a swipe of it behind
-                        the rotating word, overshooting the letters */}
-                    <span
-                      aria-hidden
-                      className="brush-highlight absolute -inset-x-2 -inset-y-1 bg-[#E4FF5C]"
-                    />
-                    <RotatingWord
-                      words={ROTATING_WORDS}
-                      className="relative text-teal"
-                    />
-                  </span>
-                </span>
-                <br />
-                <SplitText text="in 10 mins" onMount delay={0.7} step={0.09} />
-              </h1>
+        {/* decorative: it carries no information the headline does not, so it
+            is muted, loops, and stays out of the a11y tree. No `poster` of its
+            own — the image above is the poster. */}
+        <video
+          ref={handleVideoRef}
+          src={videoSrc}
+          autoPlay
+          muted
+          loop
+          playsInline
+          webkit-playsinline="true"
+          preload="none"
+          aria-hidden
+          onCanPlay={() => setPlaying(true)}
+          onLoadedData={() => setPlaying(true)}
+          onPlaying={() => setPlaying(true)}
+          className={cn(
+            'absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out',
+            playing ? 'opacity-100' : 'opacity-0'
+          )}
+        />
+      </motion.div>
 
-              <p
-                style={rise(500)}
-                className="hero-rise mt-6 max-w-[480px] text-lg leading-relaxed text-ink-muted lg:text-xl"
-              >
-                Professionally trained, background-verified caregivers
-              </p>
+      {/* scrim: white type has to hold up over every frame of the clip — heaviest
+          in the bottom-left corner where the copy sits */}
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/25 to-black/75"
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/10 to-transparent"
+      />
 
-              <div
-                style={rise(600)}
-                className="hero-rise mt-9 flex flex-wrap items-center gap-3"
-              >
-                <Button
-                  href="#book"
-                  label="BOOK A CAREGIVER NOW"
-                  variant="solid"
-                  size="md"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    openAppOrStore();
-                  }}
+      <Container className="relative pb-24 pt-40 lg:pb-32">
+        <motion.div
+          style={{ y: copyY, opacity: fade }}
+          className="flex max-w-4xl flex-col items-start text-left"
+        >
+          <h1 className="font-display text-[min(3.25rem,calc((100vw-3.5rem)/6.75))] font-bold leading-[1.04] tracking-[-0.02em] text-white sm:text-[3.25rem] lg:text-[5.75rem] lg:leading-[1.02]">
+            {/* "Get" and the rotating word stay on one line at every width —
+                the font shrinks on mobile so this fits rather than the line
+                wrapping and splitting the two apart */}
+            <span className="whitespace-nowrap">
+              <SplitText text="Get" onMount delay={0.35} />{' '}
+              <span className="hero-pop relative inline-block">
+                <RotatingWord
+                  words={ROTATING_WORDS}
+                  className="relative text-white"
                 />
-                <Button
-                  href="#safety-360"
-                  label="WHY CHOOSE US?"
-                  variant="secondary"
-                  size="md"
-                />
-              </div>
-            </motion.div>
+              </span>
+            </span>
+            <br />
+            <SplitText text="in 10 mins" onMount delay={0.7} step={0.09} />
+          </h1>
 
-            <motion.div
-              style={{ y: mediaY }}
-              className="relative order-1 mx-auto w-full max-w-[520px] lg:order-2"
+          <div className="flex flex-col items-start">
+            <p
+              style={rise(500)}
+              className="hero-rise mt-6 max-w-[480px] text-lg leading-relaxed text-white/85 lg:text-xl"
             >
-              <div className="hero-media">
-                <Tilt max={8}>
-                  {/* the frame is shorter than the clip's native 3:4 by 10% of the
-                      height, and object-bottom anchors the crop to the top edge */}
-                  <div className="relative aspect-[5/6] overflow-hidden rounded-card bg-teal shadow-float">
-                    {/* The first frame of the clip, served through next/image so it
-                        arrives as a sized AVIF/WebP with a preload hint in the head —
-                        it is what paints the hero, and it paints before the video has
-                        a single byte. `priority` because this is the LCP element. */}
-                    <Image
-                      src="/img/hero-poster.jpg"
-                      alt=""
-                      aria-hidden
-                      fill
-                      priority
-                      sizes="(min-width: 1280px) 620px, (min-width: 1024px) 520px, 100vw"
-                      className="object-cover object-bottom"
-                    />
+              Trained, background-checked caregivers you can actually trust
+            </p>
 
-                    {/* decorative: it carries no information the headline does not,
-                        so it is muted, loops, and stays out of the a11y tree.
-                        No `poster` of its own — the image above is the poster. */}
-                    <video
-                      ref={handleVideoRef}
-                      src={videoSrc}
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      webkit-playsinline="true"
-                      preload="none"
-                      aria-hidden
-                      onCanPlay={() => setPlaying(true)}
-                      onLoadedData={() => setPlaying(true)}
-                      onPlaying={() => setPlaying(true)}
-                      className={cn(
-                        'absolute inset-0 h-full w-full object-cover object-bottom transition-opacity duration-700 ease-out',
-                        playing ? 'opacity-100' : 'opacity-0'
-                      )}
-                    />
-                  </div>
-                </Tilt>
-              </div>
-            </motion.div>
+            <div
+              style={rise(600)}
+              className="hero-rise mt-9 flex flex-wrap items-center gap-3"
+            >
+              <Button
+                href="#book"
+                label="BOOK A CAREGIVER NOW"
+                variant="solid"
+                size="md"
+                onClick={(e) => {
+                  e.preventDefault();
+                  openAppOrStore();
+                }}
+              />
+              <Button
+                href="#safety-360"
+                label="WHY CHOOSE US?"
+                variant="ghost"
+                size="md"
+              />
+            </div>
           </div>
-        </Container>
-      </div>
+        </motion.div>
+      </Container>
     </section>
   );
 }

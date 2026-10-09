@@ -6,6 +6,7 @@ import SplitText from '@/components/motion/SplitText';
 import TealGround, { trackSpotlight } from '@/components/fx/TealGround';
 import { DURATION, EASE } from '@/components/motion/Reveal';
 import { cn } from '@/lib/cn';
+import { useSafeReducedMotion } from '@/components/fx/MotionPrefs';
 
 /* The dark teal title band every inner page opens with — the same ground as
    the home hero, so moving between pages feels like one site. */
@@ -24,11 +25,12 @@ export default function PageHero({
   containerClassName?: string;
   children?: React.ReactNode;
 }) {
+  const reduced = useSafeReducedMotion();
   const fade = (delay: number) => ({
     initial: {
       opacity: 0,
-      y: 18,
-      filter: 'blur(8px)',
+      y: reduced ? 0 : 18,
+      filter: reduced ? 'none' : 'blur(8px)',
     },
     animate: {
       opacity: 1,

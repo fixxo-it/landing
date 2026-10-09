@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import LegalPage from '@/components/legal/LegalPage';
 
 export const metadata: Metadata = {
-  title: 'Data Deletion — FamCare',
+  title: 'Data Deletion | FamCare',
 };
 
 export default function DataDeletionPage() {

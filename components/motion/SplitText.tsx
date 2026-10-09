@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { EASE, useReveal } from '@/components/motion/Reveal';
 import { cn } from '@/lib/cn';
+import { useSafeReducedMotion } from '@/components/fx/MotionPrefs';
 
 /* Each word rises out of its own clipping slot, tipped back a few degrees, so
    a heading assembles itself line by line rather than fading in as a block.
@@ -21,6 +22,7 @@ export default function SplitText({
   step?: number;
   onMount?: boolean;
 }) {
+  const reduced = useSafeReducedMotion();
   const { ref, inView } = useReveal();
   const words = text.split(' ');
 
@@ -35,7 +37,7 @@ export default function SplitText({
           <span className="-mb-[0.12em] inline-block overflow-hidden pb-[0.12em] align-bottom">
             {onMount ? (
               /* above the fold: CSS, so the words rise as soon as the HTML
-                 lands instead of sitting hidden until hydration */
+               lands instead of sitting hidden until hydration */
               <span
                 className="split-rise inline-block origin-bottom-left"
                 style={{
@@ -47,8 +49,14 @@ export default function SplitText({
             ) : (
               <motion.span
                 className="inline-block origin-bottom-left will-change-transform"
-                initial={{ y: '110%', rotate: 7 }}
-                animate={inView ? { y: '0%', rotate: 0 } : undefined}
+                initial={reduced ? { opacity: 0 } : { y: '110%', rotate: 7 }}
+                animate={
+                  inView
+                    ? reduced
+                      ? { opacity: 1 }
+                      : { y: '0%', rotate: 0 }
+                    : undefined
+                }
                 transition={{
                   duration: 0.9,
                   ease: EASE,

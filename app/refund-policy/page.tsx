@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import LegalPage from '@/components/legal/LegalPage';
 
 export const metadata: Metadata = {
-  title: 'Refund Policy — FamCare',
+  title: 'Refund Policy | FamCare',
 };
 
 export default function RefundPolicyPage() {
@@ -57,10 +57,10 @@ export default function RefundPolicyPage() {
 
       <h3>Cancellations by FamCare</h3>
       <p>
-        If FamCare cancels a confirmed booking &mdash; for example due to
-        caregiver unavailability, safety concerns, or operational issues &mdash;
-        you will receive a full refund of the fees paid for that Session, unless
-        the cancellation results from your own conduct or a breach of our{' '}
+        If FamCare cancels a confirmed booking (for example due to caregiver
+        unavailability, safety concerns, or operational issues), you will
+        receive a full refund of the fees paid for that Session, unless the
+        cancellation results from your own conduct or a breach of our{' '}
         <a href="/terms-and-conditions">Terms of Use</a>.
       </p>
 

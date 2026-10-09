@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { DURATION, EASE } from '@/components/motion/Reveal';
+import { useSafeReducedMotion } from '@/components/fx/MotionPrefs';
 
 /* plays on mount rather than on scroll: the header sits inside the top 10% of
    the viewport, which Reveal's in-view margin deliberately ignores */
@@ -14,9 +15,10 @@ export default function OnLoad({
   y?: number;
   children: React.ReactNode;
 }) {
+  const reduced = useSafeReducedMotion();
   return (
     <motion.div
-      initial={{ opacity: 0, y }}
+      initial={{ opacity: 0, y: reduced ? 0 : y }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: DURATION, delay, ease: EASE }}
     >

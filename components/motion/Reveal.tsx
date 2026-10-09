@@ -2,11 +2,13 @@
 
 import { useRef } from 'react';
 import { motion, useInView, type Variants } from 'framer-motion';
+import { useSafeReducedMotion } from '@/components/fx/MotionPrefs';
 
 /* Shared motion language for the page:
    – one easing curve (a soft out-expo) so nothing feels like a different site
    – a 28px rise: far enough that the arrival reads as an arrival, short enough
-     that nobody is left waiting on it */
+     that nobody is left waiting on it
+   – every animation collapses to a plain fade when the OS asks for less motion */
 export const EASE = [0.22, 1, 0.36, 1] as const;
 export const RISE = 28;
 export const DURATION = 0.75;
@@ -45,6 +47,7 @@ export default function Reveal({
   className?: string;
   children: React.ReactNode;
 }) {
+  const reduced = useSafeReducedMotion();
   const Component = motion[as] as typeof motion.div;
   const { ref, inView } = useReveal();
 
@@ -54,8 +57,8 @@ export default function Reveal({
       className={className}
       initial={{
         opacity: 0,
-        y: y,
-        filter: 'blur(10px)',
+        y: reduced ? 0 : y,
+        filter: reduced ? 'none' : 'blur(10px)',
       }}
       animate={
         inView
@@ -69,8 +72,8 @@ export default function Reveal({
             }
           : {
               opacity: 0,
-              y: y,
-              filter: 'blur(10px)',
+              y: reduced ? 0 : y,
+              filter: reduced ? 'none' : 'blur(10px)',
             }
       }
       transition={{ duration: DURATION, delay, ease: EASE }}
@@ -121,13 +124,14 @@ export function StaggerItem({
   as?: Tag;
   children: React.ReactNode;
 }) {
+  const reduced = useSafeReducedMotion();
   const Component = motion[as] as typeof motion.div;
   const variants: Variants = {
     hidden: {
       opacity: 0,
-      y: RISE * 1.6,
-      scale: 0.96,
-      filter: 'blur(10px)',
+      y: reduced ? 0 : RISE * 1.6,
+      scale: reduced ? 1 : 0.96,
+      filter: reduced ? 'none' : 'blur(10px)',
     },
     show: {
       opacity: 1,

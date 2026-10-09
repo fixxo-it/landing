@@ -21,15 +21,11 @@ const GROUPS: Group[] = [
     items: [
       [
         'How are FamCare caregivers verified?',
-        'Nobody becomes bookable until every check clears. Application screening, two interviews, Aadhaar and identity verification, address verification, criminal background checks, reference checks, classroom and practical training, then a skill assessment.',
+        'Every caregiver goes through two interviews, identity and address checks, background verification, training, and a practical skills assessment before they can take bookings.',
       ],
       [
-        'Can I see who is coming before they arrive?',
-        'Yes, the moment your booking is confirmed — profile, photo, verification status and experience are in the app, and you can track the arrival live. At the door, scan the QR code on their FamCare ID card and only let them in if it matches.',
-      ],
-      [
-        'What happens in an emergency?',
-        'Call emergency services (112) first, then press SOS in the app — the FamCare concierge answers 24/7. Every visit also carries accident cover and emergency medical assistance at no extra cost.',
+        'Will I know who is coming to my home?',
+        'Yes. As soon as a caregiver is assigned, you can see their photo and profile in the app and track them on the way. When they arrive, please check their FamCare ID before letting them in.',
       ],
     ],
   },
@@ -38,11 +34,11 @@ const GROUPS: Group[] = [
     items: [
       [
         'What training does a caregiver complete?',
-        'Newborn and infant care, feeding and sleep routines, hygiene, emergency response, and parent communication. Every module is taught in-centre and closed by a practical assessment an instructor watches.',
+        "Every caregiver receives classroom and hands-on training in baby care, feeding and sleep routines, hygiene, safe handling, and emergency response. They also learn parent communication, household etiquette, and how to follow your family's care instructions. They must pass a practical assessment before taking bookings.",
       ],
       [
         'Is training refreshed over time?',
-        'Yes, twice a year. Background checks are re-run every six months and refresher modules are required to stay bookable.',
+        'Yes. Every caregiver completes refresher training each quarter. When service feedback highlights a gap, our trainer provides individual coaching.',
       ],
     ],
   },
@@ -51,15 +47,11 @@ const GROUPS: Group[] = [
     items: [
       [
         'How quickly can someone reach me?',
-        [
-          'Instant Care: Caregivers aim to arrive in about 10 minutes, but this depends on uncontrollable external factors like heavy rain, severe traffic, and general road conditions.',
-          'Scheduled Care: Visits can be planned and locked in up to 30 days in advance.',
-          'Safety First: Arrival times prioritize the safety and security of the FamCare caregivers on the road.',
-        ],
+        'Our median arrival time for instant bookings is 10 minutes in serviceable areas. It can take longer depending on caregiver availability, traffic and weather conditions such as heavy rain. You can also schedule care in advance.',
       ],
       [
         'Can I cancel or reschedule?',
-        'You can cancel or reschedule for free at least 4 hours before your booking starts. Within 4 hours, cancellations are non-refundable. Rescheduling is treated as a cancellation and requires a new booking.',
+        'You can cancel free of charge at least 4 hours before your booking starts, and reschedule free of charge at least 2 hours before. After that, the full booking amount is charged, with no refund.',
       ],
     ],
   },
@@ -68,24 +60,7 @@ const GROUPS: Group[] = [
     items: [
       [
         'Can I request the same caregiver again?',
-        'Yes, and you do not have to ask. FamCare Match™ uses your ratings and repeat bookings to prioritise the caregivers you liked.',
-      ],
-      [
-        'What if my child does not settle with a caregiver?',
-        'Tell us in the app and your next booking goes to someone else. We also stop matching you with that caregiver.',
-      ],
-    ],
-  },
-  {
-    tab: 'Pricing & payments',
-    items: [
-      [
-        'Are there any extra charges?',
-        "No surprises — the price shown before you confirm already includes FamCare's service fee, with no surge pricing. Applicable taxes are added on top, and waiting time or extending a visit is charged separately.",
-      ],
-      [
-        'When am I charged?',
-        'In-app, the moment you confirm the booking. Repeat bookings with a matched caregiver are discounted automatically.',
+        "Yes, with our Preferred Caregiver feature. Once you've marked at least 3 caregivers you like, we'll do our best to send one of them, depending on who's available. If none of them is free, you'll get another caregiver trained to the same FamCare standards.",
       ],
     ],
   },
@@ -94,11 +69,11 @@ const GROUPS: Group[] = [
     items: [
       [
         'Where is FamCare available?',
-        'Whitefield, Varthur and Mahadevapura, Bengaluru, today. We are expanding across east Bengaluru through the year.',
+        'We currently serve selected areas of Whitefield, Varthur, and Mahadevapura/Garudachar Palya in Bengaluru. Enter your address in the app to check availability.',
       ],
       [
         'Can I request my area?',
-        'Yes. Drop your locality in the app and we will notify you the moment caregivers are bookable near you.',
+        "Yes. Share your location in the app, and we'll notify you when FamCare becomes available nearby.",
       ],
     ],
   },
@@ -134,16 +109,31 @@ export default function Faq() {
           {/* mobile size matched to "Book in 4 steps" so the page's oversized
               headings all read at the same scale on a phone */}
           <h2 className="font-display text-[2.5rem] font-bold leading-[1.08] tracking-[-0.02em] text-ink lg:text-[3.75rem] lg:leading-[1.05]">
-            <SplitText text="Questions? Good" />
-            <br />
-            <SplitText text="Ask us anything" delay={0.15} />
+            <SplitText text="Frequently asked questions" />
           </h2>
 
-          {/* the filter actually drives the list on the right — one row,
+          {/* desktop only — pinned to the bottom of this column by mt-auto.
+             The mobile copy lives after the accordion instead, see below. */}
+          <div className="mt-10 hidden lg:mt-auto lg:block lg:pt-14">
+            <p className="font-display text-h3 font-bold text-ink">
+              Still have questions?
+            </p>
+            <a
+              href="mailto:support@famcare.co.in"
+              className="mt-3 inline-block font-display text-lg font-semibold text-teal underline decoration-teal/30 underline-offset-4 transition-colors duration-200 hover:decoration-teal"
+            >
+              Mail us &rarr; support@famcare.co.in
+            </a>
+          </div>
+        </Reveal>
+
+        {/* right panel — the topic filter, then one row per question */}
+        <Reveal delay={0.1} className="overflow-hidden rounded-[20px] bg-white">
+          {/* the filter sits on top of the list it drives — one row,
              scrolling natively on mobile rather than wrapping, so six tabs
              never cost the panel a second line. Desktop has room for all six
              without scrolling, so the overflow is switched off there. */}
-          <div className="mt-8 flex gap-2 overflow-x-auto [scrollbar-width:none] lg:flex-wrap lg:overflow-visible [&::-webkit-scrollbar]:hidden">
+          <div className="flex gap-2 overflow-x-auto px-6 pb-4 pt-6 [scrollbar-width:none] sm:px-8 lg:flex-wrap lg:overflow-visible [&::-webkit-scrollbar]:hidden">
             {GROUPS.map((g, i) => (
               <button
                 key={g.tab}
@@ -172,23 +162,6 @@ export default function Faq() {
             ))}
           </div>
 
-          {/* desktop only — pinned to the bottom of this column by mt-auto.
-             The mobile copy lives after the accordion instead, see below. */}
-          <div className="mt-10 hidden lg:mt-auto lg:block lg:pt-14">
-            <p className="font-display text-h3 font-bold text-ink">
-              Still have questions?
-            </p>
-            <a
-              href="mailto:support@famcare.co.in"
-              className="mt-3 inline-block font-display text-lg font-semibold text-teal underline decoration-teal/30 underline-offset-4 transition-colors duration-200 hover:decoration-teal"
-            >
-              Mail us &rarr; support@famcare.co.in
-            </a>
-          </div>
-        </Reveal>
-
-        {/* right panel — one row per question, split by white hairlines */}
-        <Reveal delay={0.1} className="overflow-hidden rounded-[20px] bg-white">
           <AnimatePresence mode="wait">
             <motion.div
               key={tab}

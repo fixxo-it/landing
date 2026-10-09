@@ -21,6 +21,7 @@ import BenefitIcon from '@/components/join/BenefitIcon';
 import { JELLY_GREEN } from '@/components/ui/jelly';
 import { cn } from '@/lib/cn';
 import SplitText from '@/components/motion/SplitText';
+import { useSafeReducedMotion } from '@/components/fx/MotionPrefs';
 
 const CAREGIVER_FORM_URL = '/join';
 
@@ -236,22 +237,22 @@ const STEP_ICONS = ['heart', 'shield', 'training', 'growth'];
 const STEPS = [
   {
     title: 'Careful hiring',
-    body: 'We shortlist for temperament first: patience, calm communication, cleanliness and empathy, across two interview rounds.',
+    body: 'We look for the right temperament first: patient, calm, tidy and kind. Everyone goes through two rounds of interviews.',
     Visual: VisualHiring,
   },
   {
     title: 'Verified identity',
-    body: 'Government ID, address and criminal background verification are completed before a caregiver is ever shown to a family.',
+    body: 'We check government ID, address and criminal background before a caregiver is ever shown to a family.',
     Visual: VisualIdentity,
   },
   {
     title: 'Mandatory training',
-    body: 'Classroom and hands-on training in baby care, hygiene, emergency response and parent communication.',
+    body: 'Classroom and hands-on training in baby care, hygiene, handling emergencies and talking with parents.',
     Visual: VisualTraining,
   },
   {
     title: 'Practical assessment',
-    body: 'Skills are demonstrated, observed and certified in-centre. Only then does a caregiver become bookable.',
+    body: "Caregivers show us what they've learnt while a trainer watches. Only then can you book them.",
     Visual: VisualAssessment,
   },
 ];
@@ -340,6 +341,7 @@ function Step({
   onActivate: (i: number) => void;
 }) {
   const ref = useRef<HTMLLIElement>(null);
+  const reduced = useSafeReducedMotion();
 
   /* zero-height band at the viewport middle: whichever step crosses it wins */
   const inView = useInView(ref, { margin: '-50% 0px -50% 0px' });
@@ -371,15 +373,17 @@ function Step({
       ref={ref}
       /* each step arrives on its own as you reach it, rather than the whole
          list appearing at once when the section's top edge enters */
-      initial={{ opacity: 0, y: RISE }}
-      animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: RISE }}
+      initial={{ opacity: 0, y: reduced ? 0 : RISE }}
+      animate={
+        revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: reduced ? 0 : RISE }
+      }
       transition={{ duration: DURATION, ease: EASE }}
       className="relative flex gap-5 pb-16 last:pb-0 lg:min-h-[70vh] lg:pb-0"
     >
       {!isLast && (
         <span className="absolute bottom-0 left-5 top-12 w-px -translate-x-1/2 bg-line">
           <motion.span
-            style={{ scaleY: fill }}
+            style={{ scaleY: reduced ? 1 : fill }}
             className="block h-full w-full origin-top bg-teal"
           />
         </span>

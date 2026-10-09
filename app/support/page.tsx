@@ -29,7 +29,7 @@ const FAQS: [string, string][] = [
   ],
   [
     'What is your pricing?',
-    "Pricing is transparent and standardised by the type of care and duration of the service — you see the quote, including FamCare's service fee, in the app before you confirm. Applicable taxes, waiting time and session extensions are charged in addition.",
+    "Pricing is transparent and standardised by the type of care and duration of the service. You see the full quote, including FamCare's service fee, in the app before you confirm. Applicable taxes, waiting time and session extensions are charged in addition.",
   ],
 ];
 

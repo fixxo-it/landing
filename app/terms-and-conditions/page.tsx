@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import LegalPage from '@/components/legal/LegalPage';
 
 export const metadata: Metadata = {
-  title: 'Terms of Use — FamCare',
+  title: 'Terms of Use | FamCare',
 };
 
 const ADDRESS =
@@ -133,23 +133,23 @@ export default function TermsAndConditionsPage() {
 
       <h2>iii. Eligibility and Registration</h2>
       <p>
-        3.1 Eligibility &mdash; To access and use the Platform, you must: (a) be
-        at least eighteen (18) years of age; (b) have the legal capacity to
-        enter into binding contracts under applicable Indian law; (c) not be a
-        person who has previously been suspended or removed from the Platform by
+        3.1 Eligibility: To access and use the Platform, you must: (a) be at
+        least eighteen (18) years of age; (b) have the legal capacity to enter
+        into binding contracts under applicable Indian law; (c) not be a person
+        who has previously been suspended or removed from the Platform by
         FamCare; and (d) comply fully with these Terms and all Applicable Laws.
       </p>
       <p>
-        3.2 Account Registration &mdash; You must create an Account to access
-        most features of the Platform. During registration, you agree to: (a)
-        provide accurate, current, and complete information; (b) maintain and
-        promptly update your information to keep it accurate, current, and
-        complete; (c) maintain the security and confidentiality of your Account
-        credentials; and (d) notify FamCare immediately upon becoming aware of
-        any unauthorised access to or use of your Account.
+        3.2 Account Registration: You must create an Account to access most
+        features of the Platform. During registration, you agree to: (a) provide
+        accurate, current, and complete information; (b) maintain and promptly
+        update your information to keep it accurate, current, and complete; (c)
+        maintain the security and confidentiality of your Account credentials;
+        and (d) notify FamCare immediately upon becoming aware of any
+        unauthorised access to or use of your Account.
       </p>
       <p>
-        3.3 Account Responsibility &mdash; You are solely responsible for all
+        3.3 Account Responsibility: You are solely responsible for all
         activities that occur under your Account. FamCare shall not be liable
         for any loss or damage arising from your failure to maintain the
         confidentiality of your Account credentials or from unauthorised use of
@@ -157,15 +157,15 @@ export default function TermsAndConditionsPage() {
         any third party without FamCare&rsquo;s prior written consent.
       </p>
       <p>
-        3.4 Minors and Children &mdash; The Platform is not intended for use by
-        persons under the age of eighteen (18) years. Parents and guardians may
-        use the Platform on behalf of their minor children for the purpose of
-        availing childcare services. FamCare shall not knowingly permit minors
-        to register independently as Users or Caregivers.
+        3.4 Minors and Children: The Platform is not intended for use by persons
+        under the age of eighteen (18) years. Parents and guardians may use the
+        Platform on behalf of their minor children for the purpose of availing
+        childcare services. FamCare shall not knowingly permit minors to
+        register independently as Users or Caregivers.
       </p>
       <p>
-        3.5 Electronic Acceptance and Binding Agreement &mdash; By clicking
-        &ldquo;I Agree&rdquo;, &ldquo;Accept&rdquo;, &ldquo;Register&rdquo;,
+        3.5 Electronic Acceptance and Binding Agreement: By clicking &ldquo;I
+        Agree&rdquo;, &ldquo;Accept&rdquo;, &ldquo;Register&rdquo;,
         &ldquo;Continue&rdquo;, or any similar electronic confirmation,
         downloading, installing, accessing, or otherwise using the Platform, you
         acknowledge and agree that such electronic acceptance constitutes your
@@ -176,29 +176,28 @@ export default function TermsAndConditionsPage() {
         including Sections 4, 5 and 10A thereof, and other Applicable Laws.
       </p>
       <p>
-        3.6 Age Verification &mdash; FamCare may require Users to provide
-        documentary proof of age, identity, or legal capacity at any time for
-        verification purposes. Failure to provide satisfactory verification may
-        result in refusal of registration, suspension, or termination of the
-        Account.
+        3.6 Age Verification: FamCare may require Users to provide documentary
+        proof of age, identity, or legal capacity at any time for verification
+        purposes. Failure to provide satisfactory verification may result in
+        refusal of registration, suspension, or termination of the Account.
       </p>
       <p>
-        3.7 Duplicate Accounts &mdash; Users shall not create, maintain, or
-        operate multiple Accounts, impersonate another individual, or create
-        Accounts using false, misleading, or fictitious information. FamCare may
-        suspend or permanently terminate duplicate or fraudulent Accounts
-        without prior notice.
+        3.7 Duplicate Accounts: Users shall not create, maintain, or operate
+        multiple Accounts, impersonate another individual, or create Accounts
+        using false, misleading, or fictitious information. FamCare may suspend
+        or permanently terminate duplicate or fraudulent Accounts without prior
+        notice.
       </p>
       <p>
-        3.8 OTP and Authentication Security &mdash; Where login or verification
-        is facilitated through one-time passwords (OTP), authentication codes,
-        or similar credentials, Users shall maintain their confidentiality and
+        3.8 OTP and Authentication Security: Where login or verification is
+        facilitated through one-time passwords (OTP), authentication codes, or
+        similar credentials, Users shall maintain their confidentiality and
         shall not disclose such credentials to any third party. Users remain
         responsible for all activities conducted using successfully
         authenticated credentials.
       </p>
       <p>
-        3.9 Account Recovery &mdash; FamCare may require additional identity
+        3.9 Account Recovery: FamCare may require additional identity
         verification, documentation, or authentication before restoring access
         to an Account where unauthorised access, fraud, security concerns, or
         ownership disputes are suspected.
@@ -206,30 +205,30 @@ export default function TermsAndConditionsPage() {
 
       <h2>iv. Nature of the Platform and Services</h2>
       <p>
-        4.1 Facilitation Platform &mdash; FamCare operates as a
-        technology-enabled platform that facilitates the discovery, booking, and
-        management of childcare and babysitting services. FamCare connects Users
-        with independent Caregivers and provides associated tools including
+        4.1 Facilitation Platform: FamCare operates as a technology-enabled
+        platform that facilitates the discovery, booking, and management of
+        childcare and babysitting services. FamCare connects Users with
+        independent Caregivers and provides associated tools including
         scheduling, real-time GPS session tracking, payment processing, and
         safety features.
       </p>
       <p>
-        4.2 No Employment Relationship &mdash; Caregivers registered on the
-        Platform are independent service providers and are not employees,
-        agents, joint venture partners, or contractors of FamCare. FamCare does
-        not employ, supervise, direct, or control Caregivers in the performance
-        of their caregiving services. The relationship between a User and a
-        Caregiver is an independent engagement, and FamCare is not a party to
-        that caregiving relationship.
+        4.2 No Employment Relationship: Caregivers registered on the Platform
+        are independent service providers and are not employees, agents, joint
+        venture partners, or contractors of FamCare. FamCare does not employ,
+        supervise, direct, or control Caregivers in the performance of their
+        caregiving services. The relationship between a User and a Caregiver is
+        an independent engagement, and FamCare is not a party to that caregiving
+        relationship.
       </p>
       <p>
-        4.3 Intermediary Status &mdash; FamCare operates solely as a
-        technology-enabled intermediary platform facilitating the discovery,
-        booking, communication, payment processing, and management of caregiving
-        services between independent Users and independent Caregivers. FamCare
-        does not itself provide childcare or caregiving services. Any
-        verification, screening, or trust and safety measures undertaken by
-        FamCare are ancillary to its intermediary function and do not constitute
+        4.3 Intermediary Status: FamCare operates solely as a technology-enabled
+        intermediary platform facilitating the discovery, booking,
+        communication, payment processing, and management of caregiving services
+        between independent Users and independent Caregivers. FamCare does not
+        itself provide childcare or caregiving services. Any verification,
+        screening, or trust and safety measures undertaken by FamCare are
+        ancillary to its intermediary function and do not constitute
         FamCare&rsquo;s assumption of control, supervision, or liability over
         the caregiving services provided by Caregivers. FamCare shall be
         entitled to all protections, exemptions, and safe harbour available to
@@ -238,15 +237,15 @@ export default function TermsAndConditionsPage() {
         statutory obligations.
       </p>
       <p>
-        4.4 No Guarantee of Availability &mdash; FamCare does not guarantee the
+        4.4 No Guarantee of Availability: FamCare does not guarantee the
         continuous availability of any specific Caregiver, the successful
         completion of any booking, or uninterrupted access to the Platform.
         Service availability is subject to the location, preferences, and
         availability of registered Caregivers at the relevant time.
       </p>
       <p>
-        4.5 Verification Disclaimer &mdash; While FamCare conducts background
-        checks, identity verification, police verification, and other screening
+        4.5 Verification Disclaimer: While FamCare conducts background checks,
+        identity verification, police verification, and other screening
         procedures in respect of Caregivers, such verification measures are not
         exhaustive and do not constitute a guarantee of suitability, conduct,
         character, competence, or future performance. Users acknowledge that
@@ -261,9 +260,7 @@ export default function TermsAndConditionsPage() {
       </p>
 
       <h2>v. User Obligations</h2>
-      <p>
-        5.1 General Obligations &mdash; By using the Platform, you agree to:
-      </p>
+      <p>5.1 General Obligations: By using the Platform, you agree to:</p>
       <ul>
         <li>
           (a) use the Platform only for lawful purposes and in accordance with
@@ -295,7 +292,7 @@ export default function TermsAndConditionsPage() {
           bookings.
         </li>
       </ul>
-      <p>5.2 Prohibited Conduct &mdash; You shall not:</p>
+      <p>5.2 Prohibited Conduct: You shall not:</p>
       <ul>
         <li>
           (a) use the Platform to engage in any unlawful, fraudulent, abusive,
@@ -351,11 +348,11 @@ export default function TermsAndConditionsPage() {
         </li>
       </ul>
       <p>
-        5.3 Confidentiality and Non-Disclosure &mdash; While accessing or using
-        the Platform or during any Session, you may obtain access to
-        confidential or proprietary information relating to FamCare, the
-        Platform, Users, Caregivers, Children, or other third parties, including
-        personal information, contact details, addresses, schedules, operational
+        5.3 Confidentiality and Non-Disclosure: While accessing or using the
+        Platform or during any Session, you may obtain access to confidential or
+        proprietary information relating to FamCare, the Platform, Users,
+        Caregivers, Children, or other third parties, including personal
+        information, contact details, addresses, schedules, operational
         procedures, pricing, business information, photographs, communications,
         and other confidential materials (&ldquo;Confidential
         Information&rdquo;). You shall keep all Confidential Information
@@ -366,9 +363,9 @@ export default function TermsAndConditionsPage() {
         deactivation of your Account.
       </p>
       <p>
-        5.4 Fraud, Abuse and Platform Integrity &mdash; You shall not engage in
-        any activity that compromises the integrity, security, reputation, or
-        lawful operation of the Platform, including submitting false complaints,
+        5.4 Fraud, Abuse and Platform Integrity: You shall not engage in any
+        activity that compromises the integrity, security, reputation, or lawful
+        operation of the Platform, including submitting false complaints,
         malicious reports, fraudulent payment disputes or chargebacks, false
         emergency alerts, fake reviews or ratings, identity fraud, account
         manipulation, impersonation, collusion with other users, or any attempt
@@ -378,13 +375,13 @@ export default function TermsAndConditionsPage() {
         under Applicable Law.
       </p>
       <p>
-        5.5 Cooperation During Investigations &mdash; Users shall cooperate with
+        5.5 Cooperation During Investigations: Users shall cooperate with
         FamCare during any investigation relating to fraud, abuse, security
         incidents, complaints, child safety concerns, regulatory enquiries, or
         legal proceedings.
       </p>
       <p>
-        5.6 Platform Monitoring &mdash; FamCare may monitor Platform activity,
+        5.6 Platform Monitoring: FamCare may monitor Platform activity,
         communications, transactions, bookings, or usage patterns for fraud
         detection, security, quality assurance, child safety, regulatory
         compliance, and enforcement of these Terms.
@@ -392,8 +389,8 @@ export default function TermsAndConditionsPage() {
 
       <h2>vi. Bookings, Cancellations, and Payments</h2>
       <p>
-        6.1 Booking Confirmation &mdash; A Session booking is confirmed only
-        upon receipt of a confirmation notification from FamCare through the
+        6.1 Booking Confirmation: A Session booking is confirmed only upon
+        receipt of a confirmation notification from FamCare through the
         Platform. FamCare reserves the right to cancel or modify any confirmed
         booking in exceptional circumstances, including but not limited to
         Caregiver unavailability, safety concerns, or Platform operational
@@ -405,79 +402,78 @@ export default function TermsAndConditionsPage() {
         arising from such cancellation.
       </p>
       <p>
-        6.2 Cancellations &mdash; Cancellation of confirmed bookings shall be
-        subject to FamCare&rsquo;s cancellation and refund policy as published
-        on the Platform from time to time. A User may cancel a confirmed
-        Session without cancellation charges provided such cancellation is made
-        at least four (4) hours before the scheduled commencement time of the
-        Session. Cancellations made less than four (4) hours before the
-        scheduled commencement time, or any failure by the User to be available
-        at the commencement of the Session (&ldquo;no-show&rdquo;), may attract
+        6.2 Cancellations: Cancellation of confirmed bookings shall be subject
+        to FamCare&rsquo;s cancellation and refund policy as published on the
+        Platform from time to time. A User may cancel a confirmed Session
+        without cancellation charges provided such cancellation is made at least
+        four (4) hours before the scheduled commencement time of the Session.
+        Cancellations made less than four (4) hours before the scheduled
+        commencement time, or any failure by the User to be available at the
+        commencement of the Session (&ldquo;no-show&rdquo;), may attract
         cancellation charges in accordance with the applicable policy. FamCare
         reserves the right to impose cancellation charges in accordance with the
         applicable policy. FamCare may modify the cancellation policy upon
         reasonable notice to Users.
       </p>
       <p>
-        6.2.1 Exceptional Circumstances &mdash; FamCare may review genuine
-        medical emergencies or other exceptional situations on a case-by-case
-        basis. Any refund or credit provided under such circumstances shall be
-        at FamCare&rsquo;s sole discretion.
+        6.2.1 Exceptional Circumstances: FamCare may review genuine medical
+        emergencies or other exceptional situations on a case-by-case basis. Any
+        refund or credit provided under such circumstances shall be at
+        FamCare&rsquo;s sole discretion.
       </p>
       <p>
-        6.3 Payments &mdash; All payments for caregiving services shall be made
-        through the Platform using authorised payment methods. Cash payments
-        directly to Caregivers outside the Platform are not permitted and may
-        result in suspension of your Account. FamCare uses authorised
-        third-party payment service providers to process transactions. Service
-        Fees are displayed on the Platform and are subject to applicable taxes.
+        6.3 Payments: All payments for caregiving services shall be made through
+        the Platform using authorised payment methods. Cash payments directly to
+        Caregivers outside the Platform are not permitted and may result in
+        suspension of your Account. FamCare uses authorised third-party payment
+        service providers to process transactions. Service Fees are displayed on
+        the Platform and are subject to applicable taxes.
       </p>
       <p>
-        6.4 Refunds &mdash; Refund requests shall be governed by FamCare&rsquo;s
-        refund policy as published on the Platform. FamCare shall not be liable
-        for any transaction fees or charges imposed by payment service providers
-        or banks in connection with refund processing.
+        6.4 Refunds: Refund requests shall be governed by FamCare&rsquo;s refund
+        policy as published on the Platform. FamCare shall not be liable for any
+        transaction fees or charges imposed by payment service providers or
+        banks in connection with refund processing.
       </p>
       <p>
-        6.5 Taxes &mdash; Unless otherwise expressly indicated on the Platform
-        at the time of booking, all fees displayed on the Platform are exclusive
-        of applicable taxes. Users shall be responsible for payment of all
+        6.5 Taxes: Unless otherwise expressly indicated on the Platform at the
+        time of booking, all fees displayed on the Platform are exclusive of
+        applicable taxes. Users shall be responsible for payment of all
         applicable taxes, levies, duties, or governmental charges arising from
         their use of the Platform except where such taxes are expressly stated
         to be borne by FamCare under Applicable Law.
       </p>
       <p>
-        6.6 Waiting Charges &mdash; Where a Caregiver is required to wait beyond
-        the scheduled commencement time due to User delay, additional waiting
+        6.6 Waiting Charges: Where a Caregiver is required to wait beyond the
+        scheduled commencement time due to User delay, additional waiting
         charges may apply in accordance with the Platform policies.
       </p>
       <p>
-        6.7 Session Extension &mdash; Any extension of a confirmed Session shall
-        be processed through the Platform and shall be subject to additional
-        fees as displayed at the time of extension.
+        6.7 Session Extension: Any extension of a confirmed Session shall be
+        processed through the Platform and shall be subject to additional fees
+        as displayed at the time of extension.
       </p>
       <p>
-        6.8 Platform Commission &mdash; All bookings facilitated through the
-        Platform include Platform Service Fees payable to FamCare. Any attempt
-        to avoid such fees through direct off-platform arrangements constitutes
-        a material breach of these Terms and shall entitle FamCare to recover
-        the Service Fees that would have been payable, together with any costs
-        of enforcement, without prejudice to any other remedies available under
+        6.8 Platform Commission: All bookings facilitated through the Platform
+        include Platform Service Fees payable to FamCare. Any attempt to avoid
+        such fees through direct off-platform arrangements constitutes a
+        material breach of these Terms and shall entitle FamCare to recover the
+        Service Fees that would have been payable, together with any costs of
+        enforcement, without prejudice to any other remedies available under
         these Terms or Applicable Law.
       </p>
       <p>
-        6.9 Fraudulent Chargebacks &mdash; Fraudulent chargebacks, payment
-        reversals, or payment disputes initiated in bad faith may result in
-        suspension, recovery proceedings, legal action, and recovery of
-        associated costs.
+        6.9 Fraudulent Chargebacks: Fraudulent chargebacks, payment reversals,
+        or payment disputes initiated in bad faith may result in suspension,
+        recovery proceedings, legal action, and recovery of associated costs.
       </p>
       <p>
-        6.10 Third-Party Recruitment Agencies &mdash; FamCare may engage
-        authorised third-party recruitment agencies, staffing partners, manpower
-        agencies, placement consultants, or similar service providers to source,
-        recruit, verify, onboard, train, or manage Caregivers. Where necessary,
-        FamCare may collect, receive, use, disclose, or share Personal Data with
-        such agencies solely for recruitment, identity verification, background
+        6.10 Third-Party Recruitment Agencies: FamCare may engage authorised
+        third-party recruitment agencies, staffing partners, manpower agencies,
+        placement consultants, or similar service providers to source, recruit,
+        verify, onboard, train, or manage Caregivers. Where necessary, FamCare
+        may collect, receive, use, disclose, or share Personal Data with such
+        agencies solely for recruitment, identity verification, background
         verification, onboarding, training, compliance, and service-related
         purposes. All such agencies shall process Personal Data only on the
         documented instructions of FamCare, maintain appropriate confidentiality
@@ -489,20 +485,20 @@ export default function TermsAndConditionsPage() {
 
       <h2>vii. Safety Features and GPS Tracking</h2>
       <p>
-        7.1 Live GPS Tracking &mdash; FamCare may process and use the live GPS
-        location of Caregivers solely during active Sessions for the purposes of
-        service delivery, caregiver navigation, session monitoring, emergency
-        response, safety, fraud prevention, and dispute resolution. GPS tracking
-        ceases upon the completion or termination of the active Session. FamCare
-        does not undertake tracking, behavioural monitoring, or profiling of
-        Children through the Platform.
+        7.1 Live GPS Tracking: FamCare may process and use the live GPS location
+        of Caregivers solely during active Sessions for the purposes of service
+        delivery, caregiver navigation, session monitoring, emergency response,
+        safety, fraud prevention, and dispute resolution. GPS tracking ceases
+        upon the completion or termination of the active Session. FamCare does
+        not undertake tracking, behavioural monitoring, or profiling of Children
+        through the Platform.
       </p>
       <p>
-        7.2 SOS and Emergency Alerts &mdash; The Platform includes emergency
-        safety features including SOS alerts, geo-fencing notifications, and
-        in-app emergency contact mechanisms. Users and Caregivers are encouraged
-        to utilise these features in safety-critical situations. FamCare is not
-        an emergency services provider and does not guarantee emergency service
+        7.2 SOS and Emergency Alerts: The Platform includes emergency safety
+        features including SOS alerts, geo-fencing notifications, and in-app
+        emergency contact mechanisms. Users and Caregivers are encouraged to
+        utilise these features in safety-critical situations. FamCare is not an
+        emergency services provider and does not guarantee emergency service
         response outcomes or response times. In the event of any emergency,
         Users and Caregivers must contact the relevant emergency services
         (police, ambulance, fire) directly. FamCare shall endeavour to
@@ -510,14 +506,14 @@ export default function TermsAndConditionsPage() {
         failure, delay, or inadequacy in emergency response.
       </p>
       <p>
-        7.3 In-App Communications &mdash; All communications between Users and
+        7.3 In-App Communications: All communications between Users and
         Caregivers should be conducted through the Platform&rsquo;s authorised
         communication channels. FamCare may retain in-app communication logs for
         safety verification, dispute resolution, and compliance purposes as
         described in the Privacy Policy.
       </p>
       <p>
-        7.4 Consent to Data Processing &mdash; Users acknowledge that use of the
+        7.4 Consent to Data Processing: Users acknowledge that use of the
         Platform requires the collection, processing, storage, sharing,
         retention, and disclosure of personal data as described in the Privacy
         Policy. Users shall provide specific, informed, and affirmative consent
@@ -528,40 +524,40 @@ export default function TermsAndConditionsPage() {
 
       <h2>viii. Content and Intellectual Property</h2>
       <p>
-        8.1 User-Generated Content &mdash; By submitting, uploading, or
-        transmitting any Content through the Platform, you grant FamCare a
-        non-exclusive, royalty-free, perpetual, irrevocable, worldwide,
-        sub-licensable licence to use, reproduce, process, adapt, and display
-        such Content to the extent necessary for the operation, improvement, and
-        promotion of the Platform, subject to applicable law. This licence shall
-        survive termination or deactivation of your Account.
+        8.1 User-Generated Content: By submitting, uploading, or transmitting
+        any Content through the Platform, you grant FamCare a non-exclusive,
+        royalty-free, perpetual, irrevocable, worldwide, sub-licensable licence
+        to use, reproduce, process, adapt, and display such Content to the
+        extent necessary for the operation, improvement, and promotion of the
+        Platform, subject to applicable law. This licence shall survive
+        termination or deactivation of your Account.
       </p>
       <p>
-        8.2 Content Standards &mdash; You represent and warrant that any Content
-        you submit: (a) is accurate and not misleading; (b) does not infringe
-        the intellectual property, privacy, or other rights of any third party;
-        (c) complies with Applicable Law; and (d) does not contain any material
-        that is harmful, defamatory, obscene, or inappropriate for a childcare
+        8.2 Content Standards: You represent and warrant that any Content you
+        submit: (a) is accurate and not misleading; (b) does not infringe the
+        intellectual property, privacy, or other rights of any third party; (c)
+        complies with Applicable Law; and (d) does not contain any material that
+        is harmful, defamatory, obscene, or inappropriate for a childcare
         platform.
       </p>
       <p>
-        8.3 FamCare Intellectual Property &mdash; All intellectual property in
-        and to the Platform, including trade marks, logos, software, databases,
-        user interfaces, designs, processes, and all other content created or
-        owned by FamCare, is the exclusive property of FamCare Technologies
-        Private Limited and is protected under applicable intellectual property
-        laws. You shall not reproduce, distribute, reverse engineer, modify,
-        create derivative works from, or otherwise exploit any FamCare
-        intellectual property without express written authorisation.
+        8.3 FamCare Intellectual Property: All intellectual property in and to
+        the Platform, including trade marks, logos, software, databases, user
+        interfaces, designs, processes, and all other content created or owned
+        by FamCare, is the exclusive property of FamCare Technologies Private
+        Limited and is protected under applicable intellectual property laws.
+        You shall not reproduce, distribute, reverse engineer, modify, create
+        derivative works from, or otherwise exploit any FamCare intellectual
+        property without express written authorisation.
       </p>
       <p>
-        8.4 Feedback &mdash; Any feedback, suggestions, or recommendations you
-        submit to FamCare regarding the Platform shall be deemed
-        non-confidential and FamCare shall be free to use, implement, and
-        commercialise such feedback without any obligation to you.
+        8.4 Feedback: Any feedback, suggestions, or recommendations you submit
+        to FamCare regarding the Platform shall be deemed non-confidential and
+        FamCare shall be free to use, implement, and commercialise such feedback
+        without any obligation to you.
       </p>
       <p>
-        8.5 Reviews and Ratings &mdash; Users may provide ratings, reviews, and
+        8.5 Reviews and Ratings: Users may provide ratings, reviews, and
         feedback regarding Caregivers and Platform services. Such reviews shall
         be truthful, fair, lawful, and based on genuine experiences. FamCare
         reserves the right, but not the obligation, to moderate, edit, refuse,
@@ -570,68 +566,68 @@ export default function TermsAndConditionsPage() {
         with these Terms or Applicable Law.
       </p>
       <p>
-        8.6 User Licence &mdash; FamCare grants Users a limited, revocable,
+        8.6 User Licence: FamCare grants Users a limited, revocable,
         non-exclusive, non-transferable, and non-sublicensable licence to access
         and use the Platform solely for its intended purpose.
       </p>
       <p>
-        8.7 Trademark Restrictions &mdash; Users shall not use FamCare&rsquo;s
+        8.7 Trademark Restrictions: Users shall not use FamCare&rsquo;s
         trademarks, logos, branding, domain names, trade dress, or other
         proprietary identifiers without prior written permission.
       </p>
       <p>
-        8.8 Restricted Uses &mdash; Users shall not, without FamCare&rsquo;s
-        prior written consent, use any Platform content or data to train
-        artificial intelligence or machine learning models, scrape, crawl, data
-        mine, reverse engineer, or extract data from the Platform or its
-        databases, or otherwise use the Platform or its content for any purpose
-        other than as expressly permitted under these Terms.
+        8.8 Restricted Uses: Users shall not, without FamCare&rsquo;s prior
+        written consent, use any Platform content or data to train artificial
+        intelligence or machine learning models, scrape, crawl, data mine,
+        reverse engineer, or extract data from the Platform or its databases, or
+        otherwise use the Platform or its content for any purpose other than as
+        expressly permitted under these Terms.
       </p>
-      <p>8.9 Copyright Complaints &mdash; Provide IP complaint mechanism.</p>
+      <p>8.9 Copyright Complaints: Provide IP complaint mechanism.</p>
       <p>
-        8.10 Notice and Takedown &mdash; FamCare may remove infringing or
-        unlawful Content upon receipt of valid complaints or where required by
-        Applicable Law.
+        8.10 Notice and Takedown: FamCare may remove infringing or unlawful
+        Content upon receipt of valid complaints or where required by Applicable
+        Law.
       </p>
 
       <h2>ix. Limitation of Liability and Disclaimers</h2>
       <p>
-        9.1 Platform Provided &ldquo;As Is&rdquo; &mdash; The Platform is
-        provided on an &ldquo;as is&rdquo; and &ldquo;as available&rdquo; basis
-        without warranties of any kind, whether express or implied. FamCare does
-        not warrant that the Platform will be uninterrupted, error-free, secure,
-        or free from viruses or other harmful components. To the fullest extent
+        9.1 Platform Provided &ldquo;As Is&rdquo;: The Platform is provided on
+        an &ldquo;as is&rdquo; and &ldquo;as available&rdquo; basis without
+        warranties of any kind, whether express or implied. FamCare does not
+        warrant that the Platform will be uninterrupted, error-free, secure, or
+        free from viruses or other harmful components. To the fullest extent
         permitted under Applicable Law, FamCare disclaims all implied
         warranties.
       </p>
       <p>
-        9.2 Limitation of Liability &mdash; To the fullest extent permitted
-        under Applicable Law, FamCare&rsquo;s aggregate liability to you for any
-        claim arising out of or in connection with these Terms or your use of
-        the Platform shall not exceed the total Service Fees paid by you to
-        FamCare for the specific Session giving rise to the claim, or Indian
-        Rupees Five Thousand (INR 5,000), whichever is lower. FamCare shall not
-        be liable for any indirect, incidental, consequential, punitive, or
-        special damages arising from your use of the Platform.
+        9.2 Limitation of Liability: To the fullest extent permitted under
+        Applicable Law, FamCare&rsquo;s aggregate liability to you for any claim
+        arising out of or in connection with these Terms or your use of the
+        Platform shall not exceed the total Service Fees paid by you to FamCare
+        for the specific Session giving rise to the claim, or Indian Rupees Five
+        Thousand (INR 5,000), whichever is lower. FamCare shall not be liable
+        for any indirect, incidental, consequential, punitive, or special
+        damages arising from your use of the Platform.
       </p>
       <p>
-        9.3 Third-Party Conduct &mdash; FamCare is not responsible or liable for
-        the conduct, acts, omissions, or negligence of any Caregiver, User, or
-        third party in connection with services arranged through the Platform.
+        9.3 Third-Party Conduct: FamCare is not responsible or liable for the
+        conduct, acts, omissions, or negligence of any Caregiver, User, or third
+        party in connection with services arranged through the Platform.
         FamCare&rsquo;s role is limited to facilitating the connection between
         Users and Caregivers and providing associated platform services.
       </p>
       <p>
-        9.4 Force Majeure &mdash; FamCare shall not be liable for any failure or
-        delay in performance arising from circumstances beyond its reasonable
-        control, including natural disasters, acts of government, civil unrest,
+        9.4 Force Majeure: FamCare shall not be liable for any failure or delay
+        in performance arising from circumstances beyond its reasonable control,
+        including natural disasters, acts of government, civil unrest,
         pandemics, power failures, internet disruptions, cyber-attacks, hacking
         incidents, failures of third-party service providers (including payment
         processors, cloud hosting, and telecommunications providers), or other
         force majeure events.
       </p>
       <p>
-        9.5 Indemnity &mdash; You agree to indemnify, defend, and hold harmless
+        9.5 Indemnity: You agree to indemnify, defend, and hold harmless
         FamCare, its directors, officers, employees, affiliates, licensors,
         service providers, and representatives from and against any claims,
         actions, proceedings, liabilities, damages, losses, penalties, fines,
@@ -660,17 +656,16 @@ export default function TermsAndConditionsPage() {
 
       <h2>x. Children&rsquo;s Safety and Special Obligations</h2>
       <p>
-        10.1 Child Safety Priority &mdash; The safety and wellbeing of children
-        is the primary operational and ethical commitment of FamCare. All Users
-        and Caregivers are required to cooperate fully with FamCare&rsquo;s
-        safety protocols, verification requirements, and emergency response
-        procedures.
+        10.1 Child Safety Priority: The safety and wellbeing of children is the
+        primary operational and ethical commitment of FamCare. All Users and
+        Caregivers are required to cooperate fully with FamCare&rsquo;s safety
+        protocols, verification requirements, and emergency response procedures.
       </p>
       <p>
-        10.2 Parental Responsibility &mdash; Parents and Guardians retain full
-        legal responsibility for their minor Children at all times. Before
-        handing over a Child to the assigned Caregiver, the Parent or Guardian
-        shall complete the mandatory QR code-based identity verification of the
+        10.2 Parental Responsibility: Parents and Guardians retain full legal
+        responsibility for their minor Children at all times. Before handing
+        over a Child to the assigned Caregiver, the Parent or Guardian shall
+        complete the mandatory QR code-based identity verification of the
         Caregiver through the Platform and ensure that the identity displayed on
         the Platform matches the individual present at the service location. The
         engagement of a Caregiver through the Platform does not constitute a
@@ -683,59 +678,59 @@ export default function TermsAndConditionsPage() {
         appropriate care.
       </p>
       <p>
-        10.3 Reporting Incidents &mdash; Any incident involving the safety,
-        health, or wellbeing of a Child during or arising from a Session must be
-        reported immediately to FamCare through the Platform&rsquo;s emergency
-        features or designated support channels and, where appropriate, to the
-        relevant law enforcement or regulatory authorities. FamCare will
-        cooperate fully with any investigation by competent authorities.
+        10.3 Reporting Incidents: Any incident involving the safety, health, or
+        wellbeing of a Child during or arising from a Session must be reported
+        immediately to FamCare through the Platform&rsquo;s emergency features
+        or designated support channels and, where appropriate, to the relevant
+        law enforcement or regulatory authorities. FamCare will cooperate fully
+        with any investigation by competent authorities.
       </p>
       <p>
-        10.4 No Harmful Processing &mdash; FamCare shall not process
-        Children&rsquo;s personal data in any manner likely to cause a
-        detrimental effect on the wellbeing of the Child, including through
-        tracking, behavioural monitoring, targeted advertising, or harmful
-        profiling, consistent with Section 9 of the DPDP Act.
+        10.4 No Harmful Processing: FamCare shall not process Children&rsquo;s
+        personal data in any manner likely to cause a detrimental effect on the
+        wellbeing of the Child, including through tracking, behavioural
+        monitoring, targeted advertising, or harmful profiling, consistent with
+        Section 9 of the DPDP Act.
       </p>
       <p>
-        10.5 Mandatory Reporting and Cooperation &mdash; Users and Caregivers
-        shall promptly report any incident involving suspected child abuse,
-        neglect, exploitation, criminal conduct, medical emergencies, or other
-        serious safety concerns arising during or in connection with a Session.
-        FamCare may cooperate with law enforcement agencies, child protection
+        10.5 Mandatory Reporting and Cooperation: Users and Caregivers shall
+        promptly report any incident involving suspected child abuse, neglect,
+        exploitation, criminal conduct, medical emergencies, or other serious
+        safety concerns arising during or in connection with a Session. FamCare
+        may cooperate with law enforcement agencies, child protection
         authorities, regulatory authorities, or courts and may disclose relevant
         information where required or permitted under Applicable Law.
       </p>
 
       <h2>xi. Termination and Suspension</h2>
       <p>
-        11.1 Termination by User &mdash; You may deactivate your Account at any
-        time by following the account deletion process available through the
-        Platform or by contacting our Grievance Officer. Deactivation of your
-        Account does not affect any legal rights, obligations, or liabilities
-        that have accrued prior to the date of deactivation.
+        11.1 Termination by User: You may deactivate your Account at any time by
+        following the account deletion process available through the Platform or
+        by contacting our Grievance Officer. Deactivation of your Account does
+        not affect any legal rights, obligations, or liabilities that have
+        accrued prior to the date of deactivation.
       </p>
       <p>
-        11.2 Suspension and Termination by FamCare &mdash; FamCare reserves the
-        right, at its sole discretion, to suspend, restrict, or permanently
-        terminate your access to the Platform if: (a) you breach any provision
-        of these Terms; (b) your conduct poses a risk to the safety of any
-        Child, Caregiver, or User; (c) FamCare is required to do so by
-        applicable law, court order, or regulatory direction; or (d) FamCare
-        determines that continued access is not in the best interests of the
-        Platform&rsquo;s integrity or safety.
+        11.2 Suspension and Termination by FamCare: FamCare reserves the right,
+        at its sole discretion, to suspend, restrict, or permanently terminate
+        your access to the Platform if: (a) you breach any provision of these
+        Terms; (b) your conduct poses a risk to the safety of any Child,
+        Caregiver, or User; (c) FamCare is required to do so by applicable law,
+        court order, or regulatory direction; or (d) FamCare determines that
+        continued access is not in the best interests of the Platform&rsquo;s
+        integrity or safety.
       </p>
       <p>
-        11.3 Effect of Termination &mdash; Upon termination of your Account,
-        your right to access and use the Platform shall cease immediately.
-        FamCare shall retain your data for such periods as are required under
-        the Privacy Policy and Applicable Law. Clauses that by their nature
-        survive termination shall continue to apply.
+        11.3 Effect of Termination: Upon termination of your Account, your right
+        to access and use the Platform shall cease immediately. FamCare shall
+        retain your data for such periods as are required under the Privacy
+        Policy and Applicable Law. Clauses that by their nature survive
+        termination shall continue to apply.
       </p>
       <p>
-        11.4 Survival &mdash; Any provisions of these Terms which by their
-        nature are intended to survive termination, including without limitation
-        those relating to intellectual property, confidentiality, indemnity,
+        11.4 Survival: Any provisions of these Terms which by their nature are
+        intended to survive termination, including without limitation those
+        relating to intellectual property, confidentiality, indemnity,
         limitation of liability, dispute resolution, governing law, payment
         obligations, data retention, and any accrued rights or liabilities,
         shall continue in full force and effect notwithstanding termination or
@@ -744,10 +739,10 @@ export default function TermsAndConditionsPage() {
 
       <h2>xii. Grievance Redressal</h2>
       <p>
-        12.1 Grievance Officer &mdash; FamCare has designated a Grievance
-        Officer in accordance with the requirements of the IT Intermediary Rules
-        and the DPDP Act to address complaints and queries relating to the
-        Platform and these Terms.
+        12.1 Grievance Officer: FamCare has designated a Grievance Officer in
+        accordance with the requirements of the IT Intermediary Rules and the
+        DPDP Act to address complaints and queries relating to the Platform and
+        these Terms.
       </p>
       <p>
         The Grievance Officer shall: receive and acknowledge complaints within
@@ -783,24 +778,23 @@ export default function TermsAndConditionsPage() {
 
       <h2>xiii. Governing Law and Dispute Resolution</h2>
       <p>
-        13.1 Governing Law &mdash; These Terms shall be governed by and
-        construed in accordance with the laws of India, without regard to
-        conflict of law principles. Any dispute, claim, or controversy arising
-        out of or relating to these Terms shall be subject to the exclusive
-        jurisdiction of the competent courts located in Bengaluru, Karnataka,
-        India, subject to any mandatory dispute resolution requirements under
-        Applicable Law.
+        13.1 Governing Law: These Terms shall be governed by and construed in
+        accordance with the laws of India, without regard to conflict of law
+        principles. Any dispute, claim, or controversy arising out of or
+        relating to these Terms shall be subject to the exclusive jurisdiction
+        of the competent courts located in Bengaluru, Karnataka, India, subject
+        to any mandatory dispute resolution requirements under Applicable Law.
       </p>
       <p>
-        13.2 Amicable Resolution &mdash; In the event of any dispute or
-        grievance, the parties shall first endeavour to resolve the matter
-        amicably through FamCare&rsquo;s Grievance Redressal mechanism. If the
-        dispute is not resolved within thirty (30) days of a complaint being
-        submitted, either party may pursue available legal remedies.
+        13.2 Amicable Resolution: In the event of any dispute or grievance, the
+        parties shall first endeavour to resolve the matter amicably through
+        FamCare&rsquo;s Grievance Redressal mechanism. If the dispute is not
+        resolved within thirty (30) days of a complaint being submitted, either
+        party may pursue available legal remedies.
       </p>
       <p>
-        13.3 Arbitration &mdash; Any dispute not resolved amicably within thirty
-        (30) days shall, except where such dispute falls within the exclusive
+        13.3 Arbitration: Any dispute not resolved amicably within thirty (30)
+        days shall, except where such dispute falls within the exclusive
         jurisdiction of consumer forums or commissions under the Consumer
         Protection Act, 2019 or other Applicable Law, be finally resolved by
         arbitration in accordance with the provisions of the Arbitration and
@@ -817,86 +811,86 @@ export default function TermsAndConditionsPage() {
 
       <h2>xiv. Amendments</h2>
       <p>
-        14.1 Modifications &mdash; FamCare may amend these Terms from time to
-        time to reflect changes in law, operational practices, platform
-        features, or business requirements. Material changes shall be
-        communicated through the Platform, by email, or through other reasonable
-        notice mechanisms at least three (3) days before becoming effective,
-        unless a shorter period is required by the urgency of the circumstances,
-        safety or security concerns, or by Applicable Law.
+        14.1 Modifications: FamCare may amend these Terms from time to time to
+        reflect changes in law, operational practices, platform features, or
+        business requirements. Material changes shall be communicated through
+        the Platform, by email, or through other reasonable notice mechanisms at
+        least three (3) days before becoming effective, unless a shorter period
+        is required by the urgency of the circumstances, safety or security
+        concerns, or by Applicable Law.
       </p>
       <p>
-        14.2 Continued Use &mdash; Your continued access to or use of the
-        Platform after the effective date of any revised Terms constitutes your
+        14.2 Continued Use: Your continued access to or use of the Platform
+        after the effective date of any revised Terms constitutes your
         acceptance of those revised Terms to the extent permitted by law. If you
         do not agree to the revised Terms, you must discontinue your use of the
         Platform.
       </p>
       <p>
-        14.3 Reservation of Rights &mdash; FamCare reserves all rights not
-        expressly granted under these Terms. Nothing contained herein shall be
-        construed as granting any licence, ownership, or other proprietary
-        interest in or to the Platform except as expressly provided herein.
+        14.3 Reservation of Rights: FamCare reserves all rights not expressly
+        granted under these Terms. Nothing contained herein shall be construed
+        as granting any licence, ownership, or other proprietary interest in or
+        to the Platform except as expressly provided herein.
       </p>
       <p>
-        14.4 Future Technology &mdash; FamCare may introduce artificial
-        intelligence, automation, recommendation engines, verification
-        technologies, or similar technologies from time to time. Any outputs
-        generated by such systems are intended solely to assist Platform
-        operations and shall not constitute professional advice, legally binding
-        decisions, or guarantees of accuracy, suitability, or safety. FamCare
-        shall not be liable for any loss or damage arising from reliance on
-        automated outputs, and Users shall exercise their own independent
-        judgment in all decisions relating to caregiving services.
+        14.4 Future Technology: FamCare may introduce artificial intelligence,
+        automation, recommendation engines, verification technologies, or
+        similar technologies from time to time. Any outputs generated by such
+        systems are intended solely to assist Platform operations and shall not
+        constitute professional advice, legally binding decisions, or guarantees
+        of accuracy, suitability, or safety. FamCare shall not be liable for any
+        loss or damage arising from reliance on automated outputs, and Users
+        shall exercise their own independent judgment in all decisions relating
+        to caregiving services.
       </p>
 
       <h2>xv. Miscellaneous</h2>
       <p>
-        15.1 Assignment &mdash; FamCare may assign, transfer, novate, or
-        otherwise deal with its rights and obligations under these Terms to any
-        affiliate, successor, purchaser, or entity resulting from any merger,
-        acquisition, corporate restructuring, or transfer of business without
-        requiring prior consent from Users. Users shall not assign or transfer
-        any rights or obligations under these Terms without the prior written
-        consent of FamCare.
+        15.1 Assignment: FamCare may assign, transfer, novate, or otherwise deal
+        with its rights and obligations under these Terms to any affiliate,
+        successor, purchaser, or entity resulting from any merger, acquisition,
+        corporate restructuring, or transfer of business without requiring prior
+        consent from Users. Users shall not assign or transfer any rights or
+        obligations under these Terms without the prior written consent of
+        FamCare.
       </p>
       <p>
-        15.2 Notices &mdash; Any legal notice or communication under these Terms
-        shall be deemed duly served if sent by email to the registered email
-        address associated with the Account, by in-app notification, or by any
-        other mode recognised under Applicable Law. Users shall be responsible
-        for maintaining accurate and up-to-date contact information.
+        15.2 Notices: Any legal notice or communication under these Terms shall
+        be deemed duly served if sent by email to the registered email address
+        associated with the Account, by in-app notification, or by any other
+        mode recognised under Applicable Law. Users shall be responsible for
+        maintaining accurate and up-to-date contact information.
       </p>
       <p>
-        15.3 No Third-Party Rights &mdash; Except where expressly provided under
+        15.3 No Third-Party Rights: Except where expressly provided under
         Applicable Law, these Terms are intended solely for the benefit of the
         parties and shall not confer any rights or remedies upon any third
         party.
       </p>
       <p>
-        15.4 Severability &mdash; If any provision of these Terms is found to be
+        15.4 Severability: If any provision of these Terms is found to be
         unlawful, void, or unenforceable under Applicable Law, such provision
         shall be deemed severed from these Terms and shall not affect the
         validity and enforceability of the remaining provisions.
       </p>
       <p>
-        15.5 Waiver &mdash; FamCare&rsquo;s failure to exercise or enforce any
-        right or provision under these Terms shall not constitute a waiver of
-        such right or provision.
+        15.5 Waiver: FamCare&rsquo;s failure to exercise or enforce any right or
+        provision under these Terms shall not constitute a waiver of such right
+        or provision.
       </p>
       <p>
-        15.6 Entire Agreement &mdash; These Terms, together with the Privacy
-        Policy and any supplementary notices issued by FamCare, constitute the
-        entire agreement between you and FamCare with respect to your use of the
+        15.6 Entire Agreement: These Terms, together with the Privacy Policy and
+        any supplementary notices issued by FamCare, constitute the entire
+        agreement between you and FamCare with respect to your use of the
         Platform.
       </p>
       <p>
-        15.7 Language &mdash; These Terms are issued in the English language. In
-        the event of any translation, the English version shall prevail.
+        15.7 Language: These Terms are issued in the English language. In the
+        event of any translation, the English version shall prevail.
       </p>
       <p>
-        15.8 Relationship of the Parties &mdash; Nothing contained in these
-        Terms shall be construed as creating any employer-employee relationship,
+        15.8 Relationship of the Parties: Nothing contained in these Terms shall
+        be construed as creating any employer-employee relationship,
         partnership, joint venture, agency, fiduciary relationship, franchise,
         or other similar legal relationship between FamCare and any User or
         Caregiver. A User accesses the Platform solely to discover, book,
@@ -912,13 +906,13 @@ export default function TermsAndConditionsPage() {
         Caregiver.
       </p>
       <p>
-        15.9 Headings &mdash; The headings, titles, and numbering used in these
-        Terms are inserted solely for convenience of reference and shall not
-        affect the interpretation, construction, or meaning of any provision
-        contained herein.
+        15.9 Headings: The headings, titles, and numbering used in these Terms
+        are inserted solely for convenience of reference and shall not affect
+        the interpretation, construction, or meaning of any provision contained
+        herein.
       </p>
       <p>
-        15.10 Independent Obligations &mdash; The obligations, representations,
+        15.10 Independent Obligations: The obligations, representations,
         warranties, covenants, restrictions, and liabilities contained in these
         Terms are independent and severable. The invalidity, unenforceability,
         or non-performance of any obligation shall not affect the enforceability

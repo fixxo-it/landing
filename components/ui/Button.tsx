@@ -1,13 +1,9 @@
 'use client';
 
 import { useRef } from 'react';
-import {
-  motion,
-  useMotionValue,
-  useReducedMotion,
-  useSpring,
-} from 'framer-motion';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { cn } from '@/lib/cn';
+import { useSafeReducedMotion } from '@/components/fx/MotionPrefs';
 
 type Variant = 'primary' | 'secondary' | 'onDark' | 'solid' | 'ghost';
 type Size = 'sm' | 'md';
@@ -83,7 +79,7 @@ export default function Button({
   /* magnetic: the pill leans toward the cursor while it is over it, then
      springs home. Driven by motion values, so the CSS hover lift in BASE is
      superseded by the inline transform rather than fighting it. */
-  const reduced = useReducedMotion();
+  const reduced = useSafeReducedMotion();
   const ref = useRef<HTMLAnchorElement>(null);
   const mx = useMotionValue(0);
   const my = useMotionValue(0);

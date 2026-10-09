@@ -7,11 +7,10 @@ import BackButton from '@/components/legal/BackButton';
 import ApplicationForm from '@/components/join/ApplicationForm';
 import BenefitIcon from '@/components/join/BenefitIcon';
 import StepBadge from '@/components/join/StepBadge';
-import ServiceLoop from '@/components/join/ServiceLoop';
+import HeroPhotoLoop from '@/components/join/HeroPhotoLoop';
 import CtaBanner from '@/components/sections/CtaBanner';
 import SiteFooter from '@/components/sections/SiteFooter';
 import DownloadModal from '@/components/DownloadModal';
-import TealGround from '@/components/fx/TealGround';
 import SplitText from '@/components/motion/SplitText';
 import Tilt from '@/components/motion/Tilt';
 import Button from '@/components/ui/Button';
@@ -26,7 +25,7 @@ const BENEFITS = [
   {
     icon: 'heart',
     title: 'Respect for your work',
-    body: 'Caregiving is skilled, meaningful work, be part of a team that values the person behind the care',
+    body: 'Caregiving is skilled, meaningful work. Join a team that values the person behind the care',
   },
   {
     icon: 'growth',
@@ -36,17 +35,17 @@ const BENEFITS = [
   {
     icon: 'training',
     title: 'Training that supports you',
-    body: 'Get practical onboarding, skill assessment, and ongoing guidance to care with confidence',
+    body: 'Hands-on onboarding, skill checks and ongoing support, so you can care with confidence',
   },
   {
     icon: 'shield',
     title: 'Insurance support',
-    body: 'Insurance coverage for eligible caregivers, subject to the applicable policy terms',
+    body: 'Eligible caregivers get insurance cover, as per the policy terms',
   },
   {
     icon: 'calendar',
     title: 'Attendance bonus',
-    body: 'Earn an additional bonus when you meet the attendance criteria for the month',
+    body: "Earn an extra bonus when you meet the month's attendance target",
   },
   {
     icon: 'gift',
@@ -83,13 +82,18 @@ export default function JoinPage() {
           </Container>
         </header>
 
-        {/* dark teal hero panel — the same ground as the home hero */}
-        <section className="relative isolate mx-2 mt-3 overflow-hidden rounded-[28px] text-white sm:mx-3 lg:rounded-[44px]">
-          <TealGround grid />
-          <Container className="grid items-center gap-12 pb-16 pt-14 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:pb-24 lg:pt-20">
+        {/* hero panel: copy on the teal ground, the looping caregiver photo
+            beside it at full strength and its own portrait shape */}
+        <section className="relative isolate mx-2 mt-3 overflow-hidden rounded-[28px] bg-teal-dark text-white sm:mx-3 lg:rounded-[44px]">
+          {/* flat dark teal under a high-contrast grain */}
+          <div
+            aria-hidden
+            className="grain-strong pointer-events-none absolute inset-0 -z-10"
+          />
+          <Container className="grid items-center gap-10 pb-10 pt-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,40%)] lg:gap-16 lg:py-16">
             <Stagger delay={0.1} step={0.12}>
               <StaggerItem>
-                <p className="inline-flex rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[-0.02em] text-white/85 backdrop-blur">
+                <p className="text-xs font-semibold uppercase tracking-[-0.02em] text-white/85">
                   Caregiver careers · Bengaluru
                 </p>
               </StaggerItem>
@@ -110,9 +114,8 @@ export default function JoinPage() {
               <StaggerItem>
                 <p className="mt-6 max-w-[620px] text-lg leading-relaxed text-white/70">
                   At FamCare, your work is respected and your future matters.
-                  With structured opportunities, training, insurance support and
-                  eligible bonuses, you can grow your earnings while caring with
-                  greater peace of mind
+                  With proper training, insurance support and bonuses, you can
+                  earn more and care for families with real peace of mind
                 </p>
               </StaggerItem>
               <StaggerItem>
@@ -129,9 +132,7 @@ export default function JoinPage() {
                 </div>
               </StaggerItem>
             </Stagger>
-            <Reveal delay={0.25}>
-              <ServiceLoop />
-            </Reveal>
+            <HeroPhotoLoop className="w-full rounded-[20px] lg:rounded-[28px]" />
           </Container>
         </section>
 

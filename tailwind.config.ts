@@ -35,6 +35,7 @@ export default {
       fontFamily: {
         sans: ['var(--font-figtree)', 'system-ui', 'sans-serif'],
         display: ['var(--font-figtree)', 'system-ui', 'sans-serif'],
+        hand: ['var(--font-caveat)', 'cursive'],
       },
       /* one type ramp for the whole page — every heading picks from here */
       fontSize: {
