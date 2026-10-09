@@ -1,35 +1,33 @@
-import SiteHeader from "@/components/sections/SiteHeader";
-import Hero from "@/components/sections/Hero";
-import Services from "@/components/sections/Services";
-import HowItWorks from "@/components/sections/HowItWorks";
-import Safe360Dial from "@/components/sections/Safe360Dial";
-import Safe360 from "@/components/sections/Safe360";
-import HiringJourney from "@/components/sections/HiringJourney";
-import Testimonials from "@/components/sections/Testimonials";
-import Faq from "@/components/sections/Faq";
-import CtaBanner from "@/components/sections/CtaBanner";
-import SiteFooter from "@/components/sections/SiteFooter";
-import DownloadModal from "@/components/DownloadModal";
-import ScrollHint from "@/components/ScrollHint";
+import { ScrollFx, SmoothScroll } from "@/components/lab/core";
+import Hero from "@/components/lab/Hero";
+import Preloader from "@/components/lab/Preloader";
+import { HorizontalServices, ProblemSolution, Safe360, ZoomDot } from "@/components/lab/Scenes";
+import { AppQrModal } from "@/components/lab/AppQr";
+import { Faq, FooterCta, Header, Journey, MicroReel, Reviews } from "@/components/lab/Scenes2";
 
+/* Motion lab: an experimental, animation-led take on the landing page. */
 export default function Home() {
   return (
-    <>
-      <SiteHeader />
-      <main className="flex w-full flex-col">
+    <div className="lab overflow-x-clip">
+      <SmoothScroll />
+      <Preloader />
+      <Header />
+      <div aria-hidden className="lab-grain" />
+
+      <main>
         <Hero />
-        <Services />
-        <HowItWorks />
-        <Safe360Dial />
+        <ProblemSolution />
+        <HorizontalServices />
+        <ZoomDot />
         <Safe360 />
-        <HiringJourney />
-        <Testimonials />
+        <MicroReel />
+        <Journey />
+        <Reviews />
         <Faq />
-        <CtaBanner />
       </main>
-      <SiteFooter />
-      <DownloadModal />
-      <ScrollHint />
-    </>
+      <FooterCta />
+      <AppQrModal />
+      <ScrollFx />
+    </div>
   );
 }

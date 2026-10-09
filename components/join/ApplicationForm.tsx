@@ -1,27 +1,56 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
-import { Arrow } from "@/components/ui/Button";
-import { JELLY_BTN } from "@/components/join/jelly";
-import Select from "@/components/join/Select";
-import DobPicker, { isAdult, parseDob } from "@/components/join/DobPicker";
+import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { Arrow } from '@/components/ui/Button';
+import Select, { MultiSelect } from '@/components/join/Select';
+import DobPicker, { isAdult, parseDob } from '@/components/join/DobPicker';
 
-const EXPERIENCE = ["No experience yet", "Less than 1 year", "1–3 years", "3–5 years", "5+ years"];
-const AVAILABILITY = ["Immediately", "Within a week", "Within 2 weeks", "Within a month"];
+const EXPERIENCE = [
+  'No experience yet',
+  'Less than 1 year',
+  '1–3 years',
+  '3–5 years',
+  '5+ years',
+];
+const AVAILABILITY = [
+  'Immediately',
+  'Within a week',
+  'Within 2 weeks',
+  'Within a month',
+];
+const LANGUAGES = [
+  'Kannada',
+  'Hindi',
+  'English',
+  'Tamil',
+  'Telugu',
+  'Malayalam',
+  'Marathi',
+  'Bengali',
+  'Odia',
+  'Urdu',
+];
+
+/* the required-field mark, in red so it reads as a rule rather than decoration */
+const REQUIRED = <span className="text-[#E5383B]">*</span>;
 
 const FIELD =
-  "h-14 w-full rounded-2xl border border-line bg-white px-5 text-base text-ink placeholder:text-ink-faint outline-none transition-colors focus:border-teal focus:ring-2 focus:ring-teal/20";
+  'h-14 w-full rounded-2xl border border-line bg-white px-5 text-base text-ink placeholder:text-ink-faint outline-none transition-colors focus:border-teal focus:ring-2 focus:ring-teal/20';
 
-const AREA = FIELD.replace("h-14", "min-h-[104px] resize-y py-4");
+const AREA = FIELD.replace('h-14', 'min-h-[104px] resize-y py-4');
 
 /* white panel with only a whisper of the brand green: a thin dark-green bar along the top */
-const PANEL = "relative isolate overflow-hidden rounded-[32px] bg-white shadow-float ring-1 ring-teal/10";
+const PANEL =
+  'relative isolate overflow-hidden rounded-[32px] bg-white shadow-float ring-1 ring-teal/10';
 
 function Glow() {
   return (
     <>
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-1.5 bg-gradient-to-r from-teal-dark to-teal" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-1.5 bg-gradient-to-r from-teal-dark to-teal"
+      />
     </>
   );
 }
@@ -29,19 +58,39 @@ function Glow() {
 function Field({
   label,
   className,
-  labelClassName = "text-teal-dark",
+  labelClassName = 'text-teal-dark',
+  optional,
+  count,
+  maxCount,
   children,
 }: {
   label: string;
   className?: string;
   labelClassName?: string;
+  optional?: boolean;
+  count?: number;
+  maxCount?: number;
   children: React.ReactNode;
 }) {
   return (
     <div className={className}>
-      <span className={`mb-2 block text-[15px] font-semibold ${labelClassName}`}>
-        {label} <span className="text-teal">*</span>
-      </span>
+      <div className="mb-2 flex items-center justify-between">
+        <span className={`block text-[15px] font-semibold ${labelClassName}`}>
+          {label}{' '}
+          {optional ? (
+            <span className="font-normal text-ink-faint">(optional)</span>
+          ) : (
+            REQUIRED
+          )}
+        </span>
+        {maxCount && count !== undefined ? (
+          <span
+            className={`text-xs ${count > maxCount * 0.9 ? 'font-medium text-[#B4432F]' : 'text-ink-faint'}`}
+          >
+            {count}/{maxCount}
+          </span>
+        ) : null}
+      </div>
       {children}
     </div>
   );
@@ -49,12 +98,15 @@ function Field({
 
 export default function ApplicationForm() {
   const [done, setDone] = useState(false);
-  const [experience, setExperience] = useState("");
-  const [start, setStart] = useState("");
-  const [dob, setDob] = useState("");
+  const [experience, setExperience] = useState('');
+  const [start, setStart] = useState('');
+  const [dob, setDob] = useState('');
+  const [languages, setLanguages] = useState<string[]>([]);
+  const [currentAddress, setCurrentAddress] = useState('');
+  const [permanentAddress, setPermanentAddress] = useState('');
   const [tried, setTried] = useState(false);
-  const [sending, setSending] = useState(false);
-  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
   const born = parseDob(dob);
@@ -64,153 +116,302 @@ export default function ApplicationForm() {
   const closeThanks = () => {
     setDone(false);
     setTried(false);
-    setExperience("");
-    setStart("");
-    setDob("");
+    setSubmitError(null);
+    setExperience('');
+    setStart('');
+    setDob('');
+    setLanguages([]);
+    setCurrentAddress('');
+    setPermanentAddress('');
     formRef.current?.reset();
   };
 
   useEffect(() => {
     if (!done) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && closeThanks();
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && closeThanks();
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
   }, [done]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setTried(true);
+    setSubmitError(null);
+
+    if (
+      !experience ||
+      !start ||
+      !languages.length ||
+      dobInvalid ||
+      dobUnderage
+    ) {
+      return;
+    }
+
+    const form = formRef.current;
+    if (!form) return;
+
+    const formData = new FormData(form);
+    const fullName = String(formData.get('name') || '').trim();
+    const phone = String(formData.get('mobile') || '').trim();
+    const consent = formData.get('consent') === 'on';
+    const website = String(formData.get('website') || '').trim(); // Honeypot
+
+    setIsSubmitting(true);
+
+    try {
+      const res = await fetch('/api/apply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          full_name: fullName,
+          phone,
+          dob,
+          languages: languages.join(', '),
+          experience,
+          availability: start,
+          current_address: currentAddress,
+          permanent_address: permanentAddress,
+          consent_contact: consent,
+          website,
+        }),
+      });
+
+      const json = await res.json().catch(() => null);
+
+      if (!res.ok) {
+        throw new Error(
+          json?.error ||
+            json?.detail ||
+            'Failed to submit application, please try again'
+        );
+      }
+
+      setDone(true);
+    } catch (err: unknown) {
+      const msg =
+        err instanceof Error
+          ? err.message
+          : 'Something went wrong, please check your details and try again';
+      setSubmitError(msg);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <>
-    <form
-      ref={formRef}
-      onSubmit={async (e) => {
-        e.preventDefault();
-        setTried(true);
-        if (sending || !experience || !start || dobInvalid || dobUnderage) return;
-        setSending(true);
-        setError("");
-        const f = new FormData(e.currentTarget);
-        const text = (k: string) => String(f.get(k) ?? "");
-        try {
-          const res = await fetch("/api/apply", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              name: text("name"),
-              mobile: text("mobile"),
-              dob,
-              languages: text("languages"),
-              experience,
-              start,
-              currentAddress: text("currentAddress"),
-              permanentAddress: text("permanentAddress"),
-            }),
-          });
-          if (!res.ok) throw new Error();
-          setDone(true);
-        } catch {
-          setError("Something went wrong sending your application, please try again");
-        } finally {
-          setSending(false);
-        }
-      }}
-      className={`${PANEL} p-6 sm:p-10 lg:p-14`}
-    >
-      <Glow />
-      <h3 className="relative font-display text-h3 font-semibold text-teal-dark lg:text-4xl">Caregiver application</h3>
-      <p className="relative mt-2 text-ink-muted">Fields marked * are required</p>
-
-      <div className="relative mt-8 grid gap-6 sm:grid-cols-2">
-        <Field label="Full name">
-          <input required name="name" placeholder="As on your ID" className={FIELD} />
-        </Field>
-        <Field label="Mobile number">
-          <input
-            required
-            name="mobile"
-            type="tel"
-            inputMode="numeric"
-            pattern="[0-9]{10}"
-            placeholder="10-digit number"
-            className={FIELD}
-          />
-        </Field>
-        <Field label="Date of birth" labelClassName="text-ink">
-          <DobPicker value={dob} onChange={setDob} invalid={tried && (dobInvalid || dobUnderage)} />
-          {tried && dobInvalid && (
-            <p className="mt-2 text-sm font-medium text-[#B4432F]">Enter a valid date as DD/MM/YYYY.</p>
-          )}
-          {tried && dobUnderage && (
-            <p className="mt-2 text-sm font-medium text-[#B4432F]">You must be 18 or older to apply</p>
-          )}
-        </Field>
-        <Field label="Languages you speak">
-          <input required name="languages" placeholder="e.g. Kannada, Hindi" className={FIELD} />
-        </Field>
-        <Field label="Baby care experience">
-          <Select value={experience} onChange={setExperience} options={EXPERIENCE} placeholder="Select experience" invalid={tried && !experience} />
-        </Field>
-        <Field label="When can you start?">
-          <Select value={start} onChange={setStart} options={AVAILABILITY} placeholder="Select availability" invalid={tried && !start} />
-        </Field>
-        <Field label="Current address" className="sm:col-span-2">
-          <textarea required name="currentAddress" rows={3} placeholder="House / flat, street, area, city, pincode" className={AREA} />
-        </Field>
-        <Field label="Permanent address" className="sm:col-span-2">
-          <textarea required name="permanentAddress" rows={3} placeholder="House / flat, street, area, city, pincode" className={AREA} />
-        </Field>
-      </div>
-
-      <hr className="relative my-8 border-line" />
-
-      <div className="relative flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-        <label className="flex items-start gap-3 text-[15px] font-semibold text-ink">
-          <input required type="checkbox" className="mt-0.5 h-6 w-6 shrink-0 rounded-md accent-teal" />
-          <span>
-            I agree that FamCare may contact me about this application by phone or WhatsApp.{" "}
-            <span className="text-teal">*</span>
-          </span>
-        </label>
-        <button
-          type="submit"
-          disabled={sending}
-          className={`${JELLY_BTN} h-12 px-7 text-base disabled:opacity-60`}
-        >
-          <span className="relative z-10 inline-flex items-center gap-2.5">{sending ? "SENDING…" : "SUBMIT"} <Arrow /></span>
-        </button>
-      </div>
-      {error && <p className="relative mt-4 text-sm font-medium text-[#B4432F]">{error}</p>}
-      <p className="relative mt-4 text-sm text-ink-muted">
-        We use your details only for recruitment, please don’t share Aadhaar numbers or other documents here
-      </p>
-    </form>
-
-    {done && createPortal(
-      <div
-        className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/50 px-6 backdrop-blur-sm"
-        onClick={closeThanks}
+      <form
+        ref={formRef}
+        onSubmit={handleSubmit}
+        className={`${PANEL} p-6 sm:p-10 lg:p-14`}
       >
+        <Glow />
+        <h3 className="relative font-display text-h3 font-semibold text-teal-dark lg:text-4xl">
+          Caregiver application
+        </h3>
+        <p className="relative mt-2 text-ink-muted">
+          Fields marked {REQUIRED} are required
+        </p>
+
+        {submitError && (
+          <div className="relative mt-6 flex items-start gap-3 rounded-2xl border border-red-200 bg-red-50/80 p-4 text-sm text-[#B4432F]">
+            <span className="shrink-0 text-base">⚠️</span>
+            <div className="flex-1 font-medium">{submitError}</div>
+          </div>
+        )}
+
+        {/* Honeypot field - Invisible to legitimate users, filled by bots */}
         <div
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="thanks-title"
-          onClick={(e) => e.stopPropagation()}
-          className="w-full max-w-[440px] rounded-[28px] bg-white p-8 text-center shadow-float sm:p-10"
+          className="hidden"
+          aria-hidden="true"
+          style={{ display: 'none', position: 'absolute', left: '-9999px' }}
         >
-          <span className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-teal text-3xl text-lime" aria-hidden>
-            ✓
-          </span>
-          <h3 id="thanks-title" className="mt-5 font-display text-3xl font-bold text-ink">
-            Thank you for applying
-          </h3>
-          <p className="mt-3 text-ink-muted">
-            Our hiring team will review your details and contact you if you are shortlisted
-          </p>
-          <button type="button" onClick={closeThanks} className={`${JELLY_BTN} mt-7 h-12 px-8 text-base`}>
-            <span className="relative z-10">DONE</span>
+          <label htmlFor="website">Website</label>
+          <input
+            type="text"
+            id="website"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
+
+        <div className="relative mt-8 grid gap-6 sm:grid-cols-2">
+          <Field label="Full name">
+            <input
+              required
+              name="name"
+              maxLength={100}
+              placeholder="As on your ID"
+              className={FIELD}
+            />
+          </Field>
+          <Field label="Mobile number">
+            <input
+              required
+              name="mobile"
+              type="tel"
+              inputMode="numeric"
+              pattern="[0-9]{10}"
+              maxLength={15}
+              placeholder="10-digit number"
+              className={FIELD}
+            />
+          </Field>
+          <Field label="Date of birth" labelClassName="text-ink">
+            <DobPicker
+              value={dob}
+              onChange={setDob}
+              invalid={tried && (dobInvalid || dobUnderage)}
+            />
+            {tried && dobInvalid && (
+              <p className="mt-2 text-sm font-medium text-[#B4432F]">
+                Enter a valid date as DD/MM/YYYY.
+              </p>
+            )}
+            {tried && dobUnderage && (
+              <p className="mt-2 text-sm font-medium text-[#B4432F]">
+                You must be 18 or older to apply
+              </p>
+            )}
+          </Field>
+          <Field label="Languages you speak">
+            <MultiSelect
+              value={languages}
+              onChange={setLanguages}
+              options={LANGUAGES}
+              placeholder="Select languages"
+              invalid={tried && !languages.length}
+            />
+          </Field>
+          <Field label="Baby care experience">
+            <Select
+              value={experience}
+              onChange={setExperience}
+              options={EXPERIENCE}
+              placeholder="Select experience"
+              invalid={tried && !experience}
+            />
+          </Field>
+          <Field label="When can you start?">
+            <Select
+              value={start}
+              onChange={setStart}
+              options={AVAILABILITY}
+              placeholder="Select availability"
+              invalid={tried && !start}
+            />
+          </Field>
+          <Field
+            label="Current address"
+            optional
+            className="sm:col-span-2"
+            count={currentAddress.length}
+            maxCount={500}
+          >
+            <textarea
+              name="currentAddress"
+              rows={3}
+              maxLength={500}
+              value={currentAddress}
+              onChange={(e) => setCurrentAddress(e.target.value)}
+              placeholder="House / flat, street, area, city, pincode"
+              className={AREA}
+            />
+          </Field>
+          <Field
+            label="Permanent address"
+            optional
+            className="sm:col-span-2"
+            count={permanentAddress.length}
+            maxCount={500}
+          >
+            <textarea
+              name="permanentAddress"
+              rows={3}
+              maxLength={500}
+              value={permanentAddress}
+              onChange={(e) => setPermanentAddress(e.target.value)}
+              placeholder="House / flat, street, area, city, pincode"
+              className={AREA}
+            />
+          </Field>
+        </div>
+
+        <hr className="relative my-8 border-line" />
+
+        <div className="relative flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+          <label className="flex items-start gap-3 text-[15px] font-semibold text-ink">
+            <input
+              required
+              name="consent"
+              type="checkbox"
+              defaultChecked
+              className="mt-0.5 h-6 w-6 shrink-0 rounded-md accent-teal"
+            />
+            <span>
+              I agree that FamCare may contact me about this application by
+              phone or WhatsApp. {REQUIRED}
+            </span>
+          </label>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="btn-lime disabled:opacity-70"
+          >
+            <span className="relative z-10 inline-flex items-center gap-2.5">
+              {isSubmitting ? 'SUBMITTING...' : 'SUBMIT'}{' '}
+              {!isSubmitting && <Arrow />}
+            </span>
           </button>
         </div>
-      </div>,
-      document.body,
-    )}
+        <p className="relative mt-4 text-sm text-ink-muted">
+          We only use your details for hiring. Please don’t share your Aadhaar
+          number or other documents here
+        </p>
+      </form>
+
+      {done &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/50 px-6 backdrop-blur-sm"
+            onClick={closeThanks}
+          >
+            <div
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="thanks-title"
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-[440px] rounded-[28px] bg-white p-8 text-center shadow-float sm:p-10"
+            >
+              <span
+                className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-teal text-3xl text-lime"
+                aria-hidden
+              >
+                ✓
+              </span>
+              <h3
+                id="thanks-title"
+                className="mt-5 font-display text-3xl font-bold text-ink"
+              >
+                Thank you for applying
+              </h3>
+              <p className="mt-3 text-ink-muted">
+                Our hiring team will go through your details and get in touch if
+                you’re shortlisted
+              </p>
+              <button
+                type="button"
+                onClick={closeThanks}
+                className="btn-lime mt-7"
+              >
+                <span className="relative z-10">DONE</span>
+              </button>
+            </div>
+          </div>,
+          document.body
+        )}
     </>
   );
 }
