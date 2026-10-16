@@ -919,6 +919,76 @@ export default function TermsAndConditionsPage() {
         of any other independent obligation unless the nature of such obligation
         necessarily requires otherwise.
       </p>
+
+      <h2>xvi. Child Adjustment and Settling Policy</h2>
+      <p>
+        16.1 Purpose: At FamCare, we want every child to feel safe and
+        comfortable with their caregiver. We also recognise that children,
+        especially infants and toddlers, may need time to adjust to a new
+        person. This policy explains how such situations are handled.
+      </p>
+      <p>
+        16.2 Adjustment Period: It is normal for a child to be unsettled, to
+        cry, or to resist a new caregiver during early Sessions. Our Caregivers
+        are trained to comfort and engage children patiently, and they will make
+        reasonable efforts to help your child settle throughout the Session.
+      </p>
+      <p>
+        16.3 Child Not Cooperating with the Caregiver: Where a child remains
+        distressed, or does not cooperate with the Caregiver despite the
+        Caregiver&rsquo;s reasonable efforts to soothe and engage them, FamCare
+        will not be liable for any resulting dissatisfaction with the Session,
+        and the Service Fee for the Session will not be eligible for a refund.
+        This applies where:
+      </p>
+      <ul>
+        <li>
+          (a) the Caregiver arrived on time, was present for the booked
+          duration, and followed FamCare&rsquo;s care protocols; and
+        </li>
+        <li>
+          (b) the Caregiver made documented efforts to settle the child
+          (recorded in the end-of-session note).
+        </li>
+      </ul>
+      <p>
+        16.4 Our Goodwill Support: We want your child to have a good experience.
+        Where a child has not settled, FamCare may, at its discretion: (a)
+        arrange a follow-up Session with the same Caregiver to help your child
+        build familiarity; or (b) offer to match you with a different Caregiver
+        for your next booking.
+      </p>
+      <p>
+        16.5 Exceptions: This policy does not apply, and a full refund or
+        appropriate remedy will be provided, where:
+      </p>
+      <ul>
+        <li>
+          (a) the Caregiver was late, absent, or ended the Session early without
+          a valid reason;
+        </li>
+        <li>
+          (b) the Caregiver did not follow FamCare&rsquo;s care or safety
+          protocols; or
+        </li>
+        <li>
+          (c) there is any concern relating to the child&rsquo;s safety,
+          well-being, or the Caregiver&rsquo;s conduct.
+        </li>
+      </ul>
+      <p>
+        16.6 Setting Expectations: We recommend that parents introduce the
+        Caregiver to the child before the first Session, and remain at home
+        during initial visits where possible. This helps children settle faster.
+      </p>
+      <p>
+        16.7 Raising a Concern: If you have a concern about a Session, please
+        contact us within [24 hours] of the Session at{' '}
+        <a href="mailto:support@famcare.co.in">support@famcare.co.in</a>,{' '}
+        <a href="tel:+919035272679">+91 90352 72679</a>, or through in-app
+        support. Each concern is reviewed fairly, and our decision will be
+        shared with you within [X working days].
+      </p>
     </LegalPage>
   );
 }
