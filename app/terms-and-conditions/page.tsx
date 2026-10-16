@@ -983,11 +983,11 @@ export default function TermsAndConditionsPage() {
       </p>
       <p>
         16.7 Raising a Concern: If you have a concern about a Session, please
-        contact us within [24 hours] of the Session at{' '}
+        contact us within 24 hours of the Session at{' '}
         <a href="mailto:support@famcare.co.in">support@famcare.co.in</a>,{' '}
         <a href="tel:+919035272679">+91 90352 72679</a>, or through in-app
         support. Each concern is reviewed fairly, and our decision will be
-        shared with you within [X working days].
+        shared with you within 2 working days.
       </p>
     </LegalPage>
   );
