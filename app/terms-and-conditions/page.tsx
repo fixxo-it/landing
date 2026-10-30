@@ -78,7 +78,7 @@ export default function TermsAndConditionsPage() {
         <li>
           <strong>&ldquo;Caregiver&rdquo;</strong> means any individual
           registered on the Platform as a nanny, babysitter, companion,
-          childcare provider, elder care provider, or other care professional
+          childcare provider, or other care professional
           offering services to Users. For clarity, the term babysitter is
           included within Caregiver.
         </li>

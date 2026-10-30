@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import {
-  AnimatePresence,
   motion,
   useInView,
   useScroll,
@@ -17,13 +16,8 @@ import Tilt from '@/components/motion/Tilt';
 import SplitText from '@/components/motion/SplitText';
 import { useSafeReducedMotion } from '@/components/fx/MotionPrefs';
 
-/* services without a booking flow yet just announce themselves instead of
-   deep linking into the app */
-const COMING_SOON = new Set(['Elderly care']);
-
 /* every service shares one category, but each has its own sub-service id —
-   that's the pair the deep link into the app needs. Elderly care has none
-   yet since it opens the "coming soon" dialog instead. */
+   that's the pair the deep link into the app needs. */
 const CATEGORY_ID = '4c031045-1100-4d4a-9a8d-0b60251c0f8d';
 
 /* cards without a dedicated photo fall back to the generic /img/service.png */
@@ -48,7 +42,6 @@ const SERVICES: [string, string?, string?][] = [
     '/img/afterschoolcare.png',
     '3ad7e368-898d-4256-b4eb-1251a0d4f944',
   ],
-  ['Elderly care', '/img/elderlycare.png'],
 ];
 
 /* the last stretch of the pin is spent holding the settled strip, so the
@@ -64,7 +57,6 @@ const LEAD = 168;
 export default function Services() {
   const reduced = useSafeReducedMotion();
   const pinned = !reduced;
-  const [comingSoon, setComingSoon] = useState(false);
 
   /* the scroll-driven pin is a lg-only effect — below it the strip is a plain
      overflow-x-auto native swipe, so the track must carry no transform at all
@@ -205,88 +197,12 @@ export default function Services() {
                   image={image}
                   subServiceId={subServiceId}
                   reduced={!!reduced}
-                  onComingSoon={() => setComingSoon(true)}
                 />
               </Tilt>
             ))}
           </motion.div>
         </div>
       </div>
-
-      <AnimatePresence>
-        {comingSoon && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2, ease: EASE }}
-            className="fixed inset-0 z-[60] grid place-items-center bg-ink/40 px-6 backdrop-blur-sm"
-            onClick={() => setComingSoon(false)}
-          >
-            <motion.div
-              initial={{ opacity: 0, y: 8, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 8, scale: 0.98 }}
-              transition={{ duration: 0.25, ease: EASE }}
-              onClick={(e) => e.stopPropagation()}
-              className="relative flex w-full max-w-[560px] flex-col overflow-hidden rounded-3xl bg-white shadow-float"
-            >
-              <button
-                type="button"
-                onClick={() => setComingSoon(false)}
-                aria-label="Close"
-                className="absolute right-4 top-4 z-10 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-ink-muted shadow-float ring-1 ring-line transition-colors duration-200 hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
-              >
-                <svg
-                  className="h-4 w-4"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  strokeLinecap="round"
-                  aria-hidden
-                >
-                  <path d="M6 6l12 12M18 6L6 18" />
-                </svg>
-              </button>
-
-              {/* full width, stacked above the copy — on every breakpoint now,
-                  not just from sm up */}
-              <div className="relative h-[180px] w-full shrink-0">
-                <Image
-                  src="/img/elderlycare.png"
-                  alt=""
-                  aria-hidden
-                  fill
-                  sizes="560px"
-                  className="object-cover"
-                />
-              </div>
-              <div className="p-8 text-left">
-                <p className="font-display text-h3 font-bold text-ink">
-                  Coming soon
-                </p>
-                <p className="mt-2 text-sm leading-relaxed text-ink-muted">
-                  Elderly care is coming soon. We&rsquo;ll let you know as soon
-                  as it&rsquo;s live.
-                </p>
-                <button
-                  type="button"
-                  onClick={() => setComingSoon(false)}
-                  className="relative mt-6 inline-flex h-11 items-center justify-center overflow-hidden rounded-full bg-teal px-6 text-sm font-semibold text-white transition-colors duration-200 hover:bg-teal-dark"
-                >
-                  <span
-                    aria-hidden
-                    className="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay"
-                    style={{ backgroundImage: 'url(/img/Grainy.jpg)' }}
-                  />
-                  <span className="relative z-10">Got it</span>
-                </button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   );
 }
@@ -296,24 +212,18 @@ function ServiceCard({
   image,
   subServiceId,
   reduced,
-  onComingSoon,
 }: {
   name: string;
   image?: string;
   subServiceId?: string;
   reduced: boolean;
-  onComingSoon: () => void;
 }) {
   return (
     <motion.a
       href="#book"
       onClick={(e) => {
         e.preventDefault();
-        if (COMING_SOON.has(name) || !subServiceId) {
-          onComingSoon();
-        } else {
-          openServiceBooking(CATEGORY_ID, subServiceId);
-        }
+        if (subServiceId) openServiceBooking(CATEGORY_ID, subServiceId);
       }}
       whileHover={reduced ? undefined : { y: -6 }}
       transition={{ duration: 0.3, ease: EASE }}
@@ -357,9 +267,6 @@ function ServiceCard({
           <p className="text-xl font-semibold tracking-[-0.02em] text-white lg:text-2xl">
             {name}
           </p>
-          {COMING_SOON.has(name) && (
-            <p className="text-base text-white/75 lg:text-lg">Coming soon</p>
-          )}
         </div>
       </div>
     </motion.a>

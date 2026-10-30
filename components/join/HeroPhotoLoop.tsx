@@ -9,7 +9,6 @@ const PHOTOS: [string, string][] = [
   ['Infant day care', '/img/infantcare.png'],
   ['Toddler companion', '/img/toddlercare.png'],
   ['After school care', '/img/afterschoolcare.png'],
-  ['Elderly care', '/img/elderlycare.png'],
 ];
 
 /* the hero's photo panel: one photo at a time at full strength, crossfading

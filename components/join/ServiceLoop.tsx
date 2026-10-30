@@ -9,7 +9,6 @@ const SERVICES: [string, string][] = [
   ['Infant day care', '/img/infantcare.png'],
   ['Toddler companion', '/img/toddlercare.png'],
   ['After school care', '/img/afterschoolcare.png'],
-  ['Elderly care', '/img/elderlycare.png'],
 ];
 
 /* one service at a time, held for 2 seconds, crossfading to the next */

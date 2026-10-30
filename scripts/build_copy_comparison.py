@@ -93,7 +93,6 @@ add_section("Hero", [
     ("\u201cIn-house trained, authorised caregivers \u2014 criminal record & background verified. Safety built into every booking, for both you and your caregiver.\u201d",
      "\u201cProfessionally trained, background-verified caregivers at your door in 10 minutes.\u201d"),
     ("Buttons: \u201cDownload Now\u201d / \u201cSafety Features \u2192\u201d", "Buttons: \u201cFIND NEARBY CAREGIVER\u201d / \u201cSEE HOW IT WORKS\u201d"),
-    ("\u201cAlso coming soon: Elderly Care\u201d", "\u2014"),
     ("Stats strip: ~10 min avg arrival \u00b7 6-Layer verification \u00b7 \u20b90 starting price \u00b7 6AM\u20139PM service hours \u00b7 0% book-again rate "
      "(note: some stats render as \u201c0 min\u201d / \u201c0-layer\u201d on the live site \u2014 likely a bug, flag before reusing)", "No stats strip"),
 ])
@@ -106,8 +105,6 @@ add_section("Services", [
     ("Infant day care \u2014 \u201cSafe at-home supervision, bottle prep, and active caregiving for 3\u201312 months\u201d (badge: \u201cMost booked\u201d)", "Infant day care (6\u201318mo)"),
     ("Toddler companion \u2014 \u201cPlay-based engagement, meals, and routine monitoring for 1\u20133 years\u201d", "Toddler companion (1.5\u20134yr)"),
     ("After-school babysitting \u2014 \u201cDrop-off support, snack time, and supervised homework for 4\u201310 years\u201d", "After school care (4\u201310yr)"),
-    ("Elderly care (Coming Soon) \u2014 \u201cCompassionate at-home support, mobility assistance, and daily routine help for seniors\u201d",
-     "Elderly care (60+yr) \u2014 live, not marked \u201ccoming soon\u201d"),
 ])
 
 add_section("Safety / Trust System", [
