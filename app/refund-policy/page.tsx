@@ -1,9 +1,12 @@
-import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import LegalPage from '@/components/legal/LegalPage';
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'Refund Policy | FamCare',
-};
+  description:
+    'FamCare cancellation windows, cancellation charges and how refunds for pre-paid baby care bookings work.',
+  path: '/refund-policy',
+});
 
 export default function RefundPolicyPage() {
   return (

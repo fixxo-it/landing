@@ -1,9 +1,12 @@
-import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import LegalPage from '@/components/legal/LegalPage';
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'Privacy Policy | FamCare',
-};
+  description:
+    'How FamCare collects, uses, stores and protects your personal information when you use the FamCare app and website.',
+  path: '/privacy-policy',
+});
 
 const ADDRESS =
   'Sabari Complex, National Plaza, 24, Field Marshal Cariappa Rd, Shanthala Nagar, Ashok Nagar, Bengaluru, Karnataka 560025';
@@ -81,9 +84,8 @@ export default function PrivacyPolicyPage() {
         <li>
           <strong>&ldquo;Caregiver&rdquo;</strong> means any individual
           registered on the Platform as a nanny, babysitter, companion,
-          childcare provider, or other care professional
-          offering services to Users. For clarity, the term babysitter is
-          included within Caregiver.
+          childcare provider, or other care professional offering services to
+          Users. For clarity, the term babysitter is included within Caregiver.
         </li>
         <li>
           <strong>&ldquo;Consent&rdquo;</strong> means a freely given, specific,

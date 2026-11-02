@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import Link from 'next/link';
 import OnLoad from '@/components/join/OnLoad';
 import Reveal, { Stagger, StaggerItem } from '@/components/motion/Reveal';
@@ -15,11 +15,12 @@ import SplitText from '@/components/motion/SplitText';
 import Tilt from '@/components/motion/Tilt';
 import Button from '@/components/ui/Button';
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'Join FamCare as a caregiver',
   description:
     'Caregiver careers in Bengaluru: training, insurance support and eligible bonuses',
-};
+  path: '/join',
+});
 
 const BENEFITS = [
   {

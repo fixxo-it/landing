@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Container } from '@/components/ui/Section';
 import PageHero from '@/components/ui/PageHero';
 import Tilt from '@/components/motion/Tilt';
@@ -11,29 +11,7 @@ import SiteFooter from '@/components/sections/SiteFooter';
 import CtaBanner from '@/components/sections/CtaBanner';
 import DownloadModal from '@/components/DownloadModal';
 import { cn } from '@/lib/cn';
-
-const FAQS: [string, string][] = [
-  [
-    'How do I book a caregiver?',
-    'Download the FamCare app from the App Store or Play Store, log in with your mobile number via OTP, then enter your care requirements and preferred time to confirm a booking.',
-  ],
-  [
-    'How do you ensure the safety of caregivers?',
-    'Every FamCare caregiver clears application screening, two interviews, Aadhaar and address verification, a criminal background check, reference checks, and in-centre training before they are bookable.',
-  ],
-  [
-    'What areas do you serve?',
-    'We currently operate in Whitefield, Varthur and Mahadevapura, Bengaluru, and are expanding across east Bengaluru through the year.',
-  ],
-  [
-    'How do I cancel or reschedule a booking?',
-    'Cancel or reschedule directly from the FamCare app. Cancellations made at least 4 hours before the scheduled time are free and fully refunded; later cancellations or no-shows may attract a cancellation charge.',
-  ],
-  [
-    'What is your pricing?',
-    "Pricing is transparent and standardised by the type of care and duration of the service. You see the full quote, including FamCare's service fee, in the app before you confirm. Applicable taxes, waiting time and session extensions are charged in addition.",
-  ],
-];
+import { BUSINESS, SUPPORT_FAQ as FAQS } from '@/lib/site-content';
 
 function MailIcon() {
   return (
@@ -75,15 +53,15 @@ const CONTACTS = [
     icon: MailIcon,
     title: 'Email us',
     body: 'For support, partnerships, or general inquiries.',
-    href: 'mailto:support@famcare.co.in',
-    label: 'support@famcare.co.in',
+    href: `mailto:${BUSINESS.email}`,
+    label: BUSINESS.email,
   },
   {
     icon: PhoneIcon,
     title: 'Call us',
     body: 'For immediate assistance and support.',
-    href: 'tel:+919535711078',
-    label: '+91 95357 11078',
+    href: `tel:${BUSINESS.phone}`,
+    label: BUSINESS.phoneDisplay,
   },
 ];
 
@@ -134,21 +112,21 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
           </svg>
         </button>
       </h3>
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.35, ease: EASE }}
-            className="overflow-hidden"
-          >
-            <p className="max-w-[62ch] px-6 pb-6 text-[15px] leading-relaxed text-ink-muted sm:px-8 lg:text-base">
-              {answer}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* always in the HTML, folded to nothing while closed, so search
+          engines and AI crawlers read every answer */}
+      <motion.div
+        initial={false}
+        animate={
+          open ? { height: 'auto', opacity: 1 } : { height: 0, opacity: 0 }
+        }
+        transition={{ duration: 0.35, ease: EASE }}
+        aria-hidden={!open}
+        className="overflow-hidden"
+      >
+        <p className="max-w-[62ch] px-6 pb-6 text-[15px] leading-relaxed text-ink-muted sm:px-8 lg:text-base">
+          {answer}
+        </p>
+      </motion.div>
     </div>
   );
 }

@@ -1,9 +1,12 @@
-import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import LegalPage from '@/components/legal/LegalPage';
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'Data Deletion | FamCare',
-};
+  description:
+    'How to request deletion of your FamCare account and the personal data linked to it.',
+  path: '/data-deletion',
+});
 
 export default function DataDeletionPage() {
   return (

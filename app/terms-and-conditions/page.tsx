@@ -1,9 +1,12 @@
-import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import LegalPage from '@/components/legal/LegalPage';
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'Terms of Use | FamCare',
-};
+  description:
+    'The terms that apply when you use the FamCare app, website and in-home baby care services.',
+  path: '/terms-and-conditions',
+});
 
 const ADDRESS =
   'Sabari Complex, National Plaza, 24, Field Marshal Cariappa Rd, Shanthala Nagar, Ashok Nagar, Bengaluru, Karnataka 560025';
@@ -78,9 +81,8 @@ export default function TermsAndConditionsPage() {
         <li>
           <strong>&ldquo;Caregiver&rdquo;</strong> means any individual
           registered on the Platform as a nanny, babysitter, companion,
-          childcare provider, or other care professional
-          offering services to Users. For clarity, the term babysitter is
-          included within Caregiver.
+          childcare provider, or other care professional offering services to
+          Users. For clarity, the term babysitter is included within Caregiver.
         </li>
         <li>
           <strong>&ldquo;Child&rdquo;</strong> means a person who has not

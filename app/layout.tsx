@@ -4,6 +4,14 @@ import './globals.css';
 import PageFx from '@/components/fx/PageFx';
 import MotionPrefs from '@/components/fx/MotionPrefs';
 import ChatWidget from '@/components/chat/ChatWidget';
+import { JsonLd, siteGraph } from '@/components/seo/JsonLd';
+import { SHARE_IMAGE } from '@/lib/seo';
+import {
+  BUSINESS,
+  HOME_DESCRIPTION,
+  HOME_TITLE,
+  SITE_URL,
+} from '@/lib/site-content';
 
 const figtree = Figtree({
   subsets: ['latin'],
@@ -18,10 +26,24 @@ const caveat = Caveat({
   display: 'swap',
 });
 
+/* Site-wide defaults. Each page sets its own title, description and
+   canonical URL via pageMetadata() (lib/seo.ts). There is deliberately no
+   canonical here: a layout's canonical is inherited by every page that doesn't
+   set one, which would point them all at the home page. */
 export const metadata: Metadata = {
-  title: 'FamCare - On demand Baby care you can trust',
-  description:
-    'Professional trained background verified caregivers in 10 minutes. Live in Whitefield, Varthur & Mahadevapura.',
+  metadataBase: new URL(SITE_URL),
+  applicationName: BUSINESS.name,
+  title: HOME_TITLE,
+  description: HOME_DESCRIPTION,
+  openGraph: {
+    type: 'website',
+    siteName: BUSINESS.name,
+    locale: 'en_IN',
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    images: [SHARE_IMAGE],
+  },
+  twitter: { card: 'summary_large_image', images: [SHARE_IMAGE] },
 };
 
 export default function RootLayout({
@@ -32,6 +54,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${figtree.variable} ${caveat.variable} antialiased`}>
+        <JsonLd data={siteGraph()} />
         <MotionPrefs>
           {children}
           {/* on every page; renders nothing unless switched on in admin */}
