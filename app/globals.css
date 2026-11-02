@@ -222,3 +222,17 @@ video.hero-video::-webkit-media-controls-overlay-play-button {
   display: none !important;
   -webkit-appearance: none;
 }
+
+/* The chat widget's typing indicator: three dots bouncing in turn
+   (components/chat/ChatPanel.tsx). motion-safe: only, so reduced motion
+   leaves them still. */
+@keyframes chat-dot {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-5px);
+  }
+}

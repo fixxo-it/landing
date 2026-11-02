@@ -3,6 +3,7 @@ import { Caveat, Figtree } from 'next/font/google';
 import './globals.css';
 import PageFx from '@/components/fx/PageFx';
 import MotionPrefs from '@/components/fx/MotionPrefs';
+import ChatWidget from '@/components/chat/ChatWidget';
 
 const figtree = Figtree({
   subsets: ['latin'],
@@ -31,7 +32,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${figtree.variable} ${caveat.variable} antialiased`}>
-        <MotionPrefs>{children}</MotionPrefs>
+        <MotionPrefs>
+          {children}
+          {/* on every page; renders nothing unless switched on in admin */}
+          <ChatWidget />
+        </MotionPrefs>
         <PageFx />
       </body>
     </html>
