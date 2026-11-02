@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { checkBotId } from 'botid/server';
 import { backendUrl, clientIp, proxyKey } from '../backend';
 
 /* A typed visitor question -> sutram /website-chatbot/ask.
 
-   This route is the first, cheap filter: same-origin only, small JSON bodies,
-   a validated shape and a per-instance IP limit. The real limits (per IP,
+   This route is the first filter: same-origin only, a per-instance IP limit,
+   Vercel BotID, small JSON bodies and a validated shape. The real limits (per IP,
    global, daily Gemini cap) are enforced in sutram, in Redis, across every
    server; an in-memory map here is per serverless instance and can't be the
    wall on its own. */
@@ -69,6 +70,12 @@ export async function POST(req: NextRequest) {
 
   const ip = clientIp(req);
   if (limited(ip || 'unknown')) return fail(429, 'rate_limited');
+
+  // Vercel BotID (see instrumentation-client.ts): scripts, headless browsers
+  // and bot farms are turned away here, before sutram or Gemini see anything.
+  // Outside Vercel production (local dev) it lets everything through.
+  const verdict = await checkBotId();
+  if (verdict.isBot) return fail(403, 'bot');
 
   const raw = await req.text();
   if (new TextEncoder().encode(raw).length > MAX_BODY_BYTES)
