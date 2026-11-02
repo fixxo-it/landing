@@ -6,78 +6,27 @@ import { Section } from '@/components/ui/Section';
 import Reveal, { EASE } from '@/components/motion/Reveal';
 import { cn } from '@/lib/cn';
 import SplitText from '@/components/motion/SplitText';
+import { HOME_FAQ as GROUPS, type FaqAnswer } from '@/lib/site-content';
 
-/* An answer is a paragraph, or a list of "Label: text" points rendered as bullets */
-type Answer = string | string[];
-type Group = { tab: string; items: [string, Answer][] };
-
-/* Answer shape, held to across every entry below: the direct answer is the
-   first sentence, the proof is the second, and there is no third. A parent
-   opening a row wants the answer, not a warm-up to it. */
-
-const GROUPS: Group[] = [
-  {
-    tab: 'Trust & safety',
-    items: [
-      [
-        'How are FamCare caregivers verified?',
-        'Every caregiver goes through two interviews, identity and address checks, background verification, training, and a practical skills assessment before they can take bookings.',
-      ],
-      [
-        'Will I know who is coming to my home?',
-        'Yes. As soon as a caregiver is assigned, you can see their photo and profile in the app and track them on the way. When they arrive, please check their FamCare ID before letting them in.',
-      ],
-    ],
-  },
-  {
-    tab: 'Training',
-    items: [
-      [
-        'What training does a caregiver complete?',
-        "Every caregiver receives classroom and hands-on training in baby care, feeding and sleep routines, hygiene, safe handling, and emergency response. They also learn parent communication, household etiquette, and how to follow your family's care instructions. They must pass a practical assessment before taking bookings.",
-      ],
-      [
-        'Is training refreshed over time?',
-        'Yes. Every caregiver completes refresher training each quarter. When service feedback highlights a gap, our trainer provides individual coaching.',
-      ],
-    ],
-  },
-  {
-    tab: 'Booking',
-    items: [
-      [
-        'How quickly can someone reach me?',
-        'Our median arrival time for instant bookings is 10 minutes in serviceable areas. It can take longer depending on caregiver availability, traffic and weather conditions such as heavy rain. You can also schedule care in advance.',
-      ],
-      [
-        'Can I cancel or reschedule?',
-        'You can cancel free of charge at least 4 hours before your booking starts, and reschedule free of charge at least 2 hours before. After that, the full booking amount is charged, with no refund.',
-      ],
-    ],
-  },
-  {
-    tab: 'Caregivers',
-    items: [
-      [
-        'Can I request the same caregiver again?',
-        "Yes, with our Preferred Caregiver feature. Once you've marked at least 3 caregivers you like, we'll do our best to send one of them, depending on who's available. If none of them is free, you'll get another caregiver trained to the same FamCare standards.",
-      ],
-    ],
-  },
-  {
-    tab: 'Service area',
-    items: [
-      [
-        'Where is FamCare available?',
-        'We currently serve selected areas of Whitefield, Varthur, and Mahadevapura/Garudachar Palya in Bengaluru. Enter your address in the app to check availability.',
-      ],
-      [
-        'Can I request my area?',
-        "Yes. Share your location in the app, and we'll notify you when FamCare becomes available nearby.",
-      ],
-    ],
-  },
-];
+function AnswerBody({ answer }: { answer: FaqAnswer }) {
+  return typeof answer === 'string' ? (
+    <p className="max-w-[62ch] px-6 pb-6 text-[15px] leading-relaxed text-ink-muted sm:px-8 lg:text-base">
+      {answer}
+    </p>
+  ) : (
+    <ul className="max-w-[62ch] list-disc space-y-2 pb-6 pl-11 pr-6 text-[15px] leading-relaxed text-ink-muted marker:text-teal sm:pl-[3.25rem] sm:pr-8 lg:text-base">
+      {answer.map((point) => {
+        const [label, ...rest] = point.split(': ');
+        return (
+          <li key={point}>
+            <span className="font-semibold text-ink">{label}:</span>{' '}
+            {rest.join(': ')}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
 
 export default function Faq() {
   const [tab, setTab] = useState(0);
@@ -227,43 +176,43 @@ export default function Faq() {
                         </svg>
                       </button>
                     </h3>
-                    <AnimatePresence initial={false}>
-                      {isOpen && (
-                        <motion.div
-                          key="body"
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.35, ease: EASE }}
-                          className="overflow-hidden"
-                        >
-                          {typeof a === 'string' ? (
-                            <p className="max-w-[62ch] px-6 pb-6 text-[15px] leading-relaxed text-ink-muted sm:px-8 lg:text-base">
-                              {a}
-                            </p>
-                          ) : (
-                            <ul className="max-w-[62ch] list-disc space-y-2 pb-6 pl-11 pr-6 text-[15px] leading-relaxed text-ink-muted marker:text-teal sm:pl-[3.25rem] sm:pr-8 lg:text-base">
-                              {a.map((point) => {
-                                const [label, ...rest] = point.split(': ');
-                                return (
-                                  <li key={point}>
-                                    <span className="font-semibold text-ink">
-                                      {label}:
-                                    </span>{' '}
-                                    {rest.join(': ')}
-                                  </li>
-                                );
-                              })}
-                            </ul>
-                          )}
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                    {/* always in the HTML, folded to nothing while closed, so
+                        search engines and AI crawlers read every answer, not
+                        just the open one. initial={false}: it starts in its
+                        resting state, with no animation on load. */}
+                    <motion.div
+                      initial={false}
+                      animate={
+                        isOpen
+                          ? { height: 'auto', opacity: 1 }
+                          : { height: 0, opacity: 0 }
+                      }
+                      transition={{ duration: 0.35, ease: EASE }}
+                      aria-hidden={!isOpen}
+                      className="overflow-hidden"
+                    >
+                      <AnswerBody answer={a} />
+                    </motion.div>
                   </div>
                 );
               })}
             </motion.div>
           </AnimatePresence>
+
+          {/* the other tabs' questions and answers, in the HTML for crawlers
+              but never shown: the tab above is the only visible copy */}
+          {GROUPS.map((g, i) =>
+            i === tab ? null : (
+              <div key={g.tab} hidden>
+                {g.items.map(([q, a]) => (
+                  <div key={q}>
+                    <h3>{q}</h3>
+                    <AnswerBody answer={a} />
+                  </div>
+                ))}
+              </div>
+            )
+          )}
         </Reveal>
 
         {/* mobile only — the desktop copy lives inside the left panel instead,
