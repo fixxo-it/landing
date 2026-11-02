@@ -33,18 +33,20 @@ import {
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
+/* A random v4 UUID for grouping one visit's questions in the admin stats.
+   Secure randomness only (crypto), never Math.random. randomUUID needs a
+   secure context (https / localhost); getRandomValues works everywhere this
+   site runs, so it is the fallback. */
 function newSessionId(): string {
-  if (typeof crypto !== 'undefined' && 'randomUUID' in crypto)
-    return crypto.randomUUID();
-  if (typeof crypto !== 'undefined' && 'getRandomValues' in crypto) {
-    const bytes = new Uint8Array(16);
-    crypto.getRandomValues(bytes);
-    bytes[6] = (bytes[6] & 0x0f) | 0x40; // version 4
-    bytes[8] = (bytes[8] & 0x3f) | 0x80; // variant 10
-    const hex = Array.from(bytes, (b) => b.toString(16).padStart(2, '0')).join('');
-    return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
-  }
-  throw new Error('Secure random generator is not available in this environment.');
+  const c: Crypto = globalThis.crypto;
+  if (typeof c.randomUUID === 'function') return c.randomUUID();
+  const bytes = c.getRandomValues(new Uint8Array(16));
+  bytes[6] = (bytes[6] & 0x0f) | 0x40; // version 4
+  bytes[8] = (bytes[8] & 0x3f) | 0x80; // variant 10
+  const hex = Array.from(bytes, (b) => b.toString(16).padStart(2, '0')).join(
+    ''
+  );
+  return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
 }
 
 export default function ChatPanel({
