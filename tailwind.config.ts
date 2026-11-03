@@ -36,6 +36,7 @@ export default {
         sans: ['var(--font-figtree)', 'system-ui', 'sans-serif'],
         display: ['var(--font-figtree)', 'system-ui', 'sans-serif'],
         hand: ['var(--font-caveat)', 'cursive'],
+        glyphic: ['var(--font-glyphic)', 'Georgia', 'serif'],
       },
       /* one type ramp for the whole page — every heading picks from here */
       fontSize: {

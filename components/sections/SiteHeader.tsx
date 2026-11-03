@@ -13,6 +13,7 @@ export const NAV = [
   { label: 'How it works', href: '#how-it-works' },
   { label: 'Safe360', href: '#safety-360' },
   { label: 'FAQs', href: '#faq' },
+  { label: 'Monthly plans', href: '/monthly' },
   {
     label: 'Join as a caregiver',
     href: '/join',
@@ -31,9 +32,17 @@ export const NAV = [
 const GLIMMER =
   'animate-shimmer bg-[length:300%_100%] bg-gradient-to-r from-lime via-white via-50% to-lime bg-clip-text font-semibold text-transparent motion-reduce:animate-none motion-reduce:bg-none motion-reduce:text-lime';
 
-export default function SiteHeader() {
+/* the same sweep for white pages, where lime and white would vanish */
+const GLIMMER_LIGHT =
+  'animate-shimmer bg-[length:300%_100%] bg-gradient-to-r from-teal-dark via-teal-light via-50% to-teal-dark bg-clip-text font-semibold text-transparent motion-reduce:animate-none motion-reduce:bg-none motion-reduce:text-teal-dark';
+
+/* `light` is the same bar for pages that open on white rather than the video:
+   dark type, and section links that lead back to the home page. `active` marks
+   the page you are on. */
+export default function SiteHeader({ light = false, active }: { light?: boolean; active?: string }) {
   const [open, setOpen] = useState(false);
   const reduced = useSafeReducedMotion();
+  const to = (href: string) => (light && href.startsWith('#') ? `/${href}` : href);
 
   return (
     /* lives on the hero only: absolutely placed over the top of the video and
@@ -59,7 +68,9 @@ export default function SiteHeader() {
              the dropdown it contains, and the dropdown's own blur would then
              see nothing behind it but would not blur the video */
           open
-            ? 'border-white/30 shadow-float'
+            ? light
+              ? 'border-line bg-white shadow-float'
+              : 'border-white/30 shadow-float'
             : 'border-transparent bg-transparent',
           /* bottom corners flatten to butt flush against the dropdown's own
              square top edge — same merged-pill look as before, just achieved
@@ -67,7 +78,7 @@ export default function SiteHeader() {
           open ? 'rounded-t-[28px]' : 'rounded-full'
         )}
       >
-        {open && (
+        {open && !light && (
           <span
             aria-hidden
             className="pointer-events-none absolute inset-0 -z-10 rounded-t-[28px] bg-white/10 backdrop-blur-xl backdrop-saturate-150 lg:hidden"
@@ -80,8 +91,11 @@ export default function SiteHeader() {
           aria-label="Main"
         >
           <a
-            href="#top"
-            className="font-display text-[1.8rem] font-bold leading-none tracking-[-0.02em] text-white"
+            href={light ? '/' : '#top'}
+            className={cn(
+              'font-display text-[1.8rem] font-bold leading-none tracking-[-0.02em]',
+              light ? 'text-teal-dark' : 'text-white'
+            )}
           >
             FamCare
           </a>
@@ -91,16 +105,28 @@ export default function SiteHeader() {
             {NAV.map((item) => (
               <a
                 key={item.href}
-                href={item.href}
+                href={to(item.href)}
+                aria-current={item.href === active ? 'page' : undefined}
                 className={cn(
                   'group relative whitespace-nowrap py-1 text-base font-medium tracking-[-0.02em] transition-colors duration-200',
                   item.href === '#safety-360'
-                    ? GLIMMER
-                    : 'text-white/90 hover:text-white'
+                    ? light
+                      ? GLIMMER_LIGHT
+                      : GLIMMER
+                    : light
+                      ? 'text-ink/80 hover:text-teal-dark'
+                      : 'text-white/90 hover:text-white',
+                  item.href === active && 'font-semibold !text-teal-dark'
                 )}
               >
                 {item.label}
-                <span className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-white transition-transform duration-300 ease-out group-hover:scale-x-100 motion-reduce:transition-none" />
+                <span
+                  className={cn(
+                    'absolute inset-x-0 -bottom-0.5 origin-left transition-transform duration-300 ease-out group-hover:scale-x-100 motion-reduce:transition-none',
+                    light ? 'bg-teal-dark' : 'bg-white',
+                    item.href === active ? 'h-0.5 scale-x-100' : 'h-px scale-x-0'
+                  )}
+                />
               </a>
             ))}
           </div>
@@ -109,7 +135,7 @@ export default function SiteHeader() {
             <Button
               href="#book"
               label="BOOK NOW"
-              variant="onDark"
+              variant={light ? 'solid' : 'onDark'}
               className="hidden sm:inline-flex"
               onClick={(e) => {
                 e.preventDefault();
@@ -122,7 +148,10 @@ export default function SiteHeader() {
               aria-expanded={open}
               aria-controls="mobile-nav"
               aria-label={open ? 'Close menu' : 'Open menu'}
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/40 text-white lg:hidden"
+              className={cn(
+                'flex h-11 w-11 items-center justify-center rounded-full border lg:hidden',
+                light ? 'border-line text-teal-dark' : 'border-white/40 text-white'
+              )}
             >
               <span className="relative block h-3 w-4">
                 <span
@@ -162,18 +191,31 @@ export default function SiteHeader() {
                  animation never pushes the header's own box taller and the
                  page never shifts under it. Same white glass as the bar above
                  so the two read as one shape with no seam. */
-              className="absolute inset-x-0 top-full overflow-hidden rounded-b-[28px] border-x border-b border-white/30 bg-white/10 shadow-float backdrop-blur-xl backdrop-saturate-150 lg:hidden"
+              className={cn(
+                'absolute inset-x-0 top-full overflow-hidden rounded-b-[28px] border-x border-b shadow-float lg:hidden',
+                light
+                  ? 'border-line bg-white'
+                  : 'border-white/30 bg-white/10 backdrop-blur-xl backdrop-saturate-150'
+              )}
             >
               <div className="px-3 pb-6 sm:px-5 lg:px-7">
-                <ul className="flex flex-col border-t border-white/15 pt-2">
+                <ul className={cn('flex flex-col border-t pt-2', light ? 'border-line' : 'border-white/15')}>
                   {NAV.map((item) => (
                     <li key={item.href}>
                       <a
-                        href={item.href}
+                        href={to(item.href)}
+                        aria-current={item.href === active ? 'page' : undefined}
                         onClick={() => setOpen(false)}
                         className={cn(
                           'block py-3 text-base font-medium',
-                          item.href === '#safety-360' ? GLIMMER : 'text-white'
+                          item.href === '#safety-360'
+                            ? light
+                              ? GLIMMER_LIGHT
+                              : GLIMMER
+                            : light
+                              ? 'text-ink'
+                              : 'text-white',
+                          item.href === active && 'font-semibold !text-teal-dark underline underline-offset-4'
                         )}
                       >
                         {item.label}
@@ -184,7 +226,7 @@ export default function SiteHeader() {
                 <Button
                   href="#book"
                   label="BOOK NOW"
-                  variant="onDark"
+                  variant={light ? 'solid' : 'onDark'}
                   size="md"
                   className="mt-4 w-full sm:hidden"
                   onClick={(e) => {

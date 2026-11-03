@@ -55,6 +55,11 @@ export const PAGES = [
     about: 'cancellation charges and refunds',
   },
   {
+    path: '/monthly',
+    name: 'Monthly childcare plans',
+    about: '10-hour monthly plan, 3-day trial, pauses, exit terms and waitlist',
+  },
+  {
     path: '/join',
     name: 'Join as a caregiver',
     about: 'caregiver jobs in Bengaluru',

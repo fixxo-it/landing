@@ -34,7 +34,10 @@ export default function SplitText({
       <span className="sr-only">{text}</span>
       {words.map((word, i) => (
         <span key={i} aria-hidden>
-          <span className="-mb-[0.12em] inline-block overflow-hidden pb-[0.12em] align-bottom">
+          {/* the slot is padded past the word and pulled back by the same
+              amount: the line box stays put, but descenders and the last letter
+              are not clipped */}
+          <span className="-mx-[0.08em] -mb-[0.25em] inline-block overflow-hidden px-[0.08em] pb-[0.25em] align-bottom">
             {onMount ? (
               /* above the fold: CSS, so the words rise as soon as the HTML
                lands instead of sitting hidden until hydration */
@@ -49,7 +52,7 @@ export default function SplitText({
             ) : (
               <motion.span
                 className="inline-block origin-bottom-left will-change-transform"
-                initial={reduced ? { opacity: 0 } : { y: '110%', rotate: 7 }}
+                initial={reduced ? { opacity: 0 } : { y: '130%', rotate: 7 }}
                 animate={
                   inView
                     ? reduced

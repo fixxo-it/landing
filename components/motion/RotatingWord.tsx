@@ -31,19 +31,27 @@ export default function RotatingWord({
     return () => clearInterval(id);
   }, [words.length, reduced]);
 
-  const longest = words.reduce((a, b) => (b.length > a.length ? b : a), '');
   const word = reduced ? words[0] : words[index];
 
   return (
     <span
       className={cn(
-        'relative inline-grid overflow-hidden align-top',
+        /* padded past the word and pulled back by the same amount, so
+           descenders and tight tracking have room inside the clip */
+        'relative -mx-[0.08em] -mb-[0.25em] inline-grid overflow-hidden px-[0.08em] pb-[0.25em] align-top',
         className
       )}
     >
-      <span className="invisible col-start-1 row-start-1 whitespace-nowrap">
-        {longest}
-      </span>
+      {/* every word reserves the box: most letters is not always most width */}
+      {words.map((w) => (
+        <span
+          key={w}
+          aria-hidden
+          className="invisible col-start-1 row-start-1 whitespace-nowrap"
+        >
+          {w}
+        </span>
+      ))}
       <AnimatePresence mode="popLayout" initial={false}>
         <motion.span
           key={word}

@@ -11,14 +11,19 @@ export default function Select({
   options,
   placeholder,
   invalid,
+  searchable = false,
 }: {
   value: string;
   onChange: (v: string) => void;
   options: string[];
   placeholder: string;
   invalid?: boolean;
+  /* a filter box at the top of the menu, for lists too long to scan */
+  searchable?: boolean;
 }) {
   const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState('');
+  const shown = options.filter((o) => o.toLowerCase().includes(query.trim().toLowerCase()));
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -65,17 +70,29 @@ export default function Select({
         </svg>
       </button>
       {open && (
+        <div className="absolute inset-x-0 top-full z-20 mt-2 overflow-hidden rounded-2xl border border-line bg-white shadow-float">
+        {searchable && (
+          <input
+            autoFocus
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search"
+            aria-label="Search the list"
+            className="w-full border-b border-line px-5 py-3 text-base text-ink outline-none placeholder:text-ink-faint"
+          />
+        )}
         <ul
           role="listbox"
-          className="absolute inset-x-0 top-full z-20 mt-2 max-h-64 overflow-y-auto rounded-2xl border border-line bg-white p-1.5 shadow-float"
+          className="max-h-64 overflow-y-auto p-1.5"
         >
-          {options.map((o) => (
+          {shown.map((o) => (
             <li key={o} role="option" aria-selected={o === value}>
               <button
                 type="button"
                 onClick={() => {
                   onChange(o);
                   setOpen(false);
+                  setQuery('');
                 }}
                 className={cn(
                   'flex w-full items-center justify-between rounded-xl px-4 py-3 text-left text-[15px] font-medium transition-colors hover:bg-teal-tint',
@@ -87,7 +104,9 @@ export default function Select({
               </button>
             </li>
           ))}
+          {shown.length === 0 && <li className="px-4 py-3 text-[15px] text-ink-muted">No matches</li>}
         </ul>
+        </div>
       )}
     </div>
   );
