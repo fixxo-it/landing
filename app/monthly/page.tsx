@@ -46,7 +46,7 @@ const CONFIDENCE = [
 
 const STEPS = [
   { n: '01', title: 'Join the waitlist', body: 'Tell us your area and your child’s age. We’ll call when a slot opens', img: '/img/microservices/indoor-play.jpg', pos: 'object-center' },
-  { n: '02', title: 'Try for 3 days', body: 'Meet up to 3 caregivers over a ₹4,499 trial', img: '/img/candidate.png', pos: 'object-top' },
+  { n: '02', title: 'Try for 3 days', body: 'Meet up to 3 caregivers', img: '/img/candidate.png', pos: 'object-top' },
   { n: '03', title: 'Pick your caregiver', body: 'Keep the one your child loves. We confirm timings and your 26 service days', img: '/img/infantcare.png', pos: 'object-center' },
   { n: '04', title: 'Monthly care begins', body: 'The same familiar face every day, with backup whenever they’re away', img: '/img/toddlercare.png', pos: 'object-center' },
 ];
