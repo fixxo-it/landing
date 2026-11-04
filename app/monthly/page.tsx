@@ -9,17 +9,15 @@ import SiteFooter from '@/components/sections/SiteFooter';
 import DownloadModal from '@/components/DownloadModal';
 import SplitText from '@/components/motion/SplitText';
 import WaitlistForm from '@/components/monthly/WaitlistForm';
-import { CountUp, Starburst } from '@/components/monthly/Bits';
+import { Starburst } from '@/components/monthly/Bits';
 import CrayonArt from '@/components/monthly/CrayonArt';
-import { CTA_BLOCK, CTA_DARK, GHOST } from '@/components/monthly/styles';
+import { CTA_BLOCK, GHOST } from '@/components/monthly/styles';
 import { PhotoCard } from '@/components/monthly/PhotoCard';
-import TermsExplorer from '@/components/monthly/TermsExplorer';
 
 /* Every term, price and date here comes from "FamCare Monthly Care Plans",
    updated 03 November 2026. Change the copy only alongside that document.
    The page follows a hire-with-confidence story: why you can
    trust it, how it works, what it costs, then sign up and questions. */
-const UPDATED = 'Terms updated 3 November 2026';
 
 export const metadata: Metadata = {
   title: 'Monthly childcare plans | FamCare',
@@ -64,13 +62,6 @@ const VINTAGE = [
   { paper: '#DCE9EC', motif: 'M19 14.5A8 8 0 0 1 9.5 5a8 8 0 1 0 9.5 9.5zM17 3l.8 2.2L20 6l-2.2.8L17 9l-.8-2.2L14 6l2.2-.8z' },
   { paper: '#F7EDCC', motif: 'M3 11h13a6.5 6.5 0 0 1-13 0zM3 11a6.5 6.5 0 0 1 6.5-6.5V11M16 11l2.5-5H21M6.5 19.5a1.5 1.5 0 1 0 0 .01M14.5 19.5a1.5 1.5 0 1 0 0 .01' },
 ];
-
-const PLAN_TERMS = [
-  { text: '3-month minimum lock-in', art: 'lock' },
-  { text: 'One month’s notice period after the lock-in, with monthly fees payable during notice', art: 'calendar' },
-  { text: 'Deposit back within 7 working days of your last service', art: 'refund' },
-  { text: '6 or 12 month agreement, your choice', art: 'agreement' },
-] as const;
 
 const REVIEWS = [
   ['Experience was very good. We are very happy to have a caregiver from FamCare. She really took good care of my kids and was very professional as well.', 'Nikhil', 'Dad of 2 · Whitefield'],
@@ -320,61 +311,6 @@ export default function MonthlyPage() {
                 ))}
               </Stagger>
             </div>
-          </div>
-        </section>
-
-        {/* 6. pricing: one large tinted card beside a grid of small ones, then the terms */}
-        <section className={SECTION}>
-          <div className={W}>
-            <Reveal className="text-center">
-              <p className={EYEBROW}>Simple pricing</p>
-              <h2 className={`mt-4 ${H2}`}>
-                <SplitText text="One plan. No surprises" />
-              </h2>
-            </Reveal>
-            <div className="mt-12 grid gap-4 lg:mt-14 lg:grid-cols-2">
-              <Reveal>
-                <div className="flex h-full flex-col rounded-[28px] border border-line bg-gradient-to-b from-white to-teal-tint p-8 lg:p-10">
-                  <p className="text-sm font-semibold text-ink-muted">Monthly plan</p>
-                  <div className="mt-2 flex flex-wrap items-baseline gap-x-3">
-                    <CountUp to={35999} className="font-glyphic text-[3.25rem] leading-none text-ink lg:text-[4rem]" />
-                    <span className="text-ink-muted">a month + taxes</span>
-                  </div>
-                  <p className="mt-3 text-ink-muted">10 hours a day · 26 days a month</p>
-                  <div className="mt-8 flex-1 divide-y divide-line border-t border-line">
-                    {[
-                      ['Refundable deposit', '₹18,000'],
-                      ['First payment', '₹53,999 + taxes'],
-                      ['3-day trial (optional)', '₹4,499'],
-                    ].map(([k, v]) => (
-                      <div key={k} className="flex items-center justify-between gap-4 py-4">
-                        <span className="text-ink-muted">{k}</span>
-                        <span className="text-right font-semibold text-ink">{v}</span>
-                      </div>
-                    ))}
-                  </div>
-                  <a href="#waitlist" className={`${CTA_DARK} mt-6 w-full`}>
-                    Join the waitlist
-                  </a>
-                </div>
-              </Reveal>
-              <Stagger className="grid gap-4 sm:grid-cols-2" step={0.08}>
-                {PLAN_TERMS.map(({ text, art }) => (
-                  <StaggerItem key={text} className="h-full">
-                    <div className="relative isolate flex h-full min-h-[270px] flex-col justify-end overflow-hidden rounded-[24px] bg-white p-5 text-lg font-semibold leading-snug text-ink">
-                      <CrayonArt art={art} className="absolute inset-0 -z-10 h-full w-full" />
-                      <span aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-[50%] bg-gradient-to-t from-white from-40% via-white/85 to-transparent" />
-                      {text}
-                    </div>
-                  </StaggerItem>
-                ))}
-              </Stagger>
-            </div>
-
-            {/* the full terms, at a glance */}
-            <Reveal className="mt-20 lg:mt-28">
-              <TermsExplorer updated={UPDATED} />
-            </Reveal>
           </div>
         </section>
 
