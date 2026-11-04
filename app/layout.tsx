@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Caveat, Figtree } from 'next/font/google';
+import { Caveat, Faculty_Glyphic, Figtree } from 'next/font/google';
 import './globals.css';
 import PageFx from '@/components/fx/PageFx';
 import MotionPrefs from '@/components/fx/MotionPrefs';
@@ -16,6 +16,14 @@ import {
 const figtree = Figtree({
   subsets: ['latin'],
   variable: '--font-figtree',
+  display: 'swap',
+});
+
+/* editorial serif for the monthly-plans headings */
+const glyphic = Faculty_Glyphic({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-glyphic',
   display: 'swap',
 });
 
@@ -53,7 +61,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${figtree.variable} ${caveat.variable} antialiased`}>
+      <body className={`${figtree.variable} ${caveat.variable} ${glyphic.variable} antialiased`}>
         <JsonLd data={siteGraph()} />
         <MotionPrefs>
           {children}

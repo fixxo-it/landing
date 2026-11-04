@@ -26,3 +26,18 @@ export function clientIp(req: NextRequest): string {
   if (fwd) return fwd.split(',')[0].trim();
   return '';
 }
+
+/* Browsers send Origin on every POST; it must be this site. Scripts can forge
+   it, so this is a filter, never the only protection on a route. */
+export function sameOrigin(req: NextRequest): boolean {
+  const origin = req.headers.get('origin');
+  const host = req.headers.get('x-forwarded-host') ?? req.headers.get('host');
+  if (!origin || !host) return false;
+  try {
+    if (new URL(origin).host !== host) return false;
+  } catch {
+    return false;
+  }
+  const site = req.headers.get('sec-fetch-site');
+  return !site || site === 'same-origin';
+}

@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { Container } from '@/components/ui/Section';
 import { Stagger, StaggerItem } from '@/components/motion/Reveal';
 
@@ -18,6 +17,7 @@ const COLUMNS: {
   {
     head: 'Company',
     links: [
+      { label: 'Monthly plans', href: '/monthly' },
       { label: 'Join as a caregiver', href: '/join' },
       { label: 'Safe360', href: '#safety-360' },
       { label: 'AI-first care', href: '#safety-360' },
@@ -48,128 +48,93 @@ const SOCIALS = [
   },
 ];
 
+/* "FamCare" outlined from Figtree Bold */
+const WORDMARK =
+  'M0 712V12H449V137H137V305H397V430H137V712ZM689 724Q599 724 549 684Q500 644 500 571Q500 491 553 450Q607 410 704 410H822Q815 364 793 340Q771 315 730 315Q698 315 672 329Q646 343 628 372L512 332Q526 300 553 270Q580 239 623 220Q667 200 730 200Q806 200 856 229Q907 258 931 310Q956 363 955 435L952 712H829L827 654Q808 688 773 706Q739 724 689 724ZM711 614Q743 614 769 599Q795 584 810 560Q825 536 825 510V508H750Q685 508 660 524Q635 539 635 567Q635 589 655 602Q675 614 711 614ZM1060 712V212H1184L1190 277Q1213 239 1249 220Q1285 200 1329 200Q1390 200 1431 226Q1473 252 1492 306Q1514 255 1554 227Q1594 200 1647 200Q1735 200 1781 255Q1827 311 1827 426V712H1695V456Q1695 405 1684 377Q1673 349 1654 337Q1635 324 1609 324Q1561 323 1535 355Q1509 387 1509 450V712H1377V456Q1377 405 1366 377Q1356 349 1336 337Q1317 324 1291 324Q1243 323 1218 355Q1192 387 1192 450V712ZM2260 724Q2158 724 2079 678Q2000 631 1955 550Q1910 468 1910 362Q1910 256 1955 174Q2000 93 2078 46Q2157 0 2259 0Q2331 0 2393 25Q2455 51 2501 96Q2548 142 2573 201L2446 248Q2429 211 2401 183Q2373 156 2337 140Q2301 125 2259 125Q2198 125 2151 155Q2103 186 2076 239Q2050 292 2050 362Q2050 432 2077 485Q2104 539 2152 569Q2200 600 2262 600Q2305 600 2341 583Q2376 567 2404 538Q2431 509 2448 471L2575 517Q2550 578 2504 625Q2457 672 2395 698Q2333 724 2260 724ZM2819 724Q2729 724 2679 684Q2630 644 2630 571Q2630 491 2683 450Q2737 410 2834 410H2952Q2945 364 2923 340Q2901 315 2860 315Q2828 315 2802 329Q2776 343 2758 372L2642 332Q2656 300 2683 270Q2710 239 2753 220Q2797 200 2860 200Q2936 200 2986 229Q3037 258 3061 310Q3086 363 3085 435L3082 712H2959L2957 654Q2938 688 2903 706Q2869 724 2819 724ZM2841 614Q2873 614 2899 599Q2925 584 2940 560Q2955 536 2955 510V508H2880Q2815 508 2790 524Q2765 539 2765 567Q2765 589 2785 602Q2805 614 2841 614ZM3190 712V212H3322V304Q3353 257 3400 233Q3448 210 3499 210V338Q3453 338 3413 349Q3372 360 3347 385Q3322 410 3322 449V712ZM3795 724Q3721 724 3664 690Q3607 657 3574 598Q3542 539 3542 462Q3542 385 3575 326Q3609 267 3667 234Q3726 200 3802 200Q3868 200 3923 234Q3979 269 4012 336Q4046 402 4046 497H3680Q3685 547 3723 576Q3761 606 3809 606Q3850 606 3876 588Q3902 571 3916 543L4034 589Q4013 631 3979 662Q3946 692 3900 708Q3854 724 3795 724ZM3687 399H3903Q3900 368 3883 349Q3866 330 3843 321Q3820 312 3798 312Q3777 312 3752 320Q3728 329 3709 348Q3691 367 3687 399Z';
+
+const LINK = 'transition-colors duration-200 hover:text-teal-dark';
+
 export default function SiteFooter() {
   return (
-    /* z-10 so it stays over the CTA phone that bleeds down into it. The footer
-       itself is a transparent frame; the dark teal card inset inside it is
-       what closes the page, so every line inside it is set in white. */
-    <footer id="site-footer" className="relative z-10 p-3 sm:p-4">
-      <div className="relative overflow-hidden rounded-card bg-teal-dark text-white">
-        <Image
-          src="/img/Grainy.jpg"
-          alt=""
-          aria-hidden
-          fill
-          sizes="100vw"
-          className="object-cover opacity-40 mix-blend-overlay"
-        />
-        <Container className="relative">
-          <Stagger className="grid gap-14 pt-16 lg:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))] lg:gap-x-12 lg:pt-20">
-            <StaggerItem>
-              <div className="w-fit lg:pr-16">
-                <p className="font-display text-5xl font-bold leading-none tracking-[-0.02em] text-white">
-                  FamCare
-                </p>
-                <p className="mt-1.5 whitespace-nowrap text-[15px] font-bold text-white/70">
-                  Caregivers in{' '}
-                  <span className="font-bold italic text-lime-light">
-                    10 minutes
-                  </span>
-                </p>
-              </div>
+    /* z-10 and a solid ground so it stays over the CTA phone that bleeds down
+       into it. A soft curved top, the brand beside the link columns, and the
+       page ends on the name fading out. */
+    <footer
+      id="site-footer"
+      className="relative z-10 overflow-hidden rounded-t-[32px] border-t border-line bg-gradient-to-b from-white to-teal-tint pt-14 lg:rounded-t-[48px] lg:pt-20"
+    >
+      <Container>
+        <Stagger className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-[minmax(0,1.5fr)_repeat(3,minmax(0,1fr))] lg:gap-x-10">
+          <StaggerItem className="col-span-2 sm:col-span-3 lg:col-span-1">
+            <p className="font-display text-[2.5rem] font-bold leading-none tracking-[-0.02em] text-teal-dark">
+              FamCare
+            </p>
+            <p className="mt-1.5 text-sm text-ink-muted">Caregivers in 10 minutes</p>
 
-              <address className="mt-14 max-w-md not-italic text-white/80">
-                <p className="text-base leading-relaxed">
-                  1st floor, Novel MSR Building, Subbaiah Reddy Colony,
-                  Marathahalli Village, Marathahalli, Bengaluru, Karnataka
-                  560037
-                </p>
-                <p className="mt-4 flex flex-wrap gap-x-8 gap-y-2 text-base">
-                  <a
-                    href="tel:+919535711078"
-                    className="transition-colors duration-200 hover:text-white"
-                  >
-                    +91 95357 11078
-                  </a>
-                  <a
-                    href="mailto:support@famcare.co.in"
-                    className="transition-colors duration-200 hover:text-white"
-                  >
-                    support@famcare.co.in
-                  </a>
-                </p>
-              </address>
-            </StaggerItem>
-
-            {COLUMNS.map((col) => (
-              <StaggerItem key={col.head}>
-                <nav aria-label={col.head}>
-                  <h2 className="text-base font-bold uppercase text-white">
-                    {col.head}
-                  </h2>
-                  <ul className="mt-6 space-y-4 text-base">
-                    {col.links.map((l) => (
-                      <li key={l.label}>
-                        <a
-                          href={l.href}
-                          target={l.external ? '_blank' : undefined}
-                          rel={l.external ? 'noopener noreferrer' : undefined}
-                          className="text-white/80 transition-colors duration-200 hover:text-white"
-                        >
-                          {l.label}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-              </StaggerItem>
-            ))}
-          </Stagger>
-
-          {/* closing bar — deliberately not wrapped in <Reveal>: the shared
-              viewport trigger holds a reveal until the element clears the
-              bottom 10% of the screen, and the very last strip of the page can
-              never clear it — you run out of scroll first. It stayed at
-              opacity 0 for good. */}
-          <div className="mt-16 flex flex-col gap-4 border-t border-white/15 py-8 text-sm text-white/70 sm:flex-row sm:items-center sm:justify-between lg:mt-20">
-            <p>© {new Date().getFullYear()} FamCare. All rights reserved.</p>
-
-            <div className="flex items-center gap-5">
-              <span className="flex items-center gap-1.5">
-                Made with
-                <svg
-                  className="h-3.5 w-3.5 shrink-0 fill-lime-light"
-                  viewBox="0 0 24 24"
-                  aria-label="love"
-                  role="img"
-                >
-                  <path d="M12 21s-7.5-4.7-9.6-9A5.4 5.4 0 0 1 12 6.3 5.4 5.4 0 0 1 21.6 12c-2.1 4.3-9.6 9-9.6 9Z" />
-                </svg>
-                in Bengaluru.
-              </span>
-
+            <p className="mt-8 text-sm text-ink-muted">Find us at</p>
+            <div className="mt-3 flex items-center gap-4 text-ink-muted">
               {SOCIALS.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={s.label}
-                  className="text-white/70 transition-colors duration-200 hover:text-white"
-                >
-                  <svg
-                    className="h-5 w-5 shrink-0 fill-current"
-                    viewBox="0 0 24 24"
-                    aria-hidden
-                  >
+                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} className={LINK}>
+                  <svg className="h-5 w-5 shrink-0 fill-current" viewBox="0 0 24 24" aria-hidden>
                     <path d={s.path} />
                   </svg>
                 </a>
               ))}
             </div>
-          </div>
-        </Container>
-      </div>
+
+            <address className="mt-8 max-w-[300px] border border-line bg-white/60 p-4 text-[13px] not-italic leading-relaxed text-ink-muted">
+              <p>© {new Date().getFullYear()} FamCare. All rights reserved.</p>
+              <p className="mt-3">
+                1st floor, Novel MSR Building, Subbaiah Reddy Colony, Marathahalli Village, Marathahalli, Bengaluru,
+                Karnataka 560037
+              </p>
+              <p className="mt-3 flex flex-col gap-0.5 text-ink">
+                <a href="tel:+919535711078" className={LINK}>
+                  +91 95357 11078
+                </a>
+                <a href="mailto:support@famcare.co.in" className={LINK}>
+                  support@famcare.co.in
+                </a>
+              </p>
+            </address>
+          </StaggerItem>
+
+          {COLUMNS.map((col) => (
+            <StaggerItem key={col.head}>
+              <nav aria-label={col.head}>
+                <h2 className="text-xs font-semibold uppercase tracking-[0.1em] text-ink">{col.head}</h2>
+                <ul className="mt-6 space-y-3.5 text-base text-ink-muted">
+                  {col.links.map((l) => (
+                    <li key={l.label}>
+                      <a
+                        href={l.href}
+                        target={l.external ? '_blank' : undefined}
+                        rel={l.external ? 'noopener noreferrer' : undefined}
+                        className={LINK}
+                      >
+                        {l.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </StaggerItem>
+          ))}
+        </Stagger>
+
+        {/* decorative: the name set huge and fading away down the page. Drawn as a
+            shape rather than live text, so no browser can measure or clip it
+            differently, and the viewBox hugs the letters so it fills the width */}
+        <svg aria-hidden viewBox="0 0 4046 724" className="mb-6 mt-12 block w-full lg:mb-10 lg:mt-16">
+          <defs>
+            <linearGradient id="footer-wordmark" gradientUnits="userSpaceOnUse" x1="0" x2="0" y1="0" y2="724">
+              <stop offset="0" stopColor="#0B1F20" stopOpacity="0.15" />
+              <stop offset="1" stopColor="#0B1F20" stopOpacity="0.03" />
+            </linearGradient>
+          </defs>
+          <path d={WORDMARK} fill="url(#footer-wordmark)" />
+        </svg>
+      </Container>
     </footer>
   );
 }

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { checkBotId } from 'botid/server';
-import { backendUrl, clientIp, proxyKey } from '../backend';
+import { backendUrl, clientIp, proxyKey, sameOrigin } from '../backend';
 
 /* A typed visitor question -> sutram /website-chatbot/ask.
 
@@ -36,21 +36,6 @@ function limited(ip: string): boolean {
       if (!v.some((t) => now - t < WINDOW_MS)) hits.delete(k);
   }
   return false;
-}
-
-/* Browsers send Origin on every POST; it must be this site. Scripts can forge
-   it, which is why the sutram limits are what actually bound the cost. */
-function sameOrigin(req: NextRequest): boolean {
-  const origin = req.headers.get('origin');
-  const host = req.headers.get('x-forwarded-host') ?? req.headers.get('host');
-  if (!origin || !host) return false;
-  try {
-    if (new URL(origin).host !== host) return false;
-  } catch {
-    return false;
-  }
-  const site = req.headers.get('sec-fetch-site');
-  return !site || site === 'same-origin';
 }
 
 const fail = (status: number, error: string) =>
