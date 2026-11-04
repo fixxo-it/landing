@@ -9,7 +9,6 @@ import SiteFooter from '@/components/sections/SiteFooter';
 import DownloadModal from '@/components/DownloadModal';
 import SplitText from '@/components/motion/SplitText';
 import WaitlistForm from '@/components/monthly/WaitlistForm';
-import { Starburst } from '@/components/monthly/Bits';
 import CrayonArt from '@/components/monthly/CrayonArt';
 import { CTA_BLOCK, GHOST } from '@/components/monthly/styles';
 import { PhotoCard } from '@/components/monthly/PhotoCard';
@@ -69,17 +68,6 @@ const REVIEWS = [
   ['Very professional and good care, the caregiver is very experienced and handled the child very well.', 'Swapna', 'Mom of 1 · Whitefield'],
 ];
 
-const FAQS = [
-  ['What does the monthly plan include?', 'A familiar primary caregiver for 10 hours a day on 26 agreed service days each month, with backup and replacement cover managed by FamCare. Timings, service dates and offs are confirmed before service begins'],
-  ['Can I try a caregiver before committing?', 'Yes. The 3-day trial costs ₹4,499 and lets you meet up to 3 different caregivers. It’s paid separately and isn’t adjusted against the monthly fee or deposit'],
-  ['What happens when my caregiver is on leave?', 'We send a trained backup for up to 10 hours on your agreed service days, at no extra charge. Backup caregivers may be different from your primary caregiver'],
-  ['Is there a lock-in?', 'Yes, a 3-month minimum from your monthly start date. Cancelling during the lock-in forfeits the ₹18,000 deposit'],
-  ['How do I cancel?', 'After the lock-in, give one month’s notice. Monthly fees remain payable during the notice period'],
-  ['When do I get my deposit back?', 'Within 7 working days of your last service date, after any dues and agreed deductions are settled'],
-  ['Can I pause when we travel?', 'Yes, once each: a 7-day pause for ₹3,999 and a 15-day pause for ₹6,999. Service restarts the day after the pause ends, and must resume within 7 days'],
-  ['Where is the monthly plan available?', 'We’re starting in Whitefield and supported nearby clusters. Join the waitlist and we’ll tell you when your area opens'],
-];
-
 export default function MonthlyPage() {
   return (
     <>
@@ -135,10 +123,6 @@ export default function MonthlyPage() {
                   className="h-auto w-full mix-blend-multiply"
                 />
               </Reveal>
-              {/* the burst sits over the photo's top-left corner, as in the campaign artwork */}
-              <div className="absolute left-[-2%] top-[-2%] z-10 w-[34%] text-[clamp(0.8rem,1.6vw,1.6rem)] lg:left-[-12%] lg:top-[0%] lg:w-[36%]">
-                <Starburst className="w-full" />
-              </div>
             </div>
           </Container>
         </section>
@@ -329,32 +313,6 @@ export default function MonthlyPage() {
               <WaitlistForm />
             </Reveal>
           </div>
-        </section>
-
-        {/* 8. faq, after the form */}
-        <section className="border-t border-line">
-          <Container className="grid gap-10 py-16 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:gap-16 lg:py-24">
-            <Reveal className="lg:sticky lg:top-28 lg:self-start">
-              <h2 className="font-glyphic text-[2.6rem] leading-[1.06] text-ink lg:text-[4rem] lg:leading-[1.02]">
-                <SplitText text="Frequently asked questions" />
-              </h2>
-            </Reveal>
-            <Stagger className="divide-y divide-line border-y border-line" step={0.05}>
-              {FAQS.map(([q, a], i) => (
-                <StaggerItem key={q}>
-                  <details open={i === 0} className="group py-5">
-                    <summary className="flex cursor-pointer list-none items-center justify-between gap-6">
-                      <span className="text-lg font-semibold text-ink lg:text-xl">{q}</span>
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-line text-xl text-teal transition-transform duration-300 group-open:rotate-45">
-                        +
-                      </span>
-                    </summary>
-                    <p className="mt-3 max-w-[60ch] leading-relaxed text-ink-muted">{a}</p>
-                  </details>
-                </StaggerItem>
-              ))}
-            </Stagger>
-          </Container>
         </section>
 
         <CtaBanner heading="max-w-[14ch] font-glyphic text-[2.6rem] leading-[1.06] text-balance text-ink lg:text-[4rem] lg:leading-[1.02]" />
