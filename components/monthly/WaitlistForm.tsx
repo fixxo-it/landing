@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Select from '@/components/join/Select';
 import { AGES, BENGALURU_AREAS, NEAR_AREAS, NOT_LISTED, OTHER, STARTS } from '@/lib/waitlist-options';
@@ -50,7 +51,7 @@ export default function WaitlistForm() {
   const area = f.area === OTHER ? otherArea : f.area;
   const [error, setError] = useState<string | null>(null);
   const [sending, setSending] = useState(false);
-  const [done, setDone] = useState(false);
+  const [done, setDone] = useState<{ mobile: string; area: string } | null>(null);
   const set = (k: keyof typeof f) => (v: string) => setF((s) => ({ ...s, [k]: v }));
 
   const submit = async (e: React.FormEvent) => {
@@ -64,7 +65,9 @@ export default function WaitlistForm() {
       const res = await fetch('/api/waitlist', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...f, area }) });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || 'Something went wrong. Please try again');
-      setDone(true);
+      setDone({ mobile: f.mobile, area });
+      setF({ name: '', mobile: '', area: '', childAge: '', start: '', website: '' });
+      setOtherArea('');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong. Please try again');
     } finally {
@@ -72,37 +75,89 @@ export default function WaitlistForm() {
     }
   };
 
+  /* Esc closes the popup, and the page behind it stays still while it's open */
+  useEffect(() => {
+    if (!done) return;
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setDone(null);
+    const overflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = overflow;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [done]);
+
+  /* portalled to <body>: the form sits inside a transformed Reveal, which
+     would otherwise trap a fixed overlay inside it */
+  const popup =
+    typeof document === 'undefined'
+      ? null
+      : createPortal(
+          <AnimatePresence>
+            {done && (
+              <motion.div
+                key="thanks"
+                className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/50 p-5 backdrop-blur-sm"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setDone(null)}
+              >
+                <motion.div
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="waitlist-thanks"
+                  initial={{ opacity: 0, scale: 0.94, y: 24 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.96, y: 12 }}
+                  transition={{ duration: 0.45, ease: EASE }}
+                  onClick={(e) => e.stopPropagation()}
+                  className="relative w-full max-w-md rounded-[28px] bg-white p-8 text-center shadow-float sm:p-10"
+                >
+                  <button
+                    type="button"
+                    onClick={() => setDone(null)}
+                    aria-label="Close"
+                    className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-xl text-ink-muted transition-colors hover:bg-teal-tint hover:text-teal"
+                  >
+                    ×
+                  </button>
+                  <motion.svg viewBox="0 0 64 64" className="mx-auto h-16 w-16" aria-hidden initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 220, damping: 14, delay: 0.15 }}>
+                    <circle cx="32" cy="32" r="30" fill="#014D4F" />
+                    <motion.path
+                      d="M19 33l9 9 17-18"
+                      fill="none"
+                      stroke="#fff"
+                      strokeWidth="4.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: 1 }}
+                      transition={{ duration: 0.6, delay: 0.4 }}
+                    />
+                  </motion.svg>
+                  <h3 id="waitlist-thanks" className="mt-5 font-glyphic text-3xl text-ink">
+                    We&rsquo;ve received your details
+                  </h3>
+                  <p className="mt-3 text-ink-muted">
+                    You&rsquo;re on the waitlist. We&rsquo;ll call you on {done.mobile} when a monthly slot opens in{' '}
+                    {done.area === NOT_LISTED ? 'your area' : done.area}
+                  </p>
+                  <button type="button" onClick={() => setDone(null)} className={cn(CTA, 'mt-7')}>
+                    <span>Done</span>
+                  </button>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body,
+        );
+
   return (
-    <AnimatePresence mode="wait" initial={false}>
-      {done ? (
-        <motion.div
-          key="done"
-          initial={{ opacity: 0, scale: 0.96, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: EASE }}
-          className={cn(PANEL, 'p-10 text-center lg:p-16')}
-        >
-          <motion.svg viewBox="0 0 64 64" className="mx-auto h-20 w-20" aria-hidden initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 220, damping: 14, delay: 0.15 }}>
-            <circle cx="32" cy="32" r="30" fill="#014D4F" />
-            <motion.path
-              d="M19 33l9 9 17-18"
-              fill="none"
-              stroke="#fff"
-              strokeWidth="4.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            />
-          </motion.svg>
-          <h3 className="mt-6 font-glyphic text-3xl text-ink lg:text-[2.75rem]">You&rsquo;re on the list</h3>
-          <p className="mx-auto mt-3 max-w-md text-lg text-ink-muted">
-            We&rsquo;ll call you on {f.mobile} when a monthly slot opens in {area === NOT_LISTED ? 'your area' : area}
-          </p>
-        </motion.div>
-      ) : (
-        <motion.form key="form" onSubmit={submit} noValidate exit={{ opacity: 0, y: -20 }} className={cn(PANEL, 'p-6 sm:p-10 lg:p-14')}>
+    <>
+      {popup}
+        <form onSubmit={submit} noValidate className={cn(PANEL, 'p-6 sm:p-10 lg:p-14')}>
           <h3 className="font-glyphic text-3xl text-ink lg:text-[2.75rem]">Join the waitlist</h3>
           <p className="mt-2 text-ink-muted">Fields marked {REQUIRED} are required</p>
 
@@ -159,8 +214,7 @@ export default function WaitlistForm() {
               </span>
             </button>
           </div>
-        </motion.form>
-      )}
-    </AnimatePresence>
+        </form>
+    </>
   );
 }
