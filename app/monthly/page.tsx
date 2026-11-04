@@ -271,7 +271,7 @@ export default function MonthlyPage() {
         </section>
 
         {/* 5. parents love: the one dark panel, held to the page's column */}
-        <section className="pt-20 lg:pt-28">
+        <section className="py-20 lg:py-28">
           <div className={W}>
             <div className="relative isolate overflow-hidden rounded-[32px] bg-teal-dark px-6 py-14 text-white sm:px-10 lg:px-14 lg:py-20">
               <div aria-hidden className="grain-strong pointer-events-none absolute inset-0 -z-10" />
