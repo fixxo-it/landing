@@ -24,8 +24,18 @@ const SCREEN_IMAGES: string[] = [
 ];
 const SCREENS = SCREEN_IMAGES.length;
 
+/* where the finger lands on each screen, as % of the screenshot: Schedule on
+   home, Checkout on the booking screen, Pay now at checkout, and Message on
+   the assigned-caregiver sheet. */
+const TAPS: { x: number; y: number }[] = [
+  { x: 61, y: 48 },
+  { x: 76, y: 93.5 },
+  { x: 77, y: 93.5 },
+  { x: 60, y: 69 },
+];
+
 /* how long each screen holds before the next one appears */
-const DWELL = 2.4;
+const DWELL = 2.8;
 
 export default function HowItWorks() {
   const reduced = useSafeReducedMotion();
@@ -111,6 +121,39 @@ export default function HowItWorks() {
   );
 }
 
+/* a finger-touch marker: it lands on the control, presses, and ripples, so the
+   viewer sees what gets tapped to reach the next screen */
+function TapCursor({ x, y }: { x: number; y: number }) {
+  const reduced = useSafeReducedMotion();
+  if (reduced) return null;
+  const delay = 1.1;
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none absolute z-10"
+      style={{ left: `${x}%`, top: `${y}%` }}
+    >
+      <motion.span
+        className="absolute -left-[22px] -top-[22px] h-11 w-11 rounded-full border-2 border-white/90"
+        initial={{ opacity: 0, scale: 0.4 }}
+        animate={{ opacity: [0, 0.9, 0], scale: [0.4, 1, 1.9] }}
+        transition={{ delay: delay + 0.25, duration: 0.9, ease: 'easeOut' }}
+      />
+      <motion.span
+        className="absolute -left-[14px] -top-[14px] h-7 w-7 rounded-full bg-white/80 shadow-[0_0_0_3px_rgba(5,92,92,0.55),0_6px_16px_rgba(0,0,0,0.35)]"
+        initial={{ opacity: 0, scale: 1.6, y: 26, x: 18 }}
+        animate={{
+          opacity: [0, 1, 1, 1],
+          scale: [1.6, 1, 0.82, 1],
+          y: [26, 0, 0, 0],
+          x: [18, 0, 0, 0],
+        }}
+        transition={{ delay, duration: 0.8, times: [0, 0.5, 0.75, 1], ease: 'easeOut' }}
+      />
+    </div>
+  );
+}
+
 /* ── phone ──────────────────────────────────────────────────────────────── */
 
 /* Sized off the viewport height so the heading and phone fit one screen
@@ -118,7 +161,7 @@ export default function HowItWorks() {
    was drawn at, so it scales as one piece. */
 function PhoneMockup({ active }: { active: number }) {
   return (
-    <div className="relative aspect-[296/600] h-[min(760px,calc(100svh-15rem))] shrink-0">
+    <div className="relative aspect-[296/615] h-[min(760px,calc(100svh-15rem))] shrink-0">
       {/* soft halo lifts the dark chassis off the teal ground */}
       <div className="pointer-events-none absolute -inset-10 rounded-full bg-teal-light/10 blur-3xl" />
       <div className="absolute inset-0 rounded-[17.5%/8.7%] bg-neutral-900 p-[3.7%] shadow-[0_44px_90px_-30px_rgba(0,0,0,0.55)]">
@@ -142,6 +185,7 @@ function PhoneMockup({ active }: { active: number }) {
                 sizes="380px"
                 className="object-cover object-top"
               />
+              <TapCursor x={TAPS[active].x} y={TAPS[active].y} />
             </motion.div>
           </AnimatePresence>
 
