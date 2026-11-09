@@ -25,7 +25,10 @@ export function initAnalytics() {
       track_pageview: 'url-with-path',
       persistence: 'localStorage',
     });
+    /* `platform` is the same property the app sets (ios / android), so
+       existing app reports split cleanly from web with a single filter */
     mixpanel.register({
+      platform: 'web',
       source: 'landing',
       environment: process.env.NEXT_PUBLIC_VERCEL_ENV ?? 'development',
     });
