@@ -1,4 +1,7 @@
 import { initBotId } from 'botid/client/core';
+import { initAnalytics } from '@/lib/analytics';
+
+initAnalytics();
 
 /* Vercel BotID: an invisible check (no CAPTCHA) attached to the requests
    listed here. The server side is checkBotId() in the same route. The chat's
