@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
+import { usePathname } from 'next/navigation';
 import { Sparkle, type ChatConfig } from './shared';
 
 /* "Ask FamCare": the help chat on every page (mounted once in app/layout.tsx).
@@ -18,13 +19,20 @@ const preloadPanel = () => {
   void import('./ChatPanel');
 };
 
+/* Pages without the chat: QR campaign pages (/c/[code]) are a short pay flow
+   on a phone, and the launcher covered their buttons. */
+const HIDDEN_ON = ['/c/'];
+
 export default function ChatWidget() {
+  const pathname = usePathname() ?? '';
+  const hidden = HIDDEN_ON.some((p) => pathname.startsWith(p));
   const [config, setConfig] = useState<ChatConfig | null>(null);
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const launcherRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
+    if (hidden) return;
     let cancelled = false;
     const load = () => {
       fetch('/api/chat/config')
@@ -50,9 +58,9 @@ export default function ChatWidget() {
       cancelled = true;
       window.clearTimeout(t);
     };
-  }, []);
+  }, [hidden]);
 
-  if (!config) return null;
+  if (hidden || !config) return null;
 
   const openPanel = () => {
     setMounted(true);
