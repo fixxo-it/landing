@@ -163,6 +163,25 @@ export default function CampaignFlow({
       ? bonusFor(topup.bonus_rules, payAmount)
       : 0;
 
+  /* This number already had the offer's extra: hide every "+₹ extra" and
+     say so instead. Known after the OTP, or on load for someone still logged
+     in on this site from an earlier top-up. */
+  const extraUsed =
+    !!topup && topup.bonus_rules.length > 0 && !!me && !me.bonus_available;
+
+  useEffect(() => {
+    if (!topup || topup.bonus_rules.length === 0 || c.state !== 'live') return;
+    let alive = true;
+    call<Me>(c.code, 'me')
+      .then((m) => alive && setMe(m))
+      .catch(() => undefined); // not logged in here yet: nothing to show
+    return () => {
+      alive = false;
+    };
+    // once per page load
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const amountProblem = (() => {
     if (!topup || payAmount == null)
       return topup ? 'Please choose an amount.' : '';
@@ -543,7 +562,7 @@ export default function CampaignFlow({
                 <span className={LABEL}>How much would you like to add?</span>
                 <div className="grid grid-cols-1 gap-2.5">
                   {options.map((a) => {
-                    const b = bonusFor(topup.bonus_rules, a);
+                    const b = extraUsed ? 0 : bonusFor(topup.bonus_rules, a);
                     const on = !customOn && amount === a;
                     return (
                       <button
@@ -604,6 +623,7 @@ export default function CampaignFlow({
                       </label>
                       {customOn &&
                         payAmount &&
+                        !extraUsed &&
                         bonusFor(topup.bonus_rules, payAmount) > 0 && (
                           <p className="mt-1 text-sm font-semibold text-teal">
                             +{rupees(bonusFor(topup.bonus_rules, payAmount))}{' '}
@@ -616,10 +636,18 @@ export default function CampaignFlow({
                 <p className={cn(NOTE, 'mt-3')}>
                   Wallet money is for FamCare bookings only. It can&apos;t be
                   withdrawn as cash.
-                  {topup.bonus_rules.length > 0 && topup.bonus_once_per_phone
+                  {topup.bonus_rules.length > 0 &&
+                  topup.bonus_once_per_phone &&
+                  !extraUsed
                     ? ' The extra is once per phone number.'
                     : ''}
                 </p>
+                {extraUsed && me && (
+                  <p className="mt-2 rounded-xl bg-teal-tint px-3 py-2 text-sm font-semibold text-teal-dark">
+                    Extra used: the number ending {me.phone_last4} has already
+                    had this offer&apos;s extra. You can still add money.
+                  </p>
+                )}
               </div>
             )}
             {error && <p className={ERROR}>{error}</p>}
@@ -799,6 +827,14 @@ export default function CampaignFlow({
                       </dd>
                     </div>
                   )}
+                  {extraUsed && (
+                    <div className="flex justify-between">
+                      <dt className="text-ink-muted">Extra from FamCare</dt>
+                      <dd className="font-semibold text-ink-muted">
+                        Already used
+                      </dd>
+                    </div>
+                  )}
                   <div className="flex justify-between border-t border-line pt-2">
                     <dt className="text-ink-muted">Wallet after this</dt>
                     <dd className="font-semibold text-teal-dark">
@@ -820,10 +856,10 @@ export default function CampaignFlow({
                 )
               )}
             </dl>
-            {topup && !me.bonus_available && topup.bonus_rules.length > 0 && (
+            {extraUsed && (
               <p className={NOTE}>
-                You&apos;ve already had this offer&apos;s extra, so this top-up
-                has none.
+                Extra used: this number has already had this offer&apos;s extra,
+                so this top-up has none.
               </p>
             )}
             <p className={NOTE}>
