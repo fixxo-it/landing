@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Arrow } from '@/components/ui/Button';
+import { track } from '@/lib/analytics';
 import { JELLY_BTN } from '@/components/join/jelly';
 import Select, { MultiSelect } from '@/components/join/Select';
 import DobPicker, { isAdult, parseDob } from '@/components/join/DobPicker';
@@ -188,6 +189,7 @@ export default function ApplicationForm() {
         );
       }
 
+      track('caregiver_application_submitted');
       setDone(true);
     } catch (err: unknown) {
       const msg =

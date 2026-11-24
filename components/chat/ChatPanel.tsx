@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import { EASE } from '@/components/motion/Reveal';
 import { useSafeReducedMotion } from '@/components/fx/MotionPrefs';
 import { openAppOrStore } from '@/components/DownloadModal';
+import { track } from '@/lib/analytics';
 import {
   AnswerText,
   BookIcon,
@@ -143,6 +144,11 @@ export default function ChatPanel({
     setBusy(true);
     setInput('');
     const previous = questions.current.slice(-3);
+    /* length only: the text can contain a parent's personal details */
+    track('chat_question_asked', {
+      via: chip ? 'quick_reply' : 'typed',
+      length: message.length,
+    });
     questions.current.push(message);
     setMessages((ms) => [
       ...ms,

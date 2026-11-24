@@ -12,6 +12,7 @@
   "dependencies": {
     "botid": "1.5.11",
     "framer-motion": "^13.0.0",
+    "mixpanel-browser": "^2.85.0",
     "next": "^15.1.3",
     "qrcode": "^1.5.4",
     "react": "^19.0.0",

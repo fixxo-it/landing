@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { EASE } from '@/components/motion/Reveal';
 import PixelatedQr from '@/components/PixelatedQr';
+import { track } from '@/lib/analytics';
 
 const DOWNLOAD_URL = 'https://famcare.onelink.me/LK0E/cgr3j0s7?af_qr=true';
 /* the same OneLink, without the QR attribution tag — a direct tap on a phone
@@ -30,9 +31,11 @@ const isMobileOS = () =>
    desktop, where scanning is the point. */
 export function openDownloadModal() {
   if (isMobileOS()) {
+    track('download_cta_clicked', { method: 'store_redirect' });
     window.location.href = DIRECT_URL;
     return;
   }
+  track('download_cta_clicked', { method: 'qr_modal' });
   window.dispatchEvent(new Event(EVENT));
 }
 
@@ -52,11 +55,12 @@ export function openDownloadModal() {
    the app is installed". A longer window, and listening on blur/pagehide as
    well as visibilitychange (different browsers signal the handoff
    differently), gives the dialog room to resolve before we assume it failed. */
-function attemptDeepLink(url: string) {
+function attemptDeepLink(url: string, props?: Record<string, unknown>) {
   if (!isMobileOS()) {
     openDownloadModal();
     return;
   }
+  track('download_cta_clicked', { method: 'deep_link', ...props });
 
   const fallback = window.setTimeout(() => {
     window.location.href = DIRECT_URL;
@@ -80,7 +84,8 @@ function attemptDeepLink(url: string) {
 
 export function openServiceBooking(categoryId: string, subServiceId: string) {
   attemptDeepLink(
-    `famcare:///schedule-care?category_id=${categoryId}&sub_service_id=${subServiceId}`
+    `famcare:///schedule-care?category_id=${categoryId}&sub_service_id=${subServiceId}`,
+    { category_id: categoryId, sub_service_id: subServiceId }
   );
 }
 
